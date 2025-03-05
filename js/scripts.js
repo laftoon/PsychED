@@ -9,6 +9,18 @@ document.addEventListener("DOMContentLoaded", function() {
     const track = document.querySelector('.carousel-track');
     const items = document.querySelectorAll('.carousel-item');
     const topbar = document.querySelector('.topbar');
+    const prevButton = document.querySelector('.prev-button');
+    const nextButton = document.querySelector('.next-button');
+
+    // State Variables
+    let isManualControl = false;
+    let manualControlTimeout;
+    let isTransitioning = false;
+    let position = 0;
+    let currentSpeed = NORMAL_SPEED;
+    let animationId = null;
+    let isHovered = false;
+    let hoveredItem = null;
 
     // Clone items for infinite loop
     const itemsArray = Array.from(items);
@@ -22,49 +34,102 @@ document.addEventListener("DOMContentLoaded", function() {
     const itemWidth = items[0].offsetWidth;
     const totalWidth = itemWidth * items.length;
 
-    // State Variables
-    let position = 0;
-    let currentSpeed = NORMAL_SPEED;
-    let animationId = null;
-    let isHovered = false;
-    let hoveredItem = null;
-
     // Set initial position
     track.style.transform = `translateX(${position}px)`;
 
-    // Navbar Scroll Effect
-    window.addEventListener('scroll', function() {
-        if (window.scrollY > SCROLL_THRESHOLD) {
-            topbar.classList.add('scrolled');
+    // Button event listeners
+    prevButton.addEventListener('click', () => {
+        if (isTransitioning) return;
+        isTransitioning = true;
+        
+        isManualControl = true;
+        clearTimeout(manualControlTimeout);
+        
+        track.style.transition = 'transform 0.5s cubic-bezier(0.4, 0, 0.2, 1)';
+        
+        position += itemWidth;
+        
+        if (position > 0) {
+            track.style.transform = `translateX(${position}px)`;
+            
+            setTimeout(() => {
+                track.style.transition = 'none';
+                position = -totalWidth + itemWidth;
+                track.style.transform = `translateX(${position}px)`;
+                
+                setTimeout(() => {
+                    track.style.transition = 'transform 0.5s cubic-bezier(0.4, 0, 0.2, 1)';
+                    isTransitioning = false;
+                }, 50);
+            }, 500);
         } else {
-            topbar.classList.remove('scrolled');
+            track.style.transform = `translateX(${position}px)`;
+            setTimeout(() => {
+                isTransitioning = false;
+            }, 500);
         }
+        
+        startManualControlTimeout();
     });
 
-    // Carousel Animation Function
-    function animate() {
-        if (!isHovered) {
-            // Normal animation
-            currentSpeed = Math.min(NORMAL_SPEED, currentSpeed + SPEED_INCREMENT);
+    nextButton.addEventListener('click', () => {
+        if (isTransitioning) return;
+        isTransitioning = true;
+        
+        isManualControl = true;
+        clearTimeout(manualControlTimeout);
+        
+        track.style.transition = 'transform 0.5s cubic-bezier(0.4, 0, 0.2, 1)';
+        
+        position -= itemWidth;
+        
+        if (position < -totalWidth) {
+            track.style.transform = `translateX(${position}px)`;
+            
+            setTimeout(() => {
+                track.style.transition = 'none';
+                position = 0;
+                track.style.transform = `translateX(${position}px)`;
+                
+                setTimeout(() => {
+                    track.style.transition = 'transform 0.5s cubic-bezier(0.4, 0, 0.2, 1)';
+                    isTransitioning = false;
+                }, 50);
+            }, 500);
         } else {
-            // Slowing down when hovered
+            track.style.transform = `translateX(${position}px)`;
+            setTimeout(() => {
+                isTransitioning = false;
+            }, 500);
+        }
+        
+        startManualControlTimeout();
+    });
+
+    function startManualControlTimeout() {
+        clearTimeout(manualControlTimeout);
+        manualControlTimeout = setTimeout(() => {
+            isManualControl = false;
+        }, 1300);
+    }
+
+    function animate() {
+        if (!isHovered && !isManualControl) {
+            track.style.transition = 'none';
+            currentSpeed = Math.min(NORMAL_SPEED, currentSpeed + SPEED_INCREMENT);
+            position -= currentSpeed;
+
+            if (position <= -totalWidth) {
+                position = 0;
+            }
+        } else {
             currentSpeed = Math.max(0, currentSpeed - SPEED_DECREMENT);
         }
 
-        // Update position
-        position -= currentSpeed;
-
-        // Check if we need to reset
-        if (position <= -totalWidth) {
-            position = 0;
-        }
-
-        // Apply transform
         track.style.transform = `translateX(${position}px)`;
         animationId = requestAnimationFrame(animate);
     }
 
-    // Helper function to add hover listeners to carousel items
     function addHoverListeners(item) {
         item.addEventListener('mouseenter', () => {
             isHovered = true;
@@ -81,6 +146,15 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // Initial hover listeners setup
     items.forEach(item => addHoverListeners(item));
+
+    // Navbar Scroll Effect
+    window.addEventListener('scroll', function() {
+        if (window.scrollY > SCROLL_THRESHOLD) {
+            topbar.classList.add('scrolled');
+        } else {
+            topbar.classList.remove('scrolled');
+        }
+    });
 
     // Page Visibility Handler
     document.addEventListener('visibilitychange', () => {

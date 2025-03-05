@@ -164,6 +164,52 @@ h1, h2, h3, h4, h5, h6 {
     margin: 0;
     padding-top: 10px;
     padding-bottom: 10px;
+    position: relative;
+}
+
+.carousel-nav {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    width: 55px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 100;
+}
+
+.carousel-nav-left {
+    left: 0;
+    background: linear-gradient(to right, rgba(245, 238, 230, 0.8), transparent);
+    padding-left: -30px;
+}
+
+.carousel-nav-right {
+    right: 0;
+    background: linear-gradient(to left, rgba(245, 238, 230, 0.8), transparent);
+    padding-right: -30px;
+}
+
+.nav-button {
+    color: var(--paragraph-color);
+    background: rgba(255, 255, 255, 0);
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    font-size: 24px;
+    cursor: pointer;
+    transition: all 0.15s ease;
+}
+
+.nav-button:hover {
+    transform: scale(1.5);
+}
+
+.announcement-carousel:hover .carousel-nav {
+    opacity: 1;
 }
 
 .carousel-track {
@@ -173,6 +219,7 @@ h1, h2, h3, h4, h5, h6 {
     position: relative;
     transform: translateX(0);
     will-change: transform;
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1); 
 }
 
 
