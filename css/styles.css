@@ -1,0 +1,58 @@
+/* General styles */
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-color: #121212; /* Dark background */
+    color: #ffffff; /* White text */
+    margin: 0;
+    padding: 20px;
+}
+
+/* Fade-in animation for the heading */
+.fade-in {
+    opacity: 0;
+    animation: fadeIn 1.5s ease-in-out forwards;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Slide-up animation for paragraph */
+.slide-up {
+    opacity: 0;
+    animation: slideUp 1.5s ease-in-out 0.5s forwards;
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Button hover effect */
+.btn-hover {
+    background-color: #ff6b6b; /* Red button */
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.3s ease-in-out, background 0.3s;
+}
+
+.btn-hover:hover {
+    background-color: #ff4f4f;
+    transform: scale(1.1);
+}
