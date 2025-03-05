@@ -16,8 +16,9 @@ body {
     background-color: var(--background-light); /* Dark background */
     color: var(--paragraph-color); /* White text */
     margin: 0;
-    padding: 40px;
     line-height: 1.6;
+    padding: 0;
+    overflow-x: hidden;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -27,27 +28,69 @@ h1, h2, h3, h4, h5, h6 {
     color: var(--heading-color)
 }
 
+.hero-header {
+    position: relative;
+    width: 100vw;
+    height: 70vh; /* Adjust this value to control the header height */
+    background-image: url('../images/header-image.jpg'); /* Replace with your image path */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.hero-header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(rgba(137, 172, 201, 0.3), rgba(137, 172, 201, 0.5)); /* Using your primary color */
+    z-index: 1;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 800px;
+    padding: 20px;
+    color: var(--background-light);
+}
+
+.hero-content h1 {
+    font-size: 3.5rem;
+    margin-bottom: 1rem;
+    color: var(--background-light);
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.hero-content p {
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+    color: var(--background-light);
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+}
+
 /* Topbar Menu Styles */
 .topbar {
-    background-color: var(--primary-color);
+    background-color: rgba(137, 172, 201, 0.1);
+    backdrop-filter: blur(10px);
     position: fixed;
     top: 0;
     left: 0;
-    width: 98%;
+    width: 100%;
+    box-sizing: border-box;
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    padding: 10px 20px;
-    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1);
+    align-items: stretch; /* Change to stretch */
+    height: 60px; /* Set fixed height */
+    padding: 0 40px; /* Remove vertical padding */
     z-index: 1000;
-}
-
-.logo {
-    font-family: 'Quicksand', sans-serif;
-    font-size: 1.5rem;
-    font-weight: bold;
-    color:var(--background-light);
-    text-decoration: none;
+    transition: background-color 0.3s ease;
 }
 
 .nav-menu {
@@ -55,22 +98,60 @@ h1, h2, h3, h4, h5, h6 {
     list-style: none;
     margin: 0;
     padding: 0;
+    height: 100%;
+    align-items: stretch; /* Change to stretch */
 }
 
 .nav-menu li {
-    margin-left: 20px;
+    margin: 0;
+    height: 100%;
+    display: flex;
+    align-items: stretch;
 }
 
 .nav-menu a {
     font-family: 'Quicksand', sans-serif;
     color: var(--background-light);
     text-decoration: none;
-    transition: color 0.3s;
-    font-size: 1rem;
+    transition: all 0.3s;
+    font-size: 1.1rem;
     font-weight: 500;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+    padding: 0 20px;
+    display: flex;
+    align-items: center;
+    position: relative; /* Add this */
 }
 
 .nav-menu a:hover {
     color: var(--secondary-color);
 }
 
+/* Add new hover effect */
+.nav-menu a::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(255, 255, 255, 0.1);
+    transform: scaleY(0);
+    transition: transform 0.3s ease;
+}
+
+.nav-menu a:hover::before {
+    transform: scaleY(1);
+}
+
+/* Adjust logo */
+.logo {
+    display: flex;
+    align-items: center;
+    font-family: 'Quicksand', sans-serif;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--background-light);
+    text-decoration: none;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
