@@ -1,58 +1,76 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&family=Open+Sans:wght@300;400;600&display=swap');
+
 /* General styles */
+:root {
+    --primary-color: #89acc9;
+    --secondary-color: #e7cfd2;
+    --background-light: #f5eee6;
+    --heading-color: #2c3e50;
+    --paragraph-color: #596275;
+    --accent-color: #6a9e9f;
+}
+
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Open Sans', sans-serif;
     text-align: center;
-    background-color: #121212; /* Dark background */
-    color: #ffffff; /* White text */
+    background-color: var(--background-light); /* Dark background */
+    color: var(--paragraph-color); /* White text */
     margin: 0;
-    padding: 20px;
+    padding: 40px;
+    line-height: 1.6;
 }
 
-/* Fade-in animation for the heading */
-.fade-in {
-    opacity: 0;
-    animation: fadeIn 1.5s ease-in-out forwards;
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: var(--heading-color)
 }
 
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(-20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-/* Slide-up animation for paragraph */
-.slide-up {
-    opacity: 0;
-    animation: slideUp 1.5s ease-in-out 0.5s forwards;
-}
-
-@keyframes slideUp {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-/* Button hover effect */
-.btn-hover {
-    background-color: #ff6b6b; /* Red button */
-    color: white;
+/* Topbar Menu Styles */
+.topbar {
+    background-color: var(--primary-color);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 98%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     padding: 10px 20px;
-    border: none;
-    cursor: pointer;
-    transition: transform 0.3s ease-in-out, background 0.3s;
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
 }
 
-.btn-hover:hover {
-    background-color: #ff4f4f;
-    transform: scale(1.1);
+.logo {
+    font-family: 'Quicksand', sans-serif;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color:var(--background-light);
+    text-decoration: none;
 }
+
+.nav-menu {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-menu li {
+    margin-left: 20px;
+}
+
+.nav-menu a {
+    font-family: 'Quicksand', sans-serif;
+    color: var(--background-light);
+    text-decoration: none;
+    transition: color 0.3s;
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+.nav-menu a:hover {
+    color: var(--secondary-color);
+}
+
