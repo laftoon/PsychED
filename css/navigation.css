@@ -1,60 +1,112 @@
+/* Design Tokens and Theme Configuration */
+:root {
+  /* Layout */
+  --topbar-height: 60px;
+  --topbar-padding-x: 40px;
+  --nav-item-padding-x: 20px;
+  
+  /* Typography */
+  --font-family-navigation: 'Quicksand', system-ui, sans-serif;
+  --font-size-nav: 1.1rem;
+  --font-size-logo: 1.5rem;
+  --font-weight-nav: 500;
+  --font-weight-logo: 700;
+  
+  /* Effects */
+  --shadow-text: 1px 1px 2px rgba(0, 0, 0, 0.1);
+  --topbar-background: rgba(137, 172, 201, 0);
+  
+  /* Z-index Layers */
+  --z-index-topbar: 1000;
+}
+
+/* Component: Topbar
+   ========================================================================== */
 .topbar {
-    background-color: rgba(137, 172, 201, 0);
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 60px;
-    padding: 0 40px;
-    box-sizing: border-box;
-    display: flex;
-    justify-content: space-between;
-    align-items: stretch;
-    z-index: 1000;
-    transition: var(--transition-standard);
+  /* Layout */
+  position: absolute;
+  inset: 0 0 auto 0;
+  width: 100%;
+  height: var(--topbar-height);
+  padding-inline: var(--topbar-padding-x);
+  box-sizing: border-box;
+  
+  /* Display */
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+  
+  /* Visual */
+  background-color: var(--topbar-background);
+  z-index: var(--z-index-topbar);
+  
+  /* Animation */
+  transition: var(--transition-standard);
 }
 
+/* Component: Navigation Menu
+   ========================================================================== */
 .nav-menu {
-    display: flex;
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    height: 100%;
-    align-items: stretch;
+  /* Reset */
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  
+  /* Layout */
+  height: 100%;
+  
+  /* Display */
+  display: flex;
+  align-items: stretch;
 }
 
-.nav-menu li {
-    margin: 0;
-    height: 100%;
-    display: flex;
-    align-items: stretch;
+.nav-menu__item {
+  /* Layout */
+  height: 100%;
+  margin: 0;
+  
+  /* Display */
+  display: flex;
+  align-items: stretch;
 }
 
-.nav-menu a {
-    font-family: 'Quicksand', sans-serif;
-    color: var(--background-light);
-    text-decoration: none;
-    font-size: 1.1rem;
-    font-weight: 500;
-    padding: 0 20px;
-    display: flex;
-    align-items: center;
-    position: relative;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
-    transition: all var(--transition-standard);
+.nav-menu__link {
+  /* Typography */
+  font-family: var(--font-family-navigation);
+  font-size: var(--font-size-nav);
+  font-weight: var(--font-weight-nav);
+  color: var(--background-light);
+  text-decoration: none;
+  text-shadow: var(--shadow-text);
+  
+  /* Layout */
+  padding-inline: var(--nav-item-padding-x);
+  
+  /* Display */
+  display: flex;
+  align-items: center;
+  position: relative;
+  
+  /* Animation */
+  transition: all var(--transition-standard);
 }
 
-.nav-menu a:hover {
-    color: var(--secondary-color);
+.nav-menu__link:hover {
+  color: var(--secondary-color);
 }
 
+/* Component: Logo
+   ========================================================================== */
 .logo {
-    display: flex;
-    align-items: center;
-    font-family: 'Quicksand', sans-serif;
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: var(--background-light);
-    text-decoration: none;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+  /* Display */
+  display: flex;
+  align-items: center;
+  
+  /* Typography */
+  font-family: var(--font-family-navigation);
+  font-size: var(--font-size-logo);
+  font-weight: var(--font-weight-logo);
+  color: var(--background-light);
+  text-decoration: none;
+  text-shadow: var(--shadow-text);
 }

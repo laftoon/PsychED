@@ -1,74 +1,148 @@
-/* General card styles */
-.cards-container {
-    display: flex;
-    flex-wrap: wrap; 
-    justify-content: center;
-    gap: 1.5rem;
-    padding: 2rem 2rem;
-    max-width: 1450px;
-    margin: 0 auto;
+/* ==========================================================================
+   Card Component System
+   ========================================================================== */
+
+:root {
+  /* Layout */
+  --cards-max-width: 1450px;
+  --cards-padding: 2rem;
+  --cards-gap: 1.5rem;
+  
+  /* Card Dimensions */
+  --card-max-width: 250px;
+  --card-min-width: 200px;
+  --card-image-height: 250px;
+  --card-image-circle-size: 200px;
+  --card-image-display-size: 220px;
+  --card-border-radius: 15px;
+  
+  /* Colors */
+  --card-gradient-start: rgba(137, 172, 201, 0.98);
+  --card-gradient-end: rgba(231, 207, 210, 0.98);
+  --card-background: white;
+  
+  /* Spacing */
+  --card-content-padding-x: 1rem;
+  --card-content-padding-y: 0.5rem;
+  
+  /* Effects */
+  --card-hover-y-offset: -5px;
 }
 
+/* Cards Container
+   ========================================================================== */
+.cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--cards-gap);
+  padding: var(--cards-padding);
+  max-width: var(--cards-max-width);
+  margin-inline: auto;
+}
+
+/* Card Base
+   ========================================================================== */
 .card {
-    flex: 1 1 calc(20% - 1.5rem); /* This will make it 5 cards per row */
-    max-width: 250px; /* Adjust this value as needed */
-    min-width: 200px; /* Adjust this value as needed */
-    background: white;
-    border-radius: 15px;
-    overflow: hidden;
-    box-shadow: var(--shadow-small);
-    transition: transform var(--transition-standard), box-shadow var(--transition-standard);
-    padding: 0;
-    margin: 0;
+  /* Layout */
+  flex: 1 1 calc(20% - var(--cards-gap));
+  max-width: var(--card-max-width);
+  min-width: var(--card-min-width);
+  padding: 0;
+  margin: 0;
+  
+  /* Visual */
+  background: var(--card-background);
+  border-radius: var(--card-border-radius);
+  overflow: hidden;
+  box-shadow: var(--shadow-small);
+  
+  /* Animation */
+  transition: transform var(--transition-standard),
+              box-shadow var(--transition-standard);
 }
-
 
 .card:hover {
-    transform: translateY(-5px);
-    box-shadow: var(--shadow-large);
+  transform: translateY(var(--card-hover-y-offset));
+  box-shadow: var(--shadow-large);
 }
 
-.card-image {
-    width: 100%; 
-    height: 250px;
-    margin: 0;
-    position: relative;
-    background: linear-gradient(
-        135deg,
-        rgba(137, 172, 201, 0.98),
-        rgba(231, 207, 210, 0.98)
-    );
-    border-radius: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+/* Card Image
+   ========================================================================== */
+.card__image-container {
+  position: relative;
+  width: 100%;
+  height: var(--card-image-height);
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(
+    135deg,
+    var(--card-gradient-start),
+    var(--card-gradient-end)
+  );
 }
 
-.card-image::before {
-    content: '';
-    position: absolute;
-    width: 200px;
-    height: 200px;
-    border-radius: 50%;
-    background: white; 
-    z-index: 1;
+.card__image-container::before {
+  content: '';
+  position: absolute;
+  width: var(--card-image-circle-size);
+  height: var(--card-image-circle-size);
+  border-radius: 50%;
+  background: var(--card-background);
+  z-index: 1;
 }
 
-.card-image img {
-    width: 220px;
-    height: 220px;
-    object-fit: cover;
-    border-radius: 50%;
-    position: relative;
-    z-index: 2;
+.card__image {
+  width: var(--card-image-display-size);
+  height: var(--card-image-display-size);
+  object-fit: cover;
+  border-radius: 50%;
+  position: relative;
+  z-index: 2;
 }
 
-.card-content {
-    padding: 0.5rem 1rem 1rem;
-    text-align: center; 
+/* Card Content
+   ========================================================================== */
+.card__content {
+  padding: var(--card-content-padding-y) var(--card-content-padding-x) 
+           calc(var(--card-content-padding-x) + var(--card-content-padding-y));
+  text-align: center;
 }
 
-.card-content h2 {
-    margin-top: -0.1rem; 
-    margin-bottom: 0.5rem; 
+.card__title {
+  margin-block: -0.1rem 0.5rem;
+}
+
+/* Responsive Design
+   ========================================================================== */
+@media (max-width: 1200px) {
+  .card {
+    flex: 1 1 calc(33.333% - var(--cards-gap));
+  }
+}
+
+@media (max-width: 768px) {
+  .card {
+    flex: 1 1 calc(50% - var(--cards-gap));
+  }
+}
+
+@media (max-width: 480px) {
+  .card {
+    flex: 1 1 100%;
+  }
+}
+
+/* Accessibility
+   ========================================================================== */
+@media (prefers-reduced-motion: reduce) {
+  .card {
+    transition: none;
+  }
+  
+  .card:hover {
+    transform: none;
+  }
 }
