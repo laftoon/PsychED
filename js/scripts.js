@@ -97,14 +97,17 @@ document.addEventListener("DOMContentLoaded", function() {
         resizeTimeout = setTimeout(() => moveToCard(currentIndex), 100);
     });
 
-    // Navbar Scroll Effect
-    window.addEventListener('scroll', () => {
+// Navbar Scroll Effect
+window.addEventListener('scroll', () => {
+    if (window.innerWidth <= 768) { // Only apply on mobile
         if (window.scrollY > SCROLL_THRESHOLD) {
             topbar.classList.add('scrolled');
         } else {
             topbar.classList.remove('scrolled');
         }
-    });
+    }
+});
+
 
     // Initialize carousel
     prevButton.style.display = 'none';

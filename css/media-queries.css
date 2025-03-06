@@ -20,6 +20,11 @@
         display: block;
     }
 
+    .topbar.scrolled {
+        background-color: var(--primary-color);
+        position: fixed;
+    }
+    
     .nav-menu {
         display: none;
         position: fixed;
@@ -63,6 +68,13 @@
     }
 
     .wide-card.with-image .content-image {
+        display: none;
+    }
+}
+
+@media (min-width: 769px) {
+    /* Hide mobile menu toggle on desktop */
+    .mobile-menu-toggle {
         display: none;
     }
 }
