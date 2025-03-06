@@ -1,7 +1,17 @@
-/* Fonts */
+/* Table of Contents
+1. Imports & Variables
+2. Base Styles
+3. Navigation
+4. Hero Section
+5. Wide Cards Section
+6. Regular Cards Section
+7. Carousel Section
+8. Media Queries
+*/
+
+/* 1. Imports & Variables */
 @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&family=Open+Sans:wght@300;400;600&display=swap');
 
-/* Variables */
 :root {
     --primary-color: #89acc9;
     --secondary-color: #e7cfd2;
@@ -9,9 +19,12 @@
     --heading-color: #2c3e50;
     --paragraph-color: #596275;
     --accent-color: #6a9e9f;
+    --shadow-small: 0 4px 15px rgba(0, 0, 0, 0.1);
+    --shadow-large: 0 6px 20px rgba(0, 0, 0, 0.15);
+    --transition-standard: 0.3s ease;
 }
 
-/* Base Styles */
+/* 2. Base Styles */
 body {
     font-family: 'Open Sans', sans-serif;
     text-align: center;
@@ -22,7 +35,7 @@ body {
     padding: 0;
     overflow-x: hidden;
 }
-/* Typography */
+
 h1, h2, h3, h4, h5, h6 {
     font-family: 'Quicksand', sans-serif;
     font-weight: 600;
@@ -30,7 +43,69 @@ h1, h2, h3, h4, h5, h6 {
     color: var(--heading-color);
 }
 
-/* Hero Section */
+/* 3. Navigation */
+.topbar {
+    background-color: rgba(137, 172, 201, 0);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 60px;
+    padding: 0 40px;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+    z-index: 1000;
+    transition: var(--transition-standard);
+}
+
+.nav-menu {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    align-items: stretch;
+}
+
+.nav-menu li {
+    margin: 0;
+    height: 100%;
+    display: flex;
+    align-items: stretch;
+}
+
+.nav-menu a {
+    font-family: 'Quicksand', sans-serif;
+    color: var(--background-light);
+    text-decoration: none;
+    font-size: 1.1rem;
+    font-weight: 500;
+    padding: 0 20px;
+    display: flex;
+    align-items: center;
+    position: relative;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+    transition: all var(--transition-standard);
+}
+
+.nav-menu a:hover {
+    color: var(--secondary-color);
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    font-family: 'Quicksand', sans-serif;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--background-light);
+    text-decoration: none;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+/* 4. Hero Section */
 .hero-header {
     position: relative;
     width: 100vw;
@@ -38,7 +113,6 @@ h1, h2, h3, h4, h5, h6 {
     background-image: url('../images/header-image.jpg');
     background-size: cover;
     background-position: center;
-    background-repeat: no-repeat;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -71,125 +145,175 @@ h1, h2, h3, h4, h5, h6 {
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
 }
 
-.hero-content p {
-    font-size: 1.5rem;
-    margin-bottom: 2rem;
-    color: var(--background-light);
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
-}
-
-/* Navigation */
-.topbar {
-    background-color: rgba(137, 172, 201, 0);
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 60px;
-    padding: 0 40px;
-    box-sizing: border-box;
+/* 5. Wide Cards Section */
+.wide-cards-container {
     display: flex;
-    justify-content: space-between;
-    align-items: stretch;
-    z-index: 1000;
-    transition: background-color 0.3s ease;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 2rem 2rem;
+    max-width: 1450px;
+    margin: 0 auto;
 }
 
-.nav-menu {
-    display: flex;
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    height: 100%;
-    align-items: stretch;
-}
-
-.nav-menu .fa-linkedin {
-    font-size: 1.3rem;
-    transition: color 0.3s ease;
-}
-
-.nav-menu a:hover .fa-linkedin {
-    color: var(--secondary-color);
-}
-.nav-menu .fa-instagram {
-    font-size: 1.3rem;
-    transition: color 0.3s ease;
-}
-
-.nav-menu a:hover .fa-instagram {
-    color: var(--secondary-color);
-}
-
-.nav-menu .fa-facebook {
-    font-size: 1.3rem;
-    transition: color 0.3s ease;
-}
-
-.nav-menu a:hover .fa-facebook {
-    color: var(--secondary-color);
-}
-
-.nav-menu li {
-    margin: 0;
-    height: 100%;
-    display: flex;
-    align-items: stretch;
-}
-
-.nav-menu a {
-    font-family: 'Quicksand', sans-serif;
-    color: var(--background-light);
-    text-decoration: none;
-    font-size: 1.1rem;
-    font-weight: 500;
-    padding: 0 20px;
-    display: flex;
-    align-items: center;
+.wide-card {
     position: relative;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
-    transition: all 0.3s;
+    min-height: 300px;
+    height: fit-content;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: var(--shadow-small);
+    transition: transform var(--transition-standard), box-shadow var(--transition-standard);
 }
 
-.nav-menu a:hover {
-    color: var(--secondary-color);
+.wide-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-large);
 }
 
-.nav-menu a::before {
-    content: '';
+.wide-card-background {
     position: absolute;
     top: 0;
     left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(255, 255, 255, 0.1);
-    transform: scaleY(0);
-    transition: transform 0.3s ease;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
 }
 
-.nav-menu a:hover::before {
-    transform: scaleY(1);
+.wide-card-background img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: blur(8px);
 }
 
-.logo {
+.wide-card-background::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        rgba(137, 172, 201, 0.5),
+        rgba(231, 207, 210, 0.5)
+    );
+    backdrop-filter: blur(8px);
+}
+
+.wide-card-content {
+    position: relative;
+    z-index: 2;
     display: flex;
-    align-items: center;
-    font-family: 'Quicksand', sans-serif;
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: var(--background-light);
-    text-decoration: none;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding: 1rem;
+    height: fit-content;
+    box-sizing: border-box;
+    gap: 1rem;
+}
+
+.wide-card.with-image .content-text {
+    flex: 1;
+    max-width: 80%;
+}
+
+.wide-card.with-image .content-image {
+    flex: 0 0 300px;
+    height: 300px;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: var(--shadow-small);
+}
+
+.wide-card:not(.with-image) .content-text {
+    flex: 1;
+    max-width: 100%;
+}
+
+.content-image {
+    display: none;
+}
+
+.wide-card.with-image .content-image {
+    display: block;
+}
+
+.content-text {
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.content-text h2 {
+    color: white;
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.content-text p {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 1.1rem;
+    line-height: 1.6;
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
 }
 
-/* Carousel */
+/* 6. Regular Cards Section */
+.cards-container {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    padding: 2rem 2rem;
+    max-width: 1450px;
+    margin: 0 auto;
+}
+
+.card {
+    flex: 1;
+    max-width: 350px;
+    background: white;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: var(--shadow-small);
+    transition: transform var(--transition-standard), box-shadow var(--transition-standard);
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-large);
+}
+
+.card-image {
+    height: 250px;
+    overflow: hidden;
+    position: relative;
+}
+
+.card-image::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(137, 172, 201, 0.3);
+    backdrop-filter: blur(3px);
+    z-index: 1;
+}
+
+.card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.card-content {
+    padding: 1.5rem;
+    text-align: left;
+}
+
+/* 7. Carousel Section */
 .announcement-carousel {
     width: 100vw;
     overflow: hidden;
     background-color: var(--background-light);
     margin: 0;
-    padding-top: 10px;
-    padding-bottom: 10px;
+    padding: 10px 0;
     position: relative;
 }
 
@@ -202,32 +326,30 @@ h1, h2, h3, h4, h5, h6 {
     align-items: center;
     justify-content: center;
     opacity: 0;
-    transition: opacity 0.3s ease;
+    transition: opacity var(--transition-standard);
     z-index: 100;
 }
 
 .carousel-nav-left {
     left: 0;
     background: linear-gradient(to right, rgba(245, 238, 230, 0.8), transparent);
-    padding-left: -30px;
 }
 
 .carousel-nav-right {
     right: 0;
     background: linear-gradient(to left, rgba(245, 238, 230, 0.8), transparent);
-    padding-right: -30px;
 }
 
 .nav-button {
     color: var(--paragraph-color);
-    background: rgba(255, 255, 255, 0);
+    background: transparent;
     border: none;
     border-radius: 50%;
     width: 40px;
     height: 40px;
     font-size: 24px;
     cursor: pointer;
-    transition: all 0.15s ease;
+    transition: transform 0.15s ease;
 }
 
 .nav-button:hover {
@@ -238,62 +360,38 @@ h1, h2, h3, h4, h5, h6 {
     opacity: 1;
 }
 
-.carousel-track {
-    display: flex;
-    gap: 0px;
-    width: fit-content;
-    position: relative;
-    transform: translateX(0);
-    will-change: transform;
-    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1); 
+/* 8. Media Queries */
+@media (max-width: 968px) {
+    .cards-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .card {
+        width: 100%;
+        max-width: 500px;
+    }
 }
 
+@media (max-width: 768px) {
+    .wide-card-content {
+        flex-direction: column;
+        padding: 1.5rem;
+    }
 
-.carousel-item {
-    flex: 0 0 600px;
-    height: 250px;
-    position: relative;
-    overflow: hidden;
-    border-radius: 12px;
-    transform: scale(1);
-    box-shadow: 0 0 0 0 rgba(0,0,0,0);
-    transition: transform 0.15s ease-out, box-shadow 0.15s ease-out;
-    will-change: transform, box-shadow;
-}
+    .wide-card.with-image .content-text,
+    .wide-card:not(.with-image) .content-text {
+        max-width: 100%;
+    }
 
-.carousel-item-hovered {
-    transform: scale(1.05);
-    z-index: 10;
-    box-shadow: 20px 0 20px -20px rgba(0,0,0,0.3), 
-                -20px 0 20px -20px rgba(0,0,0,0.3);
-}
+    .wide-card.with-image .content-image {
+        width: 100%;
+        height: 200px;
+        order: -1;
+        margin-bottom: 1.5rem;
+    }
 
-.carousel-item img {
-    width: 100%;
-    height: 250px;
-    object-fit: cover;
-}
-
-.carousel-content {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    padding: 20px;
-    background: linear-gradient(transparent, rgba(0, 0, 0, 0.7));
-    color: white;
-    text-align: left;
-    transition: transform 0.3s ease;
-}
-
-.carousel-content h3 {
-    margin: 0 0 5px 0;
-    font-size: 1.2rem;
-    color: white;
-}
-
-.carousel-content p {
-    margin: 0;
-    font-size: 0.9rem;
-    opacity: 0.9;
+    .nav-menu {
+        display: none;
+    }
 }
