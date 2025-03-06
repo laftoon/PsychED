@@ -8,6 +8,18 @@ document.addEventListener("DOMContentLoaded", function() {
     const prevButton = document.querySelector('.carousel-nav-left');
     const nextButton = document.querySelector('.carousel-nav-right');
     const cards = document.querySelectorAll('.flip-card');
+    const scrollButton = document.querySelector('.scroll-to-contact');
+    const contactSection = document.querySelector('#contact-section');
+
+    // Scroll to contact functionality
+    if (scrollButton && contactSection) {
+        scrollButton.addEventListener('click', () => {
+            contactSection.scrollIntoView({ 
+                behavior: 'smooth',
+                block: 'start'
+            });
+        });
+    }
 
     // State Variables
     let currentIndex = 0;
