@@ -1,0 +1,61 @@
+/* Contact Form Styles */
+.contact-card .wide-card-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    padding: 2rem;
+    max-width: 1450px;
+    margin: 0 auto;
+}
+
+.contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 100%;
+    max-width: 1000px;
+}
+
+.form-group {
+    width: 100%;
+}
+
+.contact-form input {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 1rem;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.contact-form input::placeholder {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.contact-form input:focus {
+    outline: none;
+    border-color: white;
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.submit-button {
+    padding: 1rem 2rem;
+    background: white;
+    border: none;
+    border-radius: 8px;
+    color: var(--primary-color);
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 1rem;
+}
+
+.submit-button:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-small);
+}

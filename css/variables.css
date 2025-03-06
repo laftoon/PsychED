@@ -1,0 +1,13 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&family=Open+Sans:wght@300;400;600&display=swap');
+
+:root {
+    --primary-color: #89acc9;
+    --secondary-color: #e7cfd2;
+    --background-light: #f5eee6;
+    --heading-color: #2c3e50;
+    --paragraph-color: #596275;
+    --accent-color: #6a9e9f;
+    --shadow-small: 0 4px 15px rgba(0, 0, 0, 0.1);
+    --shadow-large: 0 6px 20px rgba(0, 0, 0, 0.15);
+    --transition-standard: 0.3s ease;
+}

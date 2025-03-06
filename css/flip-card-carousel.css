@@ -1,0 +1,110 @@
+/* Flip Cards Carousel */
+.flip-carousel-container {
+    position: relative;
+    width: 100vw;
+    margin-left: calc(-50vw + 50%);
+    margin-right: calc(-50vw + 50%);
+    overflow: hidden;
+}
+
+.flip-carousel {
+    position: relative;
+    padding-top: 0.5rem;
+    padding-bottom: 1rem;
+}
+
+.flip-cards-track {
+    display: flex;
+    gap: 1rem;
+    transition: transform 0.5s ease;
+    padding: 0 2rem;
+}
+
+.flip-card {
+    min-width: 500px;
+    height: 250px;
+    perspective: 1000px;
+    cursor: pointer;
+    position: relative;
+}
+
+.flip-card-inner {
+    position: absolute;
+    inset: 0;
+    transition: transform 0.8s ease;
+    transform-style: preserve-3d;
+    box-shadow: var(--shadow-small);
+}
+
+.flip-card:hover .flip-card-inner {
+    transform: rotateY(180deg);
+}
+
+.flip-card-front, .flip-card-back {
+    position: absolute;
+    inset: 0;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    border-radius: 15px;
+}
+
+.flip-card-front {
+    background: linear-gradient(
+        135deg,
+        rgba(137, 172, 201, 0.98),
+        rgba(231, 207, 210, 0.98)
+    );
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+}
+
+.flip-card-front h2 {
+    color: white;
+    margin: 0;
+    font-size: 2rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.flip-card-back {
+    background: white;
+    transform: rotateY(180deg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+}
+
+/* Carousel Navigation */
+.carousel-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 50px;
+    height: 50px;
+    background: white;
+    border: none;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: var(--shadow-small);
+    z-index: 10;
+    transition: all 0.3s ease;
+}
+
+.carousel-nav-left {
+    left: 10px;
+}
+
+.carousel-nav-right {
+    right: 10px;
+}
+
+.carousel-nav:hover {
+    background: var(--primary-color);
+    color: white;
+}

@@ -1,0 +1,61 @@
+/* General card styles */
+.card {
+    flex: 1;
+    max-width: 350px;
+    background: white;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: var(--shadow-small);
+    transition: transform var(--transition-standard), box-shadow var(--transition-standard);
+    padding: 0;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-large);
+}
+
+.card-image {
+    width: 100%; /* Take full width of the card */
+    height: 250px;
+    margin: 0;
+    position: relative;
+    background: linear-gradient(
+        135deg,
+        rgba(137, 172, 201, 0.98),
+        rgba(231, 207, 210, 0.98)
+    );
+    border-radius: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.card-image::before {
+    content: '';
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    background: white; /* Create white circular cutout */
+    z-index: 1;
+}
+
+.card-image img {
+    width: 220px;
+    height: 220px;
+    object-fit: cover;
+    border-radius: 50%;
+    position: relative;
+    z-index: 2;
+}
+
+.card-content {
+    padding: 0.5rem 1rem 1rem;
+    text-align: center; /* Center the text content */
+}
+
+.card-content h2 {
+    margin-top: -0.1rem; /* Add negative margin to move title up */
+    margin-bottom: 0.5rem; /* Reduce bottom margin */
+}
