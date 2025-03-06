@@ -4,7 +4,7 @@
 
 :root {
   /* Layout */
-  --contact-max-width: 1450px;
+  --contact-max-width: var(--wide-card-container-max-width); /* Match wide cards width */
   --contact-padding: 2rem;
   --contact-gap: 1rem;
   
@@ -48,11 +48,14 @@
     max-width: var(--contact-max-width);
     margin: 0 auto;
     padding: var(--contact-padding);
+    box-sizing: border-box; /* Add this to include padding in width calculation */
 }
+
 
 /* Contact Layout
    ========================================================================== */
 .contact {
+    width: 100%;
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: var(--contact-gap);
@@ -64,7 +67,9 @@
     );
     border-radius: var(--card-border-radius);
     color: white;
+    box-sizing: border-box; /* Add this to include padding in width calculation */
 }
+
 
 
 
