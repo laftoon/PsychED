@@ -3,6 +3,8 @@ document.addEventListener("DOMContentLoaded", function() {
     const SCROLL_THRESHOLD = 50;
 
     // DOM Elements
+    const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+    const navMenu = document.querySelector('.nav-menu');
     const topbar = document.querySelector('.topbar');
     const track = document.querySelector('.flip-cards-track');
     const prevButton = document.querySelector('.carousel-nav-left');
@@ -10,6 +12,32 @@ document.addEventListener("DOMContentLoaded", function() {
     const cards = document.querySelectorAll('.flip-card');
     const scrollButton = document.querySelector('.scroll-to-contact');
     const contactSection = document.querySelector('#contact-section');
+
+    // Mobile Menu Handler
+    if (mobileMenuToggle && navMenu) {
+        mobileMenuToggle.addEventListener('click', (e) => {
+            e.stopPropagation(); // Prevent event bubbling
+            navMenu.classList.toggle('active');
+            mobileMenuToggle.classList.toggle('active');
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!navMenu.contains(e.target) && !mobileMenuToggle.contains(e.target)) {
+                navMenu.classList.remove('active');
+                mobileMenuToggle.classList.remove('active');
+            }
+        });
+
+        // Close menu when clicking nav links
+        const navLinks = navMenu.querySelectorAll('a');
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+                mobileMenuToggle.classList.remove('active');
+            });
+        });
+    }
 
     // Scroll to contact functionality
     if (scrollButton && contactSection) {
@@ -21,55 +49,56 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 
-    // State Variables
+    // Carousel functionality
     let currentIndex = 0;
     let isTransitioning = false;
 
-    // Calculate dimensions
     function updateCarouselDimensions() {
         const cardWidth = cards[0].offsetWidth;
-        const gap = 16; // Match your CSS gap
-        return { cardWidth, gap };
+        const gap = 16;
+        const containerWidth = track.parentElement.offsetWidth;
+        const totalWidth = cards.length * (cardWidth + gap) - gap;
+        const visibleCards = Math.floor(containerWidth / (cardWidth + gap));
+        const maxScroll = Math.max(0, cards.length - visibleCards);
+        return { cardWidth, gap, maxScroll };
     }
 
     function moveToCard(index) {
         if (isTransitioning) return;
         
+        const { cardWidth, gap, maxScroll } = updateCarouselDimensions();
+        
         // Boundary checks
-        if (index < 0) index = 0;
-        if (index > cards.length - 1) index = cards.length - 1;
+        index = Math.max(0, Math.min(index, maxScroll));
 
-        const { cardWidth, gap } = updateCarouselDimensions();
         const offset = (cardWidth + gap) * index;
         
+        isTransitioning = true;
         track.style.transform = `translateX(-${offset}px)`;
         currentIndex = index;
 
         // Update button visibility
         prevButton.style.display = index === 0 ? 'none' : 'flex';
-        nextButton.style.display = index === cards.length - 1 ? 'none' : 'flex';
+        nextButton.style.display = index >= maxScroll ? 'none' : 'flex';
+
+        setTimeout(() => {
+            isTransitioning = false;
+        }, 500);
     }
 
     // Event Listeners
-    prevButton?.addEventListener('click', () => {
-        moveToCard(currentIndex - 1);
-    });
+    prevButton?.addEventListener('click', () => moveToCard(currentIndex - 1));
+    nextButton?.addEventListener('click', () => moveToCard(currentIndex + 1));
 
-    nextButton?.addEventListener('click', () => {
-        moveToCard(currentIndex + 1);
-    });
-
-    // Window resize handler
+    // Debounced resize handler
     let resizeTimeout;
     window.addEventListener('resize', () => {
         clearTimeout(resizeTimeout);
-        resizeTimeout = setTimeout(() => {
-            moveToCard(currentIndex);
-        }, 100);
+        resizeTimeout = setTimeout(() => moveToCard(currentIndex), 100);
     });
 
     // Navbar Scroll Effect
-    window.addEventListener('scroll', function() {
+    window.addEventListener('scroll', () => {
         if (window.scrollY > SCROLL_THRESHOLD) {
             topbar.classList.add('scrolled');
         } else {
@@ -78,5 +107,6 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 
     // Initialize carousel
+    prevButton.style.display = 'none';
     moveToCard(0);
 });

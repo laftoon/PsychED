@@ -24,6 +24,58 @@
     --transition-standard: 0.3s ease;
 }
 
+/* 1. Mobile Menu Styles */
+
+/* Mobile Menu Styles */
+/* Update Mobile Menu Styles */
+.mobile-menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    padding: 0.5rem;
+    cursor: pointer;
+    z-index: 1001;
+}
+
+.hamburger {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: var(--background-light);
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.hamburger::before,
+.hamburger::after {
+    content: '';
+    position: absolute;
+    width: 24px;
+    height: 2px;
+    background: var(--background-light);
+    left: 0;
+    transition: all 0.3s ease;
+}
+
+.hamburger::before { top: -6px; }
+.hamburger::after { bottom: -6px; }
+
+.mobile-menu-toggle.active .hamburger {
+    background: transparent;
+}
+
+.mobile-menu-toggle.active .hamburger::before {
+    transform: rotate(45deg);
+    top: 0;
+}
+
+.mobile-menu-toggle.active .hamburger::after {
+    transform: rotate(-45deg);
+    bottom: 0;
+}
+
+
+
 /* 2. Base Styles */
 body {
     font-family: 'Open Sans', sans-serif;
@@ -59,6 +111,8 @@ h1, h2, h3, h4, h5, h6 {
     z-index: 1000;
     transition: var(--transition-standard);
 }
+
+
 
 .nav-menu {
     display: flex;
@@ -206,8 +260,6 @@ h1, h2, h3, h4, h5, h6 {
     z-index: 1;
 }
 
-
-
 .wide-card-content {
     position: relative;
     z-index: 2;
@@ -231,6 +283,13 @@ h1, h2, h3, h4, h5, h6 {
     border-radius: 10px;
     overflow: hidden;
     box-shadow: var(--shadow-small);
+}
+
+.wide-card.with-image .content-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px;
 }
 
 .wide-card:not(.with-image) .content-text {
@@ -338,7 +397,6 @@ h1, h2, h3, h4, h5, h6 {
     margin-bottom: 0.5rem; /* Reduce bottom margin */
 }
 
-
 /* 7. Flip Cards Carousel */
 .flip-carousel-container {
     position: relative;
@@ -358,8 +416,9 @@ h1, h2, h3, h4, h5, h6 {
     display: flex;
     gap: 1rem;
     transition: transform 0.5s ease;
-    padding: 0 calc((100vw - 500px) / 2);
+    padding: 0 2rem; /* Changed from calc(50% - 250px) to fixed padding */
 }
+
 
 .flip-card {
     min-width: 500px;
@@ -510,18 +569,56 @@ h1, h2, h3, h4, h5, h6 {
     box-shadow: var(--shadow-small);
 }
 
-
-
-
 /* 8. Media Queries */
+/* 8. Media Queries */
+@media (max-width: 1024px) {
+    .cards-container {
+        flex-wrap: wrap;
+        gap: 2rem;
+    }
 
-@media (max-width: 768px) {
-    .contact-card .wide-card-content {
-        grid-template-columns: 1fr;
+    .card {
+        flex: 0 1 calc(50% - 1rem);
+    }
+
+    .flip-card {
+        min-width: 400px;
     }
 }
 
-@media (max-width: 968px) {
+@media (max-width: 768px) {
+    /* Navigation */
+    .mobile-menu-toggle {
+        display: block;
+    }
+
+    .nav-menu {
+        display: none;
+        position: fixed;
+        top: 60px;
+        left: 0;
+        width: 100%;
+        height: calc(100vh - 60px);
+        background: var(--primary-color);
+        flex-direction: column;
+        padding: 2rem;
+        z-index: 1000;
+    }
+
+    .nav-menu.active {
+        display: flex;
+    }
+
+    /* Cards and Layout */
+    .wide-card-content {
+        flex-direction: column;
+        padding: 1.5rem;
+    }
+
+    .contact-card .wide-card-content {
+        grid-template-columns: 1fr;
+    }
+
     .cards-container {
         flex-direction: column;
         align-items: center;
@@ -531,13 +628,6 @@ h1, h2, h3, h4, h5, h6 {
         width: 100%;
         max-width: 500px;
     }
-}
-
-@media (max-width: 768px) {
-    .wide-card-content {
-        flex-direction: column;
-        padding: 1.5rem;
-    }
 
     .wide-card.with-image .content-text,
     .wide-card:not(.with-image) .content-text {
@@ -545,13 +635,41 @@ h1, h2, h3, h4, h5, h6 {
     }
 
     .wide-card.with-image .content-image {
-        width: 100%;
-        height: 200px;
-        order: -1;
-        margin-bottom: 1.5rem;
-    }
-
-    .nav-menu {
         display: none;
     }
 }
+
+@media (max-width: 480px) {
+    .topbar {
+        padding: 0 1rem;
+    }
+
+    .hero-content h1 {
+        font-size: 1.5rem;
+    }
+
+    .content-text h2,
+    .flip-card-front h2 {
+        font-size: 1.5rem;
+    }
+
+    .flip-card {
+        min-width: calc(100vw - 4rem);
+        height: 300px;
+    }
+
+    .contact-form input {
+        font-size: 16px;
+    }
+}
+
+@media (hover: none) {
+    .flip-card-inner {
+        transform: rotateY(0);
+    }
+
+    .flip-card:active .flip-card-inner {
+        transform: rotateY(180deg);
+    }
+}
+
