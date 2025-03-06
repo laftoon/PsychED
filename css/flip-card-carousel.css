@@ -51,8 +51,9 @@
 .flip-card-front {
     background: linear-gradient(
         135deg,
-        rgba(137, 172, 201, 0.98),
-        rgba(231, 207, 210, 0.98)
+        rgba(231, 207, 210, 0.98),
+        rgba(137, 172, 201, 0.98)
+        
     );
     overflow: hidden;
     display: flex;
