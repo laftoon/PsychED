@@ -22,7 +22,7 @@ body {
     padding: 0;
     overflow-x: hidden;
 }
-
+/* Typography */
 h1, h2, h3, h4, h5, h6 {
     font-family: 'Quicksand', sans-serif;
     font-weight: 600;
@@ -65,7 +65,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .hero-content h1 {
-    font-size: 3.5rem;
+    font-size: 2.5rem;
     margin-bottom: 1rem;
     color: var(--background-light);
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
@@ -102,6 +102,32 @@ h1, h2, h3, h4, h5, h6 {
     padding: 0;
     height: 100%;
     align-items: stretch;
+}
+
+.nav-menu .fa-linkedin {
+    font-size: 1.3rem;
+    transition: color 0.3s ease;
+}
+
+.nav-menu a:hover .fa-linkedin {
+    color: var(--secondary-color);
+}
+.nav-menu .fa-instagram {
+    font-size: 1.3rem;
+    transition: color 0.3s ease;
+}
+
+.nav-menu a:hover .fa-instagram {
+    color: var(--secondary-color);
+}
+
+.nav-menu .fa-facebook {
+    font-size: 1.3rem;
+    transition: color 0.3s ease;
+}
+
+.nav-menu a:hover .fa-facebook {
+    color: var(--secondary-color);
 }
 
 .nav-menu li {
