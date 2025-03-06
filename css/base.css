@@ -1,8 +1,8 @@
 /* Base Typography System */
 :root {
   /* Design Tokens - Typography */
-  --font-family-primary: 'Open Sans', system-ui, -apple-system, sans-serif;
-  --font-family-headings: 'Quicksand', system-ui, -apple-system, sans-serif;
+  --font-family-primary: 'Merriweather', system-ui, -apple-system, serif;
+  --font-family-headings: 'Merriweather', system-ui, -apple-system, serif;
   
   /* Design Tokens - Spacing */
   --spacing-base: 1rem;
