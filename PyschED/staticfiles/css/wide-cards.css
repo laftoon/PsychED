@@ -1,0 +1,162 @@
+/* ==========================================================================
+   Wide Cards Component
+   ========================================================================== */
+
+:root {
+  /* Layout */
+  --wide-card-container-max-width: 1450px;
+  --wide-card-container-padding: 2rem;
+  --wide-card-gap: 1rem;
+  --wide-card-min-height: 300px;
+  --wide-card-border-radius: 15px;
+  --wide-card-content-padding: 1rem;
+  --wide-card-image-width: 300px;
+  
+  /* Typography */
+  --wide-card-title-size: 2rem;
+  --wide-card-text-size: 1.1rem;
+  --wide-card-line-height: 1.6;
+  
+  /* Colors */
+  --wide-card-gradient-start: rgba(137, 172, 201, 0.98);
+  --wide-card-gradient-end: rgba(231, 207, 210, 0.98);
+  --wide-card-text-color: white;
+  --wide-card-text-color-muted: rgba(255, 255, 255, 0.9);
+  
+  /* Effects */
+  --wide-card-shadow: var(--shadow-small);
+  --wide-card-hover-shadow: var(--shadow-large);
+  --wide-card-hover-y-offset: -5px;
+  --wide-card-title-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+  --wide-card-text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+/* Container
+   ========================================================================== */
+.wide-cards {
+  display: flex;
+  flex-direction: column;
+  gap: var(--wide-card-gap);
+  padding: var(--wide-card-container-padding);
+  max-width: var(--wide-card-container-max-width);
+  margin-inline: auto;
+}
+
+/* Card Base
+   ========================================================================== */
+.wide-card {
+  position: relative;
+  min-height: var(--wide-card-min-height);
+  height: fit-content;
+  border-radius: var(--wide-card-border-radius);
+  overflow: hidden;
+  box-shadow: var(--wide-card-shadow);
+  transition: transform var(--transition-standard),
+              box-shadow var(--transition-standard);
+}
+
+.wide-card:hover {
+  transform: translateY(var(--wide-card-hover-y-offset));
+  box-shadow: var(--wide-card-hover-shadow);
+}
+
+/* Card Background
+   ========================================================================== */
+.wide-card__background {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    var(--wide-card-gradient-start),
+    var(--wide-card-gradient-end)
+  );
+  z-index: 1;
+}
+
+/* Card Content Layout
+   ========================================================================== */
+.wide-card__content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: var(--wide-card-content-padding);
+  height: fit-content;
+  box-sizing: border-box;
+  gap: var(--wide-card-gap);
+}
+
+/* Card Text Content
+   ========================================================================== */
+.wide-card__text {
+  flex: 1;
+  color: var(--wide-card-text-color);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.wide-card__title {
+  font-size: var(--wide-card-title-size);
+  margin-block-end: 1.5rem;
+  color: var(--wide-card-text-color);
+  text-shadow: var(--wide-card-title-shadow);
+}
+
+.wide-card__description {
+  color: var(--wide-card-text-color-muted);
+  font-size: var(--wide-card-text-size);
+  line-height: var(--wide-card-line-height);
+  text-shadow: var(--wide-card-text-shadow);
+}
+
+/* Card Image
+   ========================================================================== */
+.wide-card__image {
+  display: none;
+  flex: 0 0 var(--wide-card-image-width);
+  height: var(--wide-card-min-height);
+  border-radius: calc(var(--wide-card-border-radius) - 5px);
+  overflow: hidden;
+  box-shadow: var(--wide-card-shadow);
+}
+
+.wide-card__image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: inherit;
+}
+
+/* Modifiers
+   ========================================================================== */
+.wide-card--with-image .wide-card__text {
+  max-width: 80%;
+}
+
+.wide-card--with-image .wide-card__image {
+  display: block;
+}
+
+/* Responsive Design
+   ========================================================================== */
+@media (max-width: 768px) {
+  .wide-card--with-image .wide-card__text {
+    max-width: 100%;
+  }
+  
+  .wide-card__image {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wide-card {
+    transition: none;
+  }
+  
+  .wide-card:hover {
+    transform: none;
+  }
+}

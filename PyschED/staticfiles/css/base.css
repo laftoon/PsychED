@@ -1,0 +1,42 @@
+/* Base Typography System */
+:root {
+  /* Design Tokens - Typography */
+  --font-family-primary: 'Merriweather', system-ui, -apple-system, serif;
+  --font-family-headings: 'Merriweather', system-ui, -apple-system, serif;
+  
+  /* Design Tokens - Spacing */
+  --spacing-base: 1rem;
+  
+  /* Design Tokens - Line Heights */
+  --line-height-body: 1.6;
+  
+  /* Design Tokens - Font Weights */
+  --font-weight-heading: 600;
+}
+
+/* Base Styles */
+body {
+  /* Typography */
+  font-family: var(--font-family-primary);
+  line-height: var(--line-height-body);
+  
+  /* Colors */
+  background-color: var(--background-light);
+  color: var(--paragraph-color);
+  
+  /* Layout */
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  
+  /* Behavior */
+  overflow-x: hidden;
+}
+
+/* Heading Styles */
+:is(h1, h2, h3, h4, h5, h6) {
+  font-family: var(--font-family-headings);
+  font-weight: var(--font-weight-heading);
+  margin-block-end: var(--spacing-base);
+  color: var(--heading-color);
+}

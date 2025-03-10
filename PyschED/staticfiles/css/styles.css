@@ -1,0 +1,675 @@
+/* Table of Contents
+1. Imports & Variables
+2. Base Styles
+3. Navigation
+4. Hero Section
+5. Wide Cards Section
+6. Regular Cards Section
+7. Flip Carousel Section
+8. Media Queries
+*/
+
+/* 1. Imports & Variables */
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&family=Open+Sans:wght@300;400;600&display=swap');
+
+:root {
+    --primary-color: #89acc9;
+    --secondary-color: #e7cfd2;
+    --background-light: #f5eee6;
+    --heading-color: #2c3e50;
+    --paragraph-color: #596275;
+    --accent-color: #6a9e9f;
+    --shadow-small: 0 4px 15px rgba(0, 0, 0, 0.1);
+    --shadow-large: 0 6px 20px rgba(0, 0, 0, 0.15);
+    --transition-standard: 0.3s ease;
+}
+
+/* 1. Mobile Menu Styles */
+
+/* Mobile Menu Styles */
+/* Update Mobile Menu Styles */
+.mobile-menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    padding: 0.5rem;
+    cursor: pointer;
+    z-index: 1001;
+}
+
+.hamburger {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: var(--background-light);
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.hamburger::before,
+.hamburger::after {
+    content: '';
+    position: absolute;
+    width: 24px;
+    height: 2px;
+    background: var(--background-light);
+    left: 0;
+    transition: all 0.3s ease;
+}
+
+.hamburger::before { top: -6px; }
+.hamburger::after { bottom: -6px; }
+
+.mobile-menu-toggle.active .hamburger {
+    background: transparent;
+}
+
+.mobile-menu-toggle.active .hamburger::before {
+    transform: rotate(45deg);
+    top: 0;
+}
+
+.mobile-menu-toggle.active .hamburger::after {
+    transform: rotate(-45deg);
+    bottom: 0;
+}
+
+
+
+/* 2. Base Styles */
+body {
+    font-family: 'Open Sans', sans-serif;
+    text-align: center;
+    background-color: var(--background-light);
+    color: var(--paragraph-color);
+    margin: 0;
+    line-height: 1.6;
+    padding: 0;
+    overflow-x: hidden;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: var(--heading-color);
+}
+
+/* 3. Navigation */
+.topbar {
+    background-color: rgba(137, 172, 201, 0);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 60px;
+    padding: 0 40px;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+    z-index: 1000;
+    transition: var(--transition-standard);
+}
+
+
+
+.nav-menu {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    align-items: stretch;
+}
+
+.nav-menu li {
+    margin: 0;
+    height: 100%;
+    display: flex;
+    align-items: stretch;
+}
+
+.nav-menu a {
+    font-family: 'Quicksand', sans-serif;
+    color: var(--background-light);
+    text-decoration: none;
+    font-size: 1.1rem;
+    font-weight: 500;
+    padding: 0 20px;
+    display: flex;
+    align-items: center;
+    position: relative;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+    transition: all var(--transition-standard);
+}
+
+.nav-menu a:hover {
+    color: var(--secondary-color);
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    font-family: 'Quicksand', sans-serif;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--background-light);
+    text-decoration: none;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+/* 4. Hero Section */
+.hero-header {
+    position: relative;
+    width: 100vw;
+    height: 50vh;
+    background-image: url('../images/header-image.jpg');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.hero-header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(rgba(137, 172, 201, 0.3), rgba(137, 172, 201, 0.5));
+    z-index: 1;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 800px;
+    padding: 20px;
+    color: var(--background-light);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+}
+
+.scroll-to-contact {
+    margin-top: 1rem;
+    background: white;
+    color: var(--primary-color);
+    border: none;
+    padding: 1rem 2rem;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.scroll-to-contact:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-small);
+}
+
+.hero-content h1 {
+    font-size: 2.5rem;
+    margin-bottom: -1rem;
+    color: var(--background-light);
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* 5. Wide Cards Section */
+.wide-cards-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 2rem 2rem;
+    max-width: 1450px;
+    margin: 0 auto;
+}
+
+.wide-card {
+    position: relative;
+    min-height: 300px;
+    height: fit-content;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: var(--shadow-small);
+    transition: transform var(--transition-standard), box-shadow var(--transition-standard);
+}
+
+.wide-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-large);
+}
+
+.wide-card-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        135deg,
+        rgba(137, 172, 201, 0.98),  /* Increased to 0.98 */
+        rgba(231, 207, 210, 0.98)    /* Increased to 0.98 */
+    );
+    z-index: 1;
+}
+
+.wide-card-content {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding: 1rem;
+    height: fit-content;
+    box-sizing: border-box;
+    gap: 1rem;
+}
+
+.wide-card.with-image .content-text {
+    flex: 1;
+    max-width: 80%;
+}
+
+.wide-card.with-image .content-image {
+    flex: 0 0 300px;
+    height: 300px;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: var(--shadow-small);
+}
+
+.wide-card.with-image .content-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.wide-card:not(.with-image) .content-text {
+    flex: 1;
+    max-width: 100%;
+}
+
+.content-image {
+    display: none;
+}
+
+.wide-card.with-image .content-image {
+    display: block;
+}
+
+.content-text {
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.content-text h2 {
+    color: white;
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.content-text p {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 1.1rem;
+    line-height: 1.6;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+/* 6. Regular Cards Section */
+.cards-container {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    padding: 2rem 2rem;
+    max-width: 1450px;
+    margin: 0 auto;
+}
+
+.card {
+    flex: 1;
+    max-width: 350px;
+    background: white;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: var(--shadow-small);
+    transition: transform var(--transition-standard), box-shadow var(--transition-standard);
+    padding: 0;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-large);
+}
+
+.card-image {
+    width: 100%; /* Take full width of the card */
+    height: 250px;
+    margin: 0;
+    position: relative;
+    background: linear-gradient(
+        135deg,
+        rgba(137, 172, 201, 0.98),
+        rgba(231, 207, 210, 0.98)
+    );
+    border-radius: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.card-image::before {
+    content: '';
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    background: white; /* Create white circular cutout */
+    z-index: 1;
+}
+
+.card-image img {
+    width: 220px;
+    height: 220px;
+    object-fit: cover;
+    border-radius: 50%;
+    position: relative;
+    z-index: 2;
+}
+
+.card-content {
+    padding: 0.5rem 1rem 1rem;
+    text-align: center; /* Center the text content */
+}
+
+.card-content h2 {
+    margin-top: -0.1rem; /* Add negative margin to move title up */
+    margin-bottom: 0.5rem; /* Reduce bottom margin */
+}
+
+/* 7. Flip Cards Carousel */
+.flip-carousel-container {
+    position: relative;
+    width: 100vw;
+    margin-left: calc(-50vw + 50%);
+    margin-right: calc(-50vw + 50%);
+    overflow: hidden;
+}
+
+.flip-carousel {
+    position: relative;
+    padding-top: 0.5rem;
+    padding-bottom: 1rem;
+}
+
+.flip-cards-track {
+    display: flex;
+    gap: 1rem;
+    transition: transform 0.5s ease;
+    padding: 0 2rem; /* Changed from calc(50% - 250px) to fixed padding */
+}
+
+
+.flip-card {
+    min-width: 500px;
+    height: 250px;
+    perspective: 1000px;
+    cursor: pointer;
+    position: relative; 
+}
+
+.flip-card-inner {
+    position: absolute;
+    inset: 0; 
+    transition: transform 0.8s ease;
+    transform-style: preserve-3d;
+    box-shadow: var(--shadow-small);
+}
+
+.flip-card:hover .flip-card-inner {
+    transform: rotateY(180deg);
+}
+
+.flip-card-front, .flip-card-back {
+    position: absolute;
+    inset: 0; /* Use inset instead of top, left, width, height */
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    border-radius: 15px;
+}
+
+.flip-card-front {
+    background: linear-gradient(135deg,
+        rgba(137, 172, 201, 0.98),
+        rgba(231, 207, 210, 0.98));
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+}
+
+.flip-card-front h2 {
+    color: white;
+    margin: 0;
+    font-size: 2rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.flip-card-back {
+    background: white;
+    transform: rotateY(180deg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+}
+
+/* Carousel Navigation */
+.carousel-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 50px;
+    height: 50px;
+    background: white;
+    border: none;
+    border-radius: 50%;
+    display: flex; /* Change from none to flex */
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: var(--shadow-small);
+    z-index: 10;
+    transition: all 0.3s ease;
+}
+
+.carousel-nav-left {
+    left: 10px;
+}
+
+.carousel-nav-right {
+    right: 10px;
+}
+
+.carousel-nav:hover {
+    background: var(--primary-color);
+    color: white;
+}
+
+/* Contact Form Styles */
+.contact-card .wide-card-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    padding: 2rem;
+    max-width: 1450px; 
+    margin: 0 auto; 
+}
+
+.contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 100%;
+    max-width: 1000px; 
+}
+
+.form-group {
+    width: 100%;
+}
+
+.contact-form input {
+    width: 100%;
+    box-sizing: border-box; 
+    padding: 1rem;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.contact-form input::placeholder {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.contact-form input:focus {
+    outline: none;
+    border-color: white;
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.submit-button {
+    padding: 1rem 2rem;
+    background: white;
+    border: none;
+    border-radius: 8px;
+    color: var(--primary-color);
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 1rem;
+}
+
+.submit-button:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-small);
+}
+
+/* 8. Media Queries */
+/* 8. Media Queries */
+@media (max-width: 1024px) {
+    .cards-container {
+        flex-wrap: wrap;
+        gap: 2rem;
+    }
+
+    .card {
+        flex: 0 1 calc(50% - 1rem);
+    }
+
+    .flip-card {
+        min-width: 400px;
+    }
+}
+
+@media (max-width: 768px) {
+    /* Navigation */
+    .mobile-menu-toggle {
+        display: block;
+    }
+
+    .nav-menu {
+        display: none;
+        position: fixed;
+        top: 60px;
+        left: 0;
+        width: 100%;
+        height: calc(100vh - 60px);
+        background: var(--primary-color);
+        flex-direction: column;
+        padding: 2rem;
+        z-index: 1000;
+    }
+
+    .nav-menu.active {
+        display: flex;
+    }
+
+    /* Cards and Layout */
+    .wide-card-content {
+        flex-direction: column;
+        padding: 1.5rem;
+    }
+
+    .contact-card .wide-card-content {
+        grid-template-columns: 1fr;
+    }
+
+    .cards-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .card {
+        width: 100%;
+        max-width: 500px;
+    }
+
+    .wide-card.with-image .content-text,
+    .wide-card:not(.with-image) .content-text {
+        max-width: 100%;
+    }
+
+    .wide-card.with-image .content-image {
+        display: none;
+    }
+}
+
+@media (max-width: 480px) {
+    .topbar {
+        padding: 0 1rem;
+    }
+
+    .hero-content h1 {
+        font-size: 1.5rem;
+    }
+
+    .content-text h2,
+    .flip-card-front h2 {
+        font-size: 1.5rem;
+    }
+
+    .flip-card {
+        min-width: calc(100vw - 4rem);
+        height: 300px;
+    }
+
+    .contact-form input {
+        font-size: 16px;
+    }
+}
+
+@media (hover: none) {
+    .flip-card-inner {
+        transform: rotateY(0);
+    }
+
+    .flip-card:active .flip-card-inner {
+        transform: rotateY(180deg);
+    }
+}
+

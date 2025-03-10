@@ -1,0 +1,200 @@
+/* ==========================================================================
+   Contact Form Component
+   ========================================================================== */
+
+:root {
+  /* Layout */
+  --contact-max-width: var(--wide-card-container-max-width); /* Match wide cards width */
+  --contact-padding: 2rem;
+  --contact-gap: 1rem;
+  
+  /* Form Elements */
+  --input-padding: 1rem;
+  --input-border-radius: 8px;
+  --input-border-width: 2px;
+  
+  /* Button */
+  --button-padding-x: 2rem;
+  --button-padding-y: 1rem;
+  --button-margin-top: 1rem;
+  
+  /* Typography */
+  --input-font-size: 1rem;
+  --button-font-size: 1rem;
+  --button-font-weight: 600;
+  
+  /* Colors */
+  --input-border-color: rgba(255, 255, 255, 0.2);
+  --input-bg-color: rgba(255, 255, 255, 0.1);
+  --input-focus-bg-color: rgba(255, 255, 255, 0.2);
+  --input-text-color: white;
+  --input-placeholder-color: rgba(255, 255, 255, 0.8);
+  --button-bg-color: white;
+
+    /* Contact Section Specific */
+    --contact-bg-gradient-start: var(--gradient-start);
+    --contact-bg-gradient-end: var(--gradient-end);
+    --contact-text-color: white;
+    --contact-title-size: 2rem;
+  
+  /* Transitions */
+  --transition-standard: all 0.3s ease;
+}
+
+/* Contact Container
+   ========================================================================== */
+.contact-container {
+    width: 100%;
+    max-width: var(--contact-max-width);
+    margin: 0 auto;
+    padding: var(--contact-padding);
+    box-sizing: border-box; /* Add this to include padding in width calculation */
+}
+
+
+/* Contact Layout
+   ========================================================================== */
+.contact {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--contact-gap);
+    padding: var(--contact-padding);
+    background: linear-gradient(
+        135deg,
+        var(--gradient-start),
+        var(--gradient-end)
+    );
+    border-radius: var(--card-border-radius);
+    color: white;
+    box-sizing: border-box; /* Add this to include padding in width calculation */
+}
+
+
+
+
+/* Contact Content Styles
+   ========================================================================== */
+   .contact__title {
+    color: white;
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+  
+  .contact__description {
+    color: white;
+    line-height: 1.6;
+    margin-bottom: 2rem;
+  }
+
+/* Form Container
+   ========================================================================== */
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--contact-gap);
+  width: 100%;
+  max-width: 1000px;
+}
+
+/* Form Groups
+   ========================================================================== */
+.form-group {
+  width: 100%;
+}
+
+/* Form Inputs
+   ========================================================================== */
+.form-input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: var(--input-padding);
+  
+  /* Border */
+  border: var(--input-border-width) solid var(--input-border-color);
+  border-radius: var(--input-border-radius);
+  
+  /* Colors */
+  background: var(--input-bg-color);
+  color: var(--input-text-color);
+  
+  /* Typography */
+  font-size: var(--input-font-size);
+  
+  /* Animation */
+  transition: var(--transition-standard);
+}
+
+.form-input::placeholder {
+  color: var(--input-placeholder-color);
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: var(--input-text-color);
+  background: var(--input-focus-bg-color);
+}
+
+/* Submit Button
+   ========================================================================== */
+.form-submit {
+  padding: var(--button-padding-y) var(--button-padding-x);
+  margin-top: var(--button-margin-top);
+  
+  /* Visual */
+  background: var(--button-bg-color);
+  border: none;
+  border-radius: var(--input-border-radius);
+  
+  /* Typography */
+  color: var(--primary-color);
+  font-weight: var(--button-font-weight);
+  font-size: var(--button-font-size);
+  
+  /* Interaction */
+  cursor: pointer;
+  transition: var(--transition-standard);
+}
+
+.form-submit:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-small);
+}
+
+/* Accessibility
+   ========================================================================== */
+.form-input:focus-visible,
+.form-submit:focus-visible {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .form-input,
+  .form-submit {
+    transition: none;
+  }
+  
+  .form-submit:hover {
+    transform: none;
+  }
+}
+
+/* Responsive Design
+   ========================================================================== */
+@media (max-width: 768px) {
+  .contact {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  :root {
+    --input-font-size: 16px; /* Prevent zoom on iOS */
+    --button-padding-x: 1.5rem;
+  }
+  
+  .contact {
+    padding: calc(var(--contact-padding) / 2);
+  }
+}

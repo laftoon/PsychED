@@ -15,6 +15,13 @@ import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+# Define STATIC_ROOT (important for collectstatic)
+STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
+
+# Define COMPRESS_ROOT (where compressed files will be stored)
+COMPRESS_ROOT = os.path.join(STATIC_ROOT, "CACHE")
+COMPRESS_OFFLINE = True
+
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
@@ -38,6 +45,19 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'core',
+    'compressor',
+]
+
+STATICFILES_FINDERS = [
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    'compressor.finders.CompressorFinder',
+]
+
+COMPRESS_ENABLED = True
+COMPRESS_CSS_FILTERS = [
+    'compressor.filters.css_default.CssAbsoluteFilter',
+    'compressor.filters.cssmin.CSSMinFilter'
 ]
 
 MIDDLEWARE = [
