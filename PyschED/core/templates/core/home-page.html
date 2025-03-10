@@ -369,8 +369,8 @@
         </div>
 
         <!-- Contact Form -->
-        <form class="contact-form" action="/submit" method="POST">
-            <!-- First Name Input -->
+        <form class="contact-form" action="" method="POST">
+            {% csrf_token %}
             <div class="form-group">
                 <input 
                     class="form-input" 
