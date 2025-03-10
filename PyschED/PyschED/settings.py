@@ -24,7 +24,7 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, 'core/static')]
 # Compression configuration
 COMPRESS_ROOT = STATIC_ROOT
 COMPRESS_OUTPUT_DIR = 'CACHE'
-COMPRESS_ENABLED = False
+COMPRESS_ENABLED = True
 COMPRESS_OFFLINE = False
 COMPRESS_CSS_FILTERS = [
     'compressor.filters.css_default.CssAbsoluteFilter',
