@@ -1,0 +1,24 @@
+/* core/static/css/transitions.css */
+:root {
+    --transition-duration: 0.3s;
+    --transition-timing: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Global transition styles */
+.wide-card,
+.card,
+.flip-card,
+.nav-menu__link {
+    transition-property: transform, box-shadow, opacity;
+    transition-duration: var(--transition-duration);
+    transition-timing-function: var(--transition-timing);
+    will-change: transform, box-shadow;
+}
+
+/* Ensure smooth hardware acceleration */
+.wide-card,
+.card {
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    perspective: 1000px;
+}

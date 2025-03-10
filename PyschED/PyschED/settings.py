@@ -12,21 +12,37 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 
 from pathlib import Path
 import os 
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# Define STATIC_ROOT (important for collectstatic)
+# Static files configuration
+STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'core/static')]
 
-# Define COMPRESS_ROOT (where compressed files will be stored)
-COMPRESS_ROOT = os.path.join(STATIC_ROOT, "CACHE")
-COMPRESS_OFFLINE = True
+# Compression configuration
+COMPRESS_ROOT = STATIC_ROOT
+COMPRESS_OUTPUT_DIR = 'CACHE'
+COMPRESS_ENABLED = False
+COMPRESS_OFFLINE = False
+COMPRESS_CSS_FILTERS = [
+    'compressor.filters.css_default.CssAbsoluteFilter',
+    'compressor.filters.cssmin.rCSSMinFilter',  # Use rCSSMinFilter instead of CSSMinFilter
+]
+COMPRESS_OUTPUT_DIR = 'CACHE'
+COMPRESS_CSS_HASHING_METHOD = 'content'
 
+# Add these settings
+COMPRESS_PRECOMPILERS = ()
+COMPRESS_CSS_BACKEND = 'django_compressor.css.CssCompressor'
+
+COMPRESS_CACHEABLE_PRECOMPILERS = ()
+COMPRESS_REBUILD_TIMEOUT = 0
+COMPRESS_MINT_DELAY = 0
+COMPRESS_MTIME_DELAY = 0
 
 # Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-3f8s(cn1)%*2k%fpl+73v7)ov3kiwjns2ybu*9mo8$y1zubrzs'
 
 # SECURITY WARNING: don't run with debug turned on in production!
@@ -34,9 +50,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-
 # Application definition
-
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -48,16 +62,11 @@ INSTALLED_APPS = [
     'compressor',
 ]
 
+# Static files finders
 STATICFILES_FINDERS = [
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
     'compressor.finders.CompressorFinder',
-]
-
-COMPRESS_ENABLED = True
-COMPRESS_CSS_FILTERS = [
-    'compressor.filters.css_default.CssAbsoluteFilter',
-    'compressor.filters.cssmin.CSSMinFilter'
 ]
 
 MIDDLEWARE = [
@@ -90,10 +99,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'PyschED.wsgi.application'
 
-
-# Database
-# https://docs.djangoproject.com/en/5.1/ref/settings/#databases
-
+# Database configuration
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -101,10 +107,7 @@ DATABASES = {
     }
 }
 
-
 # Password validation
-# https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
-
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
@@ -120,27 +123,11 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
-# https://docs.djangoproject.com/en/5.1/topics/i18n/
-
 LANGUAGE_CODE = 'en-us'
-
 TIME_ZONE = 'UTC'
-
 USE_I18N = True
-
 USE_TZ = True
 
-
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/5.1/howto/static-files/
-
-STATIC_URL = '/static/'
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'core/static'),]
-
-
 # Default primary key field type
-# https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
-
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'

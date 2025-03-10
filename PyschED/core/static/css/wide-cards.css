@@ -45,20 +45,24 @@
 /* Card Base
    ========================================================================== */
 .wide-card {
-  position: relative;
-  min-height: var(--wide-card-min-height);
-  height: fit-content;
-  border-radius: var(--wide-card-border-radius);
-  overflow: hidden;
-  box-shadow: var(--wide-card-shadow);
-  transition: transform var(--transition-standard),
-              box-shadow var(--transition-standard);
+    position: relative;
+    min-height: var(--wide-card-min-height);
+    height: fit-content;
+    border-radius: var(--wide-card-border-radius);
+    overflow: hidden;
+    box-shadow: var(--wide-card-shadow);
+    transform: translateY(0);  /* Add explicit initial state */
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);  /* Use explicit transition */
+    will-change: transform, box-shadow;  /* Optimize performance */
+    backface-visibility: hidden;
+    perspective: 1000px;
 }
 
 .wide-card:hover {
-  transform: translateY(var(--wide-card-hover-y-offset));
-  box-shadow: var(--wide-card-hover-shadow);
+    transform: translateY(var(--wide-card-hover-y-offset));
+    box-shadow: var(--wide-card-hover-shadow);
 }
+
 
 /* Card Background
    ========================================================================== */
