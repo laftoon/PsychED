@@ -58,8 +58,11 @@
   box-shadow: var(--shadow-small);
   
   /* Animation */
-  transition: transform var(--transition-standard),
-              box-shadow var(--transition-standard);
+  transform: translateY(0);
+  transition: all var(--transition-duration) var(--transition-timing);
+  will-change: transform, box-shadow;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
 }
 
 .card:hover {

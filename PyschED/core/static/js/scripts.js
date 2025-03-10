@@ -1,15 +1,11 @@
 // Config
 const CONFIG = {
-    SCROLL: {
-        THRESHOLD: 50,
-        BEHAVIOR: 'smooth'
-    },
     CAROUSEL: {
-        TRANSITION_TIME: 500,
-        GAP: 16,
-        RESIZE_DEBOUNCE: 100
+        TRANSITION_TIME: 300, // Reduced from 500ms
+        GAP: 16
     }
 };
+
 
 // DOM Selectors using a dedicated service
 class DOMService {
@@ -33,7 +29,6 @@ class MobileMenu {
 
     init() {
         if (!this.toggle || !this.menu) return;
-        
         this.bindEvents();
     }
 
@@ -67,145 +62,81 @@ class MobileMenu {
     }
 }
 
-// Carousel Module using Observer Pattern
+// Carousel Module
 class Carousel {
     constructor() {
-        this.track = DOMService.getElement('.carousel__track');
-        this.prevButton = DOMService.getElement('.carousel__nav--prev');
-        this.nextButton = DOMService.getElement('.carousel__nav--next');
-        this.cards = DOMService.getElements('.flip-card');
+        this.track = document.querySelector('.carousel__track');
+        this.prevButton = document.querySelector('.carousel__nav--prev');
+        this.nextButton = document.querySelector('.carousel__nav--next');
+        this.cards = document.querySelectorAll('.flip-card');
         
-        this.state = {
-            currentIndex: 0,
-            isTransitioning: false
-        };
-
-        this.observers = [];
+        this.currentIndex = 0;
+        this.isAnimating = false;
+        
         this.init();
     }
 
     init() {
         if (!this.track || !this.cards.length) return;
         
-        this.bindEvents();
-        this.updateNavigation(0);
-    }
-
-    bindEvents() {
-        this.prevButton?.addEventListener('click', () => this.move('prev'));
-        this.nextButton?.addEventListener('click', () => this.move('next'));
+        // Add event listeners
+        this.prevButton?.addEventListener('click', () => this.navigate('prev'));
+        this.nextButton?.addEventListener('click', () => this.navigate('next'));
         
-        // Debounced resize handler using utility function
-        window.addEventListener('resize', debounce(() => {
-            this.updateDimensions();
-        }, CONFIG.CAROUSEL.RESIZE_DEBOUNCE));
+        // Add transition end listener
+        this.track.addEventListener('transitionend', () => {
+            this.isAnimating = false;
+        });
+
+        // Initial navigation update
+        this.updateNavigation();
     }
 
-    move(direction) {
-        if (this.state.isTransitioning) return;
-
+    navigate(direction) {
+        if (this.isAnimating) return;
+        
+        this.isAnimating = true;
         const increment = direction === 'prev' ? -1 : 1;
-        const newIndex = this.state.currentIndex + increment;
+        const newIndex = this.currentIndex + increment;
         
-        this.updatePosition(newIndex);
+        this.moveToIndex(newIndex);
     }
 
-    updatePosition(index) {
-        const dimensions = this.calculateDimensions();
-        const boundedIndex = this.getBoundedIndex(index, dimensions.maxScroll);
+    moveToIndex(index) {
+        const maxIndex = this.getMaxIndex();
+        const boundedIndex = Math.max(0, Math.min(index, maxIndex));
         
-        this.state.isTransitioning = true;
-        this.track.style.transform = `translateX(-${(dimensions.cardWidth + CONFIG.CAROUSEL.GAP) * boundedIndex}px)`;
-        this.state.currentIndex = boundedIndex;
-        
-        this.updateNavigation(boundedIndex);
-        this.notifyObservers();
-
-        setTimeout(() => {
-            this.state.isTransitioning = false;
-        }, CONFIG.CAROUSEL.TRANSITION_TIME);
-    }
-
-    calculateDimensions() {
         const cardWidth = this.cards[0].offsetWidth;
+        const gap = 16; // Match the CSS gap value
+        const translateX = -(cardWidth + gap) * boundedIndex;
+        
+        this.track.style.transform = `translate3d(${translateX}px, 0, 0)`;
+        this.currentIndex = boundedIndex;
+        
+        this.updateNavigation();
+    }
+
+    getMaxIndex() {
         const containerWidth = this.track.parentElement.offsetWidth;
-        const visibleCards = Math.floor(containerWidth / (cardWidth + CONFIG.CAROUSEL.GAP));
-        const maxScroll = Math.max(0, this.cards.length - visibleCards);
+        const cardWidth = this.cards[0].offsetWidth;
+        const gap = 16;
+        const visibleCards = Math.floor(containerWidth / (cardWidth + gap));
+        return Math.max(0, this.cards.length - visibleCards);
+    }
+
+    updateNavigation() {
+        const maxIndex = this.getMaxIndex();
         
-        return { cardWidth, maxScroll };
-    }
-
-    getBoundedIndex(index, maxScroll) {
-        return Math.max(0, Math.min(index, maxScroll));
-    }
-
-    updateNavigation(index) {
-        const dimensions = this.calculateDimensions();
-        if (this.prevButton) this.prevButton.style.display = index === 0 ? 'none' : 'flex';
-        if (this.nextButton) this.nextButton.style.display = index >= dimensions.maxScroll ? 'none' : 'flex';
-    }
-
-    // Observer Pattern methods
-    addObserver(observer) {
-        this.observers.push(observer);
-    }
-
-    notifyObservers() {
-        this.observers.forEach(observer => observer.update(this.state));
-    }
-}
-
-// Scroll Handler Module
-class ScrollHandler {
-    constructor() {
-        this.topbar = DOMService.getElement('.topbar');
-        this.init();
-    }
-
-    init() {
-        if (!this.topbar) return;
-        
-        window.addEventListener('scroll', () => this.handleScroll());
-    }
-
-    handleScroll() {
-        if (window.innerWidth <= 768) {
-            this.topbar.classList.toggle('scrolled', window.scrollY > CONFIG.SCROLL.THRESHOLD);
+        if (this.prevButton) {
+            this.prevButton.style.display = this.currentIndex === 0 ? 'none' : 'flex';
+        }
+        if (this.nextButton) {
+            this.nextButton.style.display = this.currentIndex >= maxIndex ? 'none' : 'flex';
         }
     }
 }
 
-// Utility Functions
-function debounce(func, wait) {
-    let timeout;
-    return function executedFunction(...args) {
-        const later = () => {
-            clearTimeout(timeout);
-            func(...args);
-        };
-        clearTimeout(timeout);
-        timeout = setTimeout(later, wait);
-    };
-}
-
-// Initialize Application
+// Initialize on DOM load
 document.addEventListener('DOMContentLoaded', () => {
-    const app = {
-        mobileMenu: new MobileMenu(),
-        carousel: new Carousel(),
-        scrollHandler: new ScrollHandler()
-    };
-
-    // Handle scroll to contact
-    const scrollButton = DOMService.getElement('.scroll-to-contact');
-    const contactSection = DOMService.getElement('#contact-section');
-    
-    if (scrollButton && contactSection) {
-        scrollButton.addEventListener('click', () => {
-            contactSection.scrollIntoView({ 
-                behavior: CONFIG.SCROLL.BEHAVIOR,
-                block: 'start'
-            });
-        });
-    }
+    new Carousel();
 });
