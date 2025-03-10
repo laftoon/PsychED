@@ -5,17 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="PsychED Lab - Servicii de psihologie și consiliere">
     <title>PsychED Lab</title>
-    <link rel="stylesheet" href="css/variables.css">
-    <link rel="stylesheet" href="css/base.css">
-    <link rel="stylesheet" href="css/navigation.css">
-    <link rel="stylesheet" href="css/hero-header.css">
-    <link rel="stylesheet" href="css/small-cards.css">
-    <link rel="stylesheet" href="css/wide-cards.css">
-    <link rel="stylesheet" href="css/flip-card-carousel.css">
-    <link rel="stylesheet" href="css/contact-card.css">
-    <link rel="stylesheet" href="css/media-queries.css">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/variables.css' %}">
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    <link rel="stylesheet" href="{% static 'css/navigation.css' %}">
+    <link rel="stylesheet" href="{% static 'css/hero-header.css' %}">
+    <link rel="stylesheet" href="{% static 'css/small-cards.css' %}">
+    <link rel="stylesheet" href="{% static 'css/wide-cards.css' %}">
+    <link rel="stylesheet" href="{% static 'css/flip-card-carousel.css' %}">
+    <link rel="stylesheet" href="{% static 'css/contact-card.css' %}">
+    <link rel="stylesheet" href="{% static 'css/media-queries.css' %}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
+
 <body>
 <!-- Navigation -->
 <nav class="topbar">
@@ -100,7 +102,7 @@
                 </p>
             </div>
             <div class="wide-card__image">
-                <img src="images/content1.jpg" alt="Despre mine">
+                <img src="{% static 'images/content1.jpg' %}" alt="Profile Image">
             </div>
         </div>
     </article>
@@ -141,7 +143,7 @@
     <article class="card">
         <div class="card__image-container">
             <img class="card__image" 
-                 src="images/terapie-individuala.jpg" 
+                 src="{% static 'images/terapie-individuala.jpg' %}" 
                  alt="Terapie Individuală">
         </div>
         <div class="card__content">
@@ -157,7 +159,7 @@
     <article class="card">
         <div class="card__image-container">
             <img class="card__image" 
-                 src="images/evaluari-clinice.jpg" 
+                 src="{% static 'images/evaluari-clinice.jpg' %}" 
                  alt="Evaluări Clinice">
         </div>
         <div class="card__content">
@@ -173,7 +175,7 @@
     <article class="card">
         <div class="card__image-container">
             <img class="card__image" 
-                 src="images/consiliere-vocationala.jpg" 
+                 src="{% static 'images/consiliere-vocationala.jpg' %}" 
                  alt="Consiliere Vocațională">
         </div>
         <div class="card__content">
@@ -189,7 +191,7 @@
     <article class="card">
         <div class="card__image-container">
             <img class="card__image" 
-                 src="images/Consiliere-Educationala.jpg" 
+                 src="{% static 'images/consiliere-educationala.jpg' %}"
                  alt="Consiliere Educațională">
         </div>
         <div class="card__content">
@@ -205,7 +207,7 @@
     <article class="card">
         <div class="card__image-container">
             <img class="card__image" 
-                 src="images/dezvoltare-personala.jpg" 
+                 src="{% static 'images/dezvoltare-personala.jpg' %}" 
                  alt="Dezvoltare Personală">
         </div>
         <div class="card__content">
@@ -408,6 +410,7 @@
 
 
 
-    <script src="js/scripts.js"></script>
+   {% load static %}
+   <script src="{% static 'js/scripts.js' %}"></script>  
 </body>
 </html>
