@@ -4,7 +4,7 @@
 
 :root {
   /* Layout */
-  --contact-max-width: var(--wide-card-container-max-width); /* Match wide cards width */
+  --contact-max-width: var(--wide-card-container-max-width);
   --contact-padding: 2rem;
   --contact-gap: 1rem;
   
@@ -13,16 +13,6 @@
   --input-border-radius: 8px;
   --input-border-width: 2px;
   
-  /* Button */
-  --button-padding-x: 2rem;
-  --button-padding-y: 1rem;
-  --button-margin-top: 1rem;
-  
-  /* Typography */
-  --input-font-size: 1rem;
-  --button-font-size: 1rem;
-  --button-font-weight: 600;
-  
   /* Colors */
   --input-border-color: rgba(255, 255, 255, 0.2);
   --input-bg-color: rgba(255, 255, 255, 0.1);
@@ -30,171 +20,207 @@
   --input-text-color: white;
   --input-placeholder-color: rgba(255, 255, 255, 0.8);
   --button-bg-color: white;
-
-    /* Contact Section Specific */
-    --contact-bg-gradient-start: var(--gradient-start);
-    --contact-bg-gradient-end: var(--gradient-end);
-    --contact-text-color: white;
-    --contact-title-size: 2rem;
-  
-  /* Transitions */
-  --transition-standard: all 0.3s ease;
 }
 
-/* Contact Container
-   ========================================================================== */
-.contact-container {
-    width: 100%;
-    max-width: var(--contact-max-width);
-    margin: 0 auto;
-    padding: var(--contact-padding);
-    box-sizing: border-box; /* Add this to include padding in width calculation */
-}
+/* Add this to your existing contact-card.css */
 
-
-/* Contact Layout
-   ========================================================================== */
-.contact {
-    width: 100%;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: var(--contact-gap);
-    padding: var(--contact-padding);
+/* Loader styles */
+.loader-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
     background: linear-gradient(
         135deg,
         var(--gradient-start),
         var(--gradient-end)
     );
+    display: none;
+    justify-content: center;
+    align-items: center;
     border-radius: var(--card-border-radius);
-    color: white;
-    box-sizing: border-box; /* Add this to include padding in width calculation */
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 9;
+}
+
+.loader {
+    width: 48px;
+    height: 48px;
+    border: 4px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    border-top-color: white;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
 }
 
 
+/* Contact Container */
+.contact-container {
+    width: 100%;
+    max-width: var(--contact-max-width);
+    margin: 0 auto;
+    padding: var(--contact-padding);
+    box-sizing: border-box;
+}
 
-
-/* Contact Content Styles
-   ========================================================================== */
-   .contact__title {
-    color: white;
-    font-size: 2rem;
-    margin-bottom: 1rem;
-  }
-  
-  .contact__description {
-    color: white;
-    line-height: 1.6;
-    margin-bottom: 2rem;
-  }
-
-/* Form Container
-   ========================================================================== */
-.contact-form {
-  display: flex;
-  flex-direction: column;
+/* Contact Layout */
+.contact {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   gap: var(--contact-gap);
-  width: 100%;
-  max-width: 1000px;
-}
-
-/* Form Groups
-   ========================================================================== */
-.form-group {
-  width: 100%;
-}
-
-/* Form Inputs
-   ========================================================================== */
-.form-input {
-  width: 100%;
+  padding: var(--contact-padding);
+  background: linear-gradient(
+      135deg,
+      var(--gradient-start),
+      var(--gradient-end)
+  );
+  border-radius: var(--card-border-radius);
+  color: white;
   box-sizing: border-box;
-  padding: var(--input-padding);
-  
-  /* Border */
-  border: var(--input-border-width) solid var(--input-border-color);
-  border-radius: var(--input-border-radius);
-  
-  /* Colors */
-  background: var(--input-bg-color);
-  color: var(--input-text-color);
-  
-  /* Typography */
-  font-size: var(--input-font-size);
-  
-  /* Animation */
-  transition: var(--transition-standard);
+  position: relative; /* Add this */
+}
+/* Contact Form */
+.contact-form {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: var(--contact-gap);
+    width: 100%;
+}
+
+/* Form Content and Success Message */
+.form-content,
+.success-message {
+    transition: opacity 0.3s ease;
+}
+
+.form-content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--contact-gap);
+}
+
+.success-message {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  display: none;
+  opacity: 0;
+  background: linear-gradient(
+      135deg,
+      var(--gradient-start),
+      var(--gradient-end)
+  );
+  border-radius: var(--card-border-radius);
+  transition: opacity 0.3s ease;
+  z-index: 10;
+}
+.success-message h3 {
+  color: white;
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+}
+
+.success-message p {
+  color: rgba(255, 255, 255, 0.9);
+}
+.success-message-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  text-align: center;
+  padding: 2rem;
+}
+
+/* Form Groups */
+.form-group {
+    width: 100%;
+}
+
+/* Form Inputs */
+.form-input {
+    width: 100%;
+    padding: var(--input-padding);
+    background: var(--input-bg-color);
+    border: var(--input-border-width) solid var(--input-border-color);
+    border-radius: var(--input-border-radius);
+    color: var(--input-text-color);
+    box-sizing: border-box;
+    transition: all 0.3s ease;
 }
 
 .form-input::placeholder {
-  color: var(--input-placeholder-color);
+    color: var(--input-placeholder-color);
 }
 
 .form-input:focus {
-  outline: none;
-  border-color: var(--input-text-color);
-  background: var(--input-focus-bg-color);
+    outline: none;
+    border-color: var(--input-text-color);
+    background: var(--input-focus-bg-color);
 }
 
-/* Submit Button
-   ========================================================================== */
+/* Submit Button */
 .form-submit {
-  padding: var(--button-padding-y) var(--button-padding-x);
-  margin-top: var(--button-margin-top);
-  
-  /* Visual */
-  background: var(--button-bg-color);
-  border: none;
-  border-radius: var(--input-border-radius);
-  
-  /* Typography */
-  color: var(--primary-color);
-  font-weight: var(--button-font-weight);
-  font-size: var(--button-font-size);
-  
-  /* Interaction */
-  cursor: pointer;
-  transition: var(--transition-standard);
+    width: 100%;
+    padding: 1rem 2rem;
+    margin-top: 1rem;
+    background: var(--button-bg-color);
+    border: none;
+    border-radius: var(--input-border-radius);
+    color: var(--primary-color);
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
 }
 
 .form-submit:hover {
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-small);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-small);
 }
 
-/* Accessibility
-   ========================================================================== */
-.form-input:focus-visible,
-.form-submit:focus-visible {
-  outline: 2px solid var(--primary-color);
-  outline-offset: 2px;
+/* Contact Content */
+.contact__title {
+    color: white;
+    font-size: 2rem;
+    margin-bottom: 1rem;
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .form-input,
-  .form-submit {
-    transition: none;
-  }
-  
-  .form-submit:hover {
-    transform: none;
-  }
+.contact__description {
+    color: white;
+    line-height: 1.6;
+    margin-bottom: 2rem;
 }
 
-/* Responsive Design
-   ========================================================================== */
+/* Responsive Design */
 @media (max-width: 768px) {
-  .contact {
-    grid-template-columns: 1fr;
-  }
+    .contact {
+        grid-template-columns: 1fr;
+    }
+    
+    .contact__content {
+        text-align: center;
+    }
 }
 
 @media (max-width: 480px) {
-  :root {
-    --input-font-size: 16px; /* Prevent zoom on iOS */
-    --button-padding-x: 1.5rem;
-  }
-  
-  .contact {
-    padding: calc(var(--contact-padding) / 2);
-  }
+    .contact {
+        padding: 1rem;
+    }
+    
+    .form-input {
+        font-size: 16px; /* Prevent zoom on iOS */
+    }
 }

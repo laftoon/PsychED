@@ -140,3 +140,68 @@ class Carousel {
 document.addEventListener('DOMContentLoaded', () => {
     new Carousel();
 });
+
+document.addEventListener('DOMContentLoaded', function() {
+    const form = document.querySelector('.contact-form');
+    const contact = document.querySelector('.contact');
+    const successMessage = contact.querySelector('.success-message');
+    const loaderContainer = contact.querySelector('.loader-container');
+    const formContent = form.querySelector('.form-content');
+
+    if (!form || !successMessage || !loaderContainer) return;
+
+    form.addEventListener('submit', async function(e) {
+        e.preventDefault();
+
+        // Show loader
+        loaderContainer.style.display = 'flex';
+        setTimeout(() => {
+            loaderContainer.style.opacity = '1';
+        }, 50);
+
+        try {
+            const formData = new FormData(form);
+            const response = await fetch('', {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'X-CSRFToken': formData.get('csrfmiddlewaretoken')
+                }
+            });
+
+            if (response.ok) {
+                // Hide loader and show success message
+                loaderContainer.style.opacity = '0';
+                
+                setTimeout(() => {
+                    loaderContainer.style.display = 'none';
+                    successMessage.style.display = 'block';
+                    
+                    // Small delay to ensure display: block has taken effect
+                    requestAnimationFrame(() => {
+                        successMessage.style.opacity = '1';
+                    });
+
+                    // Hide success message and reset form after delay
+                    setTimeout(() => {
+                        successMessage.style.opacity = '0';
+                        
+                        setTimeout(() => {
+                            successMessage.style.display = 'none';
+                            form.reset();
+                        }, 300); // Match the transition duration
+                    }, 3000);
+                }, 300); // Match the transition duration
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            // Hide loader on error
+            loaderContainer.style.opacity = '0';
+            setTimeout(() => {
+                loaderContainer.style.display = 'none';
+            }, 300);
+        }
+    });
+});
+
+
