@@ -1,3 +1,4 @@
+# PyschED/core/urls.py
 from django.urls import path
 from . import views
 from core.views import HomePageView
@@ -5,4 +6,3 @@ from core.views import HomePageView
 urlpatterns = [
     path('', HomePageView.as_view(), name='home'),
 ]
-

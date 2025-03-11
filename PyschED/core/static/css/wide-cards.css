@@ -105,6 +105,7 @@
     line-height: 1.6;
     color: var(--text-muted);
     text-shadow: var(--shadow-text);
+    text-align: center; /* Center text */
 }
 
 /* Card Image

@@ -1,11 +1,16 @@
 # core/views.py
 
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.core.mail import send_mail
 from django.conf import settings
 from django.views.generic import TemplateView
 from django.http import JsonResponse
 from .forms import ContactForm
+import os 
+from .calendar_integration import create_calendar_event
+from datetime import datetime, timedelta
+from django.shortcuts import redirect
+
 
 class HomePageView(TemplateView):
     template_name = 'core/home-page.html'
@@ -21,6 +26,27 @@ class HomePageView(TemplateView):
                 interest = form.cleaned_data['interest']
                 message = form.cleaned_data['message']
                 
+                # Create calendar event
+                event_details = {
+                    'summary': f'Consultation with {first_name} {last_name}',
+                    'description': f'Interest: {interest}\nMessage: {message}',
+                    'start': {
+                        'dateTime': (datetime.now() + timedelta(days=1)).isoformat(),
+                        'timeZone': 'Europe/Bucharest',
+                    },
+                    'end': {
+                        'dateTime': (datetime.now() + timedelta(days=1, hours=1)).isoformat(),
+                        'timeZone': 'Europe/Bucharest',
+                    },
+                    'attendees': [
+                        {'email': email},
+                        {'email': settings.EMAIL_HOST_USER},  # Your email
+                    ],
+                }
+                
+                # Create the calendar event
+                calendar_event = create_calendar_event(event_details)
+                
                 # Send email to admin (myself)
                 admin_subject = f'New Request: {interest}'
                 admin_message = f"""
@@ -30,6 +56,8 @@ class HomePageView(TemplateView):
                 Email: {email}
                 Interest: {interest}
                 Message: {message}
+                
+                Calendar Event: {calendar_event['htmlLink'] if calendar_event else 'Failed to create event'}
                 """
                 
                 # Send email to user
@@ -38,6 +66,8 @@ class HomePageView(TemplateView):
                 Salut {first_name},
 
                 Multumesc ca m-ai contactat, voi reveni cu o programare.
+                
+                {f"Calendar Event: {calendar_event['htmlLink']}" if calendar_event else ''}
 
                 Cu drag,
                 Francesca Raileanu
@@ -48,7 +78,7 @@ class HomePageView(TemplateView):
                     admin_subject,
                     admin_message,
                     settings.EMAIL_HOST_USER,
-                    [settings.EMAIL_HOST_USER],  # Your email address
+                    [settings.EMAIL_HOST_USER],
                     fail_silently=False,
                 )
                 
@@ -57,11 +87,14 @@ class HomePageView(TemplateView):
                     user_subject,
                     user_message,
                     settings.EMAIL_HOST_USER,
-                    [email],  # User's email address
+                    [email],
                     fail_silently=False,
                 )
                 
-                return JsonResponse({'success': True})
+                return JsonResponse({
+                    'success': True,
+                    'calendar_event': calendar_event['htmlLink'] if calendar_event else None
+                })
                 
             except Exception as e:
                 return JsonResponse({

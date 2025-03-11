@@ -58,6 +58,12 @@ TEMPLATES = [
         },
     },
 ]
+# settings.py
+
+GOOGLE_CALENDAR_SERVICE_ACCOUNT_FILE = os.path.join(BASE_DIR, 'calendar-integration.json')
+GOOGLE_CALENDAR_USER_EMAIL = 'lauravaida01@gmail.com'  # The email address you want to create events as
+
+
 
 
 # WSGI configuration
