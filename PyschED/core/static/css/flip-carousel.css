@@ -132,6 +132,8 @@
     font-size: var(--text-base);
     color: var(--paragraph-color);
     line-height: 1.6;
+    padding: 0 var(--space-md);
+    max-width: 90%;
 }
 
 /* Responsive Design
