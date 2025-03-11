@@ -100,14 +100,14 @@
 
 .card__title {
     font-family: var(--font-primary);
-    font-size: 1.15rem; /* Reduced size to ensure one line */
+    font-size: 1.1rem; /* Reduced size to ensure one line */
     font-weight: var(--weight-bold);
     color: var(--heading-color);
     margin: 0;
     white-space: nowrap; /* Prevent text wrapping */
     overflow: hidden;
     text-overflow: ellipsis; /* Add ellipsis for overflow text */
-    padding: 0 var(--space-xs); /* Add padding to prevent text touching edges */
+    
 }
 
 .card__description {
