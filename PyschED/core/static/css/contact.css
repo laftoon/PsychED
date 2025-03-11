@@ -136,6 +136,7 @@
     color: var(--primary-color);
     font-family: var(--font-secondary);
     font-weight: var(--weight-semibold);
+    font-size: var(--text-xl);
     cursor: pointer;
     transition: var(--transition-standard);
 }

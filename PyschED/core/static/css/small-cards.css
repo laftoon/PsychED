@@ -92,16 +92,20 @@
 /* Card Content
    ========================================================================== */
 .card__content {
-    padding: var(--space-sm) var(--space-md) var(--space-lg);
+    padding: var(--space-2xl) var(--space-md) var(--space-lg); /* Increased top padding */
     text-align: center;
 }
 
 .card__title {
     font-family: var(--font-primary);
-    font-size: var(--text-xl);
+    font-size: 1.15rem; /* Reduced size to ensure one line */
     font-weight: var(--weight-bold);
     color: var(--heading-color);
-    margin-block: calc(-1 * var(--space-xs)) var(--space-sm);
+    margin: 0;
+    white-space: nowrap; /* Prevent text wrapping */
+    overflow: hidden;
+    text-overflow: ellipsis; /* Add ellipsis for overflow text */
+    padding: 0 var(--space-xs); /* Add padding to prevent text touching edges */
 }
 
 .card__description {
@@ -110,6 +114,7 @@
     color: var(--paragraph-color);
     line-height: 1.6;
 }
+
 
 /* Responsive Design
    ========================================================================== */
