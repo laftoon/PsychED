@@ -21,8 +21,8 @@
     --text-muted: rgba(255, 255, 255, 0.9);
     
     /* Gradient Colors */
-    --gradient-start: rgba(137, 172, 201, 0.98);
-    --gradient-end: rgba(231, 207, 210, 0.98);
+    --gradient-start: rgba(137, 172, 201, 0.95);
+    --gradient-end: rgba(231, 207, 210, 0.95);
     --overlay-light: rgba(137, 172, 201, 0.3);
     --overlay-dark: rgba(137, 172, 201, 0.5);
 
@@ -37,11 +37,14 @@
     --text-xs: 0.75rem;    /* 12px */
     --text-sm: 0.875rem;   /* 14px */
     --text-base: 1rem;     /* 16px */
-    --text-lg: 1.125rem;   /* 18px */
-    --text-xl: 1.25rem;    /* 20px */
-    --text-2xl: 1.5rem;    /* 24px */
-    --text-3xl: 2rem;      /* 32px */
+    --text-lg: 1.2rem;   /* 18px */
+    --text-xl: 1.4rem;    /* 20px */
+    --text-2xl: 1.75rem;    /* 24px */
+    --text-3xl: 2.25rem;      /* 32px */
     --text-4xl: 2.5rem;    /* 40px */
+
+    --letter-spacing-tight: -0.025em;
+    --letter-spacing-wide: 0.025em;
     
     /* Font Weights */
     --weight-light: 300;
@@ -115,4 +118,5 @@ body {
     font-weight: var(--weight-bold);
     color: var(--heading-color);
     margin-block-end: var(--space-md);
+    letter-spacing: var(--letter-spacing-wide);
 }

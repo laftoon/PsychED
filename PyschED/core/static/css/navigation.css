@@ -33,6 +33,8 @@
     /* Visual */
     background-color: transparent;
     z-index: var(--z-sticky);
+    backdrop-filter: blur(8px);
+    background: rgba(255, 255, 255, 0.05);
     
     /* Animation */
     transition: var(--transition-standard);
