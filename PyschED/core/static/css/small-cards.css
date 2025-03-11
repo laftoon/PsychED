@@ -1,151 +1,144 @@
 /* ==========================================================================
-   Card Component System
+   Small Cards Component
    ========================================================================== */
 
+/* Component-specific variables
+   ========================================================================== */
 :root {
-  /* Layout */
-  --cards-max-width: 1450px;
-  --cards-padding: 2rem;
-  --cards-gap: 1.5rem;
-  
-  /* Card Dimensions */
-  --card-max-width: 250px;
-  --card-min-width: 200px;
-  --card-image-height: 250px;
-  --card-image-circle-size: 200px;
-  --card-image-display-size: 220px;
-  --card-border-radius: 15px;
-  
-  /* Colors */
-  --card-gradient-start: rgba(137, 172, 201, 0.98);
-  --card-gradient-end: rgba(231, 207, 210, 0.98);
-  --card-background: white;
-  
-  /* Spacing */
-  --card-content-padding-x: 1rem;
-  --card-content-padding-y: 0.5rem;
-  
-  /* Effects */
-  --card-hover-y-offset: -5px;
+    /* Layout */
+    --card-image-height: 250px;
+    --card-image-circle-size: 200px;
+    --card-image-display-size: 220px;
+    --card-content-spacing: var(--space-md);
 }
 
 /* Cards Container
    ========================================================================== */
 .cards {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: var(--cards-gap);
-  padding: var(--cards-padding);
-  max-width: var(--cards-max-width);
-  margin-inline: auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--space-lg);
+    padding: var(--space-xl);
+    max-width: var(--container-max-width);
+    margin-inline: auto;
 }
 
 /* Card Base
    ========================================================================== */
 .card {
-  /* Layout */
-  flex: 1 1 calc(20% - var(--cards-gap));
-  max-width: var(--card-max-width);
-  min-width: var(--card-min-width);
-  padding: 0;
-  margin: 0;
-  
-  /* Visual */
-  background: var(--card-background);
-  border-radius: var(--card-border-radius);
-  overflow: hidden;
-  box-shadow: var(--shadow-small);
-  
-  /* Animation */
-  transform: translateY(0);
-  transition: all var(--transition-duration) var(--transition-timing);
-  will-change: transform, box-shadow;
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
+    /* Layout */
+    flex: 1 1 calc(20% - var(--space-lg));
+    max-width: var(--card-max-width);
+    min-width: var(--card-min-width);
+    padding: 0;
+    margin: 0;
+    
+    /* Visual */
+    background: var(--background-white);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-small);
+    
+    /* Animation */
+    transform: translateY(0);
+    transition: var(--transition-standard);
+    will-change: transform, box-shadow;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
 }
 
 .card:hover {
-  transform: translateY(var(--card-hover-y-offset));
-  box-shadow: var(--shadow-large);
+    transform: translateY(calc(-1 * var(--space-xs)));
+    box-shadow: var(--shadow-large);
 }
 
 /* Card Image
    ========================================================================== */
 .card__image-container {
-  position: relative;
-  width: 100%;
-  height: var(--card-image-height);
-  margin: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: linear-gradient(
-    135deg,
-    var(--card-gradient-start),
-    var(--card-gradient-end)
-  );
+    position: relative;
+    width: 100%;
+    height: var(--card-image-height);
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(
+        135deg,
+        var(--gradient-start),
+        var(--gradient-end)
+    );
 }
 
 .card__image-container::before {
-  content: '';
-  position: absolute;
-  width: var(--card-image-circle-size);
-  height: var(--card-image-circle-size);
-  border-radius: 50%;
-  background: var(--card-background);
-  z-index: 1;
+    content: '';
+    position: absolute;
+    width: var(--card-image-circle-size);
+    height: var(--card-image-circle-size);
+    border-radius: var(--radius-full);
+    background: var(--background-white);
+    z-index: var(--z-elevate);
 }
 
 .card__image {
-  width: var(--card-image-display-size);
-  height: var(--card-image-display-size);
-  object-fit: cover;
-  border-radius: 50%;
-  position: relative;
-  z-index: 2;
+    width: var(--card-image-display-size);
+    height: var(--card-image-display-size);
+    object-fit: cover;
+    border-radius: var(--radius-full);
+    position: relative;
+    z-index: var(--z-sticky);
 }
 
 /* Card Content
    ========================================================================== */
 .card__content {
-  padding: var(--card-content-padding-y) var(--card-content-padding-x) 
-           calc(var(--card-content-padding-x) + var(--card-content-padding-y));
-  text-align: center;
+    padding: var(--space-sm) var(--space-md) var(--space-lg);
+    text-align: center;
 }
 
 .card__title {
-  margin-block: -0.1rem 0.5rem;
+    font-family: var(--font-primary);
+    font-size: var(--text-xl);
+    font-weight: var(--weight-bold);
+    color: var(--heading-color);
+    margin-block: calc(-1 * var(--space-xs)) var(--space-sm);
+}
+
+.card__description {
+    font-family: var(--font-tertiary);
+    font-size: var(--text-base);
+    color: var(--paragraph-color);
+    line-height: 1.6;
 }
 
 /* Responsive Design
    ========================================================================== */
 @media (max-width: 1200px) {
-  .card {
-    flex: 1 1 calc(33.333% - var(--cards-gap));
-  }
+    .card {
+        flex: 1 1 calc(33.333% - var(--space-lg));
+    }
 }
 
 @media (max-width: 768px) {
-  .card {
-    flex: 1 1 calc(50% - var(--cards-gap));
-  }
+    .card {
+        flex: 1 1 calc(50% - var(--space-lg));
+    }
 }
 
 @media (max-width: 480px) {
-  .card {
-    flex: 1 1 100%;
-  }
+    .card {
+        flex: 1 1 100%;
+    }
 }
 
 /* Accessibility
    ========================================================================== */
 @media (prefers-reduced-motion: reduce) {
-  .card {
-    transition: none;
-  }
-  
-  .card:hover {
-    transform: none;
-  }
+    .card {
+        transition: none;
+    }
+    
+    .card:hover {
+        transform: none;
+    }
 }

@@ -2,44 +2,29 @@
    Wide Cards Component
    ========================================================================== */
 
+/* Component-specific variables
+   ========================================================================== */
 :root {
-  /* Layout */
-  --wide-card-container-max-width: 1450px;
-  --wide-card-container-padding: 2rem;
-  --wide-card-gap: 1rem;
-  --wide-card-min-height: 300px;
-  --wide-card-border-radius: 15px;
-  --wide-card-content-padding: 1rem;
-  --wide-card-image-width: 300px;
-  
-  /* Typography */
-  --wide-card-title-size: 2rem;
-  --wide-card-text-size: 1.1rem;
-  --wide-card-line-height: 1.6;
-  
-  /* Colors */
-  --wide-card-gradient-start: rgba(137, 172, 201, 0.98);
-  --wide-card-gradient-end: rgba(231, 207, 210, 0.98);
-  --wide-card-text-color: white;
-  --wide-card-text-color-muted: rgba(255, 255, 255, 0.9);
-  
-  /* Effects */
-  --wide-card-shadow: var(--shadow-small);
-  --wide-card-hover-shadow: var(--shadow-large);
-  --wide-card-hover-y-offset: -5px;
-  --wide-card-title-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
-  --wide-card-text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+    /* Layout */
+    --wide-card-padding: var(--space-xl);
+    --wide-card-gap: var(--space-lg);
+    --wide-card-content-padding: var(--space-lg);
+    --wide-card-image-width: 275px;
+    
+    /* Typography */
+    --wide-card-title-size: var(--text-3xl);
+    --wide-card-text-size: var(--text-lg);
 }
 
 /* Container
    ========================================================================== */
 .wide-cards {
-  display: flex;
-  flex-direction: column;
-  gap: var(--wide-card-gap);
-  padding: var(--wide-card-container-padding);
-  max-width: var(--wide-card-container-max-width);
-  margin-inline: auto;
+    display: flex;
+    flex-direction: column;
+    gap: var(--wide-card-gap);
+    padding: var(--wide-card-padding);
+    max-width: var(--container-max-width);
+    margin-inline: auto;
 }
 
 /* Card Base
@@ -48,45 +33,46 @@
     position: relative;
     min-height: var(--wide-card-min-height);
     height: fit-content;
-    border-radius: var(--wide-card-border-radius);
+    border-radius: var(--radius-lg);
     overflow: hidden;
-    box-shadow: var(--wide-card-shadow);
-    transform: translateY(0);  /* Add explicit initial state */
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);  /* Use explicit transition */
-    will-change: transform, box-shadow;  /* Optimize performance */
+    box-shadow: var(--shadow-small);
+    
+    /* Animation */
+    transform: translateY(0);
+    transition: var(--transition-standard);
+    will-change: transform, box-shadow;
     backface-visibility: hidden;
-    perspective: 1000px;
+    -webkit-backface-visibility: hidden;
 }
 
 .wide-card:hover {
-    transform: translateY(var(--wide-card-hover-y-offset));
-    box-shadow: var(--wide-card-hover-shadow);
+    transform: translateY(calc(-1 * var(--space-xs)));
+    box-shadow: var(--shadow-large);
 }
-
 
 /* Card Background
    ========================================================================== */
 .wide-card__background {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    135deg,
-    var(--wide-card-gradient-start),
-    var(--wide-card-gradient-end)
-  );
-  z-index: 1;
+    position: absolute;
+    inset: 0;
+    z-index: var(--z-negative);
+    background: linear-gradient(
+        135deg,
+        var(--gradient-start),
+        var(--gradient-end)
+    );
 }
 
 /* Card Content Layout
    ========================================================================== */
 .wide-card__content {
   position: relative;
-  z-index: 2;
+  z-index: var(--z-elevate);
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   justify-content: space-between;
-  padding: var(--wide-card-content-padding);
-  height: fit-content;
+  padding: var(--space-md) var(--wide-card-content-padding);
+  height: var(--wide-card-min-height); /* Set fixed height */
   box-sizing: border-box;
   gap: var(--wide-card-gap);
 }
@@ -95,24 +81,30 @@
    ========================================================================== */
 .wide-card__text {
   flex: 1;
-  color: var(--wide-card-text-color);
+  color: var(--text-light);
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+  justify-content: center; /* Center vertically */
+  align-items: center; /* Center horizontally */
 }
 
 .wide-card__title {
+  font-family: var(--font-primary);
   font-size: var(--wide-card-title-size);
-  margin-block-end: 1.5rem;
-  color: var(--wide-card-text-color);
-  text-shadow: var(--wide-card-title-shadow);
+  font-weight: var(--weight-bold);
+  margin: 0 0 var(--space-sm) 0; /* Adjust margin */
+  color: var(--text-light);
+  text-shadow: var(--shadow-text-strong);
+  text-align: center; /* Center text */
+  width: 100%; /* Full width for proper centering */
 }
 
 .wide-card__description {
-  color: var(--wide-card-text-color-muted);
-  font-size: var(--wide-card-text-size);
-  line-height: var(--wide-card-line-height);
-  text-shadow: var(--wide-card-text-shadow);
+    font-family: var(--font-tertiary);
+    font-size: var(--wide-card-text-size);
+    line-height: 1.6;
+    color: var(--text-muted);
+    text-shadow: var(--shadow-text);
 }
 
 /* Card Image
@@ -120,47 +112,50 @@
 .wide-card__image {
   display: none;
   flex: 0 0 var(--wide-card-image-width);
-  height: var(--wide-card-min-height);
-  border-radius: calc(var(--wide-card-border-radius) - 5px);
+  height: var(--wide-card-image-width); /* Make it square */
+  border-radius: calc(var(--radius-lg) - 5px);
   overflow: hidden;
-  box-shadow: var(--wide-card-shadow);
+  box-shadow: var(--shadow-small);
+  align-self: center; /* Center vertically */
 }
 
 .wide-card__image img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: inherit;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: inherit;
 }
 
 /* Modifiers
    ========================================================================== */
 .wide-card--with-image .wide-card__text {
-  max-width: 80%;
+    max-width: 80%;
 }
 
 .wide-card--with-image .wide-card__image {
-  display: block;
+    display: block;
 }
 
 /* Responsive Design
    ========================================================================== */
 @media (max-width: 768px) {
-  .wide-card--with-image .wide-card__text {
-    max-width: 100%;
-  }
-  
-  .wide-card__image {
-    display: none;
-  }
+    .wide-card--with-image .wide-card__text {
+        max-width: 100%;
+    }
+    
+    .wide-card__image {
+        display: none;
+    }
 }
 
+/* Accessibility
+   ========================================================================== */
 @media (prefers-reduced-motion: reduce) {
-  .wide-card {
-    transition: none;
-  }
-  
-  .wide-card:hover {
-    transform: none;
-  }
+    .wide-card {
+        transition: none;
+    }
+    
+    .wide-card:hover {
+        transform: none;
+    }
 }

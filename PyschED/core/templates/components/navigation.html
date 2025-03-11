@@ -1,0 +1,56 @@
+{# PyschED/core/templates/components/navigation.html #}
+
+<nav class="topbar">
+    <!-- Logo -->
+    <a href="#" class="logo">PsychED Lab</a>
+    
+    <!-- Mobile Menu Toggle -->
+    <button class="mobile-menu-toggle" aria-label="Toggle menu">
+        <span class="hamburger"></span>
+    </button>
+    
+    <!-- Navigation Menu -->
+    <ul class="nav-menu">
+        <!-- Regular Navigation Items -->
+        <li class="nav-menu__item">
+            <a href="#" class="nav-menu__link">Acasa</a>
+        </li>
+        <li class="nav-menu__item">
+            <a href="#" class="nav-menu__link">Despre mine</a>
+        </li>
+        <li class="nav-menu__item">
+            <a href="#" class="nav-menu__link">Servicii</a>
+        </li>
+        <li class="nav-menu__item">
+            <a href="#" class="nav-menu__link">Contact</a>
+        </li>
+        
+        <!-- Social Media Links -->
+        <li class="nav-menu__item">
+            <a href="https://www.linkedin.com/in/cristiana-francesca-raileanu-76862710a/" 
+               class="nav-menu__link nav-menu__link--social" 
+               target="_blank"
+               rel="noopener noreferrer">
+                <i class="fab fa-linkedin"></i>
+            </a>
+        </li>
+        {% comment %}
+        <li class="nav-menu__item">
+            <a href="https://www.instagram.com/your-profile" 
+               class="nav-menu__link nav-menu__link--social" 
+               target="_blank"
+               rel="noopener noreferrer">
+                <i class="fab fa-instagram"></i>
+            </a>
+        </li>
+        <li class="nav-menu__item">
+            <a href="https://www.facebook.com/your-profile" 
+               class="nav-menu__link nav-menu__link--social" 
+               target="_blank"
+               rel="noopener noreferrer">
+                <i class="fab fa-facebook"></i>
+            </a>
+        </li>
+        {% endcomment %}
+    </ul>
+</nav>

@@ -1,0 +1,60 @@
+{# PyschED/core/templates/components/wide-cards.html #}
+{% load static %}
+<section class="wide-cards">
+    <!-- About Me Card -->
+    <article class="wide-card wide-card--with-image">
+        <div class="wide-card__background"></div>
+        <div class="wide-card__content">
+            <div class="wide-card__text">
+                <h2 class="wide-card__title">Despre mine</h2>
+                <p class="wide-card__description">
+                    Sunt Psiholog Clinician, Psihoterapeut Cognitiv Comportamental, Consilier Vocațional și Consilier Educațional. 
+                    Am studiat în străinătate, în Statele Unite ale Americii și în Olanda și am revenit în România acum câțiva ani. 
+                    Am acumulat experiență în educație și psihologie în ultimii 8 ani și am ajutat sute de oameni să își identifice problemele, 
+                    să își clarifice valorile lor și să își atingă obiectivele.
+                    Datorită experienței mele diverse ofer o varietate de servicii educaționale și psihologice.
+                    Cred că nimeni nu ar trebui să sufere singur și că sunt aici pentru a oferi suport.
+                </p>
+            </div>
+            <div class="wide-card__image">
+                <img src="{% static 'images/content1.jpg' %}" alt="Profile Image">
+            </div>
+        </div>
+    </article>
+
+    <!-- Psychology Card -->
+    <article class="wide-card">
+        <div class="wide-card__background"></div>
+        <div class="wide-card__content">
+            <div class="wide-card__text">
+                <h2 class="wide-card__title">La ce mă ajută să stau de vorbă cu un psiholog?</h2>
+                <p class="wide-card__description">
+                    Un psiholog îți poate schimba viața. Te poate ajuta să te descoperi și să te înțelegi mai bine. 
+                    Să identifici lucrurile care îți creează disconfort și legătura cu trecutul și prezentul tău. 
+                    Să formulezi un plan de atac și să aplici tehnici pentru a combate aceste probleme și nu în ultimul rând 
+                    sa îți identifici valorile și să trăiești o viață care este aliniată cu ele.
+                    Terapia te poate ajuta să ameliorezi sau să elimini simptomele de anxietate și depresie, să înveți să îți 
+                    gestionezi emoțiile, gândurile și să construiești relații mai sănătoase cu cei din jur.
+                </p>
+            </div>
+        </div>
+    </article>
+
+    <!-- Counseling Card -->
+    <article class="wide-card">
+        <div class="wide-card__background"></div>
+        <div class="wide-card__content">
+            <div class="wide-card__text">
+                <h2 class="wide-card__title">La ce mă ajută să stau de vorbă cu un consilier vocațional sau educațional?</h2>
+                <p class="wide-card__description">
+                    Dacă ești adolescent și nu ești sigur ce carieră vrei să ai sau ce ai vrea să înveți la facultate, 
+                    poți vorbi cu un consilier vocațional pentru a identifica interesele și abilitățile tale și pentru a 
+                    discuta ce cariere ți s-ar potrivi.
+                    Dacă ești la liceu și vrei să aplici la facultăți în străinătate, dar nu știi cum să te pregătești pentru 
+                    acest proces, poți vorbi cu un consilier educațional care te poate lămuri în privința procesului și ajuta 
+                    să îți creezi un portofoliu impresionant.
+                </p>
+            </div>
+        </div>
+    </article>
+</section>
