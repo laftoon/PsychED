@@ -2,19 +2,6 @@
 
 <div class="contact-container">
     <section class="contact" id="contact-section">
-        <!-- Success Message -->
-        <div class="success-message">
-            <div class="success-message-content">
-                <h3>Mesaj trimis cu succes!</h3>
-                <p>Vă mulțumim pentru mesaj. Vă vom contacta în curând.</p>
-            </div>
-        </div>
-
-        <!-- Loading Indicator -->
-        <div class="loader-container">
-            <div class="loader"></div>
-        </div>
-
         <!-- Contact Content -->
         <div class="contact__content">
             <h2 class="contact__title">Programează-te</h2>
@@ -27,6 +14,19 @@
         <!-- Contact Form -->
         <form class="contact-form" action="" method="POST">
             {% csrf_token %}
+            <!-- Success Message -->
+            <div class="success-message">
+                <div class="success-message-content">
+                    <h3>Mesaj trimis cu succes!</h3>
+                    <p>Vă mulțumim pentru mesaj. Vă vom contacta în curând.</p>
+                </div>
+            </div>
+
+            <!-- Loading Indicator -->
+            <div class="loader-container">
+                <div class="loader"></div>
+            </div>
+
             <div class="form-content">
                 <div class="form-group">
                     <input 

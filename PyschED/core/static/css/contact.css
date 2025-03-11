@@ -64,15 +64,21 @@
     box-shadow: var(--shadow-small);
     color: var(--text-light);
     height: 90%;
-    display: flex;
-    flex-direction: column;
+    position: relative;
+    overflow: hidden;
 }
 
 .form-content {
     display: flex;
     flex-direction: column;
     gap: var(--space-md);
-    height: 100%;
+    opacity: 1;
+    transition: opacity 0.3s ease;
+}
+
+.form-content.hidden {
+    opacity: 0;
+    pointer-events: none;
 }
 
 .form-group {
@@ -120,6 +126,11 @@
     color: var(--text-light);
 }
 
+.form-content.loading,
+.form-content.success {
+    opacity: 0;
+}
+
 /* Focus States */
 .form-input:focus,
 .form-select:focus {
@@ -158,47 +169,59 @@
 
 /* Success Message
    ========================================================================== */
-.success-message {
-    display: none;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background: var(--background-white);
-    padding: var(--space-xl);
-    border-radius: var(--radius-lg);
-    box-shadow: var(--shadow-large);
-    z-index: var(--z-modal);
-    width: 90%;
-    max-width: 400px;
+   .success-message {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease;
+}
+
+.success-message.active {
+    opacity: 1;
+    visibility: visible;
 }
 
 .success-message-content {
     text-align: center;
+    color: var(--text-light);
 }
-
-.success-message.active {
-    display: block;
+.success-message-content h3 {
+    color: var(--text-light);
+    font-size: var(--text-2xl);
+    margin-bottom: var(--space-md);
+}
+.success-message-content p {
+    font-size: var(--text-lg);
 }
 
 /* Loading State
    ========================================================================== */
-.loader-container {
-    display: none;
+   .loader-container {
     position: absolute;
     inset: 0;
-    background: rgba(255, 255, 255, 0.8);
-    z-index: var(--z-modal);
+    background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease;
+}
+
+.loader-container.active {
+    opacity: 1;
+    visibility: visible;
 }
 
 .loader {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
     width: 40px;
     height: 40px;
-    border: 4px solid var(--primary-color);
+    border: 4px solid var(--text-light);
     border-top-color: transparent;
     border-radius: 50%;
     animation: spin 1s linear infinite;
@@ -206,7 +229,7 @@
 
 @keyframes spin {
     100% {
-        transform: translate(-50%, -50%) rotate(360deg);
+        transform: rotate(360deg);
     }
 }
 

@@ -155,21 +155,25 @@ class Carousel {
 class FormHandler {
     constructor() {
         this.form = DOMService.getElement('.contact-form');
-        this.contact = DOMService.getElement('.contact');
-        this.successMessage = this.contact?.querySelector('.success-message');
-        this.loaderContainer = this.contact?.querySelector('.loader-container');
+        this.formContent = this.form?.querySelector('.form-content');
+        this.loaderContainer = this.form?.querySelector('.loader-container');
+        this.successMessage = this.form?.querySelector('.success-message');
         
         this.init();
     }
 
     init() {
-        if (!this.form || !this.successMessage || !this.loaderContainer) return;
+        if (!this.form || !this.formContent || !this.loaderContainer || !this.successMessage) {
+            console.error('Form elements not found');
+            return;
+        }
         this.form.addEventListener('submit', (e) => this.handleSubmit(e));
     }
 
     async handleSubmit(e) {
         e.preventDefault();
         
+        // Start transition
         this.showLoader();
         
         try {
@@ -185,56 +189,60 @@ class FormHandler {
             const data = await response.json();
             
             if (data.success) {
+                this.hideLoader();
                 this.showSuccessMessage();
-                this.form.reset();
+                
+                // Reset form and restore after delay
+                setTimeout(() => {
+                    this.hideSuccessMessage();
+                    this.form.reset();
+                }, CONFIG.FORM.SUCCESS_MESSAGE_DURATION);
             } else {
+                this.hideLoader();
                 this.showErrorMessage(data.errors);
             }
         } catch (error) {
             console.error('Error:', error);
-            this.showErrorMessage('An error occurred. Please try again.');
-        } finally {
             this.hideLoader();
+            this.showErrorMessage('An error occurred. Please try again.');
         }
     }
 
     showLoader() {
-        this.loaderContainer.style.display = 'flex';
-        requestAnimationFrame(() => {
-            this.loaderContainer.style.opacity = '1';
-        });
-    }
-
-    hideLoader() {
-        this.loaderContainer.style.opacity = '0';
+        this.formContent.style.opacity = '0';
         setTimeout(() => {
-            this.loaderContainer.style.display = 'none';
+            this.formContent.style.display = 'none';
+            this.loaderContainer.classList.add('active');
         }, CONFIG.FORM.TRANSITION_DURATION);
     }
 
-    showSuccessMessage() {
-        this.successMessage.style.display = 'block';
-        requestAnimationFrame(() => {
-            this.successMessage.style.opacity = '1';
-        });
+    hideLoader() {
+        this.loaderContainer.classList.remove('active');
+    }
 
-        setTimeout(() => {
-            this.hideSuccessMessage();
-        }, CONFIG.FORM.SUCCESS_MESSAGE_DURATION);
+    showSuccessMessage() {
+        this.successMessage.classList.add('active');
     }
 
     hideSuccessMessage() {
-        this.successMessage.style.opacity = '0';
+        this.successMessage.classList.remove('active');
         setTimeout(() => {
-            this.successMessage.style.display = 'none';
+            this.formContent.style.display = 'flex';
+            setTimeout(() => {
+                this.formContent.style.opacity = '1';
+            }, 50);
         }, CONFIG.FORM.TRANSITION_DURATION);
     }
 
     showErrorMessage(errors) {
         // Implement error message display
         console.error('Form errors:', errors);
+        this.formContent.style.display = 'flex';
+        this.formContent.style.opacity = '1';
     }
 }
+
+
 
 // Utility Functions
 function debounce(func, wait) {

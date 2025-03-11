@@ -1,9 +1,8 @@
 # core/views.py
 
-from django.shortcuts import render, redirect
+from django.shortcuts import render
 from django.core.mail import send_mail
 from django.conf import settings
-from django.contrib import messages
 from django.views.generic import TemplateView
 from django.http import JsonResponse
 from .forms import ContactForm
@@ -19,40 +18,46 @@ class HomePageView(TemplateView):
                 first_name = form.cleaned_data['firstName']
                 last_name = form.cleaned_data['lastName']
                 email = form.cleaned_data['email']
+                interest = form.cleaned_data['interest']
+                message = form.cleaned_data['message']
                 
-                # Send email to admin
-                admin_subject = 'New Contact Form Submission'
+                # Send email to admin (myself)
+                admin_subject = f'New Request: {interest}'
                 admin_message = f"""
-                New contact form submission received:
-                Name: {first_name} {last_name}
+                Form Details:
+                First Name: {first_name}
+                Last Name: {last_name}
                 Email: {email}
+                Interest: {interest}
+                Message: {message}
                 """
                 
                 # Send email to user
-                user_subject = 'Thank you for contacting PsychED Lab'
+                user_subject = 'PsychED: Mesaj Trimis'
                 user_message = f"""
-                Dear {first_name},
+                Salut {first_name},
 
-                Thank you for reaching out to PsychED Lab. We have received your message and will get back to you shortly.
+                Multumesc ca m-ai contactat, voi reveni cu o programare.
 
-                Best regards,
-                PsychED Lab Team
+                Cu drag,
+                Francesca Raileanu
                 """
                 
-                # Send emails using settings directly
+                # Send email to admin
                 send_mail(
                     admin_subject,
                     admin_message,
                     settings.EMAIL_HOST_USER,
-                    [settings.EMAIL_HOST_USER],
+                    [settings.EMAIL_HOST_USER],  # Your email address
                     fail_silently=False,
                 )
                 
+                # Send email to user
                 send_mail(
                     user_subject,
                     user_message,
                     settings.EMAIL_HOST_USER,
-                    [email],
+                    [email],  # User's email address
                     fail_silently=False,
                 )
                 
