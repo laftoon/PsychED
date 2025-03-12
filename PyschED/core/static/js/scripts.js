@@ -75,3 +75,69 @@ document.addEventListener('DOMContentLoaded', () => {
         formHandler: new FormHandler()
     };
 });
+// Add these to your scripts.js
+class HeroHandler {
+    constructor() {
+        this.scrollButton = document.querySelector('.scroll-to-contact');
+        this.contactSection = document.getElementById('contact-section');
+        this.init();
+    }
+
+    init() {
+        if (this.scrollButton && this.contactSection) {
+            this.scrollButton.addEventListener('click', () => {
+                this.contactSection.scrollIntoView({ behavior: 'smooth' });
+            });
+        }
+    }
+}
+
+class CarouselHandler {
+    constructor() {
+        this.track = document.querySelector('.carousel__track');
+        this.prevButton = document.querySelector('.carousel__nav--prev');
+        this.nextButton = document.querySelector('.carousel__nav--next');
+        this.cards = Array.from(document.querySelectorAll('.flip-card'));
+        this.currentIndex = 0;
+        this.init();
+    }
+
+    init() {
+        if (this.track && this.prevButton && this.nextButton) {
+            this.updateButtons();
+            this.bindEvents();
+        }
+    }
+
+    bindEvents() {
+        this.prevButton.addEventListener('click', () => this.navigate(-1));
+        this.nextButton.addEventListener('click', () => this.navigate(1));
+    }
+
+    navigate(direction) {
+        this.currentIndex = Math.max(0, Math.min(this.currentIndex + direction, this.cards.length - 1));
+        this.updateTrack();
+        this.updateButtons();
+    }
+
+    updateTrack() {
+        const offset = -this.currentIndex * (this.cards[0].offsetWidth + 16); // 16px for gap
+        this.track.style.transform = `translateX(${offset}px)`;
+    }
+
+    updateButtons() {
+        this.prevButton.disabled = this.currentIndex === 0;
+        this.nextButton.disabled = this.currentIndex === this.cards.length - 1;
+    }
+}
+
+// Update your DOMContentLoaded event listener
+document.addEventListener('DOMContentLoaded', () => {
+    const app = {
+        mobileMenu: new MobileMenu(),
+        formHandler: new FormHandler(),
+        heroHandler: new HeroHandler(),
+        carouselHandler: new CarouselHandler()
+    };
+});
+

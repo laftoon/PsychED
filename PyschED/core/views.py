@@ -106,53 +106,68 @@ def get_time_slots(request):
 
 def send_confirmation_email(user_email, appointment_time, event_link, first_name, last_name, interest, message):
     """Send confirmation emails to user and admin"""
-    # User email
-    user_subject = 'Confirmare Programare PsychED'
-    user_message = f'''
-    Bună {first_name},
+    try:
+        # Create email messages
+        user_subject = 'Confirmare Programare PsychED'
+        user_message = f'''
+        Bună {first_name},
 
-    Îți mulțumim pentru programare. Întâlnirea ta a fost programată cu succes pentru data de {appointment_time.strftime("%d %B %Y")} la ora {appointment_time.strftime("%H:%M")}.
+        Îți mulțumim pentru programare. Întâlnirea ta a fost programată cu succes pentru data de {appointment_time.strftime("%d %B %Y")} la ora {appointment_time.strftime("%H:%M")}.
 
-    În cazul în care vor exista modificări, te voi anunța.
+        În cazul în care vor exista modificări, te voi anunța.
 
-    Link către eveniment: {event_link}
+        Link către eveniment: {event_link}
 
-    Cu stimă,
-    Laura Vaida
-    '''
+        Cu stimă,
+        Laura Vaida
+        '''
 
-    # Admin email
-    admin_subject = 'Nouă Programare PsychED'
-    admin_message = f'''
-    O nouă programare a fost creată:
+        admin_subject = 'Nouă Programare PsychED'
+        admin_message = f'''
+        O nouă programare a fost creată:
 
-    Nume: {first_name} {last_name}
-    Email: {user_email}
-    Data: {appointment_time.strftime("%d %B %Y")}
-    Ora: {appointment_time.strftime("%H:%M")}
-    Interes: {interest}
-    Mesaj: {message}
+        Nume: {first_name} {last_name}
+        Email: {user_email}
+        Data: {appointment_time.strftime("%d %B %Y")}
+        Ora: {appointment_time.strftime("%H:%M")}
+        Interes: {interest}
+        Mesaj: {message}
 
-    Link către eveniment: {event_link}
-    '''
+        Link către eveniment: {event_link}
+        '''
 
-    # Send email to user
-    send_mail(
-        user_subject,
-        user_message,
-        settings.EMAIL_HOST_USER,
-        [user_email],
-        fail_silently=False
-    )
+        # Create a single connection for both emails
+        from django.core.mail import get_connection, EmailMessage
+        connection = get_connection()
+        connection.open()
 
-    # Send email to admin
-    send_mail(
-        admin_subject,
-        admin_message,
-        settings.EMAIL_HOST_USER,
-        [settings.EMAIL_HOST_USER],  # Send to admin email
-        fail_silently=False
-    )
+        # Create email messages
+        emails = [
+            EmailMessage(
+                subject=user_subject,
+                body=user_message,
+                from_email=settings.EMAIL_HOST_USER,
+                to=[user_email],
+                connection=connection
+            ),
+            EmailMessage(
+                subject=admin_subject,
+                body=admin_message,
+                from_email=settings.EMAIL_HOST_USER,
+                to=[settings.EMAIL_HOST_USER],
+                connection=connection
+            )
+        ]
+
+        # Send all emails
+        connection.send_messages(emails)
+        connection.close()
+
+    except Exception as e:
+        logger.error(f"Error sending confirmation emails: {str(e)}")
+        raise Exception("Failed to send confirmation emails")
+
+
 
 def submit_time_slot(request):
     if request.method == 'POST':
