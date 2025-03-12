@@ -68,20 +68,24 @@ class FormHandler {
         }
     }
 
-    async handleInitialFormSubmission() {
-        this.formData = new FormData();
-        
-        const requiredFields = ['firstName', 'lastName', 'email', 'interest', 'message'];
-        for (const field of requiredFields) {
-            const value = this.form.elements[field].value.trim();
-            if (!value) {
-                this.showError(`Vă rugăm să completați câmpul ${field}`);
-                this.isSubmitting = false;
-                return;
-            }
-            this.formData.append(field, value);
+async handleInitialFormSubmission() {
+    this.formData = new FormData();
+    
+    const requiredFields = ['firstName', 'lastName', 'email', 'interest', 'message'];
+    for (const field of requiredFields) {
+        const value = this.form.elements[field].value.trim();
+        if (!value) {
+            this.showError(`Vă rugăm să completați câmpul ${field}`);
+            this.isSubmitting = false;
+            return;
         }
+        this.formData.append(field, value);
+    }
 
+    // Show loader before calendar initialization
+    this.showLoader();
+
+    try {
         if (window.calendarHandler) {
             window.calendarHandler.initializeWorkingDays();
             await window.calendarHandler.fetchAndDisplayTimeSlots();
@@ -93,9 +97,16 @@ class FormHandler {
             this.timeSlotSelection.classList.remove('hidden');
             setTimeout(() => {
                 this.timeSlotSelection.style.opacity = '1';
+                this.hideLoader(); // Hide loader after transition
             }, 50);
         }, 300);
+    } catch (error) {
+        this.hideLoader();
+        this.showError('A apărut o eroare la încărcarea calendarului');
+        console.error('Calendar initialization error:', error);
     }
+}
+
 
     handleTimeSlotClick(slot) {
         if (this.isSubmitting) return;

@@ -46,11 +46,12 @@
     cursor: pointer;
     z-index: var(--z-sticky);
     box-shadow: var(--shadow-small);
-    display: flex;
+    display: none; /* Changed from flex to none */
     align-items: center;
     justify-content: center;
     font-size: var(--text-xl);
     color: var(--primary-color);
+    transition: opacity 0.3s ease;
 }
 
 .carousel__nav--prev {
@@ -61,7 +62,6 @@
     right: var(--nav-button-offset);
 }
 
-
 /* Track
    ========================================================================== */
 .carousel__track {
@@ -69,7 +69,9 @@
     gap: var(--carousel-gap);
     transform: translate3d(0, 0, 0);
     transition: transform 0.3s ease;
+    margin: 0 var(--nav-button-size); /* Add margin to prevent cards from going under buttons */
 }
+
 
 /* Flip Card
    ========================================================================== */

@@ -107,7 +107,9 @@ def get_time_slots(request):
 def send_confirmation_email(user_email, appointment_time, event_link, first_name, last_name, interest, message):
     """Send confirmation emails to user and admin"""
     try:
-        # Create email messages
+        from django.core.mail import send_mail
+        
+        # User email
         user_subject = 'Confirmare Programare PsychED'
         user_message = f'''
         Bună {first_name},
@@ -121,7 +123,8 @@ def send_confirmation_email(user_email, appointment_time, event_link, first_name
         Cu stimă,
         Laura Vaida
         '''
-
+        
+        # Admin email
         admin_subject = 'Nouă Programare PsychED'
         admin_message = f'''
         O nouă programare a fost creată:
@@ -136,32 +139,22 @@ def send_confirmation_email(user_email, appointment_time, event_link, first_name
         Link către eveniment: {event_link}
         '''
 
-        # Create a single connection for both emails
-        from django.core.mail import get_connection, EmailMessage
-        connection = get_connection()
-        connection.open()
-
-        # Create email messages
-        emails = [
-            EmailMessage(
-                subject=user_subject,
-                body=user_message,
-                from_email=settings.EMAIL_HOST_USER,
-                to=[user_email],
-                connection=connection
-            ),
-            EmailMessage(
-                subject=admin_subject,
-                body=admin_message,
-                from_email=settings.EMAIL_HOST_USER,
-                to=[settings.EMAIL_HOST_USER],
-                connection=connection
-            )
-        ]
-
-        # Send all emails
-        connection.send_messages(emails)
-        connection.close()
+        # Send emails using send_mail
+        send_mail(
+            user_subject,
+            user_message,
+            settings.EMAIL_HOST_USER,
+            [user_email],
+            fail_silently=False,
+        )
+        
+        send_mail(
+            admin_subject,
+            admin_message,
+            settings.EMAIL_HOST_USER,
+            [settings.EMAIL_HOST_USER],
+            fail_silently=False,
+        )
 
     except Exception as e:
         logger.error(f"Error sending confirmation emails: {str(e)}")

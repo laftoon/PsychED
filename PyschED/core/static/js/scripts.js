@@ -69,13 +69,6 @@ class MobileMenu {
     }
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-    const app = {
-        mobileMenu: new MobileMenu(),
-        formHandler: new FormHandler()
-    };
-});
-// Add these to your scripts.js
 class HeroHandler {
     constructor() {
         this.scrollButton = document.querySelector('.scroll-to-contact');
@@ -99,7 +92,23 @@ class CarouselHandler {
         this.nextButton = document.querySelector('.carousel__nav--next');
         this.cards = Array.from(document.querySelectorAll('.flip-card'));
         this.currentIndex = 0;
+        this.cardsPerView = this.calculateCardsPerView();
+        this.maxIndex = Math.max(0, this.cards.length - this.cardsPerView);
         this.init();
+
+        // Add resize listener to update cardsPerView
+        window.addEventListener('resize', () => {
+            this.cardsPerView = this.calculateCardsPerView();
+            this.maxIndex = Math.max(0, this.cards.length - this.cardsPerView);
+            this.updateTrack();
+            this.updateButtons();
+        });
+    }
+
+    calculateCardsPerView() {
+        const trackWidth = this.track.parentElement.offsetWidth;
+        const cardWidth = this.cards[0].offsetWidth + 16; // 16px for gap
+        return Math.floor(trackWidth / cardWidth);
     }
 
     init() {
@@ -115,9 +124,12 @@ class CarouselHandler {
     }
 
     navigate(direction) {
-        this.currentIndex = Math.max(0, Math.min(this.currentIndex + direction, this.cards.length - 1));
-        this.updateTrack();
-        this.updateButtons();
+        const newIndex = this.currentIndex + direction;
+        if (newIndex >= 0 && newIndex <= this.maxIndex) {
+            this.currentIndex = newIndex;
+            this.updateTrack();
+            this.updateButtons();
+        }
     }
 
     updateTrack() {
@@ -126,16 +138,20 @@ class CarouselHandler {
     }
 
     updateButtons() {
-        this.prevButton.disabled = this.currentIndex === 0;
-        this.nextButton.disabled = this.currentIndex === this.cards.length - 1;
+        if (this.prevButton) {
+            this.prevButton.style.display = this.currentIndex === 0 ? 'none' : 'flex';
+        }
+        if (this.nextButton) {
+            this.nextButton.style.display = this.currentIndex >= this.maxIndex ? 'none' : 'flex';
+        }
     }
 }
+
 
 // Update your DOMContentLoaded event listener
 document.addEventListener('DOMContentLoaded', () => {
     const app = {
         mobileMenu: new MobileMenu(),
-        formHandler: new FormHandler(),
         heroHandler: new HeroHandler(),
         carouselHandler: new CarouselHandler()
     };
