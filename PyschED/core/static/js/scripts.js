@@ -1,21 +1,20 @@
-// Configuration
+// Configuration for various UI behaviors
 const CONFIG = {
     SCROLL: {
         THRESHOLD: 50,
         BEHAVIOR: 'smooth'
     },
-    CAROUSEL: {
-        TRANSITION_TIME: 300,
-        GAP: 16,
-        RESIZE_DEBOUNCE: 100
-    },
     FORM: {
         TRANSITION_DURATION: 300,
-        SUCCESS_MESSAGE_DURATION: 3000
+        SUCCESS_MESSAGE_DURATION: 3000,
+        WORKING_HOURS: {
+            START: 10, // 10 AM
+            END: 20,   // 8 PM
+            SLOT_DURATION: 60 // 60 minutes
+        }
     }
 };
 
-// DOM Service
 class DOMService {
     static getElement(selector) {
         return document.querySelector(selector);
@@ -26,7 +25,7 @@ class DOMService {
     }
 }
 
-// Mobile Menu Handler
+// Class to handle the mobile menu functionality
 class MobileMenu {
     constructor() {
         this.toggle = DOMService.getElement('.mobile-menu-toggle');
@@ -41,8 +40,8 @@ class MobileMenu {
     }
 
     bindEvents() {
-        this.toggle.addEventListener('click', (e) => this.handleToggleClick(e));
-        document.addEventListener('click', (e) => this.handleOutsideClick(e));
+        this.toggle.addEventListener('click', e => this.handleToggleClick(e));
+        document.addEventListener('click', e => this.handleOutsideClick(e));
         this.navLinks.forEach(link => {
             link.addEventListener('click', () => this.closeMenu());
         });
@@ -70,203 +69,91 @@ class MobileMenu {
     }
 }
 
-// Carousel Handler
-class Carousel {
+class HeroHandler {
     constructor() {
-        this.track = DOMService.getElement('.carousel__track');
-        this.prevButton = DOMService.getElement('.carousel__nav--prev');
-        this.nextButton = DOMService.getElement('.carousel__nav--next');
-        this.cards = DOMService.getElements('.flip-card');
-        
-        this.state = {
-            currentIndex: 0,
-            isTransitioning: false
-        };
-
+        this.scrollButton = document.querySelector('.scroll-to-contact');
+        this.contactSection = document.getElementById('contact-section');
         this.init();
     }
 
     init() {
-        if (!this.track || !this.cards.length) return;
-        
-        this.bindEvents();
-        this.updateNavigation();
-        
-        // Handle resize
-        window.addEventListener('resize', debounce(() => {
-            this.updateDimensions();
-        }, CONFIG.CAROUSEL.RESIZE_DEBOUNCE));
+        if (this.scrollButton && this.contactSection) {
+            this.scrollButton.addEventListener('click', () => {
+                this.contactSection.scrollIntoView({ behavior: 'smooth' });
+            });
+        }
+    }
+}
+
+class CarouselHandler {
+    constructor() {
+        this.track = document.querySelector('.carousel__track');
+        this.prevButton = document.querySelector('.carousel__nav--prev');
+        this.nextButton = document.querySelector('.carousel__nav--next');
+        this.cards = Array.from(document.querySelectorAll('.flip-card'));
+        this.currentIndex = 0;
+        this.cardsPerView = this.calculateCardsPerView();
+        this.maxIndex = Math.max(0, this.cards.length - this.cardsPerView);
+        this.init();
+
+        // Add resize listener to update cardsPerView
+        window.addEventListener('resize', () => {
+            this.cardsPerView = this.calculateCardsPerView();
+            this.maxIndex = Math.max(0, this.cards.length - this.cardsPerView);
+            this.updateTrack();
+            this.updateButtons();
+        });
+    }
+
+    calculateCardsPerView() {
+        const trackWidth = this.track.parentElement.offsetWidth;
+        const cardWidth = this.cards[0].offsetWidth + 16; // 16px for gap
+        return Math.floor(trackWidth / cardWidth);
+    }
+
+    init() {
+        if (this.track && this.prevButton && this.nextButton) {
+            this.updateButtons();
+            this.bindEvents();
+        }
     }
 
     bindEvents() {
-        this.prevButton?.addEventListener('click', () => this.navigate('prev'));
-        this.nextButton?.addEventListener('click', () => this.navigate('next'));
+        this.prevButton.addEventListener('click', () => this.navigate(-1));
+        this.nextButton.addEventListener('click', () => this.navigate(1));
     }
 
     navigate(direction) {
-        if (this.state.isTransitioning) return;
-        
-        const increment = direction === 'prev' ? -1 : 1;
-        const newIndex = this.state.currentIndex + increment;
-        
-        this.moveToIndex(newIndex);
+        const newIndex = this.currentIndex + direction;
+        if (newIndex >= 0 && newIndex <= this.maxIndex) {
+            this.currentIndex = newIndex;
+            this.updateTrack();
+            this.updateButtons();
+        }
     }
 
-    moveToIndex(index) {
-        const maxIndex = this.getMaxIndex();
-        const boundedIndex = Math.max(0, Math.min(index, maxIndex));
-        
-        this.state.isTransitioning = true;
-        const translateX = -(this.cards[0].offsetWidth + CONFIG.CAROUSEL.GAP) * boundedIndex;
-        
-        this.track.style.transform = `translate3d(${translateX}px, 0, 0)`;
-        this.state.currentIndex = boundedIndex;
-        
-        this.updateNavigation();
-
-        setTimeout(() => {
-            this.state.isTransitioning = false;
-        }, CONFIG.CAROUSEL.TRANSITION_TIME);
+    updateTrack() {
+        const offset = -this.currentIndex * (this.cards[0].offsetWidth + 16); // 16px for gap
+        this.track.style.transform = `translateX(${offset}px)`;
     }
 
-    getMaxIndex() {
-        const containerWidth = this.track.parentElement.offsetWidth;
-        const cardWidth = this.cards[0].offsetWidth;
-        const visibleCards = Math.floor(containerWidth / (cardWidth + CONFIG.CAROUSEL.GAP));
-        return Math.max(0, this.cards.length - visibleCards);
-    }
-
-    updateNavigation() {
-        const maxIndex = this.getMaxIndex();
+    updateButtons() {
         if (this.prevButton) {
-            this.prevButton.style.display = this.state.currentIndex === 0 ? 'none' : 'flex';
+            this.prevButton.style.display = this.currentIndex === 0 ? 'none' : 'flex';
         }
         if (this.nextButton) {
-            this.nextButton.style.display = this.state.currentIndex >= maxIndex ? 'none' : 'flex';
+            this.nextButton.style.display = this.currentIndex >= this.maxIndex ? 'none' : 'flex';
         }
     }
-
-    updateDimensions() {
-        this.moveToIndex(this.state.currentIndex);
-    }
 }
 
-// Form Handler
-class FormHandler {
-    constructor() {
-        this.form = DOMService.getElement('.contact-form');
-        this.contact = DOMService.getElement('.contact');
-        this.successMessage = this.contact?.querySelector('.success-message');
-        this.loaderContainer = this.contact?.querySelector('.loader-container');
-        
-        this.init();
-    }
 
-    init() {
-        if (!this.form || !this.successMessage || !this.loaderContainer) return;
-        this.form.addEventListener('submit', (e) => this.handleSubmit(e));
-    }
-
-    async handleSubmit(e) {
-        e.preventDefault();
-        
-        this.showLoader();
-        
-        try {
-            const formData = new FormData(this.form);
-            const response = await fetch('', {
-                method: 'POST',
-                body: formData,
-                headers: {
-                    'X-CSRFToken': formData.get('csrfmiddlewaretoken')
-                }
-            });
-
-            const data = await response.json();
-            
-            if (data.success) {
-                this.showSuccessMessage();
-                this.form.reset();
-            } else {
-                this.showErrorMessage(data.errors);
-            }
-        } catch (error) {
-            console.error('Error:', error);
-            this.showErrorMessage('An error occurred. Please try again.');
-        } finally {
-            this.hideLoader();
-        }
-    }
-
-    showLoader() {
-        this.loaderContainer.style.display = 'flex';
-        requestAnimationFrame(() => {
-            this.loaderContainer.style.opacity = '1';
-        });
-    }
-
-    hideLoader() {
-        this.loaderContainer.style.opacity = '0';
-        setTimeout(() => {
-            this.loaderContainer.style.display = 'none';
-        }, CONFIG.FORM.TRANSITION_DURATION);
-    }
-
-    showSuccessMessage() {
-        this.successMessage.style.display = 'block';
-        requestAnimationFrame(() => {
-            this.successMessage.style.opacity = '1';
-        });
-
-        setTimeout(() => {
-            this.hideSuccessMessage();
-        }, CONFIG.FORM.SUCCESS_MESSAGE_DURATION);
-    }
-
-    hideSuccessMessage() {
-        this.successMessage.style.opacity = '0';
-        setTimeout(() => {
-            this.successMessage.style.display = 'none';
-        }, CONFIG.FORM.TRANSITION_DURATION);
-    }
-
-    showErrorMessage(errors) {
-        // Implement error message display
-        console.error('Form errors:', errors);
-    }
-}
-
-// Utility Functions
-function debounce(func, wait) {
-    let timeout;
-    return function executedFunction(...args) {
-        const later = () => {
-            clearTimeout(timeout);
-            func(...args);
-        };
-        clearTimeout(timeout);
-        timeout = setTimeout(later, wait);
-    };
-}
-
-// Initialize Application
+// Update your DOMContentLoaded event listener
 document.addEventListener('DOMContentLoaded', () => {
     const app = {
         mobileMenu: new MobileMenu(),
-        carousel: new Carousel(),
-        formHandler: new FormHandler()
+        heroHandler: new HeroHandler(),
+        carouselHandler: new CarouselHandler()
     };
-
-    // Handle scroll to contact
-    const scrollButton = DOMService.getElement('.scroll-to-contact');
-    const contactSection = DOMService.getElement('#contact-section');
-    
-    if (scrollButton && contactSection) {
-        scrollButton.addEventListener('click', () => {
-            contactSection.scrollIntoView({ 
-                behavior: CONFIG.SCROLL.BEHAVIOR,
-                block: 'start'
-            });
-        });
-    }
 });
+

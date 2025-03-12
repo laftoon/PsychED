@@ -2,237 +2,333 @@
    Contact Form Component
    ========================================================================== */
 
-/* Component-specific variables
-   ========================================================================== */
-:root {
-    /* Form Elements */
-    --form-input-height: 48px;
-    --form-border-width: 2px;
-    --form-opacity-light: 0.1;
-    --form-opacity-medium: 0.2;
-    --form-opacity-high: 0.8;
-}
+@import 'variables.css';
 
-/* Contact Container
+/* Container
    ========================================================================== */
 .contact-container {
-    width: 100%;
-    max-width: var(--container-max-width);
-    margin-inline: auto;
-    padding: var(--space-xl);
-    box-sizing: border-box;
+    background-color: var(--background-light);
+    padding: var(--space-2xl) var(--container-padding);
+    position: relative;
 }
 
-/* Contact Layout
-   ========================================================================== */
 .contact {
-    width: 100%;
+    max-width: var(--container-max-width);
+    margin: 0 auto;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: var(--space-md);
+    gap: var(--space-xl);
+    align-items: stretch;
+    min-height: 500px;
+}
+
+/* Content Section
+   ========================================================================== */
+.contact__content {
+    background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
     padding: var(--space-xl);
-    background: linear-gradient(
-        135deg,
-        var(--gradient-start),
-        var(--gradient-end)
-    );
     border-radius: var(--radius-lg);
-    color: var(--text-light);
-    box-sizing: border-box;
-    position: relative;
-}
-
-/* Loading State
-   ========================================================================== */
-.loader-container {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(
-        135deg,
-        var(--gradient-start),
-        var(--gradient-end)
-    );
-    display: none;
-    justify-content: center;
-    align-items: center;
-    border-radius: var(--radius-lg);
-    opacity: 0;
-    transition: var(--transition-standard);
-    z-index: var(--z-sticky);
-}
-
-.loader {
-    width: 48px;
-    height: 48px;
-    border: 4px solid rgba(255, 255, 255, var(--form-opacity-medium));
-    border-radius: var(--radius-full);
-    border-top-color: var(--text-light);
-    animation: spin 1s linear infinite;
-}
-
-@keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-}
-
-/* Contact Form
-   ========================================================================== */
-.contact-form {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-md);
-    width: 100%;
-}
-
-/* Form Content
-   ========================================================================== */
-.form-content {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-md);
-}
-
-.form-group {
-    width: 100%;
-}
-
-/* Form Inputs
-   ========================================================================== */
-.form-input {
-    width: 100%;
-    height: var(--form-input-height);
-    padding: var(--space-md);
-    background: rgba(255, 255, 255, var(--form-opacity-light));
-    border: var(--form-border-width) solid rgba(255, 255, 255, var(--form-opacity-medium));
-    border-radius: var(--radius-md);
-    color: var(--text-light);
-    box-sizing: border-box;
-    transition: var(--transition-standard);
-    
-    font-family: var(--font-tertiary);
-    font-size: var(--text-base);
-}
-
-.form-input::placeholder {
-    color: rgba(255, 255, 255, var(--form-opacity-high));
-}
-
-.form-input:focus {
-    outline: none;
-    border-color: var(--text-light);
-    background: rgba(255, 255, 255, var(--form-opacity-medium));
-}
-
-/* Submit Button
-   ========================================================================== */
-.form-submit {
-    width: 100%;
-    padding: var(--space-md) var(--space-xl);
-    margin-block-start: var(--space-md);
-    background: var(--background-white);
-    border: none;
-    border-radius: var(--radius-md);
-    color: var(--primary-color);
-    font-family: var(--font-secondary);
-    font-weight: var(--weight-semibold);
-    font-size: var(--text-xl);
-    cursor: pointer;
-    transition: var(--transition-standard);
-}
-
-.form-submit:hover {
-    transform: translateY(calc(-1 * var(--space-xs)));
     box-shadow: var(--shadow-small);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 90%;
 }
 
-/* Success Message
-   ========================================================================== */
-.success-message {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    display: none;
-    opacity: 0;
-    background: linear-gradient(
-        135deg,
-        var(--gradient-start),
-        var(--gradient-end)
-    );
-    border-radius: var(--radius-lg);
-    transition: var(--transition-standard);
-    z-index: var(--z-modal);
-}
-
-.success-message-content {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 100%;
-    text-align: center;
-    padding: var(--space-xl);
-}
-
-.success-message h3 {
-    font-family: var(--font-primary);
-    font-size: var(--text-2xl);
-    color: var(--text-light);
-    margin-block-end: var(--space-md);
-}
-
-.success-message p {
-    font-family: var(--font-tertiary);
-    color: var(--text-muted);
-}
-
-/* Contact Content
-   ========================================================================== */
 .contact__title {
-    font-family: var(--font-primary);
     font-size: var(--text-3xl);
     color: var(--text-light);
-    margin-block-end: var(--space-md);
+    margin-bottom: var(--space-md);
 }
 
 .contact__description {
-    font-family: var(--font-tertiary);
-    color: var(--text-muted);
+    font-size: var(--text-lg);
+    color: var(--text-light);
     line-height: 1.6;
-    margin-block-end: var(--space-xl);
 }
 
+/* Form Container
+   ========================================================================== */
+.contact-form {
+    background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+    padding: var(--space-xl);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-small);
+    color: var(--text-light);
+    height: 90%;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Form Content and Time Slot Selection
+   ========================================================================== */
+.form-content,
+.time-slot-selection {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 90%;
+    height: 90%;
+    padding: var(--space-xl);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+    transition: opacity 0.3 ease;
+    opacity: 1;
+}
+
+.form-content.hidden,
+.time-slot-selection.hidden {
+    display: none;
+}
+
+/* Form Groups
+   ========================================================================== */
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+}
+
+/* Input & Select Styling
+   ========================================================================== */
+.form-input,
+.form-select {
+    padding: var(--space-md);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: var(--radius-md);
+    font-family: var(--font-secondary);
+    font-size: var(--text-base);
+    color: var(--text-light);
+    background: rgba(255, 255, 255, 0.1);
+    transition: var(--transition-standard);
+}
+
+.form-input::placeholder {
+    color: var(--text-light);
+    opacity: 0.8;
+}
+
+.form-select {
+    appearance: none;
+    background-color: rgba(255, 255, 255, 0.1);
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right var(--space-md) center;
+    background-size: 1em;
+    padding-right: var(--space-xl);
+}
+
+.form-select option {
+    background-color: var(--primary-color);
+    color: var(--text-light);
+    padding: var(--space-md);
+}
+
+/* Time Slot Selection
+   ========================================================================== */
+.time-slot-selection {
+    gap: var(--space-lg);
+}
+
+.time-slot-selection h3 {
+    color: var(--text-light);
+    font-size: var(--text-xl);
+    text-align: center;
+    margin-bottom: var(--space-md);
+}
+
+/* Day Navigation
+   ========================================================================== */
+.day-navigation {
+    margin-bottom: var(--space-lg);
+}
+
+.navigation-container {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: var(--space-md);
+}
+
+.date-container {
+    display: flex;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.current-date {
+    text-align: center;
+    padding: var(--space-sm);
+    transition: transform 0.3s ease-in-out;
+    width: 100%;
+}
+
+.current-date.slide-left {
+    transform: translateX(-100%);
+}
+
+.current-date.slide-right {
+    transform: translateX(100%);
+}
+
+.day-navigation button {
+    background: var(--text-light);
+    color: var(--primary-color);
+    border: none;
+    padding: var(--space-sm) var(--space-md);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: opacity 0.3s ease;
+    font-weight: var(--weight-medium);
+    white-space: nowrap;
+    min-width: 140px;
+}
+
+.day-navigation button:disabled {
+    opacity: 0;
+    visibility: hidden;
+}
+
+/* Time Slots Grid
+   ========================================================================== */
+#time-slots {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    gap: var(--space-md);
+    overflow-y: auto;
+    max-height: 300px;
+    margin-bottom: var(--space-lg);
+}
+
+.time-slot {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--text-light);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: var(--space-md);
+    border-radius: var(--radius-md);
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.time-slot:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.time-slot.selected {
+    background: var(--text-light);
+    color: var(--primary-color);
+}
+
+/* Form Buttons
+   ========================================================================== */
+.form-submit {
+    background: var(--text-light);
+    color: var(--primary-color);
+    border: none;
+    padding: var(--space-md) var(--space-xl);
+    border-radius: var(--radius-md);
+    font-size: var(--text-base);
+    font-weight: var(--weight-medium);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 100%;
+    margin-top: auto;
+}
+
+.form-submit:hover {
+    background: rgba(255, 255, 255, 0.9);
+}
+
+.form-submit:disabled {
+    background: rgba(255, 255, 255, 0.5);
+    cursor: not-allowed;
+}
+
+.initial-submit {
+    margin-top: 0.5rem;
+}
+
+.confirm-time-slot {
+    margin-top: var(--space-xl);
+}
+
+/* Form Textarea
+   ========================================================================== */
+.form-textarea {
+    resize: vertical;
+    min-height: 60px;  /* Reduced from 100px */
+    max-height: 150px; /* Added max-height */
+    padding: var(--space-md);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: var(--radius-md);
+    font-family: var(--font-secondary);
+    font-size: var(--text-base);
+    color: var(--text-light);
+    background: rgba(255, 255, 255, 0.1);
+    transition: var(--transition-standard);
+    width: 100%;
+}
+
+
+
+/* Messages and Loader
+   ========================================================================== */
+.success-message,
+.error-message,
+.loader-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.95);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease;
+    z-index: 10;
+}
+
+.success-message.active,
+.error-message.active,
+.loader-container.active {
+    opacity: 1;
+    visibility: visible;
+}
+.loader {
+    width: 40px;
+    height: 40px;
+    border: 4px solid var(--primary-color);
+    border-top: 4px solid transparent;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
 /* Responsive Design
    ========================================================================== */
 @media (max-width: 768px) {
     .contact {
         grid-template-columns: 1fr;
     }
-    
-    .contact__content {
+
+    .navigation-container {
+        grid-template-columns: 1fr;
         text-align: center;
     }
-}
 
-@media (max-width: 480px) {
-    .contact {
-        padding: var(--space-md);
+    .day-navigation button {
+        width: 100%;
     }
-    
-    .form-input {
-        font-size: var(--text-base);
+
+    #time-slots {
+        grid-template-columns: repeat(2, 1fr);
     }
 }
-
-/* Accessibility
-   ========================================================================== */
-@media (prefers-reduced-motion: reduce) {
-    .form-submit {
-        transition: none;
-    }
-    
-    .form-submit:hover {
-        transform: none;
-    }
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
 }
