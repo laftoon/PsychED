@@ -12,7 +12,6 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-3f8s(cn1)%*2k%fpl+73v7)ov3kiwjns2ybu*9mo8$y1zubrzs'
 DEBUG = True
 ALLOWED_HOSTS = []
-
 # Application definition
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -58,11 +57,26 @@ TEMPLATES = [
         },
     },
 ]
-# settings.py
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+        },
+    },
+    'root': {
+        'handlers': ['console'],
+        'level': 'DEBUG',
+    },
+}
 
 GOOGLE_CALENDAR_SERVICE_ACCOUNT_FILE = os.path.join(BASE_DIR, 'calendar-integration.json')
-GOOGLE_CALENDAR_USER_EMAIL = 'lauravaida01@gmail.com'  # The email address you want to create events as
-
+GOOGLE_CALENDAR_USER_EMAIL = 'lauravaida01@gmail.com'  # Your calendar ID
+GOOGLE_CALENDAR_ID = '1b1e7cb49ef25197f00cabea8ca36baa86fe394b9f00379db32ab360336966f1@group.calendar.google.com'
+TIME_ZONE = 'Europe/Bucharest'  # Update this to match your timezone
+USE_TZ= True
 
 
 
@@ -95,7 +109,6 @@ AUTH_PASSWORD_VALIDATORS = [
 
 # Internationalization
 LANGUAGE_CODE = 'en-us'
-TIME_ZONE = 'UTC'
 USE_I18N = True
 USE_TZ = True
 

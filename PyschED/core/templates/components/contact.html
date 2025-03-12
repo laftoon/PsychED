@@ -12,21 +12,33 @@
         </div>
 
         <!-- Contact Form -->
-        <form class="contact-form" action="" method="POST">
+        <form class="contact-form" id="contactForm" action="" method="POST" onsubmit="return false;">
             {% csrf_token %}
-            <!-- Success Message -->
-            <div class="success-message">
-                <div class="success-message-content">
-                    <h3>Mesaj trimis cu succes!</h3>
-                    <p>Vă mulțumim pentru mesaj. Vă vom contacta în curând.</p>
+            
+            <!-- Error Message -->
+            <div class="error-message hidden">
+                <div class="error-message-content">
+                    <h3>Error</h3>
+                    <p></p>
                 </div>
             </div>
+
+            <!-- Success Message -->
+<!-- In contact.html, update the success message -->
+<div class="success-message hidden">
+    <div class="success-message-content">
+        <h3>Cerere trimisă cu succes!</h3>
+        <p>Vă mulțumim pentru programare.</p>
+    </div>
+</div>
+
 
             <!-- Loading Indicator -->
             <div class="loader-container">
                 <div class="loader"></div>
             </div>
 
+            <!-- Initial Form Content -->
             <div class="form-content">
                 <div class="form-group">
                     <input 
@@ -93,8 +105,31 @@
                     ></textarea>
                 </div>
 
-                <button type="submit" class="form-submit">
-                    Trimite
+                <button type="submit" class="form-submit initial-submit">
+                    Continuă
+                </button>
+            </div>
+
+            <!-- Time Slot Selection -->
+            <div class="time-slot-selection hidden">
+                <h3>Selectează ora programării</h3>
+<div class="day-navigation">
+    <div class="navigation-container">
+        <button type="button" id="prev-day">
+            <i class="fas fa-chevron-left"></i> Ziua anterioară
+        </button>
+        <div class="date-container">
+            <span class="current-date"></span>
+        </div>
+        <button type="button" id="next-day">
+            Ziua următoare <i class="fas fa-chevron-right"></i>
+        </button>
+    </div>
+</div>
+
+                <div id="time-slots" class="time-slots-grid"></div>
+                <button type="submit" class="form-submit confirm-time-slot" disabled>
+                    Confirmă programarea
                 </button>
             </div>
         </form>

@@ -2,16 +2,7 @@
    Contact Form Component
    ========================================================================== */
 
-/* Component-specific variables
-   ========================================================================== */
-:root {
-    /* Form Elements */
-    --form-input-height: 48px;
-    --form-border-width: 2px;
-    --form-opacity-light: 0.1;
-    --form-opacity-medium: 0.2;
-    --form-opacity-high: 0.8;
-}
+@import 'variables.css';
 
 /* Container
    ========================================================================== */
@@ -27,12 +18,13 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: var(--space-xl);
-    align-items: stretch; /* Changed from stretch to start */
-    min-height: 500px; /* Add a minimum height to ensure consistent sizing */
+    align-items: stretch;
+    min-height: 500px;
 }
+
 /* Content Section
    ========================================================================== */
-   .contact__content {
+.contact__content {
     background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
     padding: var(--space-xl);
     border-radius: var(--radius-lg);
@@ -55,9 +47,9 @@
     line-height: 1.6;
 }
 
-/* Form
+/* Form Container
    ========================================================================== */
-   .contact-form {
+.contact-form {
     background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
     padding: var(--space-xl);
     border-radius: var(--radius-lg);
@@ -68,33 +60,47 @@
     overflow: hidden;
 }
 
-.form-content {
+/* Form Content and Time Slot Selection
+   ========================================================================== */
+.form-content,
+.time-slot-selection {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 90%;
+    height: 90%;
+    padding: var(--space-xl);
     display: flex;
     flex-direction: column;
     gap: var(--space-md);
+    transition: opacity 0.3 ease;
     opacity: 1;
-    transition: opacity 0.3s ease;
 }
 
-.form-content.hidden {
-    opacity: 0;
-    pointer-events: none;
+.form-content.hidden,
+.time-slot-selection.hidden {
+    display: none;
 }
 
+/* Form Groups
+   ========================================================================== */
 .form-group {
     display: flex;
     flex-direction: column;
+    gap: var(--space-sm);
 }
 
-/* Input Styling */
-.form-input {
+/* Input & Select Styling
+   ========================================================================== */
+.form-input,
+.form-select {
     padding: var(--space-md);
     border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: var(--radius-md);
     font-family: var(--font-secondary);
     font-size: var(--text-base);
     color: var(--text-light);
-    background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+    background: rgba(255, 255, 255, 0.1);
     transition: var(--transition-standard);
 }
 
@@ -103,134 +109,196 @@
     opacity: 0.8;
 }
 
-/* Select Styling */
 .form-select {
     appearance: none;
+    background-color: rgba(255, 255, 255, 0.1);
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right var(--space-md) center;
+    background-size: 1em;
+    padding-right: var(--space-xl);
+}
+
+.form-select option {
+    background-color: var(--primary-color);
+    color: var(--text-light);
+    padding: var(--space-md);
+}
+
+/* Time Slot Selection
+   ========================================================================== */
+.time-slot-selection {
+    gap: var(--space-lg);
+}
+
+.time-slot-selection h3 {
+    color: var(--text-light);
+    font-size: var(--text-xl);
+    text-align: center;
+    margin-bottom: var(--space-md);
+}
+
+/* Day Navigation
+   ========================================================================== */
+.day-navigation {
+    margin-bottom: var(--space-lg);
+}
+
+.navigation-container {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: var(--space-md);
+}
+
+.date-container {
+    display: flex;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.current-date {
+    text-align: center;
+    padding: var(--space-sm);
+    transition: transform 0.3s ease-in-out;
+    width: 100%;
+}
+
+.current-date.slide-left {
+    transform: translateX(-100%);
+}
+
+.current-date.slide-right {
+    transform: translateX(100%);
+}
+
+.day-navigation button {
+    background: var(--text-light);
+    color: var(--primary-color);
+    border: none;
+    padding: var(--space-sm) var(--space-md);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: opacity 0.3s ease;
+    font-weight: var(--weight-medium);
+    white-space: nowrap;
+    min-width: 140px;
+}
+
+.day-navigation button:disabled {
+    opacity: 0;
+    visibility: hidden;
+}
+
+/* Time Slots Grid
+   ========================================================================== */
+#time-slots {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    gap: var(--space-md);
+    overflow-y: auto;
+    max-height: 300px;
+    margin-bottom: var(--space-lg);
+}
+
+.time-slot {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--text-light);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: var(--space-md);
+    border-radius: var(--radius-md);
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.time-slot:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.time-slot.selected {
+    background: var(--text-light);
+    color: var(--primary-color);
+}
+
+/* Form Buttons
+   ========================================================================== */
+.form-submit {
+    background: var(--text-light);
+    color: var(--primary-color);
+    border: none;
+    padding: var(--space-md) var(--space-xl);
+    border-radius: var(--radius-md);
+    font-size: var(--text-base);
+    font-weight: var(--weight-medium);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 100%;
+    margin-top: auto;
+}
+
+.form-submit:hover {
+    background: rgba(255, 255, 255, 0.9);
+}
+
+.form-submit:disabled {
+    background: rgba(255, 255, 255, 0.5);
+    cursor: not-allowed;
+}
+
+.initial-submit {
+    margin-top: 0.5rem;
+}
+
+.confirm-time-slot {
+    margin-top: var(--space-xl);
+}
+
+/* Form Textarea
+   ========================================================================== */
+.form-textarea {
+    resize: vertical;
+    min-height: 60px;  /* Reduced from 100px */
+    max-height: 150px; /* Added max-height */
     padding: var(--space-md);
     border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: var(--radius-md);
     font-family: var(--font-secondary);
     font-size: var(--text-base);
     color: var(--text-light);
-    background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
-    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
-    background-repeat: no-repeat;
-    background-position: right var(--space-md) center;
-    background-size: 1em;
-    padding-right: var(--space-xl);
+    background: rgba(255, 255, 255, 0.1);
     transition: var(--transition-standard);
+    width: 100%;
 }
 
-.form-select option {
-    background-color: var(--gradient-start);
-    color: var(--text-light);
-}
 
-.form-content.loading,
-.form-content.success {
-    opacity: 0;
-}
 
-/* Focus States */
-.form-input:focus,
-.form-select:focus {
-    outline: none;
-    border-color: var(--text-light);
-    box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.2);
-}
-
-/* Textarea Styling */
-.form-textarea {
-    resize: vertical;
-    min-height: 120px;
-    background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
-    color: var(--text-light);
-}
-
-/* Submit Button */
-.form-submit {
-    background-color: var(--background-white);
-    color: var(--primary-color);
-    padding: var(--space-md) var(--space-xl);
-    border: none;
-    border-radius: var(--radius-md);
-    font-family: var(--font-secondary);
-    font-size: var(--text-lg);
-    font-weight: var(--weight-semibold);
-    cursor: pointer;
-    transition: var(--transition-standard);
-}
-
-.form-submit:hover {
-    background-color: var(--text-light);
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-small);
-}
-
-/* Success Message
+/* Messages and Loader
    ========================================================================== */
-   .success-message {
+.success-message,
+.error-message,
+.loader-container {
     position: absolute;
-    inset: 0;
-    background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.95);
     display: flex;
-    align-items: center;
     justify-content: center;
+    align-items: center;
     opacity: 0;
     visibility: hidden;
     transition: opacity 0.3s ease;
+    z-index: 10;
 }
 
-.success-message.active {
-    opacity: 1;
-    visibility: visible;
-}
-
-.success-message-content {
-    text-align: center;
-    color: var(--text-light);
-}
-.success-message-content h3 {
-    color: var(--text-light);
-    font-size: var(--text-2xl);
-    margin-bottom: var(--space-md);
-}
-.success-message-content p {
-    font-size: var(--text-lg);
-}
-
-/* Loading State
-   ========================================================================== */
-   .loader-container {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.3s ease;
-}
-
+.success-message.active,
+.error-message.active,
 .loader-container.active {
     opacity: 1;
     visibility: visible;
-}
-
-.loader {
-    width: 40px;
-    height: 40px;
-    border: 4px solid var(--text-light);
-    border-top-color: transparent;
-    border-radius: 50%;
-    animation: spin 1s linear infinite;
-}
-
-@keyframes spin {
-    100% {
-        transform: rotate(360deg);
-    }
 }
 
 /* Responsive Design
@@ -240,8 +308,16 @@
         grid-template-columns: 1fr;
     }
 
-    .contact__content,
-    .contact-form {
-        padding: var(--space-lg);
+    .navigation-container {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+
+    .day-navigation button {
+        width: 100%;
+    }
+
+    #time-slots {
+        grid-template-columns: repeat(2, 1fr);
     }
 }
