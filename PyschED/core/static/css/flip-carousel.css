@@ -46,7 +46,7 @@
     cursor: pointer;
     z-index: var(--z-sticky);
     box-shadow: var(--shadow-small);
-    display: none; /* Changed from flex to none */
+    display: none; 
     align-items: center;
     justify-content: center;
     font-size: var(--text-xl);
@@ -69,7 +69,7 @@
     gap: var(--carousel-gap);
     transform: translate3d(0, 0, 0);
     transition: transform 0.3s ease;
-    margin: 0 var(--nav-button-size); /* Add margin to prevent cards from going under buttons */
+    margin: 0 var(--nav-button-size); 
 }
 
 
@@ -123,7 +123,7 @@
 
 /* Content Styling */
 .flip-card__title {
-    font-size: 2rem; /* Increased from text-xl */
+    font-size: 2rem; 
     color: var(--text-light);
     margin: 0;
     font-weight: var(--weight-bold);

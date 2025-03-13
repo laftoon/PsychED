@@ -113,7 +113,7 @@
 /* Mobile Menu Toggle
    ========================================================================== */
 .mobile-menu-toggle {
-    display: none; /* Hidden by default */
+    display: none; 
     background: none;
     border: none;
     padding: var(--space-sm);
@@ -122,7 +122,7 @@
 }
 
 .hamburger {
-    display: none; /* Hide hamburger by default */
+    display: none; 
     width: 24px;
     height: 2px;
     background: var(--text-light);

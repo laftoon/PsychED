@@ -15,9 +15,6 @@ from datetime import datetime
 
 logger = logging.getLogger(__name__)
 
-# core/views.py
-
-
 def get_time_slots(request):
     if request.method == 'POST':
         try:

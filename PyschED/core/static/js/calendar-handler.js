@@ -1,8 +1,4 @@
 // calendar-handler.js
-
-
-// calendar-handler.js
-
 class CalendarHandler {
     constructor() {
         this.selectedDate = this.getNextWorkingDay(new Date());
@@ -13,7 +9,6 @@ class CalendarHandler {
         this.timeSlots = document.getElementById('time-slots');
     }
 
-    // Get the next working day (skip weekends)
     getNextWorkingDay(date) {
         const nextDay = new Date(date);
         nextDay.setDate(nextDay.getDate() + 1);
@@ -43,8 +38,6 @@ class CalendarHandler {
         this.updateNavigationButtons();
     }
 
-// In calendar-handler.js, update the navigateDay method
-
 navigateDay(increment) {
     const currentIndex = this.workingDays.findIndex(date => 
         date.toDateString() === this.selectedDate.toDateString()
@@ -73,12 +66,11 @@ navigateDay(increment) {
                         this.timeSlots.innerHTML = '<div class="no-slots-message">Nu se fac programări în weekend</div>';
                     }
                 }
-            }, 300); // Match this with the CSS transition duration
+            }, 300); 
         }
     }
 }
 
-// Update the updateNavigationButtons method
 updateNavigationButtons() {
     if (this.prevDayBtn) {
         this.prevDayBtn.disabled = 

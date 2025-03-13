@@ -94,19 +94,19 @@
 /* Card Content
    ========================================================================== */
 .card__content {
-    padding: var(--space-2xl) var(--space-md) var(--space-lg); /* Increased top padding */
+    padding: var(--space-2xl) var(--space-md) var(--space-lg); 
     text-align: center;
 }
 
 .card__title {
     font-family: var(--font-primary);
-    font-size: 1.1rem; /* Reduced size to ensure one line */
+    font-size: 1.1rem; 
     font-weight: var(--weight-bold);
     color: var(--heading-color);
     margin: 0;
-    white-space: nowrap; /* Prevent text wrapping */
+    white-space: nowrap;
     overflow: hidden;
-    text-overflow: ellipsis; /* Add ellipsis for overflow text */
+    text-overflow: ellipsis; 
     
 }
 

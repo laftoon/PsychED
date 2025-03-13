@@ -173,7 +173,6 @@ async handleInitialFormSubmission() {
         console.error('Submission error:', error);
         this.showError(error.message);
         this.confirmTimeSlotBtn.disabled = false;
-        // Don't set hasSubmitted to true on error
         return;
     } finally {
         this.isSubmitting = false;

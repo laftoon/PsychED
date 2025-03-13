@@ -35,15 +35,15 @@
 /* Simple Hero Variant
    ========================================================================== */
 .hero--simple {
-    height: 40vh; /* Shorter height for simple hero */
+    height: 40vh; 
 }
 
 .hero--simple .hero__title {
-    max-width: 1200px; /* Increased from 800px */
-    font-size: 2rem; /* Slightly smaller font size for longer quote */
-    line-height: 1.5; /* Better line height for readability */
-    padding: 0 var(--space-xl); /* Add horizontal padding */
-    padding-bottom: var(--space-2xl); /* Add bottom padding */
+    max-width: 1200px; 
+    font-size: 2rem; 
+    line-height: 1.5; 
+    padding: 0 var(--space-xl); 
+    padding-bottom: var(--space-2xl); 
 }
 
 /* Responsive adjustments for the simple hero quote */
@@ -105,7 +105,7 @@
     color: var(--text-light);
     margin-block-end: calc(-1 * var(--space-md));
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-    max-width: 800px; /* Limit width for better readability */
+    max-width: 800px;
     margin: 0 auto;
 }
 

@@ -259,8 +259,8 @@
    ========================================================================== */
 .form-textarea {
     resize: vertical;
-    min-height: 60px;  /* Reduced from 100px */
-    max-height: 150px; /* Added max-height */
+    min-height: 60px;  
+    max-height: 150px; 
     padding: var(--space-md);
     border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: var(--radius-md);

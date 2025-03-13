@@ -6,7 +6,6 @@ import json
 
 @patch('core.views.get_calendar_service')
 def test_get_time_slots(self, mock_get_calendar_service):
-    # Setup the mock as before
     service = mock_get_calendar_service.return_value
     service.events.return_value.list.return_value.execute.return_value = {
         'items': [

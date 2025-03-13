@@ -96,7 +96,6 @@ class CarouselHandler {
         this.maxIndex = Math.max(0, this.cards.length - this.cardsPerView);
         this.init();
 
-        // Add resize listener to update cardsPerView
         window.addEventListener('resize', () => {
             this.cardsPerView = this.calculateCardsPerView();
             this.maxIndex = Math.max(0, this.cards.length - this.cardsPerView);
@@ -107,7 +106,7 @@ class CarouselHandler {
 
     calculateCardsPerView() {
         const trackWidth = this.track.parentElement.offsetWidth;
-        const cardWidth = this.cards[0].offsetWidth + 16; // 16px for gap
+        const cardWidth = this.cards[0].offsetWidth + 16; 
         return Math.floor(trackWidth / cardWidth);
     }
 
@@ -133,7 +132,7 @@ class CarouselHandler {
     }
 
     updateTrack() {
-        const offset = -this.currentIndex * (this.cards[0].offsetWidth + 16); // 16px for gap
+        const offset = -this.currentIndex * (this.cards[0].offsetWidth + 16); 
         this.track.style.transform = `translateX(${offset}px)`;
     }
 

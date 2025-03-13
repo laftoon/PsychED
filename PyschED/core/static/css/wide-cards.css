@@ -72,7 +72,7 @@
   align-items: center;
   justify-content: space-between;
   padding: var(--space-md) var(--wide-card-content-padding);
-  height: var(--wide-card-min-height); /* Set fixed height */
+  height: var(--wide-card-min-height); 
   box-sizing: border-box;
   gap: var(--wide-card-gap);
 }
@@ -84,19 +84,19 @@
   color: var(--text-light);
   display: flex;
   flex-direction: column;
-  justify-content: center; /* Center vertically */
-  align-items: center; /* Center horizontally */
+  justify-content: center; 
+  align-items: center; 
 }
 
 .wide-card__title {
   font-family: var(--font-primary);
   font-size: var(--wide-card-title-size);
   font-weight: var(--weight-bold);
-  margin: 0 0 var(--space-sm) 0; /* Adjust margin */
+  margin: 0 0 var(--space-sm) 0; 
   color: var(--text-light);
   text-shadow: var(--shadow-text-strong);
-  text-align: center; /* Center text */
-  width: 100%; /* Full width for proper centering */
+  text-align: center; 
+  width: 100%; 
 }
 
 .wide-card__description {
@@ -105,7 +105,7 @@
     line-height: 1.6;
     color: var(--text-muted);
     text-shadow: var(--shadow-text);
-    text-align: center; /* Center text */
+    text-align: center; 
 }
 
 /* Card Image
@@ -113,11 +113,11 @@
 .wide-card__image {
   display: none;
   flex: 0 0 var(--wide-card-image-width);
-  height: var(--wide-card-image-width); /* Make it square */
+  height: var(--wide-card-image-width); 
   border-radius: calc(var(--radius-lg) - 5px);
   overflow: hidden;
   box-shadow: var(--shadow-small);
-  align-self: center; /* Center vertically */
+  align-self: center; 
 }
 
 .wide-card__image img {
