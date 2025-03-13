@@ -72,7 +72,7 @@ LOGGING = {
     },
 }
 
-GOOGLE_CALENDAR_SERVICE_ACCOUNT_FILE = os.path.join(BASE_DIR, 'calendar-integration.json')
+GOOGLE_CALENDAR_SERVICE_ACCOUNT_FILE = os.path.join(BASE_DIR, 'calendar-key.json')
 GOOGLE_CALENDAR_USER_EMAIL = 'lauravaida01@gmail.com'  # Your calendar ID
 GOOGLE_CALENDAR_ID = '1b1e7cb49ef25197f00cabea8ca36baa86fe394b9f00379db32ab360336966f1@group.calendar.google.com'
 TIME_ZONE = 'Europe/Bucharest'  # Update this to match your timezone

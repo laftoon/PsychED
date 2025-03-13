@@ -32,6 +32,11 @@
     /* Prevent overflow issues */
     overflow: hidden;
 }
+/* Simple Hero Variant
+   ========================================================================== */
+.hero--simple {
+    height: 30vh; /* Shorter height for simple hero */
+}
 
 /* Hero Background
    ========================================================================== */

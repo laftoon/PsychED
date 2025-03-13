@@ -255,3 +255,7 @@ class HomePageView(TemplateView):
 
 def home_page(request):
     return render(request, 'core/home-page.html')
+
+class AboutPageView(TemplateView):
+    template_name = 'core/about-page.html'
+
