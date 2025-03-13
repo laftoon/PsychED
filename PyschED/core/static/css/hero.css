@@ -35,7 +35,23 @@
 /* Simple Hero Variant
    ========================================================================== */
 .hero--simple {
-    height: 30vh; /* Shorter height for simple hero */
+    height: 40vh; /* Shorter height for simple hero */
+}
+
+.hero--simple .hero__title {
+    max-width: 1200px; /* Increased from 800px */
+    font-size: 2rem; /* Slightly smaller font size for longer quote */
+    line-height: 1.5; /* Better line height for readability */
+    padding: 0 var(--space-xl); /* Add horizontal padding */
+    padding-bottom: var(--space-2xl); /* Add bottom padding */
+}
+
+/* Responsive adjustments for the simple hero quote */
+@media (max-width: 768px) {
+    .hero--simple .hero__title {
+        font-size: 1.5rem;
+        padding: 0 var(--space-md);
+    }
 }
 
 /* Hero Background
