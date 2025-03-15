@@ -1,24 +1,27 @@
 """
 Django settings for PyschED project.
 """
-
 from pathlib import Path
 import os
+from decouple import config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-# settings.py
-SECURE_SSL_REDIRECT = True
-SESSION_COOKIE_SECURE = True
-CSRF_COOKIE_SECURE = True
+
+# Security settings
+SECRET_KEY = config('SECRET_KEY', default='django-insecure-3f8s(cn1)%*2k%fpl+73v7)ov3kiwjns2ybu*9mo8$y1zubrzs')
+DEBUG = config('DEBUG', default=True, cast=bool)
+ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='localhost,127.0.0.1').split(',')
+
+# Security headers
+SECURE_SSL_REDIRECT = config('SECURE_SSL_REDIRECT', default=False, cast=bool)
+SESSION_COOKIE_SECURE = config('SESSION_COOKIE_SECURE', default=False, cast=bool)
+CSRF_COOKIE_SECURE = config('CSRF_COOKIE_SECURE', default=False, cast=bool)
 SECURE_BROWSER_XSS_FILTER = True
 SECURE_CONTENT_TYPE_NOSNIFF = True
 X_FRAME_OPTIONS = 'DENY'
 
-# Quick-start development settings - unsuitable for production
-SECRET_KEY = 'django-insecure-3f8s(cn1)%*2k%fpl+73v7)ov3kiwjns2ybu*9mo8$y1zubrzs'
-DEBUG = True
-ALLOWED_HOSTS = []
+# Application definition
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -65,6 +68,7 @@ TEMPLATES = [
     },
 ]
 
+# Logging configuration
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
@@ -127,13 +131,18 @@ LOGGING = {
     },
 }
 
+# Google Calendar settings
+GOOGLE_CALENDAR_SERVICE_ACCOUNT_FILE = config('GOOGLE_CALENDAR_SERVICE_ACCOUNT_FILE', 
+                                            default=os.path.join(BASE_DIR, 'calendar-key.json'))
+GOOGLE_CALENDAR_USER_EMAIL = config('GOOGLE_CALENDAR_USER_EMAIL', default='lauravaida01@gmail.com')
+GOOGLE_CALENDAR_ID = config('GOOGLE_CALENDAR_ID', 
+                          default='1b1e7cb49ef25197f00cabea8ca36baa86fe394b9f00379db32ab360336966f1@group.calendar.google.com')
 
-
-GOOGLE_CALENDAR_SERVICE_ACCOUNT_FILE = os.path.join(BASE_DIR, 'calendar-key.json')
-GOOGLE_CALENDAR_USER_EMAIL = 'lauravaida01@gmail.com'  # Your calendar ID
-GOOGLE_CALENDAR_ID = '1b1e7cb49ef25197f00cabea8ca36baa86fe394b9f00379db32ab360336966f1@group.calendar.google.com'
-TIME_ZONE = 'Europe/Bucharest'  # Update this to match your timezone
-USE_TZ= True
+# Time zone settings
+TIME_ZONE = 'Europe/Bucharest'
+USE_TZ = True
+LANGUAGE_CODE = 'en-us'
+USE_I18N = True
 
 # WSGI configuration
 WSGI_APPLICATION = 'PyschED.wsgi.application'
@@ -161,11 +170,6 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
-
-# Internationalization
-LANGUAGE_CODE = 'en-us'
-USE_I18N = True
-USE_TZ = True
 
 # Static files configuration
 STATIC_URL = '/static/'
@@ -196,11 +200,11 @@ COMPRESS_CSS_HASHING_METHOD = 'content'
 
 # Email configuration
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'lauravaida01@gmail.com'
-EMAIL_HOST_PASSWORD = 'dzip absb bvms ebwf'
+EMAIL_HOST = config('EMAIL_HOST', default='smtp.gmail.com')
+EMAIL_PORT = config('EMAIL_PORT', default=587, cast=int)
+EMAIL_USE_TLS = config('EMAIL_USE_TLS', default=True, cast=bool)
+EMAIL_HOST_USER = config('EMAIL_HOST_USER', default='lauravaida01@gmail.com')
+EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD', default='dzip absb bvms ebwf')
 
 # Messages framework configuration
 from django.contrib.messages import constants as messages
