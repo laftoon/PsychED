@@ -26,16 +26,12 @@ def get_calendar_service():
 
 def create_calendar_event(event_details):
     """
-    Create a calendar event without sending invites
+    Create a calendar event with a reminder to invite the user
     """
     try:
         service = get_calendar_service()
         if not service:
             raise Exception("Calendar service not available")
-            
-        # Remove attendees from event details and don't send updates
-        if 'attendees' in event_details:
-            del event_details['attendees']
             
         # Get the timezone
         bucharest_tz = pytz.timezone('Europe/Bucharest')
@@ -52,6 +48,11 @@ def create_calendar_event(event_details):
         # Update event details with properly formatted times
         event_details['start']['dateTime'] = start_time.isoformat()
         event_details['end']['dateTime'] = end_time.isoformat()
+        
+        # Add reminder to invite user in the description
+        user_email = event_details.get('user_email', '')
+        original_description = event_details.get('description', '')
+        event_details['description'] = f"⚠️ NU UITA SĂ INVIȚI: {user_email} ⚠️\n\n{original_description}"
         
         # Check for existing events in the time slot
         events_result = service.events().list(
@@ -78,3 +79,4 @@ def create_calendar_event(event_details):
     except Exception as e:
         logger.error(f"Error creating calendar event: {str(e)}")
         raise Exception(str(e))
+

@@ -112,10 +112,9 @@ def send_confirmation_email(user_email, appointment_time, event_link, first_name
         Bună {first_name},
 
         Îți mulțumim pentru programare. Întâlnirea ta a fost programată cu succes pentru data de {appointment_time.strftime("%d %B %Y")} la ora {appointment_time.strftime("%H:%M")}.
-
+        Programarea ta se va confirma atunci cand vei primi o invitatie la un eveniment Google Calendar.
         În cazul în care vor exista modificări, te voi anunța.
 
-        Link către eveniment: {event_link}
 
         Cu stimă,
         Laura Vaida
@@ -134,6 +133,7 @@ def send_confirmation_email(user_email, appointment_time, event_link, first_name
         Mesaj: {message}
 
         Link către eveniment: {event_link}
+        ⚠️ NU UITA SĂ INVIȚI: {user_email} ⚠️
         '''
 
         # Send emails using send_mail
@@ -207,7 +207,8 @@ def submit_time_slot(request):
                     'end': {
                         'dateTime': end_datetime.isoformat(),
                         'timeZone': 'Europe/Bucharest'
-                    }
+                    },
+                    'user_email': email
                 })
                 
                 if event:
