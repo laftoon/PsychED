@@ -25,11 +25,7 @@
 /* Content Section
    ========================================================================== */
 .contact__content {
-  background: linear-gradient(
-    135deg,
-    var(--gradient-start),
-    var(--gradient-end)
-  );
+  background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
   padding: var(--space-xl);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-small);
@@ -54,11 +50,7 @@
 /* Form Container
    ========================================================================== */
 .contact-form {
-  background: linear-gradient(
-    135deg,
-    var(--gradient-start),
-    var(--gradient-end)
-  );
+  background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
   padding: var(--space-xl);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-small);
