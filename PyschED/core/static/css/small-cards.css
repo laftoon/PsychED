@@ -5,49 +5,48 @@
 /* Component-specific variables
    ========================================================================== */
 :root {
-    /* Layout */
-    --card-image-height: 250px;
-    --card-image-circle-size: 200px;
-    --card-image-display-size: 220px;
-    --card-content-spacing: var(--space-md);
+  /* Layout */
+  --card-image-height: 250px;
+  --card-image-circle-size: 200px;
+  --card-image-display-size: 220px;
+  --card-content-spacing: var(--space-md);
 }
 
 /* Cards Container
    ========================================================================== */
 .cards {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: var(--space-lg);
-    padding: var(--space-xl);
-    max-width: var(--container-max-width);
-    margin-inline: auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-lg);
+  padding: var(--space-xl);
+  max-width: var(--container-max-width);
+  margin-inline: auto;
 }
 
 /* Card Base
    ========================================================================== */
 .card {
-    /* Layout */
-    flex: 1 1 calc(20% - var(--space-lg));
-    max-width: var(--card-max-width);
-    min-width: var(--card-min-width);
-    padding: 0;
-    margin: 0;
-    
-    /* Visual */
-    background: var(--background-white);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: var(--radius-lg);
-    overflow: hidden;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05),
-                0 10px 15px rgba(0, 0, 0, 0.1);
-    
-    /* Animation */
-    transform: translateY(0);
-    transition: var(--transition-standard);
-    will-change: transform, box-shadow;
-    backface-visibility: hidden;
-    -webkit-backface-visibility: hidden;
+  /* Layout */
+  flex: 1 1 calc(20% - var(--space-lg));
+  max-width: var(--card-max-width);
+  min-width: var(--card-min-width);
+  padding: 0;
+  margin: 0;
+
+  /* Visual */
+  background: var(--background-white);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05), 0 10px 15px rgba(0, 0, 0, 0.1);
+
+  /* Animation */
+  transform: translateY(0);
+  transition: var(--transition-standard);
+  will-change: transform, box-shadow;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
 }
 
 .card:hover {
@@ -58,94 +57,92 @@
 /* Card Image
    ========================================================================== */
 .card__image-container {
-    position: relative;
-    width: 100%;
-    height: var(--card-image-height);
-    margin: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: linear-gradient(
-        135deg,
-        var(--gradient-start),
-        var(--gradient-end)
-    );
+  position: relative;
+  width: 100%;
+  height: var(--card-image-height);
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(
+    135deg,
+    var(--gradient-start),
+    var(--gradient-end)
+  );
 }
 
 .card__image-container::before {
-    content: '';
-    position: absolute;
-    width: var(--card-image-circle-size);
-    height: var(--card-image-circle-size);
-    border-radius: var(--radius-full);
-    background: var(--background-white);
-    z-index: var(--z-elevate);
+  content: "";
+  position: absolute;
+  width: var(--card-image-circle-size);
+  height: var(--card-image-circle-size);
+  border-radius: var(--radius-full);
+  background: var(--background-white);
+  z-index: var(--z-elevate);
 }
 
 .card__image {
-    width: var(--card-image-display-size);
-    height: var(--card-image-display-size);
-    object-fit: cover;
-    border-radius: var(--radius-full);
-    position: relative;
-    z-index: var(--z-sticky);
+  width: var(--card-image-display-size);
+  height: var(--card-image-display-size);
+  object-fit: cover;
+  border-radius: var(--radius-full);
+  position: relative;
+  z-index: var(--z-sticky);
 }
 
 /* Card Content
    ========================================================================== */
 .card__content {
-    padding: var(--space-2xl) var(--space-md) var(--space-lg); 
-    text-align: center;
+  padding: var(--space-2xl) var(--space-md) var(--space-lg);
+  text-align: center;
 }
 
 .card__title {
-    font-family: var(--font-primary);
-    font-size: 1.1rem; 
-    font-weight: var(--weight-bold);
-    color: var(--heading-color);
-    margin: 0;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis; 
-    
+  font-family: var(--font-primary);
+  font-size: 1.1rem;
+  font-weight: var(--weight-bold);
+  color: var(--heading-color);
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .card__description {
-    font-family: var(--font-tertiary);
-    font-size: var(--text-base);
-    color: var(--paragraph-color);
-    line-height: 1.6;
+  font-family: var(--font-tertiary);
+  font-size: var(--text-base);
+  color: var(--paragraph-color);
+  line-height: 1.6;
 }
-
 
 /* Responsive Design
    ========================================================================== */
 @media (max-width: 1200px) {
-    .card {
-        flex: 1 1 calc(33.333% - var(--space-lg));
-    }
+  .card {
+    flex: 1 1 calc(33.333% - var(--space-lg));
+  }
 }
 
 @media (max-width: 768px) {
-    .card {
-        flex: 1 1 calc(50% - var(--space-lg));
-    }
+  .card {
+    flex: 1 1 calc(50% - var(--space-lg));
+  }
 }
 
 @media (max-width: 480px) {
-    .card {
-        flex: 1 1 100%;
-    }
+  .card {
+    flex: 1 1 100%;
+  }
 }
 
 /* Accessibility
    ========================================================================== */
 @media (prefers-reduced-motion: reduce) {
-    .card {
-        transition: none;
-    }
-    
-    .card:hover {
-        transform: none;
-    }
+  .card {
+    transition: none;
+  }
+
+  .card:hover {
+    transform: none;
+  }
 }

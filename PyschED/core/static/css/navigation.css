@@ -5,157 +5,157 @@
 /* Component-specific variables
    ========================================================================== */
 :root {
-    /* Layout */
-    --nav-padding-x: var(--space-xl);
-    --nav-item-spacing: var(--space-lg);
-    
-    /* Typography */
-    --nav-font-size: var(--text-lg);
-    --logo-font-size: var(--text-2xl);
+  /* Layout */
+  --nav-padding-x: var(--space-xl);
+  --nav-item-spacing: var(--space-lg);
+
+  /* Typography */
+  --nav-font-size: var(--text-lg);
+  --logo-font-size: var(--text-2xl);
 }
 
 /* Topbar
    ========================================================================== */
 .topbar {
-    /* Layout */
-    position: absolute;
-    inset: 0 0 auto 0;
-    width: 100%;
-    height: var(--nav-height);
-    padding-inline: var(--nav-padding-x);
-    box-sizing: border-box;
-    
-    /* Display */
-    display: flex;
-    justify-content: space-between;
-    align-items: stretch;
-    
-    /* Visual */
-    background-color: transparent;
-    z-index: var(--z-sticky);
-    backdrop-filter: blur(8px);
-    background: rgba(255, 255, 255, 0.05);
-    
-    /* Animation */
-    transition: var(--transition-standard);
+  /* Layout */
+  position: absolute;
+  inset: 0 0 auto 0;
+  width: 100%;
+  height: var(--nav-height);
+  padding-inline: var(--nav-padding-x);
+  box-sizing: border-box;
+
+  /* Display */
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+
+  /* Visual */
+  background-color: transparent;
+  z-index: var(--z-sticky);
+  backdrop-filter: blur(8px);
+  background: rgba(255, 255, 255, 0.05);
+
+  /* Animation */
+  transition: var(--transition-standard);
 }
 
 /* Navigation Menu
    ========================================================================== */
 .nav-menu {
-    /* Reset */
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    
-    /* Layout */
-    height: 100%;
-    
-    /* Display */
-    display: flex;
-    align-items: stretch;
+  /* Reset */
+  list-style: none;
+  margin: 0;
+  padding: 0;
+
+  /* Layout */
+  height: 100%;
+
+  /* Display */
+  display: flex;
+  align-items: stretch;
 }
 
 .nav-menu__item {
-    /* Layout */
-    height: 100%;
-    margin: 0;
-    
-    /* Display */
-    display: flex;
-    align-items: stretch;
+  /* Layout */
+  height: 100%;
+  margin: 0;
+
+  /* Display */
+  display: flex;
+  align-items: stretch;
 }
 
 .nav-menu__link {
-    /* Typography */
-    font-family: var(--font-primary);
-    font-size: var(--nav-font-size);
-    font-weight: var(--weight-medium);
-    color: var(--text-light);
-    text-decoration: none;
-    text-shadow: var(--shadow-text);
-    
-    /* Layout */
-    padding-inline: var(--nav-item-spacing);
-    
-    /* Display */
-    display: flex;
-    align-items: center;
-    position: relative;
-    
-    /* Animation */
-    transform: translateY(0);
-    transition: var(--transition-standard);
-    will-change: transform, color;
+  /* Typography */
+  font-family: var(--font-primary);
+  font-size: var(--nav-font-size);
+  font-weight: var(--weight-medium);
+  color: var(--text-light);
+  text-decoration: none;
+  text-shadow: var(--shadow-text);
+
+  /* Layout */
+  padding-inline: var(--nav-item-spacing);
+
+  /* Display */
+  display: flex;
+  align-items: center;
+  position: relative;
+
+  /* Animation */
+  transform: translateY(0);
+  transition: var(--transition-standard);
+  will-change: transform, color;
 }
 
 .nav-menu__link:hover {
-    color: var(--secondary-color);
-    transform: translateY(calc(-1 * var(--space-xs)));
+  color: var(--secondary-color);
+  transform: translateY(calc(-1 * var(--space-xs)));
 }
 
 /* Logo
    ========================================================================== */
 .logo {
-    /* Display */
-    display: flex;
-    align-items: center;
-    
-    /* Typography */
-    font-family: var(--font-primary);
-    font-size: var(--logo-font-size);
-    font-weight: var(--weight-bold);
-    color: var(--text-light);
-    text-decoration: none;
-    text-shadow: var(--shadow-text);
+  /* Display */
+  display: flex;
+  align-items: center;
+
+  /* Typography */
+  font-family: var(--font-primary);
+  font-size: var(--logo-font-size);
+  font-weight: var(--weight-bold);
+  color: var(--text-light);
+  text-decoration: none;
+  text-shadow: var(--shadow-text);
 }
 
 /* Mobile Menu Toggle
    ========================================================================== */
 .mobile-menu-toggle {
-    display: none; 
-    background: none;
-    border: none;
-    padding: var(--space-sm);
-    cursor: pointer;
-    z-index: var(--z-drawer);
+  display: none;
+  background: none;
+  border: none;
+  padding: var(--space-sm);
+  cursor: pointer;
+  z-index: var(--z-drawer);
 }
 
 .hamburger {
-    display: none; 
-    width: 24px;
-    height: 2px;
-    background: var(--text-light);
-    position: relative;
-    transition: var(--transition-standard);
+  display: none;
+  width: 24px;
+  height: 2px;
+  background: var(--text-light);
+  position: relative;
+  transition: var(--transition-standard);
 }
 
 /* Only show mobile menu toggle and hamburger on mobile devices */
 @media (max-width: 768px) {
-    .mobile-menu-toggle {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
+  .mobile-menu-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 
-    .hamburger {
-        display: block;
-    }
+  .hamburger {
+    display: block;
+  }
 
-    .nav-menu {
-        display: none;
-        position: fixed;
-        top: var(--nav-height);
-        left: 0;
-        width: 100%;
-        height: calc(100vh - var(--nav-height));
-        background: var(--primary-color);
-        flex-direction: column;
-        padding: var(--space-xl);
-        z-index: var(--z-drawer);
-    }
+  .nav-menu {
+    display: none;
+    position: fixed;
+    top: var(--nav-height);
+    left: 0;
+    width: 100%;
+    height: calc(100vh - var(--nav-height));
+    background: var(--primary-color);
+    flex-direction: column;
+    padding: var(--space-xl);
+    z-index: var(--z-drawer);
+  }
 
-    .nav-menu.active {
-        display: flex;
-    }
+  .nav-menu.active {
+    display: flex;
+  }
 }

@@ -3,161 +3,158 @@
    ========================================================================== */
 
 :root {
-    /* Component-specific tokens */
-    --hero-height: 50vh;
-    --hero-max-width: var(--container-max-width);
-    --hero-padding: var(--space-xl);
-    --hero-gap: var(--space-xl);
-    
-    /* Typography */
-    --hero-title-size: 2.25rem;
-    --hero-button-size: var(--text-lg);
+  /* Component-specific tokens */
+  --hero-height: 50vh;
+  --hero-max-width: var(--container-max-width);
+  --hero-padding: var(--space-xl);
+  --hero-gap: var(--space-xl);
+
+  /* Typography */
+  --hero-title-size: 2.25rem;
+  --hero-button-size: var(--text-lg);
 }
 
 /* Hero Container
    ========================================================================== */
 .hero {
-    position: relative;
-    height: var(--hero-height);
-    width: 100%;
-    margin: 0;
-    padding: 0;
-    
-    /* Display */
-    display: flex;
-    align-items: flex-end;
-    justify-content: center;
-    text-align: center;
-    
-    /* Prevent overflow issues */
-    overflow: hidden;
+  position: relative;
+  height: var(--hero-height);
+  width: 100%;
+  margin: 0;
+  padding: 0;
+
+  /* Display */
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  text-align: center;
+
+  /* Prevent overflow issues */
+  overflow: hidden;
 }
 /* Simple Hero Variant
    ========================================================================== */
 .hero--simple {
-    height: 40vh; 
+  height: 40vh;
 }
 
 .hero--simple .hero__title {
-    max-width: 1200px; 
-    font-size: 2rem; 
-    line-height: 1.5; 
-    padding: 0 var(--space-xl); 
-    padding-bottom: var(--space-2xl); 
+  max-width: 1200px;
+  font-size: 2rem;
+  line-height: 1.5;
+  padding: 0 var(--space-xl);
+  padding-bottom: var(--space-2xl);
 }
 
 /* Responsive adjustments for the simple hero quote */
 @media (max-width: 768px) {
-    .hero--simple .hero__title {
-        font-size: 1.5rem;
-        padding: 0 var(--space-md);
-    }
+  .hero--simple .hero__title {
+    font-size: 1.5rem;
+    padding: 0 var(--space-md);
+  }
 }
 
 /* Hero Background
    ========================================================================== */
 .hero__background {
-    position: absolute;
-    inset: 0;
-    z-index: var(--z-negative);
-    
-    /* Background image */
-    background-image: url('../images/header-image.jpg');
-    background-size: cover;
-    background-position: center;
+  position: absolute;
+  inset: 0;
+  z-index: var(--z-negative);
+
+  /* Background image */
+  background-image: url("../images/header-image.jpg");
+  background-size: cover;
+  background-position: center;
 }
 
 /* Hero Overlay
    ========================================================================== */
 .hero__overlay {
-    position: absolute;
-    inset: 0;
-    z-index: var(--z-elevate);
-    
-    /* Gradient overlay */
-    background: linear-gradient(
-        var(--overlay-light),
-        var(--overlay-dark)
-    );
+  position: absolute;
+  inset: 0;
+  z-index: var(--z-elevate);
+
+  /* Gradient overlay */
+  background: linear-gradient(var(--overlay-light), var(--overlay-dark));
 }
 
 /* Hero Content Container
    ========================================================================== */
 .hero__content {
-    position: relative;
-    z-index: var(--z-elevate);
-    max-width: var(--hero-max-width);
-    padding: var(--hero-padding);
-    
-    /* Layout */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: var(--space-lg);
+  position: relative;
+  z-index: var(--z-elevate);
+  max-width: var(--hero-max-width);
+  padding: var(--hero-padding);
+
+  /* Layout */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-lg);
 }
 
 /* Hero Title
    ========================================================================== */
 .hero__title {
-    font-family: var(--font-primary);
-    font-size: var(--hero-title-size);
-    font-weight: var(--weight-bold);
-    color: var(--text-light);
-    margin-block-end: calc(-1 * var(--space-md));
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-    max-width: 800px;
-    margin: 0 auto;
+  font-family: var(--font-primary);
+  font-size: var(--hero-title-size);
+  font-weight: var(--weight-bold);
+  color: var(--text-light);
+  margin-block-end: calc(-1 * var(--space-md));
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  max-width: 800px;
+  margin: 0 auto;
 }
 
 /* Hero Action Button
    ========================================================================== */
 .hero__button {
-    /* Base styles */
-    margin-block-start: var(--space-md);
-    padding: var(--space-md) var(--space-xl);
-    
-    /* Typography */
-    font-family: var(--font-secondary);
-    font-size: var(--hero-button-size);
-    font-weight: var(--weight-semibold);
-    
-    /* Visual */
-    background-color: var(--background-white);
-    color: var(--primary-color);
-    border: none;
-    border-radius: var(--radius-md);
-    
-    /* Interaction */
-    cursor: pointer;
-    transition: var(--transition-standard);
+  /* Base styles */
+  margin-block-start: var(--space-md);
+  padding: var(--space-md) var(--space-xl);
+
+  /* Typography */
+  font-family: var(--font-secondary);
+  font-size: var(--hero-button-size);
+  font-weight: var(--weight-semibold);
+
+  /* Visual */
+  background-color: var(--background-white);
+  color: var(--primary-color);
+  border: none;
+  border-radius: var(--radius-md);
+
+  /* Interaction */
+  cursor: pointer;
+  transition: var(--transition-standard);
 }
 
 .hero__button:hover {
-    transform: translateY(calc(-1 * var(--space-xs)));
-    box-shadow: var(--shadow-small);
+  transform: translateY(calc(-1 * var(--space-xs)));
+  box-shadow: var(--shadow-small);
 }
 
 /* Responsive Design
    ========================================================================== */
 @media (max-width: 768px) {
-    :root {
-        --hero-title-size: var(--text-3xl);
-        --hero-height: 40vh;
-    }
-    
-    .hero__content {
-        padding: var(--hero-padding) calc(var(--hero-padding) / 2);
-    }
+  :root {
+    --hero-title-size: var(--text-3xl);
+    --hero-height: 40vh;
+  }
+
+  .hero__content {
+    padding: var(--hero-padding) calc(var(--hero-padding) / 2);
+  }
 }
 
 /* Accessibility
    ========================================================================== */
 @media (prefers-reduced-motion: reduce) {
-    .hero__button {
-        transition: none;
-        
-        &:hover {
-            transform: none;
-        }
+  .hero__button {
+    transition: none;
+
+    &:hover {
+      transform: none;
     }
+  }
 }

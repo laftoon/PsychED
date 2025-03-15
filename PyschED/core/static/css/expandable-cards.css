@@ -1,145 +1,141 @@
 /* expandable-cards.css */
 .expandable-cards {
-    width: 100%;
-    padding: 0; 
-    background-color: var(--background-light);
+  width: 100%;
+  padding: 0;
+  background-color: var(--background-light);
 }
 
 .expandable-cards-container {
-    width: 100%;
-    padding: var(--space-2xl) 0;
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-xl); 
+  width: 100%;
+  padding: var(--space-2xl) 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
 }
 
 .expandable-grid {
-    width: 100%;
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(2, 400px);
-    gap: var(--space-xl);
-    margin: 0 auto;
-    max-width: var(--container-max-width);
-    padding: 0 var(--space-xl);
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 400px);
+  gap: var(--space-xl);
+  margin: 0 auto;
+  max-width: var(--container-max-width);
+  padding: 0 var(--space-xl);
 }
 
-
-.expandable-item {  
-    position: relative;
-    width: 100%;
-    height: 100%;
-    border-radius: var(--radius-lg);
-    overflow: hidden;
-    box-shadow: var(--shadow-small);
-    transition: transform 0.3s ease;
+.expandable-item {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-small);
+  transition: transform 0.3s ease;
 }
 
 .expandable-background {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    background-size: cover;
-    background-position: center;
-    transform: scale(1);
-    transition: transform 0.3s ease, filter 0.3s ease;
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  transform: scale(1);
+  transition: transform 0.3s ease, filter 0.3s ease;
 }
 
 .expandable-overlay {
-    position: absolute;
-    inset: 0;
-    opacity: 0.85;
-    background: linear-gradient(
-        to bottom,
-        rgba(137, 172, 201, 0.95),
-        rgba(231, 207, 210, 0.95)
-    );
-    transition: opacity 0.3s ease;
+  position: absolute;
+  inset: 0;
+  opacity: 0.85;
+  background: linear-gradient(
+    to bottom,
+    rgba(137, 172, 201, 0.95),
+    rgba(231, 207, 210, 0.95)
+  );
+  transition: opacity 0.3s ease;
 }
 
 .expandable-content {
-    position: relative;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: var(--space-xl);
-    z-index: 1;
-    text-align: center;
-    overflow: hidden; 
+  position: relative;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: var(--space-xl);
+  z-index: 1;
+  text-align: center;
+  overflow: hidden;
 }
 
 .expandable-title {
-    font-family: var(--font-primary);
-    font-size: var(--text-2xl);
-    font-weight: var(--weight-bold);
-    color: var(--text-light);
-    text-shadow: var(--shadow-text-strong);
-    margin-bottom: var(--space-sm);
-    position: absolute; 
-    top: 50%; 
-    left: 50%; 
-    transform: translate(-50%, -50%); 
-    width: 90%; 
-    transition: all 0.3s ease-out;
+  font-family: var(--font-primary);
+  font-size: var(--text-2xl);
+  font-weight: var(--weight-bold);
+  color: var(--text-light);
+  text-shadow: var(--shadow-text-strong);
+  margin-bottom: var(--space-sm);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90%;
+  transition: all 0.3s ease-out;
 }
 
 .expandable-description {
-    font-family: var(--font-tertiary);
-    font-size: var(--text-lg);
-    color: var(--text-light);
-    text-shadow: var(--shadow-text);
-    text-align: center;
-    width: 95%; 
-    opacity: 0;
-    position: relative;
-    margin-top: var(--space-xs);
-    padding: 0 var(--space-xs);
-    max-height: 70vh; 
-    overflow-y: auto; 
-    scrollbar-width: thin;
-    padding-bottom: var(--space-xl); 
+  font-family: var(--font-tertiary);
+  font-size: var(--text-lg);
+  color: var(--text-light);
+  text-shadow: var(--shadow-text);
+  text-align: center;
+  width: 95%;
+  opacity: 0;
+  position: relative;
+  margin-top: var(--space-xs);
+  padding: 0 var(--space-xs);
+  max-height: 70vh;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  padding-bottom: var(--space-xl);
 }
 
 /* Hover Effects */
 .expandable-item:hover .expandable-background {
-    transform: scale(1.1);
-    filter: brightness(0.7);
+  transform: scale(1.1);
+  filter: brightness(0.7);
 }
 
 .expandable-item:hover .expandable-overlay {
-    opacity: 0.8;
+  opacity: 0.8;
 }
 
 .expandable-item:hover .expandable-content {
-    justify-content: flex-start;
-    padding-top: calc(var(--space-xl) * 1.2);
-    overflow-y: auto; 
+  justify-content: flex-start;
+  padding-top: calc(var(--space-xl) * 1.2);
+  overflow-y: auto;
 }
 
 .expandable-item:hover .expandable-title {
-    position: relative; 
-    top: 0;
-    left: 0;
-    transform: none;
-    margin-bottom: var(--space-md);
-    transition: all 0.3s ease-out;
+  position: relative;
+  top: 0;
+  left: 0;
+  transform: none;
+  margin-bottom: var(--space-md);
+  transition: all 0.3s ease-out;
 }
 
 .expandable-item:hover .expandable-description {
-    opacity: 1;
+  opacity: 1;
 }
-
-
-
 
 /* Responsive Design */
 @media (max-width: 768px) {
-    .expandable-grid {
-        grid-template-columns: 1fr;
-        grid-template-rows: repeat(4, 300px);
-        gap: var(--space-lg);
-    }
+  .expandable-grid {
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(4, 300px);
+    gap: var(--space-lg);
+  }
 }
