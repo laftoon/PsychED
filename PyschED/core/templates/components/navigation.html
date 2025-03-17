@@ -12,23 +12,31 @@
   <!-- Navigation Menu -->
   <ul class="nav-menu">
     <!-- Regular Navigation Items -->
-    <li class="nav-menu__item">
-      <a href="{% url 'home' %}" class="nav-menu__link">Acasă</a>
-    </li>
+    <ul class="nav-menu">
+      <li class="nav-menu__item">
+        <a href="{% url 'home' %}" class="nav-menu__link {% if request.path == '/' %}active{% endif %}">Acasă</a>
+      </li>
 
-    <li class="nav-menu__item">
-      <a href="{% url 'about' %}" class="nav-menu__link">Proiectele mele</a>
-    </li>
+      <li class="nav-menu__item">
+        <a href="{% url 'about' %}" class="nav-menu__link {% if request.path == '/despre-mine/' %}active{% endif %}">
+          Proiectele mele
+        </a>
+      </li>
 
-    <li class="nav-menu__item">
-      <a href="{% url 'services' %}" class="nav-menu__link">Servicii</a>
-    </li>
-    <li class="nav-menu__item">
-      <a href="{% url 'blog' %}" class="nav-menu__link">Blog</a>
-    </li>
-    <li class="nav-menu__item">
-      <a href="{% url 'home' %}#contact-section" class="nav-menu__link scroll-to-contact">Contact</a>
-    </li>
+      <li class="nav-menu__item">
+        <a href="{% url 'services' %}" class="nav-menu__link {% if request.path == '/servicii/' %}active{% endif %}">
+          Servicii
+        </a>
+      </li>
+
+      <li class="nav-menu__item">
+        <a href="{% url 'blog' %}" class="nav-menu__link {% if '/blog/' in request.path %}active{% endif %}">Blog</a>
+      </li>
+
+      <li class="nav-menu__item">
+        <a href="{% url 'home' %}#contact-section" class="nav-menu__link scroll-to-contact">Contact</a>
+      </li>
+    </ul>
 
     <!-- Social Media Links -->
     <li class="nav-menu__item">

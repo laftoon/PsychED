@@ -89,10 +89,21 @@
   will-change: transform, color;
 }
 
-.nav-menu__link:hover {
+.nav-menu__link:hover,
+.nav-menu__link.active {
   color: var(--secondary-color);
   transform: translateY(calc(-1 * var(--space-xs)));
 }
+
+.nav-menu__link.scroll-to-contact:hover,
+.nav-menu__link--social:hover {
+  transform: none;
+}
+
+.nav-menu__link--social.active {
+  transform: none;
+}
+
 
 /* Logo
    ========================================================================== */

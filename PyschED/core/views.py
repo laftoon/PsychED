@@ -11,7 +11,8 @@ import logging
 import json
 import pytz
 from django.core.cache import cache
-from datetime import datetime
+from django.views.generic import ListView, DetailView
+from .models import BlogPost
 
 logger = logging.getLogger(__name__)
 
@@ -260,6 +261,19 @@ class AboutPageView(TemplateView):
 class ServicesPageView(TemplateView):
     template_name = 'core/services-page.html'
 
-class BlogPageView(TemplateView):
+class BlogPageView(ListView):
+    model = BlogPost
     template_name = 'core/blog-page.html'
+    context_object_name = 'blog_posts'
+    ordering = ['-date']
+    paginate_by = 10  # Optional: adds pagination, showing 10 posts per page
 
+class BlogDetailView(DetailView):
+    model = BlogPost
+    template_name = 'core/blog-detail.html'
+    context_object_name = 'post'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        # You can add additional context data here if needed
+        return context

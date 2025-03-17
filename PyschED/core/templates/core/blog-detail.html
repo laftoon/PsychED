@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}{{ post.title }} - PsychED Lab{% endblock %}
+
+{% block content %}
+{% include "components/navigation.html" %}
+{% include "components/hero-simple-blog.html" %}
+
+<article class="blog-detail">
+    <div class="blog-detail__content">
+        <a href="{% url 'blog' %}" class="blog-detail__back-button">
+            <i class="fas fa-arrow-left"></i> Înapoi la Blog
+        </a>
+        <h1 class="blog-detail__title">{{ post.title }}</h1>
+        <div class="blog-detail__meta">
+            <span class="blog-detail__date">{{ post.date|date:"d M Y" }}</span>
+            <span class="blog-detail__author">{{ post.author }}</span>
+        </div>
+        <div class="blog-detail__text">
+            {{ post.content|linebreaks }}
+        </div>
+    </div>
+</article>
+{% endblock %}
