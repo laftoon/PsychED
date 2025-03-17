@@ -1,25 +1,25 @@
 # Core Django
 Django==5.1.7
 python-decouple==3.8
-pytz==2023.3.post1
+pytz==2024.1  
 
 # Google Calendar Integration
-google-auth==2.23.4
-google-auth-oauthlib==1.1.0
-google-auth-httplib2==0.1.1
-google-api-python-client==2.108.0
+google-auth==2.27.0  
+google-auth-oauthlib==1.2.0  
+google-auth-httplib2==0.2.0  
+google-api-python-client==2.119.0  
 
 # Static Files Handling
 django-compressor==4.4
 
 # Development & Testing
-coverage==7.3.2
-pytest==7.4.3
-pytest-django==4.7.0
+coverage==7.5.0  
+pytest==8.1.1 
+pytest-django==4.8.0 
 
 # Security
-python-dotenv==1.0.0
+python-dotenv==1.0.1  
 
 # Formatting & Linting
-black==23.11.0
-flake8==6.1.0
+black==24.3.0  
+flake8==7.0.0  
