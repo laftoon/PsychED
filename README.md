@@ -88,7 +88,7 @@ GOOGLE_CALENDAR_API_KEY=your_google_calendar_api_key
    ```
 
 ## Project Structure
-
+```
 PsychED/
 ├── core/ # Main application
 │ ├── static/ # Static files
@@ -98,7 +98,7 @@ PsychED/
 ├── PyschED/ # Project configuration
 ├── templates/ # Global templates
 └── manage.py # Django management script
-
+```
 ## Features in Development
 
 - Multi-language support
