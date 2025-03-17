@@ -19,29 +19,29 @@ class CalendarHandler {
     this.workingDays = [];
     let currentDate = new Date();
 
-    // If current day is after work hours (after 8 PM), start from next day
-    const currentHour = currentDate.getHours();
-    if (currentHour >= 20) {
-      currentDate.setDate(currentDate.getDate() + 1);
+    // If current day is after work hours (after 7 PM Madrid time), start from next day
+    const madridTime = new Date(currentDate.toLocaleString('en-US', { timeZone: 'Europe/Madrid' }));
+    const currentHour = madridTime.getHours();
+    if (currentHour >= 19) {
+        currentDate.setDate(currentDate.getDate() + 1);
     }
 
     // Get next 7 days
     for (let i = 0; i < 7; i++) {
-      const nextDate = new Date(currentDate);
-      nextDate.setDate(currentDate.getDate() + i + 1);
-      this.workingDays.push(new Date(nextDate));
+        const nextDate = new Date(currentDate);
+        nextDate.setDate(currentDate.getDate() + i + 1);
+        this.workingDays.push(new Date(nextDate));
     }
 
     // Set selected date to first available day
     this.selectedDate = this.workingDays[0];
     this.updateDateDisplay();
     this.updateNavigationButtons();
-  }
+}
+
 
   navigateDay(increment) {
-    const currentIndex = this.workingDays.findIndex(
-      (date) => date.toDateString() === this.selectedDate.toDateString()
-    );
+    const currentIndex = this.workingDays.findIndex((date) => date.toDateString() === this.selectedDate.toDateString());
 
     const newIndex = currentIndex + increment;
 
@@ -58,16 +58,12 @@ class CalendarHandler {
           this.updateNavigationButtons();
 
           // Only fetch time slots for weekdays
-          if (
-            this.selectedDate.getDay() !== 0 &&
-            this.selectedDate.getDay() !== 6
-          ) {
+          if (this.selectedDate.getDay() !== 0 && this.selectedDate.getDay() !== 6) {
             this.fetchAndDisplayTimeSlots();
           } else {
             // Show message for weekends
             if (this.timeSlots) {
-              this.timeSlots.innerHTML =
-                '<div class="no-slots-message">Nu se fac programări în weekend</div>';
+              this.timeSlots.innerHTML = '<div class="no-slots-message">Nu se fac programări în weekend</div>';
             }
           }
         }, 300);
@@ -77,26 +73,21 @@ class CalendarHandler {
 
   updateNavigationButtons() {
     if (this.prevDayBtn) {
-      this.prevDayBtn.disabled =
-        this.selectedDate.toDateString() === this.workingDays[0].toDateString();
+      this.prevDayBtn.disabled = this.selectedDate.toDateString() === this.workingDays[0].toDateString();
     }
     if (this.nextDayBtn) {
-      this.nextDayBtn.disabled =
-        this.selectedDate.toDateString() === this.workingDays[6].toDateString();
+      this.nextDayBtn.disabled = this.selectedDate.toDateString() === this.workingDays[6].toDateString();
     }
   }
 
   updateDateDisplay() {
     if (this.currentDateSpan) {
-      this.currentDateSpan.textContent = this.selectedDate.toLocaleDateString(
-        "ro-RO",
-        {
-          weekday: "long",
-          year: "numeric",
-          month: "long",
-          day: "numeric",
-        }
-      );
+      this.currentDateSpan.textContent = this.selectedDate.toLocaleDateString("ro-RO", {
+        weekday: "long",
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+      });
     }
   }
 
@@ -124,39 +115,50 @@ class CalendarHandler {
     } catch (error) {
       console.error("Error fetching time slots:", error);
       if (this.timeSlots) {
-        this.timeSlots.innerHTML =
-          '<div class="no-slots-message">Nu s-au putut încărca intervalele orare</div>';
+        this.timeSlots.innerHTML = '<div class="no-slots-message">Nu s-au putut încărca intervalele orare</div>';
       }
     }
   }
 
   // Display time slots
-  displayTimeSlots(slots) {
+// In calendar-handler.js
+displayTimeSlots(slots) {
     if (!this.timeSlots) return;
 
     this.timeSlots.innerHTML = "";
 
     if (!slots || slots.length === 0) {
-      this.timeSlots.innerHTML =
-        '<div class="no-slots-message">Nu există intervale disponibile pentru această zi</div>';
-      return;
+        this.timeSlots.innerHTML =
+            '<div class="no-slots-message">Nu există intervale disponibile pentru această zi</div>';
+        return;
     }
 
     slots.forEach((slot) => {
-      const time = new Date(slot);
-      const button = document.createElement("button");
-      button.type = "button";
-      button.className = "time-slot";
-      button.dataset.time = time.toTimeString().slice(0, 8);
-      button.textContent = time.toLocaleTimeString("ro-RO", {
-        hour: "2-digit",
-        minute: "2-digit",
-        hour12: false,
-      });
+        const time = new Date(slot);
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = "time-slot";
+        
+        // Convert UTC to Madrid time
+        const madridTime = new Date(time.toLocaleString('en-US', { timeZone: 'Europe/Madrid' }));
+        
+        // Store the Madrid time
+        button.dataset.time = madridTime.toTimeString().slice(0, 8);
 
-      this.timeSlots.appendChild(button);
+        // Display time in Madrid timezone
+        const localTime = madridTime.toLocaleTimeString('ro-RO', {
+            hour: "2-digit",
+            minute: "2-digit",
+            hour12: false,
+            timeZone: 'Europe/Madrid'
+        });
+
+        button.textContent = localTime;
+        this.timeSlots.appendChild(button);
     });
-  }
+}
+
+
 
   // Helper function to get cookies
   getCookie(name) {

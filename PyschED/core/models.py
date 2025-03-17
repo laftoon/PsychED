@@ -8,10 +8,11 @@ class BlogPost(models.Model):
     content = models.TextField()
     snippet = models.TextField(max_length=500)
     author = models.CharField(max_length=100)
-    date = models.DateTimeField(auto_now_add=True)
+    date = models.DateTimeField(auto_now_add=True)  # Created date
+    written_on = models.DateField(null=True, blank=True)  # Written date
     
     class Meta:
-        ordering = ['-date']  # This will order posts by date, newest first
+        ordering = ['-date']
     
     def save(self, *args, **kwargs):
         if not self.slug:

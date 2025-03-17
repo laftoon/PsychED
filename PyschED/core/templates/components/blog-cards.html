@@ -5,7 +5,10 @@
             <div class="blog-card__text">
                 <h2 class="blog-card__title">{{ post.title }}</h2>
                 <div class="blog-card__meta">
-                    <span class="blog-card__date">{{ post.date|date:"d M Y" }}</span>
+                    <span class="blog-card__date">Publicat: {{ post.date|date:"d M Y" }}</span>
+                    {% if post.written_on %}
+                    <span class="blog-card__written-on">Scris: {{ post.written_on|date:"d M Y" }}</span>
+                    {% endif %}
                     <span class="blog-card__author">{{ post.author }}</span>
                 </div>
                 <p class="blog-card__description">{{ post.snippet }}</p>

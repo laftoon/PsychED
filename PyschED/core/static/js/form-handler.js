@@ -131,30 +131,37 @@ class FormHandler {
     }
   }
 
-  async handleTimeSlotSubmission() {
+// In form-handler.js
+async handleTimeSlotSubmission() {
     if (!this.selectedTimeSlot) {
-      this.showError("Vă rugăm să selectați o oră");
-      this.isSubmitting = false;
-      return;
+        this.showError("Vă rugăm să selectați o oră");
+        this.isSubmitting = false;
+        return;
     }
 
     this.showLoader();
     this.confirmTimeSlotBtn.disabled = true;
 
-    // Clear any existing messages
-    this.errorMessage.classList.remove("active");
-    this.successMessage.classList.remove("active");
-
     try {
-      if (!this.formData) {
-        throw new Error("Form data is missing");
-      }
+        if (!this.formData) {
+            throw new Error("Form data is missing");
+        }
 
-      this.formData.append(
-        "date",
-        window.calendarHandler.selectedDate.toISOString().split("T")[0]
-      );
-      this.formData.append("time", this.selectedTimeSlot);
+        const selectedDate = window.calendarHandler.selectedDate;
+        const [hours, minutes, seconds] = this.selectedTimeSlot.split(':');
+        
+        // Create date in Madrid timezone
+        const madridDate = new Date(
+            selectedDate.getFullYear(),
+            selectedDate.getMonth(),
+            selectedDate.getDate(),
+            parseInt(hours),
+            parseInt(minutes),
+            parseInt(seconds)
+        );
+
+        this.formData.append("date", madridDate.toISOString().split("T")[0]);
+        this.formData.append("time", this.selectedTimeSlot);
 
       const response = await fetch("/submit_time_slot/", {
         method: "POST",

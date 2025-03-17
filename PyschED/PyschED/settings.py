@@ -139,7 +139,7 @@ GOOGLE_CALENDAR_ID = config('GOOGLE_CALENDAR_ID',
                           default='1b1e7cb49ef25197f00cabea8ca36baa86fe394b9f00379db32ab360336966f1@group.calendar.google.com')
 
 # Time zone settings
-TIME_ZONE = 'Europe/Bucharest'
+TIME_ZONE = 'Europe/Madrid'
 USE_TZ = True
 LANGUAGE_CODE = 'ro'
 USE_I18N = True

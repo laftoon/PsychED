@@ -32,52 +32,45 @@ def get_time_slots(request):
             if not date_str:
                 return JsonResponse({'success': False, 'error': 'Date is required'})
             
-            # Parse the date and create timezone-aware datetime objects
+            # Parse the date in UTC
             date = datetime.strptime(date_str, '%Y-%m-%d').date()
             
-            # Verify if the date is a working day
-            if date.weekday() >= 5:  # 5 = Saturday, 6 = Sunday
-                return JsonResponse({
-                    'success': False,
-                    'error': 'Selected date is not a working day'
-                })
+            # Create UTC times for work hours (9:00-18:00 Madrid time)
+            madrid_tz = pytz.timezone('Europe/Madrid')
+            utc_tz = pytz.UTC
             
-            timezone = pytz.timezone(settings.TIME_ZONE) 
-            work_start = timezone.localize(datetime.combine(date, datetime.strptime('10:00', '%H:%M').time()))
-            work_end = timezone.localize(datetime.combine(date, datetime.strptime('20:00', '%H:%M').time()))
+            # Convert work hours to UTC
+            work_start = madrid_tz.localize(datetime.combine(date, datetime.strptime('11:00', '%H:%M').time()))
+            work_end = madrid_tz.localize(datetime.combine(date, datetime.strptime('20:00', '%H:%M').time()))
+            
+            # Convert to UTC for API call
+            work_start_utc = work_start.astimezone(utc_tz)
+            work_end_utc = work_end.astimezone(utc_tz)
             
             events_result = service.events().list(
                 calendarId=settings.GOOGLE_CALENDAR_ID,
-                timeMin=work_start.isoformat(),
-                timeMax=work_end.isoformat(),
+                timeMin=work_start_utc.isoformat(),
+                timeMax=work_end_utc.isoformat(),
                 singleEvents=True,
                 orderBy='startTime'
             ).execute()
             
-            # Calculate available slots considering partial hour conflicts
+            # Calculate available slots in UTC
             available_slots = []
-            current_time = work_start
+            current_time = work_start_utc
             
-            while current_time < work_end:
+            while current_time <= work_end_utc - timedelta(minutes=50):
                 is_available = True
-                current_hour = current_time.hour
+                slot_end = current_time + timedelta(minutes=50)
                 
                 for event in events_result.get('items', []):
-                    if 'dateTime' in event.get('start', {}) and 'dateTime' in event.get('end', {}):
-                        event_start = datetime.fromisoformat(event['start']['dateTime'].replace('Z', '+00:00'))
-                        event_end = datetime.fromisoformat(event['end']['dateTime'].replace('Z', '+00:00'))
-                        
-                        event_start = event_start.astimezone(timezone)
-                        event_end = event_end.astimezone(timezone)
-                        
-                        # Check if event overlaps with current hour
-                        if (event_start.hour == current_hour or 
-                            event_end.hour == current_hour or
-                            (event_start.hour < current_hour and event_end.hour > current_hour) or
-                            (event_start.hour == current_hour and event_start.minute <= 45) or
-                            (event_end.hour == current_hour and event_end.minute >= 15)):
-                            is_available = False
-                            break
+                    event_start = datetime.fromisoformat(event['start']['dateTime'].replace('Z', '+00:00'))
+                    event_end = datetime.fromisoformat(event['end']['dateTime'].replace('Z', '+00:00'))
+                    
+                    # Compare in UTC
+                    if (event_start < slot_end and event_end > current_time):
+                        is_available = False
+                        break
                 
                 if is_available:
                     available_slots.append(current_time.isoformat())
@@ -86,7 +79,8 @@ def get_time_slots(request):
             
             return JsonResponse({
                 'success': True,
-                'free_slots': available_slots
+                'free_slots': available_slots,
+                'timezone': 'UTC'
             })
             
         except Exception as e:
@@ -102,6 +96,7 @@ def get_time_slots(request):
     })
 
 
+
 def send_confirmation_email(user_email, appointment_time, event_link, first_name, last_name, interest, message):
     """Send confirmation emails to user and admin"""
     try:
@@ -112,13 +107,14 @@ def send_confirmation_email(user_email, appointment_time, event_link, first_name
         user_message = f'''
         Bună {first_name},
 
-        Îți mulțumim pentru programare. Întâlnirea ta a fost programată cu succes pentru data de {appointment_time.strftime("%d %B %Y")} la ora {appointment_time.strftime("%H:%M")}.
-        Programarea ta se va confirma atunci cand vei primi o invitatie la un eveniment Google Calendar.
-        În cazul în care vor exista modificări, te voi anunța.
+        Îți mulțumesc pentru interes! 
+        Întâlnirea ta pe data de {appointment_time.strftime("%d %B %Y")} la ora {appointment_time.strftime("%H:%M")} se va confirma atunci cand vei primi o invitatie Google Calendar!
+        
+        În cazul în care vor exista modificări, te voi anunța pe adresa de email: {user_email}.
 
 
-        Cu stimă,
-        Laura Vaida
+        Cu drag,
+        Francesca Raileanu
         '''
         
         # Admin email
@@ -181,7 +177,6 @@ def submit_time_slot(request):
             # Create a unique submission key
             submission_key = f"submission_{email}_{date_str}_{time_str}"
             
-            # Check if this submission already exists in cache
             if cache.get(submission_key):
                 return JsonResponse({
                     'success': False, 
@@ -189,34 +184,34 @@ def submit_time_slot(request):
                 }, status=400)
             
             try:
-                # Get timezone
-                bucharest_tz = pytz.timezone('Europe/Bucharest')
+                # Parse the datetime in Madrid timezone (UTC+1)
+                madrid_tz = pytz.timezone('Europe/Madrid')
+                selected_datetime = madrid_tz.localize(
+                    datetime.strptime(f"{date_str} {time_str}", "%Y-%m-%d %H:%M:%S")
+                )
                 
-                # Parse the datetime and localize it
-                selected_datetime = datetime.fromisoformat(f"{date_str}T{time_str}")
-                selected_datetime = bucharest_tz.localize(selected_datetime)
-                end_datetime = selected_datetime + timedelta(hours=1)
+                # Convert to UTC for storage
+                utc_datetime = selected_datetime.astimezone(pytz.UTC)
                 
                 # Create calendar event
                 event = create_calendar_event({
                     'summary': f'Consultație cu {first_name} {last_name}',
                     'description': f'Interes: {interest}\nMesaj: {message}',
                     'start': {
-                        'dateTime': selected_datetime.isoformat(),
-                        'timeZone': 'Europe/Bucharest'
+                        'dateTime': utc_datetime.isoformat(),
+                        'timeZone': 'UTC'
                     },
                     'end': {
-                        'dateTime': end_datetime.isoformat(),
-                        'timeZone': 'Europe/Bucharest'
+                        'dateTime': (utc_datetime + timedelta(minutes=50)).isoformat(),
+                        'timeZone': 'UTC'
                     },
                     'user_email': email
                 })
                 
                 if event:
-                    # Send confirmation emails
                     send_confirmation_email(
                         email, 
-                        selected_datetime, 
+                        selected_datetime,  # Use Madrid time for email
                         event['htmlLink'],
                         first_name,
                         last_name,
@@ -224,8 +219,7 @@ def submit_time_slot(request):
                         message
                     )
                     
-                    # Set cache after successful submission
-                    cache.set(submission_key, True, 86400)  # 24 hours
+                    cache.set(submission_key, True, 86400)
                     return JsonResponse({'success': True, 'event': event['htmlLink']})
                 else:
                     raise Exception('Failed to create calendar event')
@@ -245,7 +239,6 @@ def submit_time_slot(request):
         'success': False, 
         'error': 'Invalid request method'
     }, status=405)
-
 
 
 
@@ -277,3 +270,31 @@ class BlogDetailView(DetailView):
         context = super().get_context_data(**kwargs)
         # You can add additional context data here if needed
         return context
+
+
+
+def test_timezone_slots():
+    # Test times for different zones
+    madrid_tz = pytz.timezone('Europe/Madrid')
+    ny_tz = pytz.timezone('America/New_York')
+    tokyo_tz = pytz.timezone('Asia/Tokyo')
+    
+    # Create a test date
+    test_date = datetime.now().date()
+    
+    # Test Madrid 9:00 (working day start)
+    madrid_start = madrid_tz.localize(datetime.combine(test_date, datetime.strptime('09:00', '%H:%M').time()))
+    
+    print(f"Madrid start: {madrid_start}")
+    print(f"New York time: {madrid_start.astimezone(ny_tz)}")
+    print(f"Tokyo time: {madrid_start.astimezone(tokyo_tz)}")
+    print(f"UTC time: {madrid_start.astimezone(pytz.UTC)}")
+    
+    # Test Madrid 18:00 (working day end)
+    madrid_end = madrid_tz.localize(datetime.combine(test_date, datetime.strptime('18:00', '%H:%M').time()))
+    
+    print(f"\nMadrid end: {madrid_end}")
+    print(f"New York time: {madrid_end.astimezone(ny_tz)}")
+    print(f"Tokyo time: {madrid_end.astimezone(tokyo_tz)}")
+    print(f"UTC time: {madrid_end.astimezone(pytz.UTC)}")
+
