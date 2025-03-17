@@ -1,5 +1,5 @@
 # Core Django
-Django==5.0
+Django==5.1.7
 python-decouple==3.8
 pytz==2023.3.post1
 
