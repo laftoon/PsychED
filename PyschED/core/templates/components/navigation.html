@@ -13,18 +13,21 @@
   <ul class="nav-menu">
     <!-- Regular Navigation Items -->
     <li class="nav-menu__item">
-      <a href="{% url 'home' %}" class="nav-menu__link">Acasa</a>
+      <a href="{% url 'home' %}" class="nav-menu__link">Acasă</a>
     </li>
 
     <li class="nav-menu__item">
-      <a href="{% url 'about' %}" class="nav-menu__link">Despre mine</a>
+      <a href="{% url 'about' %}" class="nav-menu__link">Proiectele mele</a>
     </li>
 
     <li class="nav-menu__item">
-      <a href="#" class="nav-menu__link">Servicii</a>
+      <a href="{% url 'services' %}" class="nav-menu__link">Servicii</a>
     </li>
     <li class="nav-menu__item">
-      <a href="#" class="nav-menu__link">Contact</a>
+      <a href="{% url 'blog' %}" class="nav-menu__link">Blog</a>
+    </li>
+    <li class="nav-menu__item">
+      <a href="{% url 'home' %}#contact-section" class="nav-menu__link scroll-to-contact">Contact</a>
     </li>
 
     <!-- Social Media Links -->

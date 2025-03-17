@@ -47,6 +47,19 @@
   line-height: 1.6;
 }
 
+.contact__description a {
+    color: var(--text-muted); 
+    text-decoration: underline;
+    text-decoration-color: var(--text-muted); 
+    text-underline-offset: 2px; 
+    transition: color 0.3s ease; 
+}
+
+.contact__description a:hover {
+    color: #333333; 
+}
+
+
 /* Form Container
    ========================================================================== */
 .contact-form {

@@ -257,3 +257,9 @@ def home_page(request):
 class AboutPageView(TemplateView):
     template_name = 'core/about-page.html'
 
+class ServicesPageView(TemplateView):
+    template_name = 'core/services-page.html'
+
+class BlogPageView(TemplateView):
+    template_name = 'core/blog-page.html'
+

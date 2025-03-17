@@ -71,19 +71,41 @@ class MobileMenu {
 
 class HeroHandler {
   constructor() {
-    this.scrollButton = document.querySelector(".scroll-to-contact");
+    this.scrollButtons = document.querySelectorAll(".scroll-to-contact");
     this.contactSection = document.getElementById("contact-section");
     this.init();
   }
 
   init() {
-    if (this.scrollButton && this.contactSection) {
-      this.scrollButton.addEventListener("click", () => {
-        this.contactSection.scrollIntoView({ behavior: "smooth" });
+    if (this.scrollButtons.length) {
+      this.scrollButtons.forEach(button => {
+        button.addEventListener("click", (e) => {
+          // Check if we're on the home page
+          const isHomePage = window.location.pathname === "/" || 
+                           window.location.pathname === "/home/";
+
+          if (isHomePage) {
+            // If on home page, prevent default and scroll
+            e.preventDefault();
+            if (this.contactSection) {
+              this.contactSection.scrollIntoView({ behavior: "smooth" });
+            }
+          }
+          // If not on home page, let the default link behavior work
+          // It will redirect to home page with #contact-section hash
+        });
       });
     }
+
+    // Check for hash in URL when page loads
+    window.addEventListener('load', () => {
+      if (window.location.hash === '#contact-section' && this.contactSection) {
+        this.contactSection.scrollIntoView({ behavior: "smooth" });
+      }
+    });
   }
 }
+
 
 class CarouselHandler {
   constructor() {

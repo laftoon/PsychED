@@ -4,21 +4,17 @@
     <div class="contact__content">
       <h2 class="contact__title">Programează-te</h2>
       <p class="contact__description">
-        Pentru a stabili o primă întâlnire gratuită pe care o vom folosi pentru
-        a vedea dacă putem lucra împreună te rog să folosești formularul din
-        dreapta. Dacă întâmpini vreo eroare sau nu găsești ora dorită, te rog să
-        mă contactezi la adresa de email: raileanu.francesca@gmail.com
+        Pentru a stabili o primă întâlnire gratuită pe care o vom folosi pentru a vedea dacă putem lucra împreună te rog
+        să folosești formularul din dreapta. Dacă întâmpini vreo eroare sau nu găsești ora dorită, te rog să mă
+        contactezi la adresa de email:
+        <a href="mailto:raileanu.francesca@gmail.com">raileanu.francesca@gmail.com</a>
+        sau pe WhatsApp la
+        <a href="https://wa.me/40742461189" target="_blank">+40 742 461 189</a>
       </p>
     </div>
 
     <!-- Contact Form -->
-    <form
-      class="contact-form"
-      id="contactForm"
-      action=""
-      method="POST"
-      onsubmit="return false;"
-    >
+    <form class="contact-form" id="contactForm" action="" method="POST" onsubmit="return false;">
       {% csrf_token %}
 
       <!-- Error Message -->
@@ -81,22 +77,12 @@
         </div>
 
         <div class="form-group">
-          <select
-            class="form-input form-select"
-            id="interest"
-            name="interest"
-            required
-            aria-label="Interes"
-          >
+          <select class="form-input form-select" id="interest" name="interest" required aria-label="Interes">
             <option value="" disabled selected>Ce te-ar interesa?</option>
             <option value="Terapie Individuală">Terapie Individuală</option>
             <option value="Evaluări Clinice">Evaluări Clinice</option>
-            <option value="Consiliere Vocațională">
-              Consiliere Vocațională
-            </option>
-            <option value="Consiliere Educațională">
-              Consiliere Educațională
-            </option>
+            <option value="Consiliere Vocațională">Consiliere Vocațională</option>
+            <option value="Consiliere Educațională">Consiliere Educațională</option>
             <option value="Dezvoltare Personală">Dezvoltare Personală</option>
           </select>
         </div>
@@ -113,9 +99,7 @@
           ></textarea>
         </div>
 
-        <button type="submit" class="form-submit initial-submit">
-          Continuă
-        </button>
+        <button type="submit" class="form-submit initial-submit">Continuă</button>
       </div>
 
       <!-- Time Slot Selection -->
@@ -124,21 +108,21 @@
         <div class="day-navigation">
           <div class="navigation-container">
             <button type="button" id="prev-day">
-              <i class="fas fa-chevron-left"></i> Ziua anterioară
+              <i class="fas fa-chevron-left"></i>
+              Ziua anterioară
             </button>
             <div class="date-container">
               <span class="current-date"></span>
             </div>
             <button type="button" id="next-day">
-              Ziua următoare <i class="fas fa-chevron-right"></i>
+              Ziua următoare
+              <i class="fas fa-chevron-right"></i>
             </button>
           </div>
         </div>
 
         <div id="time-slots" class="time-slots-grid"></div>
-        <button type="submit" class="form-submit confirm-time-slot" disabled>
-          Confirmă programarea
-        </button>
+        <button type="submit" class="form-submit confirm-time-slot" disabled>Confirmă programarea</button>
       </div>
     </form>
   </section>

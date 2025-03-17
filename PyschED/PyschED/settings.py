@@ -141,7 +141,7 @@ GOOGLE_CALENDAR_ID = config('GOOGLE_CALENDAR_ID',
 # Time zone settings
 TIME_ZONE = 'Europe/Bucharest'
 USE_TZ = True
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'ro'
 USE_I18N = True
 
 # WSGI configuration

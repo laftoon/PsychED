@@ -102,7 +102,7 @@
   color: var(--text-light);
   margin-block-end: calc(-1 * var(--space-md));
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-  max-width: 800px;
+  max-width: 1000px;
   margin: 0 auto;
 }
 
