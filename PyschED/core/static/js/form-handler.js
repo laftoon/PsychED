@@ -38,14 +38,10 @@ class FormHandler {
     const nextDayBtn = document.getElementById("next-day");
 
     if (prevDayBtn) {
-      prevDayBtn.addEventListener("click", () =>
-        window.calendarHandler.navigateDay(-1)
-      );
+      prevDayBtn.addEventListener("click", () => window.calendarHandler.navigateDay(-1));
     }
     if (nextDayBtn) {
-      nextDayBtn.addEventListener("click", () =>
-        window.calendarHandler.navigateDay(1)
-      );
+      nextDayBtn.addEventListener("click", () => window.calendarHandler.navigateDay(1));
     }
   }
 
@@ -75,24 +71,17 @@ class FormHandler {
   async handleInitialFormSubmission() {
     this.formData = new FormData();
 
-    const requiredFields = [
-      "firstName",
-      "lastName",
-      "email",
-      "interest",
-      "message",
-    ];
+    const requiredFields = ["firstName", "lastName", "email", "interest", "message"];
     for (const field of requiredFields) {
       const value = this.form.elements[field].value.trim();
       if (!value) {
-        this.showError(`Vă rugăm să completați câmpul ${field}`);
+        this.showError(window.translations.get("required_field", "form"));
         this.isSubmitting = false;
         return;
       }
       this.formData.append(field, value);
     }
 
-    // Show loader before calendar initialization
     this.showLoader();
 
     try {
@@ -107,12 +96,12 @@ class FormHandler {
         this.timeSlotSelection.classList.remove("hidden");
         setTimeout(() => {
           this.timeSlotSelection.style.opacity = "1";
-          this.hideLoader(); // Hide loader after transition
+          this.hideLoader();
         }, 50);
       }, 300);
     } catch (error) {
       this.hideLoader();
-      this.showError("A apărut o eroare la încărcarea calendarului");
+      this.showError(window.translations.get("calendar_load_error", "errors"));
       console.error("Calendar initialization error:", error);
     }
   }
@@ -131,37 +120,37 @@ class FormHandler {
     }
   }
 
-// In form-handler.js
-async handleTimeSlotSubmission() {
+  // In form-handler.js
+  async handleTimeSlotSubmission() {
     if (!this.selectedTimeSlot) {
-        this.showError("Vă rugăm să selectați o oră");
-        this.isSubmitting = false;
-        return;
+      this.showError(window.translations.get("select_time", "form"));
+      this.isSubmitting = false;
+      return;
     }
 
     this.showLoader();
     this.confirmTimeSlotBtn.disabled = true;
 
     try {
-        if (!this.formData) {
-            throw new Error("Form data is missing");
-        }
+      if (!this.formData) {
+        throw new Error(window.translations.get("missing_form_data", "errors"));
+      }
 
-        const selectedDate = window.calendarHandler.selectedDate;
-        const [hours, minutes, seconds] = this.selectedTimeSlot.split(':');
-        
-        // Create date in Madrid timezone
-        const madridDate = new Date(
-            selectedDate.getFullYear(),
-            selectedDate.getMonth(),
-            selectedDate.getDate(),
-            parseInt(hours),
-            parseInt(minutes),
-            parseInt(seconds)
-        );
+      const selectedDate = window.calendarHandler.selectedDate;
+      const [hours, minutes, seconds] = this.selectedTimeSlot.split(":");
 
-        this.formData.append("date", madridDate.toISOString().split("T")[0]);
-        this.formData.append("time", this.selectedTimeSlot);
+      // Create date in Madrid timezone
+      const madridDate = new Date(
+        selectedDate.getFullYear(),
+        selectedDate.getMonth(),
+        selectedDate.getDate(),
+        parseInt(hours),
+        parseInt(minutes),
+        parseInt(seconds)
+      );
+
+      this.formData.append("date", madridDate.toISOString().split("T")[0]);
+      this.formData.append("time", this.selectedTimeSlot);
 
       const response = await fetch("/submit_time_slot/", {
         method: "POST",
@@ -174,7 +163,7 @@ async handleTimeSlotSubmission() {
       const data = await response.json();
 
       if (!response.ok) {
-        throw new Error(data.error || "Nu s-a putut finaliza programarea");
+        throw new Error(data.error || window.translations.get("submission_error", "form"));
       }
 
       if (data.success) {
@@ -185,14 +174,13 @@ async handleTimeSlotSubmission() {
           this.resetForm();
         }, 3000);
       } else {
-        throw new Error(data.error || "Nu s-a putut finaliza programarea");
+        throw new Error(data.error || window.translations.get("submission_error", "form"));
       }
     } catch (error) {
       this.hideLoader();
       console.error("Submission error:", error);
-      this.showError(error.message);
+      this.showError(error.message || window.translations.get("submission_error", "form"));
       this.confirmTimeSlotBtn.disabled = false;
-      return;
     } finally {
       this.isSubmitting = false;
     }
@@ -239,9 +227,7 @@ async handleTimeSlotSubmission() {
       this.successMessage.classList.add("active");
     }
   }
-
   showError(message) {
-    // Clear any success message first
     this.successMessage.classList.remove("active");
     const errorContent = this.errorMessage.querySelector("p");
     if (errorContent) {

@@ -1,4 +1,4 @@
-{# PyschED/core/templates/components/flip-carousel.html #}
+{% load i18n %}
 
 <section class="carousel">
   <div class="carousel__inner">
@@ -7,27 +7,27 @@
       <article class="flip-card">
         <div class="flip-card__inner">
           <div class="flip-card__face flip-card__face--front">
-            <h2 class="flip-card__title">Cum te pot contacta?</h2>
+            <h2 class="flip-card__title">{% trans "Cum te pot contacta?" %}</h2>
           </div>
           <div class="flip-card__face flip-card__face--back">
             <p class="flip-card__content">
-              Poți folosi formularul de mai jos pentru a te programa la o primă ședință gratuită. Dacă ai nelămuriri sau
-              întrebări, mă poți contacta pe email la
+              {% trans "Poți folosi formularul de mai jos pentru a te programa la o primă ședință gratuită. Dacă ai nelămuriri sau întrebări, mă poți contacta pe email la" %}
               <a href="mailto:raileanu.francesca@gmail.com">raileanu.francesca@gmail.com</a>
-              sau pe WhatsApp la
+              {% trans "sau pe WhatsApp la" %}
               <a href="https://wa.me/40742461189" target="_blank">+40 742 461 189</a>
             </p>
           </div>
         </div>
       </article>
+
       <!-- Session Duration Card -->
       <article class="flip-card">
         <div class="flip-card__inner">
           <div class="flip-card__face flip-card__face--front">
-            <h2 class="flip-card__title">Cât durează ședința?</h2>
+            <h2 class="flip-card__title">{% trans "Cât durează ședința?" %}</h2>
           </div>
           <div class="flip-card__face flip-card__face--back">
-            <p class="flip-card__content">O ședință durează între 50-60 de minute.</p>
+            <p class="flip-card__content">{% trans "O ședință durează între 50-60 de minute." %}</p>
           </div>
         </div>
       </article>
@@ -36,12 +36,11 @@
       <article class="flip-card">
         <div class="flip-card__inner">
           <div class="flip-card__face flip-card__face--front">
-            <h2 class="flip-card__title">Cât durează consilierea vocațională/educațională?</h2>
+            <h2 class="flip-card__title">{% trans "Cât durează consilierea vocațională/educațională?" %}</h2>
           </div>
           <div class="flip-card__face flip-card__face--back">
             <p class="flip-card__content">
-              Consilierea vocațională este scurtă și necesită în general 4-5 ședințe. Durata programului educațional se
-              stabilește în funcție de nevoi.
+              {% trans "Consilierea vocațională este scurtă și necesită în general 4-5 ședințe. Durata programului educațional se stabilește în funcție de nevoi." %}
             </p>
           </div>
         </div>
@@ -51,13 +50,11 @@
       <article class="flip-card">
         <div class="flip-card__inner">
           <div class="flip-card__face flip-card__face--front">
-            <h2 class="flip-card__title">Cât timp voi veni la terapie?</h2>
+            <h2 class="flip-card__title">{% trans "Cât timp voi veni la terapie?" %}</h2>
           </div>
           <div class="flip-card__face flip-card__face--back">
             <p class="flip-card__content">
-              Nu există o durată fixă. Vom stabili cât de des ne vom vedea și cât timp în funcție de nevoile tale. În
-              general ședințele de terapie variază între de două ori pe săptămână până la o dată la două săptămâni.
-              Rezultatele încep să se vadă abia după 2-4 luni.
+              {% trans "Nu există o durată fixă. Vom stabili cât de des ne vom vedea și cât timp în funcție de nevoile tale. În general ședințele de terapie variază între de două ori pe săptămână până la o dată la două săptămâni. Rezultatele încep să se vadă abia după 2-4 luni." %}
             </p>
           </div>
         </div>
@@ -67,12 +64,11 @@
       <article class="flip-card">
         <div class="flip-card__inner">
           <div class="flip-card__face flip-card__face--front">
-            <h2 class="flip-card__title">Cât costă o ședință?</h2>
+            <h2 class="flip-card__title">{% trans "Cât costă o ședință?" %}</h2>
           </div>
           <div class="flip-card__face flip-card__face--back">
             <p class="flip-card__content">
-              Tariful unei ședințe variază între 150-250 RON în funcție de serviciu (terapie, consiliere vocațională,
-              evaluare psihologică, etc.)
+              {% trans "Tariful unei ședințe variază între 150-250 RON în funcție de serviciu (terapie, consiliere vocațională, evaluare psihologică, etc.)" %}
             </p>
           </div>
         </div>
@@ -82,12 +78,11 @@
       <article class="flip-card">
         <div class="flip-card__inner">
           <div class="flip-card__face flip-card__face--front">
-            <h2 class="flip-card__title">Care este programul meu de lucru?</h2>
+            <h2 class="flip-card__title">{% trans "Care este programul meu de lucru?" %}</h2>
           </div>
           <div class="flip-card__face flip-card__face--back">
             <p class="flip-card__content">
-              Lucrez în principiu de luni până vineri între 10:00-20:00. Dacă nu poți ajunge la ședințe în acest
-              interval putem discuta despre eventuale acomodări.
+              {% trans "Lucrez în principiu de luni până vineri între 10:00-20:00. Dacă nu poți ajunge la ședințe în acest interval putem discuta despre eventuale acomodări." %}
             </p>
           </div>
         </div>
@@ -97,20 +92,19 @@
       <article class="flip-card">
         <div class="flip-card__inner">
           <div class="flip-card__face flip-card__face--front">
-            <h2 class="flip-card__title">Putem să ne vedem online?</h2>
+            <h2 class="flip-card__title">{% trans "Putem să ne vedem online?" %}</h2>
           </div>
           <div class="flip-card__face flip-card__face--back">
             <p class="flip-card__content">
-              Da, eu lucrez momentan exclusiv online, deoarece există studii (la care am lucrat chiar eu) care arată
-              eficacitatea terapiei online. Dacă preferi să ne vedem fizic pot acomoda această dorință.
+              {% trans "Da, eu lucrez momentan exclusiv online, deoarece există studii (la care am lucrat chiar eu) care arată eficacitatea terapiei online. Dacă preferi să ne vedem fizic pot acomoda această dorință." %}
             </p>
           </div>
         </div>
       </article>
     </div>
 
-    <!-- Next Button -->
-    <button class="carousel__nav carousel__nav--prev" aria-label="Previous">←</button>
-    <button class="carousel__nav carousel__nav--next" aria-label="Next">→</button>
+    <!-- Navigation Buttons -->
+    <button class="carousel__nav carousel__nav--prev" aria-label="{% trans 'Previous' %}">←</button>
+    <button class="carousel__nav carousel__nav--next" aria-label="{% trans 'Next' %}">→</button>
   </div>
 </section>

@@ -1,14 +1,14 @@
+{% load i18n %}
 <div class="contact-container">
   <section class="contact" id="contact-section">
     <!-- Contact Content -->
     <div class="contact__content">
-      <h2 class="contact__title">Programează-te</h2>
+      <h2 class="contact__title">{% trans "Programează-te" %}</h2>
       <p class="contact__description">
-        Pentru a stabili o primă întâlnire gratuită pe care o vom folosi pentru a vedea dacă putem lucra împreună te rog
-        să folosești formularul din dreapta. Dacă întâmpini vreo eroare sau nu găsești ora dorită, te rog să mă
-        contactezi la adresa de email:
+        {% trans "Pentru a stabili o primă întâlnire gratuită pe care o vom folosi pentru a vedea dacă putem lucra împreună te rog să folosești formularul din dreapta." %}
+        {% trans "Dacă întâmpini vreo eroare sau nu găsești ora dorită, te rog să mă contactezi la adresa de email:" %}
         <a href="mailto:raileanu.francesca@gmail.com">raileanu.francesca@gmail.com</a>
-        sau pe WhatsApp la
+        {% trans "sau pe WhatsApp la" %}
         <a href="https://wa.me/40742461189" target="_blank">+40 742 461 189</a>
       </p>
     </div>
@@ -20,7 +20,7 @@
       <!-- Error Message -->
       <div class="error-message hidden">
         <div class="error-message-content">
-          <h3>Error</h3>
+          <h3>{% trans "Eroare" %}</h3>
           <p></p>
         </div>
       </div>
@@ -28,8 +28,8 @@
       <!-- Success Message -->
       <div class="success-message hidden">
         <div class="success-message-content">
-          <h3>Cerere trimisă cu succes!</h3>
-          <p>Vă mulțumim pentru programare.</p>
+          <h3>{% trans "Cerere trimisă cu succes!" %}</h3>
+          <p>{% trans "Vă mulțumim pentru programare" %}</p>
         </div>
       </div>
 
@@ -46,9 +46,9 @@
             type="text"
             id="firstName"
             name="firstName"
-            placeholder="Prenume"
+            placeholder="{% trans 'Prenume' %}"
             required
-            aria-label="Prenume"
+            aria-label="{% trans 'Prenume' %}"
           />
         </div>
 
@@ -58,9 +58,9 @@
             type="text"
             id="lastName"
             name="lastName"
-            placeholder="Nume"
+            placeholder="{% trans 'Nume' %}"
             required
-            aria-label="Nume"
+            aria-label="{% trans 'Nume' %}"
           />
         </div>
 
@@ -70,20 +70,20 @@
             type="email"
             id="email"
             name="email"
-            placeholder="Email"
+            placeholder="{% trans 'Email' %}"
             required
-            aria-label="Email"
+            aria-label="{% trans 'Email' %}"
           />
         </div>
 
         <div class="form-group">
-          <select class="form-input form-select" id="interest" name="interest" required aria-label="Interes">
-            <option value="" disabled selected>Ce te-ar interesa?</option>
-            <option value="Terapie Individuală">Terapie Individuală</option>
-            <option value="Evaluări Clinice">Evaluări Clinice</option>
-            <option value="Consiliere Vocațională">Consiliere Vocațională</option>
-            <option value="Consiliere Educațională">Consiliere Educațională</option>
-            <option value="Dezvoltare Personală">Dezvoltare Personală</option>
+          <select class="form-input form-select" id="interest" name="interest" required aria-label="{% trans 'Interes' %}">
+            <option value="" disabled selected>{% trans "Ce te-ar interesa?" %}</option>
+            <option value="Terapie Individuală">{% trans "Terapie Individuală" %}</option>
+            <option value="Evaluări Clinice">{% trans "Evaluări Clinice" %}</option>
+            <option value="Consiliere Vocațională">{% trans "Consiliere Vocațională" %}</option>
+            <option value="Consiliere Educațională">{% trans "Consiliere Educațională" %}</option>
+            <option value="Dezvoltare Personală">{% trans "Dezvoltare Personală" %}</option>
           </select>
         </div>
 
@@ -92,37 +92,39 @@
             class="form-input form-textarea"
             id="message"
             name="message"
-            placeholder="Mesajul tău"
+            placeholder="{% trans 'Mesajul tău' %}"
             required
-            aria-label="Mesaj"
+            aria-label="{% trans 'Mesaj' %}"
             rows="4"
           ></textarea>
         </div>
 
-        <button type="submit" class="form-submit initial-submit">Continuă</button>
+        <button type="submit" class="form-submit initial-submit">{% trans "Continuă" %}</button>
       </div>
 
       <!-- Time Slot Selection -->
       <div class="time-slot-selection hidden">
-        <h3>Selectează ora programării</h3>
+        <h3>{% trans "Selectează ora programării" %}</h3>
         <div class="day-navigation">
           <div class="navigation-container">
             <button type="button" id="prev-day">
               <i class="fas fa-chevron-left"></i>
-              Ziua anterioară
+              {% trans "Ziua anterioară" %}
             </button>
             <div class="date-container">
               <span class="current-date"></span>
             </div>
             <button type="button" id="next-day">
-              Ziua următoare
+              {% trans "Ziua următoare" %}
               <i class="fas fa-chevron-right"></i>
             </button>
           </div>
         </div>
 
         <div id="time-slots" class="time-slots-grid"></div>
-        <button type="submit" class="form-submit confirm-time-slot" disabled>Confirmă programarea</button>
+        <button type="submit" class="form-submit confirm-time-slot" disabled>
+          {% trans "Confirmă programarea" %}
+        </button>
       </div>
     </form>
   </section>

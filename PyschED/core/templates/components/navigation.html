@@ -1,5 +1,5 @@
-{# PyschED/core/templates/components/navigation.html #}
-
+{% load static %}
+{% load i18n %}
 <nav class="topbar">
   <!-- Logo -->
   <a href="#" class="logo">PsychED Lab</a>
@@ -12,31 +12,29 @@
   <!-- Navigation Menu -->
   <ul class="nav-menu">
     <!-- Regular Navigation Items -->
-    <ul class="nav-menu">
-      <li class="nav-menu__item">
-        <a href="{% url 'home' %}" class="nav-menu__link {% if request.path == '/' %}active{% endif %}">Acasă</a>
-      </li>
+    <li class="nav-menu__item">
+      <a href="{% url 'home' %}" class="nav-menu__link {% if request.path == '/' %}active{% endif %}">{% trans "Acasă" %}</a>
+    </li>
 
-      <li class="nav-menu__item">
-        <a href="{% url 'about' %}" class="nav-menu__link {% if request.path == '/despre-mine/' %}active{% endif %}">
-          Proiectele mele
-        </a>
-      </li>
+    <li class="nav-menu__item">
+      <a href="{% url 'about' %}" class="nav-menu__link {% if request.path == '/despre-mine/' %}active{% endif %}">
+        {%trans "Proiectele mele"%}
+      </a>
+    </li>
 
-      <li class="nav-menu__item">
-        <a href="{% url 'services' %}" class="nav-menu__link {% if request.path == '/servicii/' %}active{% endif %}">
-          Servicii
-        </a>
-      </li>
+    <li class="nav-menu__item">
+      <a href="{% url 'services' %}" class="nav-menu__link {% if request.path == '/servicii/' %}active{% endif %}">
+        {%trans "Servicii" %}
+      </a>
+    </li>
 
-      <li class="nav-menu__item">
-        <a href="{% url 'blog' %}" class="nav-menu__link {% if '/blog/' in request.path %}active{% endif %}">Blog</a>
-      </li>
+    <li class="nav-menu__item">
+      <a href="{% url 'blog' %}" class="nav-menu__link {% if '/blog/' in request.path %}active{% endif %}">{% trans "Blog" %}</a>
+    </li>
 
-      <li class="nav-menu__item">
-        <a href="{% url 'home' %}#contact-section" class="nav-menu__link scroll-to-contact">Contact</a>
-      </li>
-    </ul>
+    <li class="nav-menu__item">
+      <a href="{% url 'home' %}#contact-section" class="nav-menu__link scroll-to-contact">{% trans "Contact" %}</a>
+    </li>
 
     <!-- Social Media Links -->
     <li class="nav-menu__item">
@@ -49,27 +47,33 @@
         <i class="fab fa-linkedin"></i>
       </a>
     </li>
-    {% comment %}
-    <li class="nav-menu__item">
-      <a
-        href="https://www.instagram.com/your-profile"
-        class="nav-menu__link nav-menu__link--social"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        <i class="fab fa-instagram"></i>
-      </a>
-    </li>
-    <li class="nav-menu__item">
-      <a
-        href="https://www.facebook.com/your-profile"
-        class="nav-menu__link nav-menu__link--social"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        <i class="fab fa-facebook"></i>
-      </a>
-    </li>
-    {% endcomment %}
-  </ul>
+
+<!-- Language Selector -->
+<li class="nav-menu__item language-selector">
+  <button class="language-selector__button nav-menu__link" aria-label="Select language">
+    {% get_current_language as LANGUAGE_CODE %}
+    {% if LANGUAGE_CODE == 'ro' %}
+      <img src="{% static 'images/flags/ro.svg' %}" alt="{% trans 'Romanian flag' %}" class="language-selector__flag">
+    {% elif LANGUAGE_CODE == 'en' %}
+      <img src="{% static 'images/flags/gb.svg' %}" alt="{% trans 'British flag' %}" class="language-selector__flag">
+    {% elif LANGUAGE_CODE == 'es' %}
+      <img src="{% static 'images/flags/es.svg' %}" alt="{% trans 'Spanish flag' %}" class="language-selector__flag">
+    {% endif %}
+  </button>
+
+  <div class="language-selector__dropdown">
+    <a href="{% url 'change_language' %}?lang=ro&next={{ request.path }}" class="language-selector__option">
+      <img src="{% static 'images/flags/ro.svg' %}" alt="{% trans 'Romanian flag' %}" class="language-selector__flag">
+      <span>Română</span>
+    </a>
+    <a href="{% url 'change_language' %}?lang=en&next={{ request.path }}" class="language-selector__option">
+      <img src="{% static 'images/flags/gb.svg' %}" alt="{% trans 'British flag' %}" class="language-selector__flag">
+      <span>English</span>
+    </a>
+    <a href="{% url 'change_language' %}?lang=es&next={{ request.path }}" class="language-selector__option">
+      <img src="{% static 'images/flags/es.svg' %}" alt="{% trans 'Spanish flag' %}" class="language-selector__flag">
+      <span>Español</span>
+    </a>
+  </div>
+</li>
 </nav>

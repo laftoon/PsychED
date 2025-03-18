@@ -1,7 +1,10 @@
 {% extends "base.html" %}
 {% load static %}
 {% load compress %}
-{% block title %}PsychED Lab - Despre Mine{% endblock %}
+{% load i18n %}
+
+{% block title %}{% trans "PsychED Lab - Servicii" %}{% endblock %}
+
 {% block content %}
 {% include "components/navigation.html" %}
 {% include "components/hero-simple-services.html" %}

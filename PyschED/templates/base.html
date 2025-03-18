@@ -1,6 +1,6 @@
 {% load static %}
 <!DOCTYPE html>
-<html lang="ro">
+<html lang="{{ LANGUAGE_CODE }}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -23,13 +23,17 @@
     <link rel="stylesheet" href="{% static 'css/contact.css' %}">
     <link rel="stylesheet" href="{% static 'css/blog-cards.css' %}">
     <link rel="stylesheet" href="{% static 'css/blog-detail.css' %}">
+    <link rel="stylesheet" href="{% static 'css/language-selector.css' %}">
+    <link rel="shortcut icon" type="image/x-icon" href="{% static 'images/favicon.ico' %}">
 
     
     {% block extra_css %}{% endblock %}
 </head>
 <body>
     {% block content %}{% endblock %}
-    <!-- Load JavaScript -->
+<!-- Load JavaScript -->
+<script src="{% static 'js/translations.js' %}"></script>
+<script src="{% static 'js/language-selector.js' %}"></script>
 <script src="{% static 'js/scripts.js' %}"></script>
 <script src="{% static 'js/form-handler.js' %}"></script>
 <script src="{% static 'js/calendar-handler.js' %}"></script>

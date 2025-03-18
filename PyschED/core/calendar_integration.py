@@ -49,7 +49,7 @@ def create_calendar_event(event_details):
         # Verify if time is within working hours
         hour = madrid_time.hour
         if hour < 11 or hour >= 19:
-            raise Exception("Selected time is outside working hours (11:00-19:00 Madrid time)")
+            raise Exception("Programările se pot face doar între orele 11:00-19:00 (GMT+1)")
 
         # Check for existing events
         events_result = service.events().list(

@@ -1,8 +1,9 @@
 {% extends "base.html" %}
 {% load static %}
 {% load compress %}
+{% load i18n %}
 
-{% block title %}PsychED Lab - Home{% endblock %}
+{% block title %}{% trans "PsychED Lab - Acasa" %}{% endblock %}
 
 {% block content %}
     {% include "components/navigation.html" %}

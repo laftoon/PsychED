@@ -1,4 +1,6 @@
-{# PyschED/core/templates/components/hero-simple-about.html #} {% load static %}
+{% load static %}
+{% load i18n %}
+
 <section class="hero hero--simple">
   <!-- Background Layer -->
   <div class="hero__background"></div>
@@ -9,7 +11,7 @@
   <!-- Content Layer -->
   <div class="hero__content">
     <h1 class="hero__title">
-      Consilierii sunt arhitecții vindecării interioare, ne ajută să construim o bază pentru un viitor mai bun
+      {% trans "Consilierii sunt arhitecții vindecării interioare, ne ajută să construim o bază pentru un viitor mai bun" %}
     </h1>
   </div>
 </section>

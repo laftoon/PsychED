@@ -1,8 +1,7 @@
-# core/views.py
 from django.shortcuts import render
 from django.core.mail import send_mail
 from django.conf import settings
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView, View, ListView, DetailView  # Add View here
 from django.http import JsonResponse
 from .forms import ContactForm
 from .calendar_integration import create_calendar_event, get_calendar_service
@@ -11,10 +10,24 @@ import logging
 import json
 import pytz
 from django.core.cache import cache
-from django.views.generic import ListView, DetailView
 from .models import BlogPost
+from django.utils import translation
+from django.shortcuts import redirect
+from django.utils.translation import get_language
 
-logger = logging.getLogger(__name__)
+
+def get_language_context(request):
+    return {'LANGUAGE_CODE': get_language()}
+
+
+def change_language(request):
+    lang = request.GET.get('lang')
+    if lang in ['en', 'es', 'ro']:
+        translation.activate(lang)
+        response = redirect(request.META.get('HTTP_REFERER', '/'))
+        response.set_cookie('django_language', lang)
+        return response
+
 
 def get_time_slots(request):
     if request.method == 'POST':
@@ -23,7 +36,7 @@ def get_time_slots(request):
             if not service:
                 return JsonResponse({
                     'success': False,
-                    'error': 'Could not connect to calendar service'
+                    'error': 'Nu s-a putut conecta la serviciul de calendar'
                 })
 
             data = json.loads(request.body)
@@ -87,12 +100,12 @@ def get_time_slots(request):
             logger.error(f"Unexpected error: {str(e)}")
             return JsonResponse({
                 'success': False,
-                'error': str(e)
+                'error': 'A apărut o eroare neașteptată. Vă rugăm să încercați din nou.'
             })
 
     return JsonResponse({
         'success': False,
-        'error': 'Invalid request method'
+        'error': 'Metodă invalidă de solicitare'
     })
 
 
@@ -171,7 +184,7 @@ def submit_time_slot(request):
             if not all([date_str, time_str, email, first_name, last_name]):
                 return JsonResponse({
                     'success': False, 
-                    'error': 'Missing required fields'
+                    'error': 'Vă rugăm să completați toate câmpurile obligatorii'
                 }, status=400)
             
             # Create a unique submission key
@@ -180,7 +193,7 @@ def submit_time_slot(request):
             if cache.get(submission_key):
                 return JsonResponse({
                     'success': False, 
-                    'error': 'This appointment has already been submitted'
+                    'error': 'Această programare a fost deja trimisă'
                 }, status=400)
             
             try:
@@ -223,23 +236,28 @@ def submit_time_slot(request):
                     return JsonResponse({'success': True, 'event': event['htmlLink']})
                 else:
                     raise Exception('Failed to create calendar event')
-                
+                    
             except Exception as e:
                 cache.delete(submission_key)
                 raise e
                 
         except Exception as e:
             logger.error(f"Error in submit_time_slot: {str(e)}")
+            error_message = str(e)
+            if "working hours" in error_message:
+                error_message = "Programările se pot face doar între orele 11:00-19:00"
+            elif "no longer available" in error_message:
+                error_message = "Acest interval orar nu mai este disponibil"
+            
             return JsonResponse({
                 'success': False, 
-                'error': str(e)
+                'error': error_message
             }, status=400)
             
     return JsonResponse({
         'success': False, 
         'error': 'Invalid request method'
     }, status=405)
-
 
 
 class HomePageView(TemplateView):
@@ -259,7 +277,15 @@ class BlogPageView(ListView):
     template_name = 'core/blog-page.html'
     context_object_name = 'blog_posts'
     ordering = ['-date']
-    paginate_by = 10  # Optional: adds pagination, showing 10 posts per page
+    paginate_by = 10
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        language = translation.get_language()
+        for post in context['blog_posts']:
+            post.translated_title = post.get_title(language)
+            post.translated_snippet = post.get_snippet(language)
+        return context
 
 class BlogDetailView(DetailView):
     model = BlogPost
@@ -268,8 +294,12 @@ class BlogDetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        # You can add additional context data here if needed
+        language = translation.get_language()
+        post = context['post']
+        context['translated_title'] = post.get_title(language)
+        context['translated_content'] = post.get_content(language)
         return context
+
 
 
 

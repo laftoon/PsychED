@@ -1,20 +1,27 @@
+{% load static %}
+{% load i18n %}
+
 <section class="blog-cards">
     {% for post in blog_posts %}
     <article class="blog-card">
         <div class="blog-card__content">
             <div class="blog-card__text">
-                <h2 class="blog-card__title">{{ post.title }}</h2>
+                <h2 class="blog-card__title">{{ post.translated_title }}</h2>
                 <div class="blog-card__meta">
-                    <span class="blog-card__date">Publicat: {{ post.date|date:"d M Y" }}</span>
+                    <span class="blog-card__date">{% trans "Publicat pe" %} {{ post.date|date:"d M Y" }}</span>
                     {% if post.written_on %}
-                    <span class="blog-card__written-on">Scris: {{ post.written_on|date:"d M Y" }}</span>
+                    <span class="blog-card__written-on">{% trans "Scris de" %} {{ post.written_on|date:"d M Y" }}</span>
                     {% endif %}
                     <span class="blog-card__author">{{ post.author }}</span>
                 </div>
-                <p class="blog-card__description">{{ post.snippet }}</p>
-                <a href="{% url 'blog_detail' post.slug %}" class="blog-card__link">Citește mai mult</a>
+                <p class="blog-card__description">{{ post.translated_snippet }}</p>
+                <a href="{% url 'blog_detail' post.slug %}" class="blog-card__link">{% trans "Citeste mai mult" %}</a>
             </div>
         </div>
     </article>
+    {% empty %}
+    <div class="blog-cards__empty">
+        {% trans "Nicio postare disponibila" %}
+    </div>
     {% endfor %}
 </section>

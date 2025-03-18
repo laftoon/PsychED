@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
+{% load i18n %}
 
 {% block title %}{{ post.title }} - PsychED Lab{% endblock %}
 
@@ -10,16 +11,17 @@
 <article class="blog-detail">
     <div class="blog-detail__content">
         <a href="{% url 'blog' %}" class="blog-detail__back-button">
-            <i class="fas fa-arrow-left"></i> Înapoi la Blog
+            <i class="fas fa-arrow-left"></i> {% trans "Inapoi la Blog" %}
         </a>
-        <h1 class="blog-detail__title">{{ post.title }}</h1>
+        <h1 class="blog-detail__title">{{ translated_title }}</h1>
         <div class="blog-detail__meta">
-            <span class="blog-detail__date">{{ post.date|date:"d M Y" }}</span>
-            <span class="blog-detail__author">{{ post.author }}</span>
+            <span class="blog-detail__date">{% trans "Publicat pe" %} {{ post.date|date:"d M Y" }}</span>
+            <span class="blog-detail__author">{% trans "Scris de" %} {{ post.author }}</span>
         </div>
         <div class="blog-detail__text">
-            {{ post.content|linebreaks }}
+            {{ translated_content|linebreaks }}
         </div>
     </div>
 </article>
+
 {% endblock %}

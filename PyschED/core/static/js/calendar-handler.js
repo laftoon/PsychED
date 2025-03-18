@@ -1,4 +1,3 @@
-// calendar-handler.js
 class CalendarHandler {
   constructor() {
     this.selectedDate = this.getNextWorkingDay(new Date());
@@ -7,6 +6,7 @@ class CalendarHandler {
     this.prevDayBtn = document.getElementById("prev-day");
     this.nextDayBtn = document.getElementById("next-day");
     this.timeSlots = document.getElementById("time-slots");
+    this.currentLanguage = document.documentElement.lang || 'ro';
   }
 
   getNextWorkingDay(date) {
@@ -37,16 +37,16 @@ class CalendarHandler {
     this.selectedDate = this.workingDays[0];
     this.updateDateDisplay();
     this.updateNavigationButtons();
-}
-
+  }
 
   navigateDay(increment) {
-    const currentIndex = this.workingDays.findIndex((date) => date.toDateString() === this.selectedDate.toDateString());
+    const currentIndex = this.workingDays.findIndex((date) => 
+      date.toDateString() === this.selectedDate.toDateString()
+    );
 
     const newIndex = currentIndex + increment;
 
     if (newIndex >= 0 && newIndex < this.workingDays.length) {
-      // Add slide animation
       if (this.currentDateSpan) {
         const direction = increment > 0 ? "left" : "right";
         this.currentDateSpan.classList.add(`slide-${direction}`);
@@ -61,9 +61,9 @@ class CalendarHandler {
           if (this.selectedDate.getDay() !== 0 && this.selectedDate.getDay() !== 6) {
             this.fetchAndDisplayTimeSlots();
           } else {
-            // Show message for weekends
+            // Show translated weekend message
             if (this.timeSlots) {
-              this.timeSlots.innerHTML = '<div class="no-slots-message">Nu se fac programări în weekend</div>';
+              this.timeSlots.innerHTML = `<div class="no-slots-message">${window.translations.get('no_weekend_appointments', 'calendar')}</div>`;
             }
           }
         }, 300);
@@ -82,7 +82,7 @@ class CalendarHandler {
 
   updateDateDisplay() {
     if (this.currentDateSpan) {
-      this.currentDateSpan.textContent = this.selectedDate.toLocaleDateString("ro-RO", {
+      this.currentDateSpan.textContent = this.selectedDate.toLocaleDateString(this.currentLanguage, {
         weekday: "long",
         year: "numeric",
         month: "long",
@@ -91,7 +91,6 @@ class CalendarHandler {
     }
   }
 
-  // Fetch and display time slots
   async fetchAndDisplayTimeSlots() {
     try {
       const response = await fetch("/get_time_slots/", {
@@ -110,57 +109,51 @@ class CalendarHandler {
       if (data.success) {
         this.displayTimeSlots(data.free_slots);
       } else {
-        throw new Error(data.error || "Failed to fetch time slots");
+        throw new Error(data.error || window.translations.get('fetch_slots_error', 'calendar'));
       }
     } catch (error) {
       console.error("Error fetching time slots:", error);
       if (this.timeSlots) {
-        this.timeSlots.innerHTML = '<div class="no-slots-message">Nu s-au putut încărca intervalele orare</div>';
+        this.timeSlots.innerHTML = `<div class="no-slots-message">${window.translations.get('load_slots_error', 'calendar')}</div>`;
       }
     }
   }
 
-  // Display time slots
-// In calendar-handler.js
-displayTimeSlots(slots) {
+  displayTimeSlots(slots) {
     if (!this.timeSlots) return;
 
     this.timeSlots.innerHTML = "";
 
     if (!slots || slots.length === 0) {
-        this.timeSlots.innerHTML =
-            '<div class="no-slots-message">Nu există intervale disponibile pentru această zi</div>';
-        return;
+      this.timeSlots.innerHTML = `<div class="no-slots-message">${window.translations.get('no_available_slots', 'calendar')}</div>`;
+      return;
     }
 
     slots.forEach((slot) => {
-        const time = new Date(slot);
-        const button = document.createElement("button");
-        button.type = "button";
-        button.className = "time-slot";
-        
-        // Convert UTC to Madrid time
-        const madridTime = new Date(time.toLocaleString('en-US', { timeZone: 'Europe/Madrid' }));
-        
-        // Store the Madrid time
-        button.dataset.time = madridTime.toTimeString().slice(0, 8);
+      const time = new Date(slot);
+      const button = document.createElement("button");
+      button.type = "button";
+      button.className = "time-slot";
+      
+      // Convert UTC to Madrid time
+      const madridTime = new Date(time.toLocaleString('en-US', { timeZone: 'Europe/Madrid' }));
+      
+      // Store the Madrid time
+      button.dataset.time = madridTime.toTimeString().slice(0, 8);
 
-        // Display time in Madrid timezone
-        const localTime = madridTime.toLocaleTimeString('ro-RO', {
-            hour: "2-digit",
-            minute: "2-digit",
-            hour12: false,
-            timeZone: 'Europe/Madrid'
-        });
+      // Display time in current language format
+      const localTime = madridTime.toLocaleTimeString(this.currentLanguage, {
+        hour: "2-digit",
+        minute: "2-digit",
+        hour12: false,
+        timeZone: 'Europe/Madrid'
+      });
 
-        button.textContent = localTime;
-        this.timeSlots.appendChild(button);
+      button.textContent = localTime;
+      this.timeSlots.appendChild(button);
     });
-}
+  }
 
-
-
-  // Helper function to get cookies
   getCookie(name) {
     let cookieValue = null;
     if (document.cookie && document.cookie !== "") {

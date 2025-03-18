@@ -1,4 +1,4 @@
-{# PyschED/core/templates/components/hero-home.html #} {% load static %}
+{# PyschED/core/templates/components/hero-home.html #} {% load static %} {% load i18n %}
 <section class="hero">
   <!-- Background Layer -->
   <div class="hero__background"></div>
@@ -9,9 +9,8 @@
   <!-- Content Layer -->
   <div class="hero__content">
     <h1 class="hero__title">
-      În mâinile unui consilier bun, vulnerabilitatea devine o cale către
-      rezistenţă
+      {% trans "În mâinile unui consilier bun, vulnerabilitatea devine o cale către rezistenţă" %}
     </h1>
-    <button class="hero__button scroll-to-contact">Programează-te</button>
+    <button class="hero__button scroll-to-contact">{% trans "Programează-te" %}</button>
   </div>
 </section>

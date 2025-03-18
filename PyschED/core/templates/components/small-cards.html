@@ -1,4 +1,5 @@
-{# PyschED/core/templates/components/small-cards.html #} {% load static %}
+{% load static %} {% load i18n %}
+
 <section class="cards">
   <!-- Psychotherapy Card -->
   <article class="card">
@@ -6,14 +7,13 @@
       <img
         class="card__image"
         src="{% static 'images/terapie-individuala.jpg' %}"
-        alt="Terapie Individuală"
+        alt="{% trans 'Terapie Individuală' %}"
       />
     </div>
     <div class="card__content">
-      <h2 class="card__title">Terapie Individuală</h2>
+      <h2 class="card__title">{% trans "Terapie Individuală" %}</h2>
       <p class="card__description">
-        Un spațiu sigur și confidențial unde poți gestiona problemele personale
-        și emoționale, dezvoltând strategii eficiente de coping
+        {% trans "Un spațiu sigur și confidențial unde poți gestiona problemele personale și emoționale, dezvoltând strategii eficiente de coping" %}
       </p>
     </div>
   </article>
@@ -21,17 +21,12 @@
   <!-- Clinical Psychology Card -->
   <article class="card">
     <div class="card__image-container">
-      <img
-        class="card__image"
-        src="{% static 'images/evaluari-clinice.jpg' %}"
-        alt="Evaluări Clinice"
-      />
+      <img class="card__image" src="{% static 'images/evaluari-clinice.jpg' %}" alt="{% trans 'Evaluări Clinice' %}" />
     </div>
     <div class="card__content">
-      <h2 class="card__title">Evaluări Clinice</h2>
+      <h2 class="card__title">{% trans "Evaluări Clinice" %}</h2>
       <p class="card__description">
-        Evaluări detaliate pentru înțelegerea provocărilor psihologice, cu
-        recomandări precise și planuri de tratament adaptate
+        {% trans "Evaluări detaliate pentru înțelegerea provocărilor psihologice, cu recomandări precise și planuri de tratament adaptate" %}
       </p>
     </div>
   </article>
@@ -42,14 +37,13 @@
       <img
         class="card__image"
         src="{% static 'images/consiliere-vocationala.jpg' %}"
-        alt="Consiliere Vocațională"
+        alt="{% trans 'Consiliere Vocațională' %}"
       />
     </div>
     <div class="card__content">
-      <h2 class="card__title">Consiliere Vocațională</h2>
+      <h2 class="card__title">{% trans "Consiliere Vocațională" %}</h2>
       <p class="card__description">
-        Descoperirea carierei ideale și dezvoltarea abilităților pentru succes,
-        cu un plan personalizat pe baza talentelor tale
+        {% trans "Descoperirea carierei ideale și dezvoltarea abilităților pentru succes, cu un plan personalizat pe baza talentelor tale" %}
       </p>
     </div>
   </article>
@@ -60,14 +54,13 @@
       <img
         class="card__image"
         src="{% static 'images/consiliere-educationala.jpg' %}"
-        alt="Consiliere Educațională"
+        alt="{% trans 'Consiliere Educațională' %}"
       />
     </div>
     <div class="card__content">
-      <h2 class="card__title">Consiliere Educațională</h2>
+      <h2 class="card__title">{% trans "Consiliere Educațională" %}</h2>
       <p class="card__description">
-        Suport pentru aplicații la universități în străinătate, dezvoltarea
-        portofoliului academic și orientare educațională
+        {% trans "Suport pentru aplicații la universități în străinătate, dezvoltarea portofoliului academic și orientare educațională" %}
       </p>
     </div>
   </article>
@@ -78,14 +71,13 @@
       <img
         class="card__image"
         src="{% static 'images/dezvoltare-personala.jpg' %}"
-        alt="Dezvoltare Personală"
+        alt="{% trans 'Dezvoltare Personală' %}"
       />
     </div>
     <div class="card__content">
-      <h2 class="card__title">Dezvoltare Personală</h2>
+      <h2 class="card__title">{% trans "Dezvoltare Personală" %}</h2>
       <p class="card__description">
-        Programe personalizate pentru creșterea stimei de sine, gestionarea
-        stresului și îmbunătățirea relațiilor interpersonale
+        {% trans "Programe personalizate pentru creșterea stimei de sine, gestionarea stresului și îmbunătățirea relațiilor interpersonale" %}
       </p>
     </div>
   </article>
