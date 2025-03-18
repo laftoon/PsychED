@@ -321,24 +321,175 @@
 }
 /* Responsive Design
    ========================================================================== */
+
+/* Mobile-First Responsive Design Updates */
 @media (max-width: 768px) {
+  .contact-container {
+    padding: var(--space-lg) var(--space-md);
+  }
+
   .contact {
     grid-template-columns: 1fr;
+    gap: var(--space-lg);
+    padding: 0;
+    min-height: auto;
+  }
+
+  .contact__content,
+  .contact-form {
+    height: auto;
+    padding: var(--space-lg);
+    border-radius: var(--radius-md);
+  }
+
+  .contact__title {
+    font-size: var(--text-2xl);
+    margin-bottom: var(--space-md);
+  }
+
+  .contact__description {
+    font-size: var(--text-base);
+    line-height: 1.5;
+  }
+
+  .form-content,
+  .time-slot-selection {
+    position: relative;
+    width: 100%;
+    height: auto;
+    padding: var(--space-md);
+  }
+
+  .form-group {
+    margin-bottom: var(--space-sm);
+  }
+
+  .form-input,
+  .form-select,
+  .form-textarea {
+    font-size: 16px; /* Prevents iOS zoom */
+    padding: var(--space-md);
+    height: 44px; /* Minimum touch target size */
+  }
+
+  .form-textarea {
+    height: auto;
+    min-height: 100px;
   }
 
   .navigation-container {
-    grid-template-columns: 1fr;
-    text-align: center;
+    grid-template-columns: auto 1fr auto;
+    gap: var(--space-sm);
   }
 
   .day-navigation button {
-    width: 100%;
+    font-size: var(--text-sm);
+    padding: var(--space-sm);
+    min-width: auto;
+  }
+
+  .current-date {
+    font-size: var(--text-sm);
+    white-space: normal;
+    text-align: center;
   }
 
   #time-slots {
     grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-sm);
+    max-height: 250px;
+  }
+
+  .time-slot {
+    padding: var(--space-sm);
+    font-size: var(--text-sm);
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .form-submit {
+    padding: var(--space-md);
+    font-size: var(--text-base);
+    height: 44px;
   }
 }
+
+/* Small Mobile Devices */
+@media (max-width: 480px) {
+  .contact-container {
+    padding: var(--space-md) var(--space-sm);
+  }
+
+  .contact__content,
+  .contact-form {
+    padding: var(--space-md);
+  }
+
+  .contact__title {
+    font-size: var(--text-xl);
+  }
+
+  .contact__description {
+    font-size: var(--text-sm);
+  }
+
+  .navigation-container {
+    grid-template-columns: 1fr;
+    gap: var(--space-xs);
+  }
+
+  .day-navigation button {
+    width: 100%;
+    margin-bottom: var(--space-xs);
+  }
+
+  #time-slots {
+    grid-template-columns: 1fr;
+    max-height: 200px;
+  }
+
+  .success-message,
+  .error-message {
+    padding: var(--space-md);
+  }
+
+  .success-message h3,
+  .error-message h3 {
+    font-size: var(--text-lg);
+  }
+}
+
+/* Touch Device Optimizations */
+@media (hover: none) {
+  .form-submit:active {
+    transform: scale(0.98);
+  }
+
+  .time-slot:active {
+    background: rgba(255, 255, 255, 0.3);
+  }
+
+  .day-navigation button:active {
+    opacity: 0.8;
+  }
+}
+
+/* Loading State Improvements */
+@media (max-width: 768px) {
+  .loader {
+    width: 30px;
+    height: 30px;
+    border-width: 3px;
+  }
+
+  .loader-container.active {
+    background: rgba(255, 255, 255, 0.9);
+  }
+}
+
+
 @keyframes spin {
   0% {
     transform: rotate(0deg);

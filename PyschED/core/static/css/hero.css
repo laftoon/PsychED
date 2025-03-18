@@ -15,25 +15,22 @@
 }
 
 /* Hero Container
-   ========================================================================== */
+     ========================================================================== */
 .hero {
   position: relative;
   height: var(--hero-height);
   width: 100%;
   margin: 0;
   padding: 0;
-
-  /* Display */
   display: flex;
   align-items: flex-end;
   justify-content: center;
   text-align: center;
-
-  /* Prevent overflow issues */
   overflow: hidden;
+  margin-top: calc(-1 * var(--nav-height)); /* Add negative margin to offset navbar height */
 }
 /* Simple Hero Variant
-   ========================================================================== */
+     ========================================================================== */
 .hero--simple {
   height: 40vh;
 }
@@ -46,29 +43,21 @@
   padding-bottom: var(--space-2xl);
 }
 
-/* Responsive adjustments for the simple hero quote */
-@media (max-width: 768px) {
-  .hero--simple .hero__title {
-    font-size: 1.5rem;
-    padding: 0 var(--space-md);
-  }
-}
 
 /* Hero Background
-   ========================================================================== */
+     ========================================================================== */
 .hero__background {
   position: absolute;
   inset: 0;
+  top: 0;
   z-index: var(--z-negative);
-
-  /* Background image */
   background-image: url("../images/header-image.jpg");
   background-size: cover;
   background-position: center;
 }
 
 /* Hero Overlay
-   ========================================================================== */
+     ========================================================================== */
 .hero__overlay {
   position: absolute;
   inset: 0;
@@ -79,14 +68,13 @@
 }
 
 /* Hero Content Container
-   ========================================================================== */
+     ========================================================================== */
 .hero__content {
   position: relative;
   z-index: var(--z-elevate);
   max-width: var(--hero-max-width);
   padding: var(--hero-padding);
-
-  /* Layout */
+  padding-top: calc(var(--nav-height) + var(--hero-padding)); /* Add padding to account for navbar */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -94,7 +82,7 @@
 }
 
 /* Hero Title
-   ========================================================================== */
+     ========================================================================== */
 .hero__title {
   font-family: var(--font-primary);
   font-size: var(--hero-title-size);
@@ -107,7 +95,7 @@
 }
 
 /* Hero Action Button
-   ========================================================================== */
+     ========================================================================== */
 .hero__button {
   /* Base styles */
   margin-block-start: var(--space-md);
@@ -135,20 +123,29 @@
 }
 
 /* Responsive Design
-   ========================================================================== */
+     ========================================================================== */
 @media (max-width: 768px) {
   :root {
     --hero-title-size: var(--text-3xl);
     --hero-height: 40vh;
   }
 
+  .hero {
+    margin-top: calc(-1 * var(--nav-height)); /* Maintain negative margin on mobile */
+  }
+
   .hero__content {
     padding: var(--hero-padding) calc(var(--hero-padding) / 2);
+    padding-top: calc(var(--nav-height) + var(--hero-padding));
+  }
+  .hero--simple .hero__title {
+    font-size: 1.5rem;
+    padding: 0 var(--space-md);
   }
 }
 
 /* Accessibility
-   ========================================================================== */
+     ========================================================================== */
 @media (prefers-reduced-motion: reduce) {
   .hero__button {
     transition: none;

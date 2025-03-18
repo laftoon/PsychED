@@ -103,39 +103,81 @@
 }
 
 /* Hover Effects */
-.expandable-item:hover .expandable-background {
+.expandable-item:hover .expandable-background,
+.expandable-item.expanded .expandable-background {
   transform: scale(1.1);
   filter: brightness(0.7);
 }
 
-.expandable-item:hover .expandable-overlay {
+.expandable-item:hover .expandable-overlay,
+.expandable-item.expanded .expandable-overlay {
   opacity: 0.8;
 }
 
-.expandable-item:hover .expandable-content {
+.expandable-item:hover .expandable-content,
+.expandable-item.expanded .expandable-content {
   justify-content: flex-start;
   padding-top: calc(var(--space-xl) * 1.2);
   overflow-y: auto;
 }
 
-.expandable-item:hover .expandable-title {
+.expandable-item:hover .expandable-title,
+.expandable-item.expanded .expandable-title {
   position: relative;
   top: 0;
   left: 0;
   transform: none;
   margin-bottom: var(--space-md);
-  transition: all 0.3s ease-out;
 }
 
-.expandable-item:hover .expandable-description {
+.expandable-item:hover .expandable-description,
+.expandable-item.expanded .expandable-description {
   opacity: 1;
 }
 
-/* Responsive Design */
+/* Mobile Styles */
 @media (max-width: 768px) {
+  .expandable-cards-container {
+    padding: var(--space-xl) 0;
+    gap: var(--space-lg);
+  }
+
   .expandable-grid {
     grid-template-columns: 1fr;
-    grid-template-rows: repeat(4, 300px);
-    gap: var(--space-lg);
+    grid-template-rows: auto;
+    gap: var(--space-md);
+    padding: 0 var(--space-md);
+  }
+
+  .expandable-item {
+    height: 300px;
+  }
+
+  .expandable-content {
+    padding: var(--space-md);
+  }
+
+  .expandable-title {
+    font-size: var(--text-xl);
+  }
+
+  .expandable-description {
+    font-size: var(--text-base);
+  }
+}
+
+/* Touch Device Optimizations */
+@media (hover: none) {
+  .expandable-item {
+    transition: none;
+  }
+
+  .expandable-item.expanded .expandable-content {
+    justify-content: flex-start;
+    padding-top: var(--space-xl);
+  }
+
+  .expandable-description {
+    -webkit-overflow-scrolling: touch;
   }
 }

@@ -120,3 +120,36 @@ body {
   margin-block-end: var(--space-md);
   letter-spacing: var(--letter-spacing-wide);
 }
+
+@media (max-width: 768px) {
+  :root {
+    /* Adjust font sizes for mobile */
+    --text-3xl: 1.875rem;
+    --text-2xl: 1.5rem;
+    --text-xl: 1.25rem;
+    --text-lg: 1.125rem;
+    
+    /* Adjust spacing for mobile */
+    --space-2xl: 2rem;
+    --space-xl: 1.5rem;
+    --space-lg: 1rem;
+    
+    /* Adjust container padding */
+    --container-padding: 1rem;
+  }
+}
+
+@media (hover: none) {
+  /* Styles for touch devices */
+  .nav-menu__link:hover {
+    transform: none;
+  }
+
+  .card:hover {
+    transform: none;
+  }
+
+  .wide-card:hover {
+    transform: none;
+  }
+}

@@ -57,6 +57,26 @@ const TRANSLATIONS = {
       written_by: "Scris de",
       read_more: "Citește mai mult",
     },
+    mobile: {
+      swipe_left: "Glisați la stânga",
+      swipe_right: "Glisați la dreapta",
+      tap_to_select: "Atingeți pentru a selecta",
+      pull_to_refresh: "Trageți pentru a reîmprospăta",
+      loading: "Se încarcă...",
+      tap_to_close: "Atingeți pentru a închide",
+      tap_to_expand: "Atingeți pentru a extinde",
+      tap_to_collapse: "Atingeți pentru a restrânge",
+      scroll_to_top: "Derulați în sus",
+      connection_error: "Verificați conexiunea la internet",
+      retry: "Încercați din nou",
+      hold_to_delete: "Țineți apăsat pentru a șterge"
+    },
+    touch: {
+      feedback_success: "Acțiune reușită",
+      feedback_error: "Acțiune eșuată",
+      feedback_warning: "Atenție",
+      feedback_info: "Informație"
+    }
   },
   en: {
     // English translations with same structure
@@ -116,6 +136,27 @@ blog: {
   read_more: "Read more",
   back_to_blog: "Back to Blog"
 },
+mobile: {
+  swipe_left: "Swipe left",
+  swipe_right: "Swipe right", 
+  tap_to_select: "Tap to select",
+  pull_to_refresh: "Pull to refresh",
+  loading: "Loading...",
+  tap_to_close: "Tap to close",
+  tap_to_expand: "Tap to expand",
+  tap_to_collapse: "Tap to collapse",
+  scroll_to_top: "Scroll to top",
+  connection_error: "Check internet connection",
+  retry: "Try again",
+  hold_to_delete: "Hold to delete"
+},
+
+touch: {
+  feedback_success: "Action successful",
+  feedback_error: "Action failed",
+  feedback_warning: "Warning",
+  feedback_info: "Information"
+}
 
   },
   es: {
@@ -175,6 +216,27 @@ blog: {
       written_by: "Escrito por",
       read_more: "Leer más",
     },
+    mobile: {
+      swipe_left: "Desliza a la izquierda",
+      swipe_right: "Desliza a la derecha",
+      tap_to_select: "Toca para seleccionar",
+      pull_to_refresh: "Tira para actualizar",
+      loading: "Cargando...",
+      tap_to_close: "Toca para cerrar",
+      tap_to_expand: "Toca para expandir",
+      tap_to_collapse: "Toca para contraer",
+      scroll_to_top: "Desplázate hacia arriba",
+      connection_error: "Verifica la conexión a internet",
+      retry: "Intentar de nuevo",
+      hold_to_delete: "Mantén presionado para eliminar"
+    },
+
+    touch: {
+      feedback_success: "Acción exitosa",
+      feedback_error: "Acción fallida",
+      feedback_warning: "Advertencia",
+      feedback_info: "Información"
+    }
   },
 };
 
