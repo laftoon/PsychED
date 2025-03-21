@@ -5,12 +5,12 @@
   <a href="#" class="logo">PsychED Lab</a>
 
   <!-- Mobile Menu Toggle -->
-  <button class="mobile-menu-toggle" aria-label="Toggle menu">
+  <button class="mobile-menu-toggle" aria-label="Toggle menu" aria-expanded="false">
     <span class="hamburger"></span>
   </button>
 
   <!-- Navigation Menu -->
-  <ul class="nav-menu">
+  <ul class="nav-menu" role="menu">
     <!-- Regular Navigation Items -->
     <li class="nav-menu__item">
       <a href="{% url 'home' %}" class="nav-menu__link {% if request.path == '/' %}active{% endif %}">{% trans "Acasă" %}</a>
@@ -48,32 +48,50 @@
       </a>
     </li>
 
-<!-- Language Selector -->
-<li class="nav-menu__item language-selector">
-  <button class="language-selector__button nav-menu__link" aria-label="Select language">
-    {% get_current_language as LANGUAGE_CODE %}
-    {% if LANGUAGE_CODE == 'ro' %}
-      <img src="{% static 'images/flags/ro.svg' %}" alt="{% trans 'Romanian flag' %}" class="language-selector__flag">
-    {% elif LANGUAGE_CODE == 'en' %}
-      <img src="{% static 'images/flags/gb.svg' %}" alt="{% trans 'British flag' %}" class="language-selector__flag">
-    {% elif LANGUAGE_CODE == 'es' %}
-      <img src="{% static 'images/flags/es.svg' %}" alt="{% trans 'Spanish flag' %}" class="language-selector__flag">
-    {% endif %}
-  </button>
-
-  <div class="language-selector__dropdown">
-    <a href="{% url 'change_language' %}?lang=ro&next={{ request.path }}" class="language-selector__option">
-      <img src="{% static 'images/flags/ro.svg' %}" alt="{% trans 'Romanian flag' %}" class="language-selector__flag">
-      <span>Română</span>
-    </a>
-    <a href="{% url 'change_language' %}?lang=en&next={{ request.path }}" class="language-selector__option">
-      <img src="{% static 'images/flags/gb.svg' %}" alt="{% trans 'British flag' %}" class="language-selector__flag">
-      <span>English</span>
-    </a>
-    <a href="{% url 'change_language' %}?lang=es&next={{ request.path }}" class="language-selector__option">
-      <img src="{% static 'images/flags/es.svg' %}" alt="{% trans 'Spanish flag' %}" class="language-selector__flag">
-      <span>Español</span>
-    </a>
-  </div>
-</li>
+    <li class="nav-menu__item desktop-language-selector">
+      <div class="language-selector">
+        <button class="language-selector__button">
+          <img 
+            src="{% static 'images/flags/ro.svg' %}" 
+            alt="{% trans 'Current language flag' %}" 
+            class="language-selector__flag"
+          >
+        </button>
+        <div class="language-selector__dropdown">
+          <a href="{% url 'change_language' %}?lang=ro&next={{ request.path }}" class="language-selector__option">
+            <img src="{% static 'images/flags/ro.svg' %}" alt="{% trans 'Romanian flag' %}" class="language-selector__flag">
+            <span>Română</span>
+          </a>
+          <a href="{% url 'change_language' %}?lang=en&next={{ request.path }}" class="language-selector__option">
+            <img src="{% static 'images/flags/gb.svg' %}" alt="{% trans 'British flag' %}" class="language-selector__flag">
+            <span>English</span>
+          </a>
+          <a href="{% url 'change_language' %}?lang=es&next={{ request.path }}" class="language-selector__option">
+            <img src="{% static 'images/flags/es.svg' %}" alt="{% trans 'Spanish flag' %}" class="language-selector__flag">
+            <span>Español</span>
+          </a>
+        </div>
+      </div>
+    </li>
+  
+    <!-- Mobile Language Options -->
+    <li class="nav-menu__item mobile-language-selector">
+      <a href="{% url 'change_language' %}?lang=ro&next={{ request.path }}" class="nav-menu__link nav-menu__link--language">
+        <img src="{% static 'images/flags/ro.svg' %}" alt="{% trans 'Romanian flag' %}" class="nav-menu__flag">
+        <span>Română</span>
+      </a>
+    </li>
+    <li class="nav-menu__item mobile-language-selector">
+      <a href="{% url 'change_language' %}?lang=en&next={{ request.path }}" class="nav-menu__link nav-menu__link--language">
+        <img src="{% static 'images/flags/gb.svg' %}" alt="{% trans 'British flag' %}" class="nav-menu__flag">
+        <span>English</span>
+      </a>
+    </li>
+    <li class="nav-menu__item mobile-language-selector">
+      <a href="{% url 'change_language' %}?lang=es&next={{ request.path }}" class="nav-menu__link nav-menu__link--language">
+        <img src="{% static 'images/flags/es.svg' %}" alt="{% trans 'Spanish flag' %}" class="nav-menu__flag">
+        <span>Español</span>
+      </a>
+    </li>
+  </ul>
 </nav>

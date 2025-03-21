@@ -147,33 +147,87 @@
 
 /* Mobile Styles */
 @media (max-width: 768px) {
-  .carousel {
-    padding: var(--space-lg) 0;
+  :root {
+    --carousel-card-width: calc(100vw - 2rem);
+    --carousel-card-height: auto;
+    --carousel-padding: var(--space-md);
   }
 
-  .carousel__nav {
-    display: none;
+  .carousel {
+    padding: var(--space-md) 0;
+  }
+
+  .carousel__container {
+    padding: 0;
+    overflow: hidden;
+  }
+
+  .carousel__inner {
+    padding: 0;
   }
 
   .carousel__track {
     margin: 0;
-    padding: 0 var(--space-sm);
+    padding: 0 var(--space-md);
     overflow-x: auto;
     scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE and Edge */
+  }
+
+  .carousel__track::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera */
   }
 
   .flip-card {
     scroll-snap-align: center;
+    flex: 0 0 calc(100% - 2rem);
+    margin: 0 1rem;
+    height: auto;
+    min-height: 300px; /* Increased from 300px */
+  }
+
+  .flip-card__face {
+    padding: var(--space-lg); /* Increased from space-md */
+    min-height: 300px; /* Increased from 300px */
+    height: 100%;
+  }
+
+  .flip-card__title {
+    font-size: var(--text-2xl); /* Increased from text-xl */
+    line-height: 1.3;
+    margin-bottom: var(--space-md);
+  }
+
+  .flip-card__content {
+    font-size: var(--text-lg); /* Increased from text-base */
+    padding: var(--space-md);
+    line-height: 1.6;
+  }
+
+  /* Hide navigation buttons on mobile */
+  .carousel__nav {
+    display: none;
   }
 }
 
-/* Touch Device Optimizations */
-@media (hover: none) {
-  .flip-card__inner {
-    transition: transform 0.3s ease;
+/* Small Mobile Devices */
+@media (max-width: 480px) {
+  .flip-card {
+    min-height: 350px;
   }
 
-  .flip-card:active .flip-card__inner {
-    transform: rotateY(180deg);
+  .flip-card__face {
+    min-height: 350px;
+  }
+
+  .flip-card__title {
+    font-size: var(--text-xl);
+  }
+
+  .flip-card__content {
+    font-size: var(--text-base);
   }
 }
+

@@ -147,37 +147,63 @@
     grid-template-rows: auto;
     gap: var(--space-md);
     padding: 0 var(--space-md);
+    width: 100%;
+    box-sizing: border-box;
   }
 
   .expandable-item {
-    height: 300px;
+    height: auto;
+    min-height: 300px;
   }
 
-  .expandable-content {
-    padding: var(--space-md);
-  }
-
-  .expandable-title {
-    font-size: var(--text-xl);
-  }
-
+  /* Remove all transitions */
+  .expandable-item,
+  .expandable-background,
+  .expandable-overlay,
+  .expandable-content,
+  .expandable-title,
   .expandable-description {
-    font-size: var(--text-base);
-  }
-}
-
-/* Touch Device Optimizations */
-@media (hover: none) {
-  .expandable-item {
     transition: none;
   }
 
-  .expandable-item.expanded .expandable-content {
+  /* Set content to expanded state by default */
+  .expandable-content {
+    padding: var(--space-md);
     justify-content: flex-start;
-    padding-top: var(--space-xl);
+    padding-top: calc(var(--space-xl) * 1.2);
+  }
+
+  .expandable-title {
+    position: relative;
+    top: 0;
+    left: 0;
+    transform: none;
+    margin-bottom: var(--space-md);
+    font-size: var(--text-xl);
+    width: 100%;
   }
 
   .expandable-description {
-    -webkit-overflow-scrolling: touch;
+    opacity: 1;
+    position: static;
+    font-size: var(--text-base);
+    width: 100%;
+    margin: 0;
+  }
+
+  /* Disable hover effects */
+  .expandable-item:hover .expandable-background,
+  .expandable-item.expanded .expandable-background {
+    transform: none;
+    filter: none;
+  }
+
+  .expandable-item:hover .expandable-overlay,
+  .expandable-item.expanded .expandable-overlay {
+    opacity: 0.85;
+  }
+
+  .expandable-background {
+    transform: none;
   }
 }

@@ -48,17 +48,16 @@
 }
 
 .contact__description a {
-    color: var(--text-muted); 
-    text-decoration: underline;
-    text-decoration-color: var(--text-muted); 
-    text-underline-offset: 2px; 
-    transition: color 0.3s ease; 
+  color: var(--text-muted);
+  text-decoration: underline;
+  text-decoration-color: var(--text-muted);
+  text-underline-offset: 2px;
+  transition: color 0.3s ease;
 }
 
 .contact__description a:hover {
-    color: #333333; 
+  color: #333333;
 }
-
 
 /* Form Container
    ========================================================================== */
@@ -321,9 +320,31 @@
 }
 /* Responsive Design
    ========================================================================== */
-
+   .mobile-language-selector {
+    display: none;
+  }
 /* Mobile-First Responsive Design Updates */
 @media (max-width: 768px) {
+  .desktop-language-selector {
+    display: none;
+  }
+  .mobile-language-selector {
+    display: block;
+  }
+  .nav-menu__link--language {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    color: var(--heading-color);
+    font-size: 1.5rem;
+    padding: var(--space-sm) 0;
+    justify-content: flex-end;
+  }
+
+  .nav-menu__flag {
+    width: 24px;
+    height: auto;
+  }
   .contact-container {
     padding: var(--space-lg) var(--space-md);
   }
@@ -341,6 +362,11 @@
     padding: var(--space-lg);
     border-radius: var(--radius-md);
   }
+  .contact-form {
+    padding: var(--space-lg);
+    width: 100%; /* Add this */
+    box-sizing: border-box; /* Add this */
+  }
 
   .contact__title {
     font-size: var(--text-2xl);
@@ -355,26 +381,67 @@
   .form-content,
   .time-slot-selection {
     position: relative;
-    width: 100%;
+    width: auto; /* Change from 100% to auto */
     height: auto;
     padding: var(--space-md);
+    box-sizing: border-box; /* Add this */
   }
-
   .form-group {
+    position: relative;
+    width: 100%;
     margin-bottom: var(--space-sm);
+  }
+  /* Add this new style for the select container */
+  .form-group:has(.form-select) {
+    overflow: visible;
   }
 
   .form-input,
   .form-select,
   .form-textarea {
-    font-size: 16px; /* Prevents iOS zoom */
+    width: 100%; /* Add this */
+    box-sizing: border-box; /* Add this */
+    font-size: 16px;
     padding: var(--space-md);
-    height: 44px; /* Minimum touch target size */
+    height: 44px;
+  }
+  .form-select {
+    width: 100%;
+    padding: var(--space-md) 40px var(--space-md) var(--space-md);
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    min-width: 0;
+    max-width: 100%;
+    box-sizing: border-box;
+    background-position: right 10px center;
+    background-size: 16px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    height: auto; /* Add this */
+    min-height: 44px; /* Change from fixed height */
+  }
+  .form-select option {
+    padding: var(--space-md);
+    white-space: normal;
+    min-height: 40px;
+    font-size: inherit;
+    color: var(--text-light);
+    background-color: var(--primary-color);
+    width: 100%; /* Add this */
+    box-sizing: border-box; /* Add this */
+  }
+  .form-group:has(.form-select) {
+    overflow: visible;
+    width: 100%;
+    position: relative;
   }
 
   .form-textarea {
     height: auto;
     min-height: 100px;
+    width: 100%; /* Add this */
   }
 
   .navigation-container {
@@ -488,7 +555,6 @@
     background: rgba(255, 255, 255, 0.9);
   }
 }
-
 
 @keyframes spin {
   0% {

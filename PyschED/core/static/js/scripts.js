@@ -432,3 +432,37 @@ document.addEventListener("DOMContentLoaded", () => {
     expandableCardHandler: new ExpandableCardHandler(),
   };
 });
+// In scripts.js
+document.addEventListener("DOMContentLoaded", () => {
+  const mobileMenuToggle = document.querySelector(".mobile-menu-toggle");
+  const navMenu = document.querySelector(".nav-menu");
+  
+  if (mobileMenuToggle && navMenu) {
+    mobileMenuToggle.addEventListener("click", () => {
+      mobileMenuToggle.classList.toggle("active");
+      navMenu.classList.toggle("active");
+      mobileMenuToggle.setAttribute(
+        "aria-expanded",
+        mobileMenuToggle.classList.contains("active")
+      );
+    });
+
+    // Close menu when clicking outside
+    document.addEventListener("click", (e) => {
+      if (!navMenu.contains(e.target) && !mobileMenuToggle.contains(e.target)) {
+        mobileMenuToggle.classList.remove("active");
+        navMenu.classList.remove("active");
+        mobileMenuToggle.setAttribute("aria-expanded", "false");
+      }
+    });
+
+    // Close menu when pressing Escape
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") {
+        mobileMenuToggle.classList.remove("active");
+        navMenu.classList.remove("active");
+        mobileMenuToggle.setAttribute("aria-expanded", "false");
+      }
+    });
+  }
+});

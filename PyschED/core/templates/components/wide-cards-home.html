@@ -1,61 +1,44 @@
-{% load static %} {% load i18n %}
-
+{# PyschED/core/templates/components/wide-cards-home.html #} {% load static %}{% load i18n %}
 <section class="wide-cards">
+  <!-- About Me Card -->
+  <article class="wide-card wide-card--with-image">
+    <div class="wide-card__background"></div>
+    <div class="wide-card__content">
+      <div class="wide-card__text">
+        <h2 class="wide-card__title">Cine sunt?</h2>
+        <p class="wide-card__description">
+          {% trans "Sunt un Psiholog Clinician și Psihoterapeut Cognitiv Comportamental cu experiență internațională în SUA și Olanda. De-a lungul a 8 ani de practică, m-am dedicat să ajut sute de persoane să-și înțeleagă mai bine problemele, să-și definească valorile și să-și atingă obiectivele. Îmi folosesc expertiza diversă pentru a oferi servicii personalizate de consiliere vocațională și educațională. Sunt aici pentru a asigura că nimeni nu trebuie să facă față provocărilor vieții singur" %}
+        </p>
+      </div>
+      <div class="wide-card__image">
+        <img src="{% static 'images/content1.2.jpg' %}" alt="Profile Image" />
+      </div>
+    </div>
+  </article>
+
+  <!-- Psychology Card -->
   <article class="wide-card">
     <div class="wide-card__background"></div>
     <div class="wide-card__content">
       <div class="wide-card__text">
-        <h2 class="wide-card__title">{% trans "Terapie Individuală" %}</h2>
+        <h2 class="wide-card__title">La ce mă ajută un psiholog?</h2>
         <p class="wide-card__description">
-          {% trans "Un spațiu sigur și confidențial unde poți gestiona problemele personale și emoționale, dezvoltând strategii eficiente de coping. Această formă de terapie îți oferă oportunitatea de a explora diverse aspecte ale vieții tale într-un mediu suportiv, ajutându-te să înțelegi mai bine originea dificultăților și să lucrezi activ pentru îmbunătățirea stării tale de bine. Este un proces colaborativ, centrat pe nevoile individuale, care încurajează creșterea personală și rezolvarea constructivă a conflictelor interioare" %}
+          {% trans "Discuțiile cu un psiholog sunt transformative și te pot ajuta să-ți îmbunătățești calitatea vieții în multe moduri. Un psiholog te sprijină să te cunoști mai bine, să identifici și să înțelegi sursele disconfortului tău, și să descoperi legătura dintre trecutul și prezentul tău. Prin terapie, vei învăța să formulezi strategii eficiente pentru a depăși provocările, să-ți clarifici valorile personale, și să trăiești o viață autentică și aliniată cu acestea. Mai mult, terapia poate reduce simptomele de anxietate și depresie, îmbunătățind gestionarea emoțiilor și relațiile interpersonale" %} 
         </p>
       </div>
     </div>
   </article>
 
+  <!-- Counseling Card -->
   <article class="wide-card">
     <div class="wide-card__background"></div>
     <div class="wide-card__content">
       <div class="wide-card__text">
-        <h2 class="wide-card__title">{% trans "Evaluări Clinice" %}</h2>
+        <h2 class="wide-card__title">
+          La ce mă ajută un consilier vocațional sau educațional?
+        </h2>
         <p class="wide-card__description">
-          {% trans "Evaluări detaliate pentru înțelegerea provocărilor psihologice, cu recomandări precise și planuri de tratament adaptate. Aceste evaluări sunt esențiale pentru diagnosticarea corectă și personalizată, oferind o bază solidă pentru intervenții terapeutice eficiente. Prin utilizarea unor metode și instrumente validate, specialistul poate identifica nevoile specifice ale fiecărei persoane, facilitând astfel elaborarea unui plan de tratament optimizat și orientat către rezultate concrete și ameliorarea simptomelor" %}
-        </p>
-      </div>
-    </div>
-  </article>
-
-  <article class="wide-card">
-    <div class="wide-card__background"></div>
-    <div class="wide-card__content">
-      <div class="wide-card__text">
-        <h2 class="wide-card__title">{% trans "Consiliere Vocațională" %}</h2>
-        <p class="wide-card__description">
-          {% trans "Descoperirea carierei ideale și dezvoltarea abilităților pentru succes, cu un plan personalizat pe baza talentelor tale. Acest proces te ajută să navighezi prin posibilele opțiuni de carieră și să identifici drumul profesional care se potrivește cel mai bine cu interesele și competențele tale personale. Consilierul vocațional utilizează diverse tehnici de evaluare pentru a clarifica aptitudinile și preferințele, oferindu-ți astfel suportul necesar pentru a lua decizii informate și a stabili obiective de carieră realiste și realizabile" %}
-        </p>
-      </div>
-    </div>
-  </article>
-
-  <article class="wide-card">
-    <div class="wide-card__background"></div>
-    <div class="wide-card__content">
-      <div class="wide-card__text">
-        <h2 class="wide-card__title">{% trans "Consiliere Educațională" %}</h2>
-        <p class="wide-card__description">
-          {% trans "Suport pentru aplicații la universități în străinătate, dezvoltarea portofoliului academic și orientare educațională. Acest serviciu este esențial pentru studenții care aspiră să studieze în afara țării, oferindu-le ghidare în complexul proces de selecție și admitere. Consilierul educațional ajută la structurarea unui portofoliu impresionant, pregătirea documentației necesare și formularea unor aplicații convingătoare. De asemenea, oferă consiliere continuă pentru a naviga prin provocările sistemelor educaționale internaționale și pentru a maximiza șansele de succes" %}
-        </p>
-      </div>
-    </div>
-  </article>
-
-  <article class="wide-card">
-    <div class="wide-card__background"></div>
-    <div class="wide-card__content">
-      <div class="wide-card__text">
-        <h2 class="wide-card__title">{% trans "Dezvoltare Personală" %}</h2>
-        <p class="wide-card__description">
-          {% trans "Programe personalizate pentru creșterea stimei de sine, gestionarea stresului și îmbunătățirea relațiilor interpersonale. Aceste programe sunt concepute pentru a te ajuta să îți descoperi și să îți valorifici potențialul maxim, oferind strategii adaptate nevoilor tale individuale. Fie că este vorba de depășirea anxietăților, îmbunătățirea comunicării în relațiile personale sau profesionale, sau dezvoltarea unui sentiment de bine și încredere în sine, consilierul îți va oferi suport constant și metode eficiente de auto-îmbunătățire. Aceste abordări te vor echipa cu uneltele necesare pentru a face față provocărilor cotidiene și pentru a trăi o viață echilibrată și împlinită" %}
+          {% trans "Discuțiile cu un consilier vocațional sau educațional sunt esențiale pentru orice adolescent sau elev de liceu nehotărât cu privire la cariera sau educația viitoare. Un consilier vocațional te ajută să identifici interesele și abilitățile tale, oferindu-ți direcții clare despre carierele care ți s-ar potrivi cel mai bine. Dacă ai în plan să studiezi în străinătate, un consilier educațional îți va clarifica pașii necesari și te va asista în crearea unui portofoliu impresionant pentru aplicățiile universitare. Această orientare specializată îți optimizează șansele de succes și te pregătește eficient pentru viitor" %}
         </p>
       </div>
     </div>

@@ -124,34 +124,62 @@
 
 /* Responsive Design
      ========================================================================== */
+
 @media (max-width: 768px) {
   :root {
-    --hero-title-size: var(--text-3xl);
-    --hero-height: 40vh;
+    --hero-title-size: 1.75rem;
+    --hero-height: 60vh;
+    --hero-padding: var(--space-lg);
   }
 
   .hero {
-    margin-top: calc(-1 * var(--nav-height)); /* Maintain negative margin on mobile */
+    height: var(--hero-height);
+    text-align: center;
   }
 
   .hero__content {
-    padding: var(--hero-padding) calc(var(--hero-padding) / 2);
-    padding-top: calc(var(--nav-height) + var(--hero-padding));
+    padding: var(--space-xl) var(--space-md);
+    padding-top: calc(var(--nav-height) + var(--space-xl));
   }
+
+  .hero__title {
+    font-size: var(--hero-title-size);
+    line-height: 1.4;
+    margin-bottom: var(--space-md);
+  }
+
+  .hero__button {
+    width: 100%;
+    max-width: 300px;
+    margin-top: var(--space-lg);
+  }
+
+  /* Simple hero variant adjustments */
+  .hero--simple {
+    height: 50vh;
+  }
+
   .hero--simple .hero__title {
     font-size: 1.5rem;
     padding: 0 var(--space-md);
+    padding-bottom: var(--space-xl);
   }
 }
 
-/* Accessibility
-     ========================================================================== */
-@media (prefers-reduced-motion: reduce) {
-  .hero__button {
-    transition: none;
+/* Additional breakpoint for very small screens */
+@media (max-width: 480px) {
+  :root {
+    --hero-title-size: 1.5rem;
+    --hero-height: 50vh;
+  }
 
-    &:hover {
-      transform: none;
-    }
+  .hero__content {
+    padding: var(--space-lg) var(--space-sm);
+  }
+
+  .hero--simple .hero__title {
+    font-size: 1.25rem;
+    padding: 0 var(--space-sm);
   }
 }
+
