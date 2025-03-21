@@ -1,16 +1,8 @@
+// form-handler.js
+
 class FormHandler {
   constructor() {
-    this.initializeElements();
-    this.initializeState();
-    
-    if (this.form) {
-      this.initialize();
-      this.setupMobileHandlers();
-    }
-  }
-
-  initializeElements() {
-    // Form elements
+    // Initialize form elements
     this.form = document.getElementById("contactForm");
     this.formContent = document.querySelector(".form-content");
     this.timeSlotSelection = document.querySelector(".time-slot-selection");
@@ -19,79 +11,29 @@ class FormHandler {
     this.loaderContainer = document.querySelector(".loader-container");
     this.successMessage = document.querySelector(".success-message");
     this.errorMessage = document.querySelector(".error-message");
-    
-    // Mobile-specific elements
-    this.inputs = this.form?.querySelectorAll('input, select, textarea');
-    this.isMobile = window.innerWidth <= 768;
-  }
 
-  initializeState() {
+    // Initialize state
     this.selectedTimeSlot = null;
     this.isSubmitting = false;
     this.formData = null;
     this.hasSubmitted = false;
-    this.touchStartY = 0;
-    this.isScrolling = false;
+
+    if (this.form) {
+      this.initialize();
+    }
   }
 
   initialize() {
     this.form.addEventListener("submit", (e) => this.handleFormSubmit(e));
-    this.setupTimeSlotHandlers();
-    this.setupNavigationButtons();
-    this.setupResizeHandler();
-  }
 
-  setupMobileHandlers() {
-    if ('ontouchstart' in window) {
-      // Prevent zoom on focus for iOS
-      this.inputs?.forEach(input => {
-        input.style.fontSize = '16px';
-        
-        // Add touch feedback
-        input.addEventListener('touchstart', () => {
-          input.style.backgroundColor = 'rgba(255, 255, 255, 0.15)';
-        });
-        
-        input.addEventListener('touchend', () => {
-          input.style.backgroundColor = '';
-        });
-      });
-
-      // Handle time slot touch events
-      if (this.timeSlots) {
-        this.timeSlots.addEventListener('touchstart', (e) => {
-          this.touchStartY = e.touches[0].clientY;
-        }, { passive: true });
-
-        this.timeSlots.addEventListener('touchmove', (e) => {
-          const touchY = e.touches[0].clientY;
-          const diff = this.touchStartY - touchY;
-
-          if (Math.abs(diff) > 5) {
-            this.isScrolling = true;
-          }
-        }, { passive: true });
-
-        this.timeSlots.addEventListener('touchend', () => {
-          setTimeout(() => {
-            this.isScrolling = false;
-          }, 100);
-        });
-      }
-    }
-  }
-
-  setupTimeSlotHandlers() {
     if (this.timeSlots) {
       this.timeSlots.addEventListener("click", (e) => {
-        if (e.target.classList.contains("time-slot") && !this.isScrolling) {
+        if (e.target.classList.contains("time-slot")) {
           this.handleTimeSlotClick(e.target);
         }
       });
     }
-  }
 
-  setupNavigationButtons() {
     const prevDayBtn = document.getElementById("prev-day");
     const nextDayBtn = document.getElementById("next-day");
 
@@ -103,30 +45,69 @@ class FormHandler {
     }
   }
 
-  setupResizeHandler() {
-    window.addEventListener('resize', this.debounce(() => {
-      this.isMobile = window.innerWidth <= 768;
-      this.updateLayout();
-    }, 250));
+  async handleFormSubmit(e) {
+    e.preventDefault();
+
+    if (this.isSubmitting || this.hasSubmitted) {
+      return;
+    }
+
+    this.isSubmitting = true;
+
+    try {
+      if (!this.timeSlotSelection.classList.contains("hidden")) {
+        await this.handleTimeSlotSubmission();
+      } else {
+        await this.handleInitialFormSubmission();
+      }
+    } catch (error) {
+      console.error("Form submission error:", error);
+      this.showError("A apărut o eroare la procesarea formularului");
+    } finally {
+      this.isSubmitting = false;
+    }
   }
 
-  updateLayout() {
-    if (this.isMobile) {
-      this.timeSlots?.classList.add('mobile-view');
-      this.form?.classList.add('mobile-view');
-    } else {
-      this.timeSlots?.classList.remove('mobile-view');
-      this.form?.classList.remove('mobile-view');
+  async handleInitialFormSubmission() {
+    this.formData = new FormData();
+
+    const requiredFields = ["firstName", "lastName", "email", "interest", "message"];
+    for (const field of requiredFields) {
+      const value = this.form.elements[field].value.trim();
+      if (!value) {
+        this.showError(window.translations.get("required_field", "form"));
+        this.isSubmitting = false;
+        return;
+      }
+      this.formData.append(field, value);
+    }
+
+    this.showLoader();
+
+    try {
+      if (window.calendarHandler) {
+        window.calendarHandler.initializeWorkingDays();
+        await window.calendarHandler.fetchAndDisplayTimeSlots();
+      }
+
+      this.formContent.style.opacity = "0";
+      setTimeout(() => {
+        this.formContent.classList.add("hidden");
+        this.timeSlotSelection.classList.remove("hidden");
+        setTimeout(() => {
+          this.timeSlotSelection.style.opacity = "1";
+          this.hideLoader();
+        }, 50);
+      }, 300);
+    } catch (error) {
+      this.hideLoader();
+      this.showError(window.translations.get("calendar_load_error", "errors"));
+      console.error("Calendar initialization error:", error);
     }
   }
 
   handleTimeSlotClick(slot) {
     if (this.isSubmitting) return;
-
-    // Add haptic feedback for supported devices
-    if (window.navigator.vibrate) {
-      window.navigator.vibrate(50);
-    }
 
     const slots = this.timeSlots.querySelectorAll(".time-slot");
     slots.forEach((s) => s.classList.remove("selected"));
@@ -136,17 +117,116 @@ class FormHandler {
 
     if (this.confirmTimeSlotBtn) {
       this.confirmTimeSlotBtn.disabled = false;
-      
-      // Scroll to button on mobile
-      if (this.isMobile) {
-        this.confirmTimeSlotBtn.scrollIntoView({ behavior: 'smooth' });
-      }
     }
   }
 
-  // ... rest of the existing methods (handleFormSubmit, handleInitialFormSubmission, 
-  // handleTimeSlotSubmission, etc.) remain the same ...
+  // In form-handler.js
+  async handleTimeSlotSubmission() {
+    if (!this.selectedTimeSlot) {
+      this.showError(window.translations.get("select_time", "form"));
+      this.isSubmitting = false;
+      return;
+    }
 
+    this.showLoader();
+    this.confirmTimeSlotBtn.disabled = true;
+
+    try {
+      if (!this.formData) {
+        throw new Error(window.translations.get("missing_form_data", "errors"));
+      }
+
+      const selectedDate = window.calendarHandler.selectedDate;
+      const [hours, minutes, seconds] = this.selectedTimeSlot.split(":");
+
+      // Create date in Madrid timezone
+      const madridDate = new Date(
+        selectedDate.getFullYear(),
+        selectedDate.getMonth(),
+        selectedDate.getDate(),
+        parseInt(hours),
+        parseInt(minutes),
+        parseInt(seconds)
+      );
+
+      this.formData.append("date", madridDate.toISOString().split("T")[0]);
+      this.formData.append("time", this.selectedTimeSlot);
+
+      const response = await fetch("/submit_time_slot/", {
+        method: "POST",
+        headers: {
+          "X-CSRFToken": this.getCookie("csrftoken"),
+        },
+        body: this.formData,
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || window.translations.get("submission_error", "form"));
+      }
+
+      if (data.success) {
+        this.hasSubmitted = true;
+        this.hideLoader();
+        this.showSuccess();
+        setTimeout(() => {
+          this.resetForm();
+        }, 3000);
+      } else {
+        throw new Error(data.error || window.translations.get("submission_error", "form"));
+      }
+    } catch (error) {
+      this.hideLoader();
+      console.error("Submission error:", error);
+      this.showError(error.message || window.translations.get("submission_error", "form"));
+      this.confirmTimeSlotBtn.disabled = false;
+    } finally {
+      this.isSubmitting = false;
+    }
+  }
+
+  resetForm() {
+    this.form.reset();
+    this.timeSlotSelection.style.opacity = "0";
+    setTimeout(() => {
+      this.timeSlotSelection.classList.add("hidden");
+      this.formContent.classList.remove("hidden");
+      setTimeout(() => {
+        this.formContent.style.opacity = "1";
+      }, 50);
+    }, 300);
+
+    this.successMessage.classList.remove("active");
+    this.errorMessage.classList.remove("active");
+    this.confirmTimeSlotBtn.disabled = true;
+    this.selectedTimeSlot = null;
+    this.formData = null;
+    this.hasSubmitted = false;
+    this.isSubmitting = false;
+  }
+
+  showLoader() {
+    if (this.loaderContainer) {
+      this.loaderContainer.classList.add("active");
+      this.form.classList.add("loading");
+    }
+  }
+
+  hideLoader() {
+    if (this.loaderContainer) {
+      this.loaderContainer.classList.remove("active");
+      this.form.classList.remove("loading");
+    }
+  }
+
+  showSuccess() {
+    // Clear any error message first
+    this.errorMessage.classList.remove("active");
+    if (this.successMessage) {
+      this.successMessage.classList.add("active");
+    }
+  }
   showError(message) {
     this.successMessage.classList.remove("active");
     const errorContent = this.errorMessage.querySelector("p");
@@ -154,28 +234,24 @@ class FormHandler {
       errorContent.textContent = message;
     }
     this.errorMessage.classList.add("active");
-
-    // Vibrate on error for mobile devices
-    if (window.navigator.vibrate) {
-      window.navigator.vibrate([100, 50, 100]);
-    }
-
-    // Ensure error is visible on mobile
-    if (this.isMobile) {
-      this.errorMessage.scrollIntoView({ behavior: 'smooth' });
-    }
-
     setTimeout(() => {
       this.errorMessage.classList.remove("active");
     }, 3000);
   }
 
-  debounce(func, wait) {
-    let timeout;
-    return (...args) => {
-      clearTimeout(timeout);
-      timeout = setTimeout(() => func.apply(this, args), wait);
-    };
+  getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== "") {
+      const cookies = document.cookie.split(";");
+      for (let i = 0; i < cookies.length; i++) {
+        const cookie = cookies[i].trim();
+        if (cookie.substring(0, name.length + 1) === name + "=") {
+          cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+          break;
+        }
+      }
+    }
+    return cookieValue;
   }
 }
 

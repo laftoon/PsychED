@@ -14,7 +14,7 @@ from .models import BlogPost
 from django.utils import translation
 from django.shortcuts import redirect
 from django.utils.translation import get_language
-
+logger = logging.getLogger(__name__)
 
 def get_language_context(request):
     return {'LANGUAGE_CODE': get_language()}
@@ -181,6 +181,8 @@ def submit_time_slot(request):
             interest = request.POST.get('interest')
             message = request.POST.get('message')
             
+            logger.info(f"Received submission for {first_name} {last_name} on {date_str} at {time_str}")
+            
             if not all([date_str, time_str, email, first_name, last_name]):
                 return JsonResponse({
                     'success': False, 
@@ -205,6 +207,8 @@ def submit_time_slot(request):
                 
                 # Convert to UTC for storage
                 utc_datetime = selected_datetime.astimezone(pytz.UTC)
+                
+                logger.info(f"Creating calendar event for {utc_datetime} UTC")
                 
                 # Create calendar event
                 event = create_calendar_event({
@@ -233,11 +237,13 @@ def submit_time_slot(request):
                     )
                     
                     cache.set(submission_key, True, 86400)
+                    logger.info(f"Successfully created event and sent confirmation email")
                     return JsonResponse({'success': True, 'event': event['htmlLink']})
                 else:
                     raise Exception('Failed to create calendar event')
                     
             except Exception as e:
+                logger.error(f"Error processing submission: {str(e)}")
                 cache.delete(submission_key)
                 raise e
                 
@@ -258,6 +264,7 @@ def submit_time_slot(request):
         'success': False, 
         'error': 'Invalid request method'
     }, status=405)
+
 
 
 class HomePageView(TemplateView):

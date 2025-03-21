@@ -1,11 +1,5 @@
 class CalendarHandler {
   constructor() {
-    this.initializeElements();
-    this.initializeState();
-    this.setupEventListeners();
-  }
-
-  initializeElements() {
     this.selectedDate = this.getNextWorkingDay(new Date());
     this.workingDays = [];
     this.currentDateSpan = document.querySelector(".current-date");
@@ -13,91 +7,127 @@ class CalendarHandler {
     this.nextDayBtn = document.getElementById("next-day");
     this.timeSlots = document.getElementById("time-slots");
     this.currentLanguage = document.documentElement.lang || 'ro';
-    this.isMobile = window.innerWidth <= 768;
   }
 
-  initializeState() {
-    this.isAnimating = false;
-    this.touchStartX = 0;
-    this.touchStartY = 0;
-    this.swipeThreshold = 50;
-    this.isScrolling = false;
+  getNextWorkingDay(date) {
+    const nextDay = new Date(date);
+    nextDay.setDate(nextDay.getDate() + 1);
+    return nextDay;
   }
 
-  setupEventListeners() {
-    // Resize handler
-    window.addEventListener('resize', this.debounce(() => {
-      this.isMobile = window.innerWidth <= 768;
-      this.updateLayout();
-    }, 250));
+  initializeWorkingDays() {
+  this.workingDays = [];
+  let currentDate = new Date();
 
-    // Touch events for mobile
-    if ('ontouchstart' in window) {
-      this.setupTouchEvents();
+  // If current day is after work hours (after 7 PM Madrid time), start from next day
+  const madridTime = new Date(currentDate.toLocaleString('en-US', { timeZone: 'Europe/Madrid' }));
+  const currentHour = madridTime.getHours();
+  if (currentHour >= 19) {
+    currentDate.setDate(currentDate.getDate() + 1);
+  }
+
+  // Get next 7 working days (excluding weekends)
+  let daysAdded = 0;
+  let i = 1;
+  while (daysAdded < 7) {
+    const nextDate = new Date(currentDate);
+    nextDate.setDate(currentDate.getDate() + i);
+    
+    // Skip weekends
+    const dayOfWeek = nextDate.getDay();
+    if (dayOfWeek !== 0 && dayOfWeek !== 6) {
+      this.workingDays.push(new Date(nextDate));
+      daysAdded++;
     }
-
-    // Keyboard navigation
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'ArrowLeft') this.navigateDay(-1);
-      if (e.key === 'ArrowRight') this.navigateDay(1);
-    });
+    i++;
   }
 
-  setupTouchEvents() {
-    if (!this.timeSlots) return;
+  // Set selected date to first available day
+  this.selectedDate = this.workingDays[0];
+  this.updateDateDisplay();
+  this.updateNavigationButtons();
+}
 
-    this.timeSlots.addEventListener('touchstart', (e) => {
-      this.touchStartX = e.touches[0].clientX;
-      this.touchStartY = e.touches[0].clientY;
-    }, { passive: true });
 
-    this.timeSlots.addEventListener('touchmove', (e) => {
-      if (this.isAnimating) return;
+  navigateDay(increment) {
+    const currentIndex = this.workingDays.findIndex((date) => 
+      date.toDateString() === this.selectedDate.toDateString()
+    );
 
-      const touchX = e.touches[0].clientX;
-      const touchY = e.touches[0].clientY;
-      const diffX = this.touchStartX - touchX;
-      const diffY = this.touchStartY - touchY;
+    const newIndex = currentIndex + increment;
 
-      // Determine if scrolling vertically
-      if (Math.abs(diffY) > Math.abs(diffX)) {
-        this.isScrolling = true;
-        return;
+    if (newIndex >= 0 && newIndex < this.workingDays.length) {
+      if (this.currentDateSpan) {
+        const direction = increment > 0 ? "left" : "right";
+        this.currentDateSpan.classList.add(`slide-${direction}`);
+
+        setTimeout(() => {
+          this.selectedDate = this.workingDays[newIndex];
+          this.updateDateDisplay();
+          this.currentDateSpan.classList.remove(`slide-${direction}`);
+          this.updateNavigationButtons();
+
+          // Only fetch time slots for weekdays
+          if (this.selectedDate.getDay() !== 0 && this.selectedDate.getDay() !== 6) {
+            this.fetchAndDisplayTimeSlots();
+          } else {
+            // Show translated weekend message
+            if (this.timeSlots) {
+              this.timeSlots.innerHTML = `<div class="no-slots-message">${window.translations.get('no_weekend_appointments', 'calendar')}</div>`;
+            }
+          }
+        }, 300);
       }
-
-      // Prevent default only for horizontal swipes
-      if (Math.abs(diffX) > 10) {
-        e.preventDefault();
-      }
-    }, { passive: false });
-
-    this.timeSlots.addEventListener('touchend', (e) => {
-      if (this.isAnimating || this.isScrolling) {
-        this.isScrolling = false;
-        return;
-      }
-
-      const touchEndX = e.changedTouches[0].clientX;
-      const diffX = this.touchStartX - touchEndX;
-
-      if (Math.abs(diffX) > this.swipeThreshold) {
-        if (diffX > 0) {
-          this.navigateDay(1); // Swipe left
-        } else {
-          this.navigateDay(-1); // Swipe right
-        }
-      }
-    });
-  }
-
-  updateLayout() {
-    if (this.timeSlots) {
-      this.timeSlots.classList.toggle('mobile-view', this.isMobile);
     }
-    this.updateNavigationButtons();
   }
 
-  // ... rest of the existing methods ...
+  updateNavigationButtons() {
+    if (this.prevDayBtn) {
+      this.prevDayBtn.disabled = this.selectedDate.toDateString() === this.workingDays[0].toDateString();
+    }
+    if (this.nextDayBtn) {
+      this.nextDayBtn.disabled = this.selectedDate.toDateString() === this.workingDays[6].toDateString();
+    }
+  }
+
+  updateDateDisplay() {
+    if (this.currentDateSpan) {
+      this.currentDateSpan.textContent = this.selectedDate.toLocaleDateString(this.currentLanguage, {
+        weekday: "long",
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+      });
+    }
+  }
+
+  async fetchAndDisplayTimeSlots() {
+    try {
+      const response = await fetch("/get_time_slots/", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "X-CSRFToken": this.getCookie("csrftoken"),
+        },
+        body: JSON.stringify({
+          date: this.selectedDate.toISOString().split("T")[0],
+        }),
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        this.displayTimeSlots(data.free_slots);
+      } else {
+        throw new Error(data.error || window.translations.get('fetch_slots_error', 'calendar'));
+      }
+    } catch (error) {
+      console.error("Error fetching time slots:", error);
+      if (this.timeSlots) {
+        this.timeSlots.innerHTML = `<div class="no-slots-message">${window.translations.get('load_slots_error', 'calendar')}</div>`;
+      }
+    }
+  }
 
   displayTimeSlots(slots) {
     if (!this.timeSlots) return;
@@ -108,9 +138,6 @@ class CalendarHandler {
       this.timeSlots.innerHTML = `<div class="no-slots-message">${window.translations.get('no_available_slots', 'calendar')}</div>`;
       return;
     }
-
-    const container = document.createElement('div');
-    container.className = 'time-slots-grid';
 
     slots.forEach((slot) => {
       const time = new Date(slot);
@@ -133,30 +160,23 @@ class CalendarHandler {
       });
 
       button.textContent = localTime;
-      
-      // Add touch feedback
-      if (this.isMobile) {
-        button.addEventListener('touchstart', () => {
-          button.style.transform = 'scale(0.98)';
-        });
-        
-        button.addEventListener('touchend', () => {
-          button.style.transform = '';
-        });
-      }
-
-      container.appendChild(button);
+      this.timeSlots.appendChild(button);
     });
-
-    this.timeSlots.appendChild(container);
   }
 
-  debounce(func, wait) {
-    let timeout;
-    return (...args) => {
-      clearTimeout(timeout);
-      timeout = setTimeout(() => func.apply(this, args), wait);
-    };
+  getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== "") {
+      const cookies = document.cookie.split(";");
+      for (let i = 0; i < cookies.length; i++) {
+        const cookie = cookies[i].trim();
+        if (cookie.substring(0, name.length + 1) === name + "=") {
+          cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+          break;
+        }
+      }
+    }
+    return cookieValue;
   }
 }
 

@@ -8,23 +8,43 @@ from decouple import config
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# Security settings
-SECRET_KEY = config('SECRET_KEY', default='django-insecure-3f8s(cn1)%*2k%fpl+73v7)ov3kiwjns2ybu*9mo8$y1zubrzs')
-ALLOWED_HOSTS = ['psychedlb.com', 'www.psychedlb.com']
+ENVIRONMENT = os.environ.get('DJANGO_ENV', 'development')
 
+# Replace your current security settings with:
+if ENVIRONMENT == 'production':
+    DEBUG = False
+    ALLOWED_HOSTS = [
+        'webapp-2509153.pythonanywhere.com',
+        'psychedlb.com',
+        'www.psychedlb.com',
+    ]
+    STATIC_ROOT = '/home/laftoon/psyched/pysched/staticfiles'
+    SECURE_SSL_REDIRECT = True
+    SESSION_COOKIE_SECURE = True
+    CSRF_COOKIE_SECURE = True
+    SECURE_BROWSER_XSS_FILTER = True
+    SECURE_CONTENT_TYPE_NOSNIFF = True
+    X_FRAME_OPTIONS = 'DENY'
+    SECURE_HSTS_SECONDS = 31536000
+    SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+    SECURE_HSTS_PRELOAD = True
+else:
+    DEBUG = True
+    ALLOWED_HOSTS = ['localhost', '127.0.0.1', '0.0.0.0']
+    STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+    SECURE_SSL_REDIRECT = False
+    SESSION_COOKIE_SECURE = False
+    CSRF_COOKIE_SECURE = False
+    SECURE_BROWSER_XSS_FILTER = False
+    SECURE_CONTENT_TYPE_NOSNIFF = False
+    SECURE_HSTS_SECONDS = 0
+    SECURE_HSTS_INCLUDE_SUBDOMAINS = False
+    SECURE_HSTS_PRELOAD = False
 
-# Security headers
 # Security settings
-DEBUG = False
-SECURE_SSL_REDIRECT = True
-SESSION_COOKIE_SECURE = True
-CSRF_COOKIE_SECURE = True
-SECURE_BROWSER_XSS_FILTER = True
-SECURE_CONTENT_TYPE_NOSNIFF = True
-X_FRAME_OPTIONS = 'DENY'
-SECURE_HSTS_SECONDS = 31536000  # 1 year
-SECURE_HSTS_INCLUDE_SUBDOMAINS = True
-SECURE_HSTS_PRELOAD = True
+SECRET_KEY = config('SECRET_KEY')
+USE_HTTPS = config('USE_HTTPS', default=False, cast=bool)
+
 
 # Application definition
 INSTALLED_APPS = [
@@ -41,6 +61,7 @@ INSTALLED_APPS = [
 # Middleware configuration
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.locale.LocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -140,10 +161,10 @@ LOGGING = {
 }
 
 # Google Calendar settings
-GOOGLE_CALENDAR_SERVICE_ACCOUNT_FILE = config('GOOGLE_CALENDAR_SERVICE_ACCOUNT_FILE', 
+GOOGLE_CALENDAR_SERVICE_ACCOUNT_FILE = config('GOOGLE_CALENDAR_SERVICE_ACCOUNT_FILE',
                                             default=os.path.join(BASE_DIR, 'calendar-key.json'))
 GOOGLE_CALENDAR_USER_EMAIL = config('GOOGLE_CALENDAR_USER_EMAIL', default='lauravaida01@gmail.com')
-GOOGLE_CALENDAR_ID = config('GOOGLE_CALENDAR_ID', 
+GOOGLE_CALENDAR_ID = config('GOOGLE_CALENDAR_ID',
                           default='1b1e7cb49ef25197f00cabea8ca36baa86fe394b9f00379db32ab360336966f1@group.calendar.google.com')
 
 # Time zone settings
@@ -191,7 +212,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 # Static files configuration
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_ROOT = '/home/laftoon/psyched/pysched/staticfiles'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'core/static'),
 ]
@@ -236,3 +257,4 @@ MESSAGE_TAGS = {
 
 # Default primary key field type
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
