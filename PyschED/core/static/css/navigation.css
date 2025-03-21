@@ -175,7 +175,13 @@
 .mobile-menu-toggle.active .hamburger::after {
   transform: translateY(-8px) rotate(-45deg);
 }
+.mobile-language-selector {
+  display: none; /* Hidden by default */
+}
 
+.desktop-language-selector {
+  display: block; /* Shown by default */
+}
 /* Mobile Menu Styles */
 @media (max-width: 768px) {
   .mobile-menu-toggle {
@@ -188,7 +194,12 @@
     border: none;
     cursor: pointer;
   }
-
+  .desktop-language-selector {
+    display: none;
+  }
+  .mobile-language-selector {
+    display: block;
+  }
   .nav-menu {
     position: fixed;
     top: var(--nav-height);
@@ -199,10 +210,32 @@
     backdrop-filter: blur(10px);
     flex-direction: column;
     align-items: flex-end;
-    padding: var(--space-xl) var(--space-xl); /* Increased right padding */
+    padding: var(--space-xl) var(--space-xl);
     transition: left 0.3s ease;
-    box-sizing: border-box; /* Add this to include padding in width calculation */
+    box-sizing: border-box;
+    
+    /* Add these properties for scrolling */
+    overflow-y: auto; /* Enable vertical scrolling */
+    -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
   }
+  .nav-menu::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  .nav-menu::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+  }
+
+  .nav-menu::-webkit-scrollbar-thumb {
+    background: var(--secondary-color);
+    border-radius: 4px;
+  }
+
+  .nav-menu::-webkit-scrollbar-thumb:hover {
+    background: var(--primary-color);
+  }
+
   .nav-menu__link--language {
     display: flex;
     align-items: center;
@@ -232,7 +265,10 @@
     margin: var(--space-md) 0;
     display: flex;
     justify-content: flex-end;
-    padding-right: var(--space-md); /* Add right padding to items */
+    padding-right: var(--space-md);
+  }
+  .nav-menu__item:last-child {
+    margin-bottom: var(--space-xl);
   }
 
   .nav-menu__link {
