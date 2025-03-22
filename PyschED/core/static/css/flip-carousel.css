@@ -145,22 +145,18 @@
   text-decoration: underline;
 }
 
-/* Mobile Styles */
-/* Mobile Styles */
 @media (max-width: 768px) {
   :root {
-    --carousel-card-width: calc(100vw - 2rem);
+    --carousel-card-width: 100%;
     --carousel-card-height: auto;
-    --carousel-padding: var(--space-md);
   }
 
   .carousel {
-    padding: var(--space-md) 0;
+    padding: var(--space-xs) 0;
   }
 
   .carousel__container {
-    padding: 0;
-    overflow: hidden;
+    padding: 0 var(--space-sm);
   }
 
   .carousel__inner {
@@ -168,27 +164,20 @@
   }
 
   .carousel__track {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
     margin: 0;
-    padding: 0 var(--space-md);
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none; /* Firefox */
-    -ms-overflow-style: none; /* IE and Edge */
-    gap: var(--space-lg); /* Add gap between cards */
+    padding: 0;
+    transform: none;
+    transition: none;
+    width: 100%;
   }
 
-  .carousel__track::-webkit-scrollbar {
-    display: none; /* Chrome, Safari, Opera */
-  }
-
-  /* Modify flip card behavior for mobile */
   .flip-card {
-    scroll-snap-align: center;
-    flex: 0 0 calc(100% - 2rem);
-    margin: 0 1rem;
+    width: 100%;
+    margin: 0;
     height: auto;
-    min-height: unset;
     perspective: none;
     cursor: default;
   }
@@ -200,77 +189,57 @@
     height: auto;
     background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
     border-radius: var(--radius-lg);
-    display: flex;
-    flex-direction: column;
   }
 
-  /* Prevent card flipping on mobile */
+  /* Remove hover and flip effects */
   .flip-card:hover .flip-card__inner,
   .flip-card.flipped .flip-card__inner {
     transform: none;
   }
 
-  /* Modify card faces for mobile layout */
   .flip-card__face {
     position: relative;
     height: auto;
-    padding: var(--space-lg);
+    padding: var(--space-sm);
     transform: none !important;
     backface-visibility: visible;
     -webkit-backface-visibility: visible;
     background: transparent;
   }
 
-  .flip-card__face--front,
-  .flip-card__face--back {
+  .flip-card__face--front {
     background: transparent;
-    padding: var(--space-lg);
+    padding: var(--space-sm);
+  }
+
+  /* Show back face content on front */
+  .flip-card__face--back {
     display: block;
     position: relative;
-  }
-  .flip-card__face--back {
-    transform: none !important;
     padding-top: 0;
   }
 
   .flip-card__title {
-    font-size: var(--text-xl);
+    font-size: var(--text-lg);
     line-height: 1.3;
-    margin-bottom: var(--space-md);
-    color: var(--text-light); /* Changed from var(--heading-color) to var(--text-light) */
+    margin-bottom: var(--space-xs);
+    color: var(--text-light);
   }
 
   .flip-card__content {
     font-size: var(--text-base);
-    padding: var(--space-lg);
-    line-height: 1.6;
+    padding: 0;
+    line-height: 1.4;
     color: var(--text-light);
-  }
-  .flip-card__content a {
-    color: var(--text-light);
-    text-decoration: underline;
-  }
-  /* Add visual indicator for scrolling */
-  .carousel__track {
-    margin: 0;
-    padding: 0 var(--space-md);
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-    gap: var(--space-lg);
+    margin-top: var(--space-xs);
   }
 
-  .carousel__track::-webkit-scrollbar {
-    display: none;
-  }
-
-  /* Hide navigation buttons on mobile */
+  /* Hide navigation */
   .carousel__nav {
     display: none;
   }
 }
+
 
 /* Small Mobile Devices */
 @media (max-width: 480px) {
