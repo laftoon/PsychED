@@ -49,12 +49,13 @@
   position: absolute;
   inset: 0;
   opacity: 0.85;
+  z-index: var(--z-elevate);
   background: linear-gradient(
     to bottom,
-    rgba(137, 172, 201, 0.95),
-    rgba(231, 207, 210, 0.95)
+    rgba(60, 95, 125, 0.99),
+    rgba(150, 130, 133, 0.99)
   );
-  transition: opacity 0.3s ease;
+  transition: 0.3s ease;
 }
 
 .expandable-content {
@@ -89,7 +90,7 @@
   font-family: var(--font-tertiary);
   font-size: var(--text-lg);
   color: var(--text-light);
-  text-shadow: var(--shadow-text);
+  text-shadow: var(--shadow-text-strong);
   text-align: center;
   width: 95%;
   opacity: 0;

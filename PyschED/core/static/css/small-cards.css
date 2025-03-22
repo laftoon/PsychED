@@ -89,7 +89,7 @@
 .card__description {
   font-family: var(--font-tertiary);
   font-size: clamp(var(--text-sm), 1.5vw, var(--text-base));
-  color: var(--paragraph-color);
+  color: var(--heading-color);
   line-height: 1.6;
   margin: 0;
 }

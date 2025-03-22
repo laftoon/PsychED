@@ -13,6 +13,18 @@
   --nav-font-size: var(--text-lg);
   --logo-font-size: var(--text-2xl);
 }
+/* Add this to your CSS */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
 
 /* Topbar
    ========================================================================== */
@@ -73,7 +85,7 @@
   font-weight: var(--weight-medium);
   color: var(--text-light);
   text-decoration: none;
-  text-shadow: var(--shadow-text);
+  text-shadow: var(--shadow-text-strong);
 
   /* Layout */
   padding-inline: var(--nav-item-spacing);

@@ -1,97 +1,186 @@
 {% load static %}
 {% load i18n %}
-<nav class="topbar">
+<nav class="topbar" role="navigation" aria-label="{% trans 'Navigarea principală' %}">
   <!-- Logo -->
-  <a href="#" class="logo">PsychED Lab</a>
+  <a href="{% url 'home' %}" class="logo" aria-label="PsychED Lab - {% trans 'Intoarcere la pagina principală' %}">PsychED Lab</a>
 
   <!-- Mobile Menu Toggle -->
-  <button class="mobile-menu-toggle" aria-label="Toggle menu" aria-expanded="false">
-    <span class="hamburger"></span>
+  <button 
+    class="mobile-menu-toggle" 
+    aria-label="{% trans 'Deschide meniul' %}"
+    aria-expanded="false"
+    aria-controls="main-menu"
+  >
+    <span class="hamburger" aria-hidden="true"></span>
   </button>
 
   <!-- Navigation Menu -->
-  <ul class="nav-menu" role="menu">
+  <ul id="main-menu" class="nav-menu">
     <!-- Regular Navigation Items -->
     <li class="nav-menu__item">
-      <a href="{% url 'home' %}" class="nav-menu__link {% if request.path == '/' %}active{% endif %}">{% trans "Acasă" %}</a>
-    </li>
-
-    <li class="nav-menu__item">
-      <a href="{% url 'about' %}" class="nav-menu__link {% if request.path == '/despre-mine/' %}active{% endif %}">
-        {%trans "Proiectele mele"%}
+      <a href="{% url 'home' %}" 
+         class="nav-menu__link {% if request.path == '/' %}active{% endif %}"
+         {% if request.path == '/' %}aria-current="page"{% endif %}
+      >
+        {% trans "Acasă" %}
       </a>
     </li>
 
     <li class="nav-menu__item">
-      <a href="{% url 'services' %}" class="nav-menu__link {% if request.path == '/servicii/' %}active{% endif %}">
-        {%trans "Servicii" %}
+      <a href="{% url 'about' %}" 
+         class="nav-menu__link {% if request.path == '/despre-mine/' %}active{% endif %}"
+         {% if request.path == '/despre-mine/' %}aria-current="page"{% endif %}
+      >
+        {% trans "Despre mine" %}
       </a>
     </li>
 
     <li class="nav-menu__item">
-      <a href="{% url 'blog' %}" class="nav-menu__link {% if '/blog/' in request.path %}active{% endif %}">{% trans "Blog" %}</a>
+      <a href="{% url 'services' %}" 
+         class="nav-menu__link {% if request.path == '/servicii/' %}active{% endif %}"
+         {% if request.path == '/servicii/' %}aria-current="page"{% endif %}
+      >
+        {% trans "Servicii" %}
+      </a>
     </li>
 
     <li class="nav-menu__item">
-      <a href="{% url 'home' %}#contact-section" class="nav-menu__link scroll-to-contact">{% trans "Contact" %}</a>
+      <a href="{% url 'home' %}#contact-section" 
+         class="nav-menu__link scroll-to-contact"
+         aria-label="{% trans 'Secțiunea de contact' %}"
+      >
+        {% trans "Contact" %}
+      </a>
     </li>
 
     <!-- Social Media Links -->
     <li class="nav-menu__item">
-      <a
-        href="https://www.linkedin.com/in/cristiana-francesca-raileanu-76862710a/"
-        class="nav-menu__link nav-menu__link--social"
-        target="_blank"
-        rel="noopener noreferrer"
+      <a href="https://www.linkedin.com/in/cristiana-francesca-raileanu-76862710a/"
+         class="nav-menu__link nav-menu__link--social"
+         target="_blank"
+         rel="noopener noreferrer"
+         aria-label="{% trans 'Vizitează profilul LinkedIn' %}"
       >
-        <i class="fab fa-linkedin"></i>
+        <i class="fab fa-linkedin" aria-hidden="true"></i>
+        <span class="visually-hidden">LinkedIn</span>
       </a>
     </li>
 
-    <li class="nav-menu__item desktop-language-selector">
-      <div class="language-selector">
-        <button class="language-selector__button">
-          <img 
-            src="{% static 'images/flags/ro.svg' %}" 
-            alt="{% trans 'Current language flag' %}" 
-            class="language-selector__flag"
-          >
-        </button>
-        <div class="language-selector__dropdown">
-          <a href="{% url 'change_language' %}?lang=ro&next={{ request.path }}" class="language-selector__option">
-            <img src="{% static 'images/flags/ro.svg' %}" alt="{% trans 'Romanian flag' %}" class="language-selector__flag">
-            <span>Română</span>
-          </a>
-          <a href="{% url 'change_language' %}?lang=en&next={{ request.path }}" class="language-selector__option">
-            <img src="{% static 'images/flags/gb.svg' %}" alt="{% trans 'British flag' %}" class="language-selector__flag">
-            <span>English</span>
-          </a>
-          <a href="{% url 'change_language' %}?lang=es&next={{ request.path }}" class="language-selector__option">
-            <img src="{% static 'images/flags/es.svg' %}" alt="{% trans 'Spanish flag' %}" class="language-selector__flag">
-            <span>Español</span>
-          </a>
-        </div>
-      </div>
-    </li>
-  
-    <!-- Mobile Language Options -->
-    <li class="nav-menu__item mobile-language-selector">
-      <a href="{% url 'change_language' %}?lang=ro&next={{ request.path }}" class="nav-menu__link nav-menu__link--language">
-        <img src="{% static 'images/flags/ro.svg' %}" alt="{% trans 'Romanian flag' %}" class="nav-menu__flag">
+<li class="nav-menu__item desktop-language-selector">
+  <div class="language-selector">
+    <button 
+      class="language-selector__button" 
+      aria-label="{% trans 'Selectează limba' %}"
+      aria-expanded="false"
+      aria-controls="language-dropdown"
+    >
+      <img 
+        src="{% static 'images/flags/ro.svg' %}" 
+        alt="" 
+        class="language-selector__flag"
+        aria-hidden="true"
+      >
+      <span class="visually-hidden">{% trans "Schimbă limba" %}</span>
+    </button>
+    <div id="language-dropdown" class="language-selector__dropdown" role="menu">
+      <a 
+        href="{% url 'change_language' %}?lang=ro&next={{ request.path }}" 
+        class="language-selector__option" 
+        role="menuitem"
+        lang="ro"
+        aria-label="{% trans 'Schimbă limba în Română' %}"
+      >
+        <img 
+          src="{% static 'images/flags/ro.svg' %}" 
+          alt="" 
+          class="language-selector__flag"
+          aria-hidden="true"
+        >
         <span>Română</span>
       </a>
-    </li>
-    <li class="nav-menu__item mobile-language-selector">
-      <a href="{% url 'change_language' %}?lang=en&next={{ request.path }}" class="nav-menu__link nav-menu__link--language">
-        <img src="{% static 'images/flags/gb.svg' %}" alt="{% trans 'British flag' %}" class="nav-menu__flag">
+      <a 
+        href="{% url 'change_language' %}?lang=en&next={{ request.path }}" 
+        class="language-selector__option" 
+        role="menuitem"
+        lang="en"
+        aria-label="{% trans 'Schimbă limba în Engleză' %}"
+      >
+        <img 
+          src="{% static 'images/flags/gb.svg' %}" 
+          alt="" 
+          class="language-selector__flag"
+          aria-hidden="true"
+        >
         <span>English</span>
       </a>
-    </li>
-    <li class="nav-menu__item mobile-language-selector">
-      <a href="{% url 'change_language' %}?lang=es&next={{ request.path }}" class="nav-menu__link nav-menu__link--language">
-        <img src="{% static 'images/flags/es.svg' %}" alt="{% trans 'Spanish flag' %}" class="nav-menu__flag">
+      <a 
+        href="{% url 'change_language' %}?lang=es&next={{ request.path }}" 
+        class="language-selector__option" 
+        role="menuitem"
+        lang="es"
+        aria-label="{% trans 'Schimbă limba în Spaniolă' %}"
+      >
+        <img 
+          src="{% static 'images/flags/es.svg' %}" 
+          alt="" 
+          class="language-selector__flag"
+          aria-hidden="true"
+        >
         <span>Español</span>
       </a>
-    </li>
+    </div>
+  </div>
+</li>
+
+<!-- Mobile Language Options -->
+<li class="nav-menu__item mobile-language-selector">
+  <a 
+    href="{% url 'change_language' %}?lang=ro&next={{ request.path }}" 
+    class="nav-menu__link nav-menu__link--language"
+    lang="ro"
+    aria-label="{% trans 'Schimbă limba în Română' %}"
+  >
+    <img 
+      src="{% static 'images/flags/ro.svg' %}" 
+      alt="" 
+      class="nav-menu__flag"
+      aria-hidden="true"
+    >
+    <span>Română</span>
+  </a>
+</li>
+<li class="nav-menu__item mobile-language-selector">
+  <a 
+    href="{% url 'change_language' %}?lang=en&next={{ request.path }}" 
+    class="nav-menu__link nav-menu__link--language"
+    lang="en"
+    aria-label="{% trans 'Schimbă limba în Engleză' %}"
+  >
+    <img 
+      src="{% static 'images/flags/gb.svg' %}" 
+      alt="" 
+      class="nav-menu__flag"
+      aria-hidden="true"
+    >
+    <span>English</span>
+  </a>
+</li>
+<li class="nav-menu__item mobile-language-selector">
+  <a 
+    href="{% url 'change_language' %}?lang=es&next={{ request.path }}" 
+    class="nav-menu__link nav-menu__link--language"
+    lang="es"
+    aria-label="{% trans 'Schimbă limba în Spaniolă' %}"
+  >
+    <img 
+      src="{% static 'images/flags/es.svg' %}" 
+      alt="" 
+      class="nav-menu__flag"
+      aria-hidden="true"
+    >
+    <span>Español</span>
+  </a>
+</li>
+
   </ul>
 </nav>

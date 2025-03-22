@@ -128,22 +128,30 @@
   font-weight: var(--weight-bold);
   margin: 0;
   color: var(--text-light);
+  text-shadow: var(--shadow-text-strong);
 }
 
 .flip-card__content {
   font-size: var(--text-lg);
   line-height: 1.6;
   padding: var(--space-md);
+  color: var(--heading-color);
+}
+
+.flip-card__content a {
+  color: var(--heading-color);
+  text-decoration: underline;
+  text-decoration-color: var(--heading-color);
+  text-underline-offset: 2px;
+  transition: color 0.3s ease; /* Add text shadow for contrast */
+}
+
+.flip-card__content a:hover,
+.flip-card__content a:active {
   color: var(--text-dark);
 }
 
-/* Rest of the CSS remains the same */
 
-
-.flip-card__content a {
-  color: var(--primary-color);
-  text-decoration: underline;
-}
 
 @media (max-width: 768px) {
   :root {
@@ -224,6 +232,7 @@
     line-height: 1.3;
     margin-bottom: var(--space-xs);
     color: var(--text-light);
+    text-shadow: var(--text-shadow-strong);
   }
 
   .flip-card__content {
@@ -232,8 +241,20 @@
     line-height: 1.4;
     color: var(--text-light);
     margin-top: var(--space-xs);
+    text-shadow: var(--text-shadow-strong)
   }
-
+  .flip-card__content a {
+    color: var(--primary-color);
+    text-decoration: underline;
+    text-decoration-color: var(--primary-color);
+    text-underline-offset: 2px;
+    transition: color 0.3s ease;
+    text-shadow: var(--shadow-small); /* Remove text shadow for better readability */
+  }
+  
+  .flip-card__content a:hover {
+    color: var(--accent-color);
+  }
   /* Hide navigation */
   .carousel__nav {
     display: none;
@@ -243,6 +264,8 @@
 
 /* Small Mobile Devices */
 @media (max-width: 480px) {
+  
+  
   .flip-card__face {
     padding: var(--space-md);
   }

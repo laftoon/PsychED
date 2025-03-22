@@ -21,10 +21,10 @@
   --text-muted: rgba(255, 255, 255, 0.9);
 
   /* Gradient Colors */
-  --gradient-start: rgba(137, 172, 201, 0.95);
-  --gradient-end: rgba(231, 207, 210, 0.95);
-  --overlay-light: rgba(137, 172, 201, 0.3);
-  --overlay-dark: rgba(137, 172, 201, 0.5);
+  --gradient-start: rgba(60, 95, 125, 0.98);
+  --gradient-end: rgba(150, 130, 133, 0.98);
+  --overlay-light: rgba(137, 172, 201, 0.5);
+  --overlay-dark: rgba(137, 172, 201, 0.8);
 
   /* Typography
        ========================================================================== */
@@ -78,8 +78,8 @@
   /* Shadows */
   --shadow-small: 0 4px 15px rgba(0, 0, 0, 0.1);
   --shadow-large: 0 6px 20px rgba(0, 0, 0, 0.15);
-  --shadow-text: 1px 1px 2px rgba(0, 0, 0, 0.1);
-  --shadow-text-strong: 2px 2px 4px rgba(0, 0, 0, 0.2);
+  --shadow-text: 1px 1px 2px rgba(0, 0, 0, 0.2);
+  --shadow-text-strong: 2px 2px 4px rgba(0, 0, 0, 0.3);
 
   /* Border Radius */
   --radius-sm: 4px;

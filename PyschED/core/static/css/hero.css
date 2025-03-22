@@ -54,6 +54,7 @@
   background-image: url("../images/header-image.jpg");
   background-size: cover;
   background-position: center;
+  
 }
 
 /* Hero Overlay
@@ -63,9 +64,14 @@
   inset: 0;
   z-index: var(--z-elevate);
 
-  /* Gradient overlay */
-  background: linear-gradient(var(--overlay-light), var(--overlay-dark));
+  /* Updated gradient overlay */
+  background: linear-gradient(
+    to bottom,
+    rgba(60, 95, 125, 0.85),
+    rgba(150, 130, 133, 0.85)
+  );
 }
+
 
 /* Hero Content Container
      ========================================================================== */
@@ -105,10 +111,9 @@
   font-family: var(--font-secondary);
   font-size: var(--hero-button-size);
   font-weight: var(--weight-semibold);
-
   /* Visual */
   background-color: var(--background-white);
-  color: var(--primary-color);
+  color: var(--gradient-start);
   border: none;
   border-radius: var(--radius-md);
 

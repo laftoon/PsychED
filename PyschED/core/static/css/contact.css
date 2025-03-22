@@ -39,12 +39,14 @@
   font-size: var(--text-3xl);
   color: var(--text-light);
   margin-bottom: var(--space-md);
+  text-shadow: var(--shadow-text-strong);
 }
 
 .contact__description {
   font-size: var(--text-lg);
   color: var(--text-light);
   line-height: 1.6;
+  text-shadow: var(--shadow-text-strong);
 }
 
 .contact__description a {
@@ -56,7 +58,7 @@
 }
 
 .contact__description a:hover {
-  color: #333333;
+  color: #b4b4b4;
 }
 
 /* Form Container
@@ -187,7 +189,7 @@
 
 .day-navigation button {
   background: var(--text-light);
-  color: var(--primary-color);
+  color: var(--gradient-start);
   border: none;
   padding: var(--space-sm) var(--space-md);
   border-radius: var(--radius-md);
@@ -238,7 +240,7 @@
    ========================================================================== */
 .form-submit {
   background: var(--text-light);
-  color: var(--primary-color);
+  color: var(--gradient-start);
   border: none;
   padding: var(--space-md) var(--space-xl);
   border-radius: var(--radius-md);
