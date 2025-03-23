@@ -14,19 +14,16 @@ from .models import BlogPost
 from django.utils import translation
 from django.shortcuts import redirect
 from django.utils.translation import get_language
+from django.urls import reverse
+
+
 logger = logging.getLogger(__name__)
 
 def get_language_context(request):
     return {'LANGUAGE_CODE': get_language()}
 
 
-def change_language(request):
-    lang = request.GET.get('lang')
-    if lang in ['en', 'es', 'ro']:
-        translation.activate(lang)
-        response = redirect(request.META.get('HTTP_REFERER', '/'))
-        response.set_cookie('django_language', lang)
-        return response
+
 
 
 def get_time_slots(request):

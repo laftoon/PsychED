@@ -4,6 +4,7 @@ Django settings for PyschED project.
 from pathlib import Path
 import os
 from decouple import config
+from django.utils.translation import gettext_lazy as _
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -172,12 +173,14 @@ TIME_ZONE = 'Europe/Madrid'
 USE_TZ = True
 LANGUAGE_CODE = 'ro'
 USE_I18N = True
+USE_L10N = True
 
 LANGUAGES = [
-    ('ro', 'Română'),
-    ('en', 'English'),
-    ('es', 'Español'),
+    ('ro', _('Romanian')),
+    ('en', _('English')),
+    ('es', _('Spanish')),
 ]
+
 
 LOCALE_PATHS = [
     os.path.join(BASE_DIR, 'locale'),
@@ -258,3 +261,16 @@ MESSAGE_TAGS = {
 # Default primary key field type
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+# Language settings
+LANGUAGE_COOKIE_NAME = 'django_language'
+LANGUAGE_COOKIE_AGE = None
+LANGUAGE_COOKIE_PATH = '/'
+LANGUAGE_COOKIE_DOMAIN = None
+LANGUAGE_COOKIE_SECURE = False
+LANGUAGE_COOKIE_HTTPONLY = True
+LANGUAGE_COOKIE_SAMESITE = 'Lax'
+
+# Session settings
+SESSION_COOKIE_AGE = 365 * 24 * 60 * 60  # 1 year
+SESSION_COOKIE_SAMESITE = 'Lax'

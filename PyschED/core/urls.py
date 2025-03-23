@@ -8,8 +8,8 @@ urlpatterns = [
     path('despre-mine/', AboutPageView.as_view(), name='about'),
     path('servicii/', ServicesPageView.as_view(), name='services'),
     path('blog/', BlogPageView.as_view(), name='blog'),
-    path('change-language/', views.change_language, name='change_language'),
     path('get_time_slots/', get_time_slots, name='get_time_slots'),
     path('submit_time_slot/', submit_time_slot, name='submit_time_slot'),
     path('blog/<slug:slug>/', BlogDetailView.as_view(), name='blog_detail'),
 ]
+

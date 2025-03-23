@@ -49,6 +49,8 @@
             placeholder="{% trans 'Prenume' %}"
             required
             aria-label="{% trans 'Prenume' %}"
+            oninvalid="this.setCustomValidity('{% trans 'Vă rugăm să completați acest câmp' %}')"
+            oninput="this.setCustomValidity('')"
           />
         </div>
 
@@ -61,6 +63,8 @@
             placeholder="{% trans 'Nume' %}"
             required
             aria-label="{% trans 'Nume' %}"
+            oninvalid="this.setCustomValidity('{% trans 'Vă rugăm să completați acest câmp' %}')"
+            oninput="this.setCustomValidity('')"
           />
         </div>
 
@@ -73,11 +77,22 @@
             placeholder="{% trans 'Email' %}"
             required
             aria-label="{% trans 'Email' %}"
+            oninvalid="this.setCustomValidity('{% trans 'Vă rugăm să introduceți o adresă de email validă' %}')"
+            oninput="this.setCustomValidity('')"
+        
           />
         </div>
 
         <div class="form-group">
-          <select class="form-input form-select" id="interest" name="interest" required aria-label="{% trans 'Interes' %}">
+          <select 
+          class="form-input form-select" 
+          id="interest" 
+          name="interest" 
+          required 
+          aria-label="{% trans 'Interes' %}"
+          oninvalid="this.setCustomValidity('{% trans 'Vă rugăm să selectați o opțiune' %}')"
+          oninput="this.setCustomValidity('')"
+        >
             <option value="" disabled selected>{% trans "Ce te-ar interesa?" %}</option>
             <option value="Terapie Individuală">{% trans "Terapie Individuală" %}</option>
             <option value="Evaluări Clinice">{% trans "Evaluări Clinice" %}</option>
@@ -96,6 +111,9 @@
             required
             aria-label="{% trans 'Mesaj' %}"
             rows="4"
+            oninvalid="this.setCustomValidity('{% trans 'Vă rugăm să completați acest câmp' %}')"
+            oninput="this.setCustomValidity('')"
+        
           ></textarea>
         </div>
 

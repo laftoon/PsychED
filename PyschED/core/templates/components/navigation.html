@@ -68,118 +68,59 @@
 
 <li class="nav-menu__item desktop-language-selector">
   <div class="language-selector">
-    <button 
-      class="language-selector__button" 
-      aria-label="{% trans 'Selectează limba' %}"
-      aria-expanded="false"
-      aria-controls="language-dropdown"
-    >
-      <img 
-        src="{% static 'images/flags/ro.svg' %}" 
-        alt="" 
-        class="language-selector__flag"
-        aria-hidden="true"
-      >
-      <span class="visually-hidden">{% trans "Schimbă limba" %}</span>
+    <button type="button" class="language-button" aria-haspopup="true" aria-expanded="false">
+      {% if LANGUAGE_CODE == 'en' %}
+        <img src="{% static 'images/flags/gb.svg' %}" alt="English" class="flag-icon">
+      {% elif LANGUAGE_CODE == 'es' %}
+        <img src="{% static 'images/flags/es.svg' %}" alt="Español" class="flag-icon">
+      {% else %}
+        <img src="{% static 'images/flags/ro.svg' %}" alt="Română" class="flag-icon">
+      {% endif %}
     </button>
-    <div id="language-dropdown" class="language-selector__dropdown" role="menu">
-      <a 
-        href="{% url 'change_language' %}?lang=ro&next={{ request.path }}" 
-        class="language-selector__option" 
-        role="menuitem"
-        lang="ro"
-        aria-label="{% trans 'Schimbă limba în Română' %}"
-      >
-        <img 
-          src="{% static 'images/flags/ro.svg' %}" 
-          alt="" 
-          class="language-selector__flag"
-          aria-hidden="true"
-        >
-        <span>Română</span>
-      </a>
-      <a 
-        href="{% url 'change_language' %}?lang=en&next={{ request.path }}" 
-        class="language-selector__option" 
-        role="menuitem"
-        lang="en"
-        aria-label="{% trans 'Schimbă limba în Engleză' %}"
-      >
-        <img 
-          src="{% static 'images/flags/gb.svg' %}" 
-          alt="" 
-          class="language-selector__flag"
-          aria-hidden="true"
-        >
-        <span>English</span>
-      </a>
-      <a 
-        href="{% url 'change_language' %}?lang=es&next={{ request.path }}" 
-        class="language-selector__option" 
-        role="menuitem"
-        lang="es"
-        aria-label="{% trans 'Schimbă limba în Spaniolă' %}"
-      >
-        <img 
-          src="{% static 'images/flags/es.svg' %}" 
-          alt="" 
-          class="language-selector__flag"
-          aria-hidden="true"
-        >
-        <span>Español</span>
-      </a>
+    
+    <div class="language-dropdown">
+      <form action="{% url 'set_language' %}" method="post" class="language-form">
+        {% csrf_token %}
+        <input type="hidden" name="next" value="{{ request.path|slice:'3:' }}">
+        
+        <button type="submit" name="language" value="ro" class="language-option {% if LANGUAGE_CODE == 'ro' %}active{% endif %}">
+          <img src="{% static 'images/flags/ro.svg' %}" alt="" class="flag-icon">
+          <span>Română</span>
+        </button>
+
+        <button type="submit" name="language" value="en" class="language-option {% if LANGUAGE_CODE == 'en' %}active{% endif %}">
+          <img src="{% static 'images/flags/gb.svg' %}" alt="" class="flag-icon">
+          <span>English</span>
+        </button>
+
+        <button type="submit" name="language" value="es" class="language-option {% if LANGUAGE_CODE == 'es' %}active{% endif %}">
+          <img src="{% static 'images/flags/es.svg' %}" alt="" class="flag-icon">
+          <span>Español</span>
+        </button>
+      </form>
     </div>
   </div>
 </li>
+<li class="nav-menu__item mobile-language-options">
+  <form action="{% url 'set_language' %}" method="post" class="mobile-language-form">
+    {% csrf_token %}
+    <input type="hidden" name="next" value="{{ request.path|slice:'3:' }}">
+    
+    <button type="submit" name="language" value="ro" class="nav-menu__link nav-menu__link--language {% if LANGUAGE_CODE == 'ro' %}active{% endif %}">
+      <img src="{% static 'images/flags/ro.svg' %}" alt="" class="nav-menu__flag">
+      <span>Română</span>
+    </button>
 
-<!-- Mobile Language Options -->
-<li class="nav-menu__item mobile-language-selector">
-  <a 
-    href="{% url 'change_language' %}?lang=ro&next={{ request.path }}" 
-    class="nav-menu__link nav-menu__link--language"
-    lang="ro"
-    aria-label="{% trans 'Schimbă limba în Română' %}"
-  >
-    <img 
-      src="{% static 'images/flags/ro.svg' %}" 
-      alt="" 
-      class="nav-menu__flag"
-      aria-hidden="true"
-    >
-    <span>Română</span>
-  </a>
-</li>
-<li class="nav-menu__item mobile-language-selector">
-  <a 
-    href="{% url 'change_language' %}?lang=en&next={{ request.path }}" 
-    class="nav-menu__link nav-menu__link--language"
-    lang="en"
-    aria-label="{% trans 'Schimbă limba în Engleză' %}"
-  >
-    <img 
-      src="{% static 'images/flags/gb.svg' %}" 
-      alt="" 
-      class="nav-menu__flag"
-      aria-hidden="true"
-    >
-    <span>English</span>
-  </a>
-</li>
-<li class="nav-menu__item mobile-language-selector">
-  <a 
-    href="{% url 'change_language' %}?lang=es&next={{ request.path }}" 
-    class="nav-menu__link nav-menu__link--language"
-    lang="es"
-    aria-label="{% trans 'Schimbă limba în Spaniolă' %}"
-  >
-    <img 
-      src="{% static 'images/flags/es.svg' %}" 
-      alt="" 
-      class="nav-menu__flag"
-      aria-hidden="true"
-    >
-    <span>Español</span>
-  </a>
+    <button type="submit" name="language" value="en" class="nav-menu__link nav-menu__link--language {% if LANGUAGE_CODE == 'en' %}active{% endif %}">
+      <img src="{% static 'images/flags/gb.svg' %}" alt="" class="nav-menu__flag">
+      <span>English</span>
+    </button>
+
+    <button type="submit" name="language" value="es" class="nav-menu__link nav-menu__link--language {% if LANGUAGE_CODE == 'es' %}active{% endif %}">
+      <img src="{% static 'images/flags/es.svg' %}" alt="" class="nav-menu__flag">
+      <span>Español</span>
+    </button>
+  </form>
 </li>
 
   </ul>
