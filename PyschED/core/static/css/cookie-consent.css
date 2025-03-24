@@ -66,22 +66,35 @@
 /* Mobile styles */
 @media (max-width: 768px) {
     .cookie-consent-container {
-        width: 100%;  /* Full width */
-        height: auto; /* Auto height based on content */
+        width: 100%;
+        height: auto;
         flex-direction: column;
+        box-sizing: border-box;
+        padding: var(--space-md) var(--space-lg); /* Increased horizontal padding */
+    }
+
+    .cookie-content {
+        width: 100%;
+        padding: 0 var(--space-md); /* Add side padding to prevent overflow */
+        box-sizing: border-box;
     }
 
     .cookie-content p {
         font-size: var(--text-sm);
+        padding-left: var(--space-sm);
+        padding-right: var(--space-sm);
     }
 
     .cookie-buttons {
-        flex-direction: column; /* Stack buttons vertically on smaller screens */
+        flex-direction: column;
         align-items: center;
+        width: 100%;
+        padding-left: var(--space-sm);
+        padding-right: var(--space-sm);
     }
 
     .cookie-btn {
-        width: 80%; /* Full width buttons on mobile */
+        width: 100%;
         margin-bottom: var(--space-sm);
     }
 }

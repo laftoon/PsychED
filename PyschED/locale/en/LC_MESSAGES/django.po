@@ -1,0 +1,1005 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-03-24 14:41+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: .\PyschED\settings.py:179
+msgid "Romanian"
+msgstr "Romanian"
+
+#: .\PyschED\settings.py:180
+msgid "English"
+msgstr "English"
+
+#: .\PyschED\settings.py:181
+msgid "Spanish"
+msgstr "Spanish"
+
+#: .\core\models.py:7
+msgid "Title (Romanian)"
+msgstr "Title (Romanian)"
+
+#: .\core\models.py:8
+msgid "Title (English)"
+msgstr "Title (English)"
+
+#: .\core\models.py:9
+msgid "Title (Spanish)"
+msgstr "Title (Spanish)"
+
+#: .\core\models.py:11
+msgid "Content (Romanian)"
+msgstr "Content (Romanian)"
+
+#: .\core\models.py:12
+msgid "Content (English)"
+msgstr "ontent (English)"
+
+#: .\core\models.py:13
+msgid "Content (Spanish)"
+msgstr "Content (Spanish)"
+
+#: .\core\models.py:15
+msgid "Snippet (Romanian)"
+msgstr "Snippet (Romanian)"
+
+#: .\core\models.py:16
+msgid "Snippet (English)"
+msgstr "Snippet (English)"
+
+#: .\core\models.py:17
+msgid "Snippet (Spanish)"
+msgstr "Snippet (Spanish)"
+
+#: .\core\templates\components\blog-cards.html:11
+#: .\core\templates\core\blog-detail.html:18
+msgid "Publicat pe"
+msgstr "Published on"
+
+#: .\core\templates\components\blog-cards.html:13
+#: .\core\templates\core\blog-detail.html:19
+msgid "Scris de"
+msgstr "Written by"
+
+#: .\core\templates\components\blog-cards.html:18
+msgid "Citeste mai mult"
+msgstr "Read more"
+
+#: .\core\templates\components\blog-cards.html:24
+msgid "Nicio postare disponibila"
+msgstr "No posts available"
+
+#: .\core\templates\components\contact.html:6
+#: .\core\templates\components\hero-home.html:14
+msgid "Programează-te"
+msgstr "Schedule an appointment"
+
+#: .\core\templates\components\contact.html:8
+msgid ""
+"Pentru a stabili o primă întâlnire gratuită pe care o vom folosi pentru a "
+"vedea dacă putem lucra împreună te rog să folosești formularul din dreapta."
+msgstr ""
+"To set up a free initial meeting, which we will use to see if we can work "
+"together, please use the form on the right."
+
+#: .\core\templates\components\contact.html:9
+msgid ""
+"Dacă întâmpini vreo eroare sau nu găsești ora dorită, te rog să mă "
+"contactezi la adresa de email:"
+msgstr ""
+"If you encounter any errors or cannot find the desired time, please contact "
+"me at the email address:"
+
+#: .\core\templates\components\contact.html:11
+#: .\core\templates\components\flip-carousel.html:17
+msgid "sau pe WhatsApp la"
+msgstr "or on WhatsApp at"
+
+#: .\core\templates\components\contact.html:23
+msgid "Eroare"
+msgstr "Error"
+
+#: .\core\templates\components\contact.html:31
+msgid "Cerere trimisă cu succes!"
+msgstr "Request sent successfully!"
+
+#: .\core\templates\components\contact.html:32
+msgid "Vă mulțumim pentru programare"
+msgstr "Thank you for your appointment"
+
+#: .\core\templates\components\contact.html:49
+#: .\core\templates\components\contact.html:51
+msgid "Prenume"
+msgstr "First Name"
+
+#: .\core\templates\components\contact.html:52
+#: .\core\templates\components\contact.html:66
+#: .\core\templates\components\contact.html:114
+msgid "Vă rugăm să completați acest câmp"
+msgstr "Please fill out this field"
+
+#: .\core\templates\components\contact.html:63
+#: .\core\templates\components\contact.html:65
+msgid "Nume"
+msgstr "Last Name"
+
+#: .\core\templates\components\contact.html:77
+#: .\core\templates\components\contact.html:79
+msgid "Email"
+msgstr "Email"
+
+#: .\core\templates\components\contact.html:80
+msgid "Vă rugăm să introduceți o adresă de email validă"
+msgstr "Please enter a valid email address"
+
+#: .\core\templates\components\contact.html:92
+msgid "Interes"
+msgstr "Interest"
+
+#: .\core\templates\components\contact.html:93
+msgid "Vă rugăm să selectați o opțiune"
+msgstr "Please select an option"
+
+#: .\core\templates\components\contact.html:96
+msgid "Ce te-ar interesa?"
+msgstr "What are you interested in?"
+
+#: .\core\templates\components\contact.html:97
+#: .\core\templates\components\small-cards.html:10
+#: .\core\templates\components\small-cards.html:14
+#: .\core\templates\components\wide-cards-services.html:8
+msgid "Terapie Individuală"
+msgstr "Individual Therapy"
+
+#: .\core\templates\components\contact.html:98
+#: .\core\templates\components\small-cards.html:24
+#: .\core\templates\components\small-cards.html:27
+#: .\core\templates\components\wide-cards-services.html:20
+msgid "Evaluări Clinice"
+msgstr "Clinical Assessments"
+
+#: .\core\templates\components\contact.html:99
+#: .\core\templates\components\small-cards.html:40
+#: .\core\templates\components\small-cards.html:44
+#: .\core\templates\components\wide-cards-services.html:32
+msgid "Consiliere Vocațională"
+msgstr "Vocational Counseling"
+
+#: .\core\templates\components\contact.html:100
+#: .\core\templates\components\small-cards.html:57
+#: .\core\templates\components\small-cards.html:61
+#: .\core\templates\components\wide-cards-services.html:44
+msgid "Consiliere Educațională"
+msgstr "Educational Counseling"
+
+#: .\core\templates\components\contact.html:101
+#: .\core\templates\components\small-cards.html:74
+#: .\core\templates\components\small-cards.html:78
+#: .\core\templates\components\wide-cards-services.html:56
+msgid "Dezvoltare Personală"
+msgstr "Personal Development"
+
+#: .\core\templates\components\contact.html:110
+msgid "Mesajul tău"
+msgstr "Your message"
+
+#: .\core\templates\components\contact.html:112
+msgid "Mesaj"
+msgstr "Message"
+
+#: .\core\templates\components\contact.html:120
+msgid "Continuă"
+msgstr "Continue"
+
+#: .\core\templates\components\contact.html:125
+msgid "Selectează ora programării"
+msgstr "Select appointment time"
+
+#: .\core\templates\components\contact.html:130
+msgid "Ziua anterioară"
+msgstr "Previous day"
+
+#: .\core\templates\components\contact.html:136
+msgid "Ziua următoare"
+msgstr "Next day"
+
+#: .\core\templates\components\contact.html:144
+msgid "Confirmă programarea"
+msgstr "Confirm appointment"
+
+#: .\core\templates\components\cookie-consent.html:5
+msgid ""
+"Acest site utilizează cookie-uri pentru a îmbunătăți experiența "
+"dumneavoastră. Aveți opțiunea de a accepta sau refuza utilizarea cookie-"
+"urilor."
+msgstr "This website uses cookies to enhance your experience. You have the option to accept or refuse the use of cookies."
+
+
+#: .\core\templates\components\cookie-consent.html:6
+msgid "Afla mai multe"
+msgstr "Find out more"
+
+#: .\core\templates\components\cookie-consent.html:9
+msgid "Acceptă"
+msgstr "Accept"
+
+#: .\core\templates\components\cookie-consent.html:10
+msgid "Refuză"
+msgstr "Refuse"
+
+#: .\core\templates\components\expandable-cards.html:10
+msgid "Educația mea"
+msgstr "My Education"
+
+#: .\core\templates\components\expandable-cards.html:12
+msgid ""
+"• Universitatea Tufts (Boston, SUA) - Licență în Psihologie Clinică<br>• "
+"Universitatea Vrije (Amsterdam, Olanda) - Master în Cercetare Clinică și "
+"Psihopatologia Dezvoltării<br>• Asociatia de Terapii Cognitiv "
+"Comportamentale si Programe de Reabilitare (București, România) - Formare în "
+"Psihoterapie Cognitiv Comportamentală Individuală și de Grup<br>• "
+"Universitatea Autonomă Barcelona (Barcelona, Spania) - Doctorat în "
+"Psihologie Clinică"
+msgstr ""
+"• Tufts University (Boston, USA) – Bachelor's in Clinical Psychology<br>• "
+"Vrije University (Amsterdam, Netherlands) – Master's in Clinical Research "
+"and Developmental Psychopathology<br>• Association for Cognitive Behavioral "
+"Therapies and Rehabilitation Programs (Bucharest, Romania) – Training in "
+"Individual and Group Cognitive Behavioral Psychotherapy<br>• Autonomous "
+"University of Barcelona (Barcelona, Spain) – PhD in Clinical Psychology"
+
+#: .\core\templates\components\expandable-cards.html:21
+msgid "De ce am devenit terapeut"
+msgstr "Why I became a therapist"
+
+#: .\core\templates\components\expandable-cards.html:23
+msgid ""
+"Am studiat psihologie pentru că mi se păreau fascinante toate fenomenele "
+"care ne definesc. Apoi, m-am îndrăgostit de psihologia clinică pentru că mi "
+"se părea cea mai logică dintre subdomeniile psihologiei; mereu am descris-o "
+"drept matematică aplicată pe oameni. Am ales să devin terapeut pentru că mi "
+"se pare un privilegiu să fii prezent într-unul dintre cele mai importante, "
+"dar și vulnerabile momente ale unei persoane. În continuare îmi doresc să "
+"contribui și mai mult la acest domeniu, acționând ca o legătură între "
+"cercetare și practică"
+msgstr ""
+"I studied psychology because I found all the phenomena that define us "
+"fascinating. Then I fell in love with clinical psychology because it seemed "
+"to me the most logical of psychology’s subfields; I’ve always described it "
+"as mathematics applied to people. I chose to become a therapist because I "
+"believe it’s a privilege to be present in one of the most important—and also "
+"vulnerable—moments in a person’s life. I continue to want to contribute even "
+"more to this field by acting as a bridge between research and practice."
+
+#: .\core\templates\components\expandable-cards.html:33
+msgid "Cercetare"
+msgstr "Research"
+
+#: .\core\templates\components\expandable-cards.html:35
+msgid ""
+"• Laboratorul Emoție, Creier și Comportament (Universitatea Tufts) - Am "
+"studiat relația între emoții și comportamente impulsive<br>• Laboratorul de "
+"Cogniție Aplicată Tufts - Am studiat interacțiunea dintre sarcinile "
+"cognitive și mișcarea corpului<br>• Centrul de Medicină a Adicției - Am "
+"investigat consumul de marijuana medicinală și efectul asupra sănătății "
+"participanților<br>• Laboratorul ZeroPhobia - Am investigat eficacitatea "
+"terapiei prin expunere virtuală asupra oamenilor cu fobii<br>• Laboratorul "
+"Riper - Am investigat ce unelte care folosesc inteligență artificială există "
+"și care este eficacitatea lor"
+msgstr ""
+"• Emotion, Brain, and Behavior Lab (Tufts University) – Studied the "
+"relationship between emotions and impulsive behaviors<br>• Tufts Applied "
+"Cognition Lab – Studied the interaction between cognitive tasks and body "
+"movement<br>• Center of Addiction Medicine – Investigated the use of medical "
+"marijuana and its effects on participants' health<br>• ZeroPhobia Lab – "
+"Investigated the effectiveness of virtual exposure therapy for people with "
+"phobias<br>• Riper Lab – Researched existing tools that use artificial "
+"intelligence and their effectiveness"
+
+#: .\core\templates\components\expandable-cards.html:45
+msgid "Fundația Calea Victoriei"
+msgstr "Calea Victoriei Foundation"
+
+#: .\core\templates\components\expandable-cards.html:47
+msgid ""
+"Colaborez cu 'Fundația Calea Victoriei' unde țin prelegeri și ateliere "
+"despre psihologie și sănătate mintală. Acest parteneriat îmi oferă "
+"oportunitatea de a împărtăși cunoștințele personale și de a ajuta alții să "
+"înțeleagă mai bine complexitățile comportamentului uman. Îmi place să "
+"contribui la dezvoltarea continuă a celor prezenți, oferindu-le uneltele "
+"necesare pentru a-și gestiona mai eficient stresul și emoțiile"
+msgstr ""
+"I collaborate with the 'Calea Victoriei Foundation' where I hold lectures "
+"and workshops on psychology and mental health. This partnership gives me the "
+"opportunity to share personal knowledge and help others better understand "
+"the complexities of human behavior. I enjoy contributing to the continuous "
+"development of those attending by providing them with the necessary tools to "
+"better manage stress and emotions"
+
+#: .\core\templates\components\expandable-cards.html:62
+msgid "Upgrade Education"
+msgstr "Upgrade Education"
+
+#: .\core\templates\components\expandable-cards.html:64
+msgid ""
+"Am fost responsabilă pentru conducerea dezvoltării conținutului, "
+"monitorizarea feedback-ului, implementarea soluțiilor, identificarea "
+"nevoilor părților interesate, crearea de noi produse, îmbunătățirea "
+"programelor educaționale, angajarea și gestionarea membrilor echipei. Acest "
+"rol mi-a permis să coordonez și să optimizez procesele, asigurându-mă că "
+"obiectivele educaționale sunt atinse eficient, în timp ce am susținut "
+"dezvoltarea profesională a echipei mele"
+msgstr ""
+"I was responsible for leading content development, monitoring feedback, "
+"implementing solutions, identifying stakeholder needs, creating new "
+"products, improving educational programs, and recruiting and managing team "
+"members. This role allowed me to coordinate and optimize processes, ensuring "
+"that educational objectives were efficiently met while supporting the "
+"professional growth of my team"
+
+#: .\core\templates\components\expandable-cards.html:74
+msgid "Doctorat Marie Curie"
+msgstr "Marie Curie PhD"
+
+#: .\core\templates\components\expandable-cards.html:76
+msgid ""
+"Am primit o bursă specială europeană pentru a cerceta cum putem să avansăm "
+"metodele noastre de investigație astfel încât să putem capta cu o acuratețe "
+"mai mare individualitatea experienței oamenilor cu probleme mintale, fie că "
+"este vorba de psihoză sau depresie. Proiectul meu folosește principii "
+"preluate din ideologia Citizen Science și metode de investigație precum "
+"Ecological Momentary Assessment pentru a ajunge la rezultatele dorite, iar "
+"în curând voi investiga și reacția terapeuților, dar și a clienților când "
+"vine vorba despre introducerea inteligenței artificiale în cadrul terapiei"
+msgstr ""
+"I received a special European scholarship to research how we can advance our "
+"investigative methods in order to more accurately capture the individuality "
+"of people’s experiences with mental health issues, whether it’s psychosis or "
+"depression. My project applies principles from Citizen Science ideology and "
+"investigation methods such as Ecological Momentary Assessment to reach the "
+"desired outcomes, and I will soon be exploring how both therapists and "
+"clients react to the introduction of artificial intelligence in therapy"
+
+#: .\core\templates\components\expandable-cards.html:86
+msgid "Dridu Dăruiește Zâmbete"
+msgstr "Dridu Gives Smiles"
+
+#: .\core\templates\components\expandable-cards.html:88
+msgid ""
+"Am proiectat un program de intervenție pentru elevii de gimnaziu dintr-o "
+"școală locală din Dridu. În fiecare lună, am organizat clase de dezvoltare "
+"personală cu studenții, unde ne-am concentrat pe dezvoltarea socio-"
+"emoțională, discriminare, bullying și alte subiecte relevante. Aceste "
+"sesiuni mi-au permis să contribui activ la creșterea și formarea lor ca "
+"indivizi conștienți și responsabili în societate"
+msgstr ""
+"I designed an intervention program for middle school students in a local "
+"school in Dridu. Every month, I organized personal development classes with "
+"the students, focusing on socio-emotional growth, discrimination, bullying, "
+"and other relevant topics. These sessions allowed me to actively contribute "
+"to their growth and development as conscious and responsible individuals in "
+"society"
+
+#: .\core\templates\components\expandable-cards.html:98
+msgid "Teatrul Labirint"
+msgstr "Labyrinth Theater"
+
+#: .\core\templates\components\expandable-cards.html:100
+msgid ""
+"Am organizat și am participat la mai multe experiențe de teatru labirint "
+"senzorial. Ultima sesiune pe care am organizat-o a făcut parte din a doua "
+"ediție a evenimentului cultural 'Dor de Doina', un eveniment destinat să "
+"conecteze tinerii la cultura, natura și tradițiile românești"
+msgstr ""
+"I organized and participated in several sensory labyrinth theater "
+"experiences. The latest session I organized was part of the second edition "
+"of the cultural event 'Dor de Doina,' an event designed to connect young "
+"people with Romanian culture, nature, and traditions"
+
+#: .\core\templates\components\expandable-cards.html:113
+msgid "Terre des Hommes"
+msgstr "Terre des Hommes"
+
+#: .\core\templates\components\expandable-cards.html:115
+msgid ""
+"Am colaborat cu organizația Terre des Hommes pentru a facilita o serie de "
+"seminarii destinate refugiaților ucraineni, concentrându-ne pe dezvoltarea "
+"rezilienței, procesarea experiențelor traumatice și îmbunătățirea sănătății "
+"mintale. Aceste ateliere au oferit un spațiu sigur și susținător, unde "
+"participanții au putut învăța tehnici de coping și au discutat despre "
+"importanța îngrijirii emoționale în contextul provocărilor pe care le "
+"întâmpină. Prin această inițiativă, am urmărit să contribuim la integrarea "
+"și adaptarea lor mai bună în comunitate, oferind suport și resurse adaptate "
+"nevoilor lor specifice"
+msgstr ""
+"I collaborated with the organization Terre des Hommes to facilitate a series "
+"of seminars for Ukrainian refugees, focusing on resilience building, "
+"processing traumatic experiences, and improving mental health. These "
+"workshops provided a safe and supportive space where participants could "
+"learn coping techniques and discuss the importance of emotional care in the "
+"face of current challenges. Through this initiative, we aimed to support "
+"their better integration and adaptation within the community by offering "
+"tailored resources and support"
+
+#: .\core\templates\components\expandable-cards.html:125
+msgid "Agenția Împreună"
+msgstr "Împreună Agency"
+
+#: .\core\templates\components\expandable-cards.html:127
+msgid ""
+"Am oferit sesiuni de consiliere pentru elevii de gimnaziu din grupuri "
+"vulnerabile, în cadrul unui proiect inițiat de Agenția Împreună. Această "
+"activitate a fost concepută pentru a sprijini tinerii în depășirea "
+"dificultăților personale și educaționale, promovând dezvoltarea lor "
+"emoțională și socială. Prin aceste întâlniri, am încercat să oferim un mediu "
+"înțelegător și adaptat nevoilor lor, contribuind astfel la consolidarea "
+"încrederii în sine și la îmbunătățirea performanței școlare a participanților"
+msgstr ""
+"I provided counseling sessions for middle school students from vulnerable "
+"groups, as part of a project initiated by the Împreună Agency. This activity "
+"was designed to support young people in overcoming personal and educational "
+"challenges, promoting their emotional and social development. Through these "
+"meetings, we aimed to offer an understanding and needs-adapted environment, "
+"thus contributing to strengthening their self-confidence and improving the "
+"academic performance of the participants"
+
+#: .\core\templates\components\expandable-cards.html:137
+msgid "Caring Universities"
+msgstr "Caring Universities"
+
+#: .\core\templates\components\expandable-cards.html:139
+msgid ""
+"Am lucrat cu studenți care se confruntau cu depresie, anxietate sau "
+"dificultăți de procrastinare, utilizând tehnici de interviu motivațional și "
+"concentrându-mă pe construirea unei alianțe terapeutice solide prin "
+"ascultare activă și tehnici de oglindire. Am ajutat studenții să identifice "
+"gânduri automate și să implementeze strategii de reglare emoțională. Această "
+"abordare a fost esențială pentru a le oferi sprijinul necesar în depășirea "
+"obstacolelor emoționale și pentru a încuraja un progres semnificativ în "
+"gestionarea stresului și îmbunătățirea sănătății mentale"
+msgstr ""
+"I worked with students dealing with depression, anxiety, or procrastination "
+"difficulties, using motivational interviewing techniques and focusing on "
+"building a strong therapeutic alliance through active listening and "
+"mirroring techniques. I helped students identify automatic thoughts and "
+"implement emotional regulation strategies. This approach was essential in "
+"providing the support needed to overcome emotional obstacles and encouraging "
+"meaningful progress in stress management and mental health improvement"
+
+#: .\core\templates\components\expandable-cards.html:148
+msgid "Universitatea Hyperion"
+msgstr "Hyperion University"
+
+#: .\core\templates\components\expandable-cards.html:149
+msgid ""
+"Am conceput materiale didactice și am predat cursul de psihologie în limba "
+"engleză pentru studenții în primul an de licență. Această experiență m-a "
+"ajutat să îmi dezvolt abilitățile de a transmite cunoștințele complexe într-"
+"un mod accesibil și captivant, contribuind semnificativ la formarea "
+"academică a tinerilor studenți. Îmi place să văd cum aceștia evoluează și "
+"își aprofundează înțelegerea asupra psihologiei umane"
+msgstr ""
+"I designed teaching materials and taught the psychology course in English "
+"for first-year undergraduate students. This experience helped me develop the "
+"ability to convey complex knowledge in an accessible and engaging way, "
+"significantly contributing to the academic development of young students. I "
+"enjoy seeing how they evolve and deepen their understanding of human "
+"psychology"
+
+#: .\core\templates\components\flip-carousel.html:11
+msgid "Cum te pot contacta?"
+msgstr "How can I contact you?"
+
+#: .\core\templates\components\flip-carousel.html:15
+msgid ""
+"Poți folosi formularul de mai jos pentru a te programa la o primă ședință "
+"gratuită. Dacă ai nelămuriri sau întrebări, mă poți contacta pe email la"
+msgstr ""
+"You can use the form below to schedule a free initial session. If you have "
+"any questions or concerns, you can contact me via email at"
+
+#: .\core\templates\components\flip-carousel.html:28
+msgid "Cât durează ședința?"
+msgstr "How long is the session?"
+
+#: .\core\templates\components\flip-carousel.html:31
+msgid ""
+"O ședință durează între 45-60 de minute și în general o adaptăm în funcție "
+"de nevoi"
+msgstr ""
+"A session lasts between 45–60 minutes and is generally adapted based on "
+"individual needs"
+
+#: .\core\templates\components\flip-carousel.html:40
+msgid "Cât durează consilierea vocațională"
+msgstr "How long does vocational counseling take?"
+
+#: .\core\templates\components\flip-carousel.html:44
+msgid "Consilierea vocațională este scurtă și necesită în general 4-8 ședințe"
+msgstr "Vocational counseling is brief and generally requires 4–8 sessions"
+
+#: .\core\templates\components\flip-carousel.html:54
+msgid "Cât timp voi veni la terapie?"
+msgstr "How long will I attend therapy?"
+
+#: .\core\templates\components\flip-carousel.html:58
+msgid ""
+"Nu există o durată fixă. Vom stabili cât de des ne vom vedea și cât timp în "
+"funcție de nevoile tale. În general ședințele de terapie variază între de "
+"două ori pe săptămână până la o dată la două săptămâni. Rezultatele încep să "
+"se vadă abia după 2-4 luni."
+msgstr ""
+"There is no fixed duration. We will determine how often and for how long we "
+"will meet based on your needs. In general, therapy sessions range from twice "
+"a week to once every two weeks. Results typically begin to show after 2–4 "
+"months"
+
+#: .\core\templates\components\flip-carousel.html:68
+msgid "Cât costă o ședință?"
+msgstr "How much does a session cost?"
+
+#: .\core\templates\components\flip-carousel.html:72
+msgid ""
+"Tariful unei ședințe variază între 150-250 RON în funcție de serviciu "
+"(terapie, consiliere vocațională, evaluare psihologică, etc.)"
+msgstr ""
+"The cost of a session ranges between 150–250 RON depending on the service "
+"(therapy, vocational counseling, psychological assessment, etc.)"
+
+#: .\core\templates\components\flip-carousel.html:82
+msgid "Care este programul meu de lucru?"
+msgstr "What are my working hours?"
+
+#: .\core\templates\components\flip-carousel.html:86
+msgid ""
+"Lucrez în principiu de luni până vineri între 10:00-20:00. Dacă nu poți "
+"ajunge la ședințe în acest interval putem discuta despre eventuale acomodări."
+msgstr ""
+"I generally work Monday through Friday between 10:00 AM and 8:00 PM. If "
+"you’re unable to attend sessions during this time frame, we can discuss "
+"possible accommodations"
+
+#: .\core\templates\components\flip-carousel.html:96
+msgid "Putem să ne vedem online?"
+msgstr "Can we meet online?"
+
+#: .\core\templates\components\flip-carousel.html:100
+msgid ""
+"Da, eu lucrez momentan exclusiv online, deoarece există studii (la care am "
+"lucrat chiar eu) care arată eficacitatea terapiei online. Dacă preferi să ne "
+"vedem fizic pot acomoda această dorință."
+msgstr ""
+"Yes, I currently work exclusively online, as there are studies (some of "
+"which I have contributed to) that show the effectiveness of online therapy. "
+"If you prefer to meet in person, I can accommodate that preference"
+
+#: .\core\templates\components\flip-carousel.html:108
+msgid "Cât durează consilierea educațională?"
+msgstr "How long does educational counseling take?"
+
+#: .\core\templates\components\flip-carousel.html:111
+msgid ""
+"Consilierea educațională se stabilește în funcție de nevoi și obiective (la "
+"câte universități vrei să aplici, dacă este nevoie să dai anumite teste "
+"(e.g. SAT)) și poate dura între 10-30 de ședințe"
+msgstr ""
+"Educational counseling is determined based on needs and objectives (how many "
+"universities you want to apply to, if you need to take certain tests (e.g., "
+"SAT)) and can last between 10-30 sessions"
+
+#: .\core\templates\components\flip-carousel.html:118
+msgid "În ce limbă putem vorbi?"
+msgstr "What language can we speak?"
+
+#: .\core\templates\components\flip-carousel.html:121
+msgid ""
+"Momentan ofer servicii în limba engleză și limba română, acestea fiind "
+"limbile pe care le stăpânesc cel mai bine. Lucrez pentru a putea oferi în "
+"curând ședințe în spaniolă, franceză și limbajul semnelor"
+msgstr ""
+"I currently offer services in English and Romanian, as these are the "
+"languages I am most proficient in. I am working to soon be able to offer "
+"sessions in Spanish, French, and sign language"
+
+#: .\core\templates\components\flip-carousel.html:129
+msgid "Previous"
+msgstr "Previous"
+
+#: .\core\templates\components\flip-carousel.html:130
+msgid "Next"
+msgstr "Next"
+
+#: .\core\templates\components\hero-home.html:12
+msgid ""
+"În mâinile unui consilier bun, vulnerabilitatea devine o cale către "
+"rezistenţă"
+msgstr ""
+"In the hands of a good counselor, vulnerability becomes a path to resilience"
+
+#: .\core\templates\components\hero-simple-about.html:14
+msgid ""
+"Consilierii sunt arhitecții vindecării interioare, ne ajută să construim o "
+"bază pentru un viitor mai bun"
+msgstr ""
+"Counselors are the architects of inner healing, helping us build a "
+"foundation for a better future"
+
+#: .\core\templates\components\hero-simple-blog.html:14
+msgid ""
+"Consilierii au capacitatea de a ne vedea potențialul, chiar și atunci când "
+"nu îl putem vedea noi înșine"
+msgstr ""
+"Counselors have the ability to see our potential, even when we can't see it "
+"ourselves"
+
+#: .\core\templates\components\hero-simple-services.html:14
+msgid ""
+"Consilierii sunt ca niște detectivi emoționali, ajutându-ne să descoperim "
+"poveștile ascunse ale minții noastre"
+msgstr ""
+"Counselors are like emotional detectives, helping us uncover the hidden "
+"stories of our minds"
+
+#: .\core\templates\components\navigation.html:3
+msgid "Navigarea principală"
+msgstr "Main Navigation"
+
+#: .\core\templates\components\navigation.html:5
+msgid "Intoarcere la pagina principală"
+msgstr "Return to the main page"
+
+#: .\core\templates\components\navigation.html:10
+msgid "Deschide meniul"
+msgstr "Open menu"
+
+#: .\core\templates\components\navigation.html:25
+msgid "Acasă"
+msgstr "Home"
+
+#: .\core\templates\components\navigation.html:34
+msgid "Despre mine"
+msgstr "About me"
+
+#: .\core\templates\components\navigation.html:43
+msgid "Servicii"
+msgstr "Services"
+
+#: .\core\templates\components\navigation.html:50
+msgid "Secțiunea de contact"
+msgstr "Contact section"
+
+#: .\core\templates\components\navigation.html:52
+msgid "Contact"
+msgstr "Contact"
+
+#: .\core\templates\components\navigation.html:62
+msgid "Vizitează profilul LinkedIn"
+msgstr "Visit LinkedIn profile"
+
+#: .\core\templates\components\small-cards.html:16
+msgid ""
+"Un spațiu sigur și confidențial unde poți gestiona problemele personale și "
+"emoționale, dezvoltând strategii eficiente de coping"
+msgstr ""
+"A safe and confidential space where you can manage personal and emotional "
+"issues, developing effective coping strategies"
+
+#: .\core\templates\components\small-cards.html:29
+msgid ""
+"Evaluări detaliate pentru înțelegerea provocărilor psihologice, cu "
+"recomandări precise și planuri de tratament adaptate"
+msgstr ""
+"Detailed assessments to understand psychological challenges, with precise "
+"recommendations and tailored treatment plans"
+
+#: .\core\templates\components\small-cards.html:46
+msgid ""
+"Descoperirea carierei ideale și dezvoltarea abilităților pentru succes, cu "
+"un plan personalizat pe baza talentelor tale"
+msgstr ""
+"Discovering the ideal career and developing skills for success, with a "
+"personalized plan based on your talents"
+
+#: .\core\templates\components\small-cards.html:63
+msgid ""
+"Suport pentru aplicații la universități în străinătate, dezvoltarea "
+"portofoliului academic și orientare educațională"
+msgstr ""
+"Support for university applications abroad, academic portfolio development, "
+"and educational guidance"
+
+#: .\core\templates\components\small-cards.html:80
+msgid ""
+"Programe personalizate pentru creșterea stimei de sine, gestionarea "
+"stresului și îmbunătățirea relațiilor interpersonale"
+msgstr ""
+"Personalized programs for boosting self-esteem, managing stress, and "
+"improving interpersonal relationships"
+
+#: .\core\templates\components\wide-cards-home.html:8
+msgid "Cine sunt"
+msgstr "Who I am"
+
+#: .\core\templates\components\wide-cards-home.html:10
+msgid ""
+"Sunt psiholog clinician și psihoterapeut cognitiv-comportamental cu "
+"experiență internațională în Statele Unite, Olanda, România și Spania. De-a "
+"lungul a 8 ani de practică, m-am dedicat să ajut sute de persoane să-și "
+"înțeleagă mai bine problemele, să-și definească valorile și să-și atingă "
+"obiectivele. Îmi folosesc expertiza diversă pentru a oferi servicii "
+"personalizate de consiliere psihologică, vocațională și educațională. Sunt "
+"aici pentru a mă asigura că nimeni nu trebuie să facă față provocărilor "
+"vieții singur"
+msgstr ""
+"I am a clinical psychologist and cognitive-behavioral psychotherapist with "
+"international experience in the United States, the Netherlands, Romania, and "
+"Spain. Over the course of 8 years of practice, I have dedicated myself to "
+"helping hundreds of individuals better understand their issues, define their "
+"values, and achieve their goals. I use my diverse expertise to offer "
+"personalized psychological, vocational, and educational counseling services. "
+"I am here to ensure that no one has to face life's challenges alone"
+
+#: .\core\templates\components\wide-cards-home.html:24
+msgid "La ce mă ajută un psiholog"
+msgstr "How can a psychologist help me"
+
+#: .\core\templates\components\wide-cards-home.html:26
+msgid ""
+"Discuțiile cu un psiholog sunt transformative și te pot ajuta să-ți "
+"îmbunătățești calitatea vieții în multe moduri. Un psiholog te sprijină să "
+"te cunoști mai bine, să identifici sursele disconfortului tău și să "
+"descoperi legătura dintre trecutul și prezentul tău. Prin terapie, vei "
+"învăța să formulezi strategii eficiente pentru a depăși provocările, să-ți "
+"clarifici valorile personale, și să trăiești o viață autentică și aliniată "
+"cu acestea. Mai mult, terapia poate reduce simptomele de anxietate și "
+"depresie, îmbunătățind gestionarea emoțiilor și relațiile interpersonale"
+msgstr ""
+"Conversations with a psychologist are transformative and can help improve "
+"your quality of life in many ways. A psychologist supports you in getting to "
+"know yourself better, identifying the sources of your discomfort, and "
+"discovering the connection between your past and present. Through therapy, "
+"you will learn to develop effective strategies to overcome challenges, "
+"clarify your personal values, and live an authentic life aligned with those "
+"values. Furthermore, therapy can reduce symptoms of anxiety and depression, "
+"improving emotional management and interpersonal relationships"
+
+#: .\core\templates\components\wide-cards-home.html:38
+msgid "La ce mă ajută un consilier vocațional sau educațional"
+msgstr "How can a vocational or educational counselor help me"
+
+#: .\core\templates\components\wide-cards-home.html:41
+msgid ""
+"Discuțiile cu un consilier vocațional sau educațional sunt esențiale pentru "
+"oricine vrea să facă o schimbare de carieră sau pentru orice adolescent "
+"nehotărât cu privire la cariera și educația viitoare. Un consilier "
+"vocațional te ajută să identifici interesele și abilitățile tale, oferindu-"
+"ți direcții clare despre carierele care ți s-ar potrivi cel mai bine. Dacă "
+"ai în plan să studiezi în străinătate, un consilier educațional îți va "
+"clarifica pașii necesari și te va asista în crearea unui portofoliu "
+"impresionant pentru aplicațiile universitare. Această orientare specializată "
+"îți optimizează șansele de succes și te pregătește eficient pentru viitor"
+msgstr ""
+"Conversations with a vocational or educational counselor are essential for "
+"anyone looking to make a career change or for any undecided teenager "
+"regarding their future career and education. A vocational counselor helps "
+"you identify your interests and skills, providing clear guidance on careers "
+"that would suit you best. If you're planning to study abroad, an educational "
+"counselor will clarify the necessary steps and assist you in creating an "
+"impressive portfolio for university applications. This specialized guidance "
+"optimizes your chances of success and effectively prepares you for the future"
+
+#: .\core\templates\components\wide-cards-services.html:10
+msgid ""
+"Un spațiu sigur și confidențial unde poți gestiona problemele personale și "
+"emoționale, dezvoltând strategii eficiente de coping. Această formă de "
+"terapie îți oferă oportunitatea de a explora diverse aspecte ale vieții tale "
+"într-un mediu adecvat, ajutându-te să înțelegi mai bine originea "
+"dificultăților și să lucrezi activ pentru îmbunătățirea stării tale de bine. "
+"Este un proces colaborativ, centrat pe nevoile individuale, care încurajează "
+"creșterea personală și rezolvarea constructivă a conflictelor interioare"
+msgstr ""
+"A safe and confidential space where you can manage personal and emotional "
+"issues, developing effective coping strategies. This form of therapy offers "
+"you the opportunity to explore various aspects of your life in an "
+"appropriate environment, helping you better understand the origin of your "
+"difficulties and actively work toward improving your well-being. It is a "
+"collaborative process, centered on individual needs, that encourages "
+"personal growth and the constructive resolution of inner conflicts"
+
+#: .\core\templates\components\wide-cards-services.html:22
+msgid ""
+"Evaluări detaliate pentru înțelegerea provocărilor psihologice, cu "
+"recomandări precise și planuri de tratament adaptate. Aceste evaluări sunt "
+"esențiale pentru diagnosticarea corectă și personalizată, oferind o bază "
+"solidă pentru intervenții terapeutice eficiente. Prin utilizarea unor metode "
+"și instrumente validate, putem identifica nevoile tale, facilitând astfel "
+"elaborarea unui plan de tratament optimizat și orientat către rezultate "
+"concrete și ameliorarea simptomelor"
+msgstr ""
+"Detailed assessments to understand psychological challenges, with precise "
+"recommendations and tailored treatment plans. These assessments are "
+"essential for accurate and personalized diagnosis, providing a solid "
+"foundation for effective therapeutic interventions. By using validated "
+"methods and tools, we can identify your needs, facilitating the development "
+"of an optimized treatment plan focused on concrete results and symptom relief"
+
+#: .\core\templates\components\wide-cards-services.html:34
+msgid ""
+"Descoperirea carierei ideale și dezvoltarea abilităților, cu un plan "
+"personalizat pe baza talentelor tale. Acest proces te ajută să navighezi "
+"prin posibilele opțiuni de carieră și să identifici drumul profesional care "
+"se potrivește cel mai bine cu interesele și competențele tale. Un "
+"consilierul vocațional utilizează diverse tehnici de evaluare pentru a "
+"clarifica aptitudinile și preferințele, oferindu-ți astfel suportul necesar "
+"pentru a lua decizii informate și a stabili obiective de carieră realiste și "
+"realizabile"
+msgstr ""
+"Discovering the ideal career and developing skills, with a personalized plan "
+"based on your talents. This process helps you navigate potential career "
+"options and identify the professional path that best fits your interests and "
+"abilities. A vocational counselor uses various assessment techniques to "
+"clarify skills and preferences, thus providing you with the support needed "
+"to make informed decisions and set realistic and achievable career goals"
+
+#: .\core\templates\components\wide-cards-services.html:46
+msgid ""
+"Suport pentru aplicații la universități în străinătate, dezvoltarea "
+"portofoliului academic și orientare educațională. Acest serviciu este "
+"esențial pentru studenții care aspiră să studieze în afara țării, oferindu-"
+"le ghidare în complexul proces de selecție și admitere. Un consilier "
+"educațional te ajută la structurarea unui portofoliu impresionant, "
+"pregătirea documentației necesare și formularea unor aplicații convingătoare "
+"care să îți pună în evidență abilitățile tale speciale. Am ajutat zeci de "
+"elevi să găsească facultăți care să se potrivească cu dorințele lor și să "
+"fie admiși la facultăți de renume precum Harvard, Princeton și Tufts"
+msgstr ""
+"Support for university applications abroad, academic portfolio development, "
+"and educational guidance. This service is essential for students aspiring to "
+"study abroad, providing guidance through the complex selection and admission "
+"process. An educational counselor helps you structure an impressive "
+"portfolio, prepare the necessary documentation, and formulate compelling "
+"applications that highlight your special skills. I have helped dozens of "
+"students find universities that match their desires and gain admission to "
+"prestigious institutions such as Harvard, Princeton, and Tufts"
+
+#: .\core\templates\components\wide-cards-services.html:58
+msgid ""
+"Programe personalizate pentru creșterea stimei de sine, gestionarea "
+"stresului și îmbunătățirea relațiilor interpersonale. Aceste programe sunt "
+"concepute pentru a te ajuta să îți descoperi și să îți valorifici "
+"potențialul maxim, oferind strategii adaptate nevoilor tale individuale. Fie "
+"că este vorba de depășirea fricilor, îmbunătățirea comunicării în relațiile "
+"personale și profesionale sau dezvoltarea unui sentiment de bine și "
+"încredere în sine, îți voi oferi suport constant și metode eficiente de auto-"
+"îmbunătățire. Aceste abordări te vor echipa cu uneltele necesare pentru a "
+"face față provocărilor cotidiene și pentru a trăi o viață echilibrată și "
+"împlinită"
+msgstr ""
+"Personalized programs for boosting self-esteem, managing stress, and "
+"improving interpersonal relationships. These programs are designed to help "
+"you discover and fully leverage your potential, offering strategies tailored "
+"to your individual needs. Whether it's overcoming fears, improving "
+"communication in personal and professional relationships, or developing a "
+"sense of well-being and self-confidence, I will provide constant support and "
+"effective self-improvement methods. These approaches will equip you with the "
+"tools needed to face daily challenges and live a balanced and fulfilling life"
+
+#: .\core\templates\core\about-page.html:6
+msgid "PsychED Lab - Proiectele Mele"
+msgstr "PsychED Lab - My Projects"
+
+#: .\core\templates\core\blog-detail.html:14
+msgid "Inapoi la Blog"
+msgstr "Back to Blog"
+
+#: .\core\templates\core\blog-page.html:6
+msgid "PsychED Lab - Blog"
+msgstr "PsychED Lab - Blog"
+
+#: .\core\templates\core\home-page.html:6
+msgid "PsychED Lab - Acasa"
+msgstr "PsychED Lab - Home"
+
+#: .\core\templates\core\privacy-policy.html:6
+msgid "PsychED Lab - Politica de Confidențialitate"
+msgstr "PsychED Lab - Privacy Policy"
+
+#: .\core\templates\core\privacy-policy.html:12
+msgid "Politica de Confidențialitate"
+msgstr "Privacy Policy"
+
+#: .\core\templates\core\privacy-policy.html:14
+msgid ""
+"Această politică de confidențialitate descrie modul în care PsychED Lab "
+"colectează, utilizează și protejează informațiile personale ale "
+"vizitatorilor săi și utilizatorilor săi înregistrati."
+msgstr "This privacy policy describes how PsychED Lab collects, uses, and protects the personal information of its visitors and registered users."
+
+
+#: .\core\templates\core\privacy-policy.html:16
+msgid "Informații personale pe care le colectăm"
+msgstr "Personal information we collect"
+
+
+#: .\core\templates\core\privacy-policy.html:17
+msgid ""
+"Când vizitați site-ul nostru, colectăm automat anumite informații despre "
+"dispozitivul dumneavoastră, inclusiv informații despre browserul web, adresa "
+"IP, fusul orar și unele dintre cookie-urile instalate pe dispozitivul "
+"dumneavoastră. De asemenea, pe măsură ce navigați pe site-ul nostru, "
+"colectăm informații despre paginile web individuale sau produsele pe care le "
+"vizualizați, ce site-uri web sau termeni de căutare vă referă la site-ul "
+"nostru și informații despre cum interacționați cu site-ul."
+msgstr "When you visit our website, we automatically collect certain information about your device, including your web browser, IP address, time zone, and some of the cookies installed on your device. Additionally, as you browse our site, we collect information about the individual web pages or products you view, what websites or search terms referred you to our site, and information about how you interact with our website."
+
+#: .\core\templates\core\privacy-policy.html:19
+msgid "Cum utilizăm informațiile dumneavoastră personale"
+msgstr "How we use your personal information"
+
+#: .\core\templates\core\privacy-policy.html:20
+msgid ""
+"Utilizăm informațiile pe care le colectăm pentru a ne îmbunătăți website-ul "
+"și calitatea serviciilor oferite, inclusiv prin monitorizarea traficului și "
+"optimizarea experienței utilizatorilor, precum și pentru a comunica cu "
+"dumneavoastră."
+msgstr "We use the information we collect to improve our website and the quality of the services we provide, including monitoring website traffic, optimizing user experience, and communicating with you."
+
+
+#: .\core\templates\core\privacy-policy.html:22
+msgid "Partajarea informațiilor personale"
+msgstr "Sharing personal information"
+
+#: .\core\templates\core\privacy-policy.html:23
+msgid ""
+"Partajăm informațiile personale cu terți doar în scopurile descrise în "
+"această politică de confidențialitate, inclusiv dar nu limitat la furnizorii "
+"de servicii care ne ajută să administrăm și să îmbunătățim website-ul."
+msgstr "We share personal information with third parties only for the purposes described in this privacy policy, including but not limited to service providers who assist us in managing and improving our website."
+
+#: .\core\templates\core\privacy-policy.html:25
+msgid "Drepturile dumneavoastră"
+msgstr "Your rights"
+
+#: .\core\templates\core\privacy-policy.html:26
+msgid ""
+"Dacă sunteți rezident european, aveți dreptul să accesați informațiile "
+"personale pe care le deținem despre dumneavoastră și să cereți ca aceste "
+"informații să fie corectate, actualizate sau șterse. Dacă doriți să "
+"exercitați acest drept, vă rugăm să ne contactați prin informațiile de "
+"contact de mai jos."
+msgstr "If you are a European resident, you have the right to access the personal information we hold about you and to request that this information be corrected, updated, or deleted. If you would like to exercise this right, please contact us using the contact information provided below."
+
+
+#: .\core\templates\core\services-page.html:6
+msgid "PsychED Lab - Servicii"
+msgstr "PsychED Lab - Services"
+
+#~ msgid "Selectează limba"
+#~ msgstr "Select language"
+
+#~ msgid "Schimbă limba"
+#~ msgstr "Change language"
+
+#~ msgid "Schimbă limba în Română"
+#~ msgstr "Change language to Romanian"
+
+#~ msgid "Schimbă limba în Engleză"
+#~ msgstr "Change language to English"
+
+#~ msgid "Schimbă limba în Spaniolă"
+#~ msgstr "Change language to Spanish"
