@@ -24,7 +24,7 @@ PsychED Lab is a professional psychotherapy platform built with Django that serv
 - **Cookie Consent**
   - Compliant with EU standards, ensuring users' privacy and consent for cookies are properly managed.
 - **Translation Features**
-  - Utilizes Django’s ```bash gettext ``` for dynamic content translation, enhancing accessibility for users in different languages.
+  - Utilizes Django’s ```gettext``` for dynamic content translation, enhancing accessibility for users in different languages.
 
 ## Tech Stack
 
