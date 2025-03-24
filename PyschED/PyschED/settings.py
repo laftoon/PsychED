@@ -29,6 +29,7 @@ if ENVIRONMENT == 'production':
     SECURE_HSTS_SECONDS = 31536000
     SECURE_HSTS_INCLUDE_SUBDOMAINS = True
     SECURE_HSTS_PRELOAD = True
+    GOOGLE_CALENDAR_SERVICE_ACCOUNT_FILE = '/home/laftoon/PsychED/PyschED/calendar-key.json'
 else:
     DEBUG = True
     ALLOWED_HOSTS = ['localhost', '127.0.0.1', '0.0.0.0']
@@ -41,6 +42,7 @@ else:
     SECURE_HSTS_SECONDS = 0
     SECURE_HSTS_INCLUDE_SUBDOMAINS = False
     SECURE_HSTS_PRELOAD = False
+    GOOGLE_CALENDAR_SERVICE_ACCOUNT_FILE = os.path.join(BASE_DIR, 'calendar-key.json')
 
 # Security settings
 SECRET_KEY = config('SECRET_KEY')
@@ -162,11 +164,9 @@ LOGGING = {
 }
 
 # Google Calendar settings
-GOOGLE_CALENDAR_SERVICE_ACCOUNT_FILE = config('GOOGLE_CALENDAR_SERVICE_ACCOUNT_FILE',
-                                            default=os.path.join(BASE_DIR, 'calendar-key.json'))
-GOOGLE_CALENDAR_USER_EMAIL = config('GOOGLE_CALENDAR_USER_EMAIL', default='lauravaida01@gmail.com')
+GOOGLE_CALENDAR_USER_EMAIL = config('GOOGLE_CALENDAR_USER_EMAIL', default='raileanu.francesca@gmail.com')
 GOOGLE_CALENDAR_ID = config('GOOGLE_CALENDAR_ID',
-                          default='1b1e7cb49ef25197f00cabea8ca36baa86fe394b9f00379db32ab360336966f1@group.calendar.google.com')
+                          default='raileanu.francesca@gmail.com')
 
 # Time zone settings
 TIME_ZONE = 'Europe/Madrid'

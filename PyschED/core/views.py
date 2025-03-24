@@ -83,8 +83,27 @@ def get_time_slots(request):
                     slot_end = current_time + timedelta(minutes=50)
                     
                     for event in events_result.get('items', []):
-                        event_start = datetime.fromisoformat(event['start']['dateTime'].replace('Z', '+00:00'))
-                        event_end = datetime.fromisoformat(event['end']['dateTime'].replace('Z', '+00:00'))
+                        # Handle both all-day events (date) and regular events (dateTime)
+                        if 'dateTime' in event['start']:
+                            event_start = datetime.fromisoformat(event['start']['dateTime'].replace('Z', '+00:00'))
+                            event_end = datetime.fromisoformat(event['end']['dateTime'].replace('Z', '+00:00'))
+                        elif 'date' in event['start']:
+                            # For all-day events, set the start time to the beginning of the day
+                            # and end time to the end of the day in UTC
+                            event_date = datetime.strptime(event['start']['date'], '%Y-%m-%d').date()
+                            event_start = utc_tz.localize(datetime.combine(event_date, datetime.min.time()))
+                            
+                            # If end date is provided, use it; otherwise, use the same day
+                            if 'date' in event['end']:
+                                end_date = datetime.strptime(event['end']['date'], '%Y-%m-%d').date()
+                            else:
+                                end_date = event_date
+                                
+                            event_end = utc_tz.localize(datetime.combine(end_date, datetime.max.time()))
+                        else:
+                            # Skip events with unknown format
+                            logger.warning(f"Skipping event with unknown format: {event}")
+                            continue
                         
                         # Compare in UTC
                         if (event_start < slot_end and event_end > current_time):

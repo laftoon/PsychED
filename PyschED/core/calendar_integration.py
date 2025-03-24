@@ -72,8 +72,27 @@ def create_calendar_event(event_details):
         logger.info(f"Found {len(existing_events)} existing events")
         
         for event in existing_events:
-            event_start = datetime.fromisoformat(event['start']['dateTime'].replace('Z', '+00:00'))
-            event_end = datetime.fromisoformat(event['end']['dateTime'].replace('Z', '+00:00'))
+            # Handle both all-day events (date) and regular events (dateTime)
+            if 'dateTime' in event['start']:
+                event_start = datetime.fromisoformat(event['start']['dateTime'].replace('Z', '+00:00'))
+                event_end = datetime.fromisoformat(event['end']['dateTime'].replace('Z', '+00:00'))
+            elif 'date' in event['start']:
+                # For all-day events, set the start time to the beginning of the day
+                # and end time to the end of the day in UTC
+                event_date = datetime.strptime(event['start']['date'], '%Y-%m-%d').date()
+                event_start = pytz.UTC.localize(datetime.combine(event_date, datetime.min.time()))
+                
+                # If end date is provided, use it; otherwise, use the same day
+                if 'date' in event['end']:
+                    end_date = datetime.strptime(event['end']['date'], '%Y-%m-%d').date()
+                else:
+                    end_date = event_date
+                    
+                event_end = pytz.UTC.localize(datetime.combine(end_date, datetime.max.time()))
+            else:
+                # Skip events with unknown format
+                logger.warning(f"Skipping event with unknown format: {event}")
+                continue
             
             # Ensure UTC timezone for comparison
             event_start = event_start.astimezone(pytz.UTC)
@@ -83,7 +102,7 @@ def create_calendar_event(event_details):
             
             # Check for overlap in UTC time
             if (max(start_time, event_start) < min(end_time, event_end)):
-                logger.info(f"Overlap detected with event: {event['summary']}")
+                logger.info(f"Overlap detected with event: {event.get('summary', 'Unknown event')}")
                 logger.info(f"Requested slot (UTC): {start_time} - {end_time}")
                 logger.info(f"Existing event (UTC): {event_start} - {event_end}")
                 raise Exception("This time slot is no longer available")
@@ -114,3 +133,4 @@ def create_calendar_event(event_details):
     except Exception as e:
         logger.error(f"Error creating calendar event: {str(e)}")
         raise Exception(str(e))
+
