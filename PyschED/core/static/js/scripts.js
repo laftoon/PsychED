@@ -131,31 +131,43 @@ class HeroHandler {
     if (this.scrollButtons.length) {
       this.scrollButtons.forEach(button => {
         button.addEventListener("click", (e) => {
-          // Check if we're on the home page
+          e.preventDefault();
+          
+          // Check if we're on the home page (any language version)
           const isHomePage = window.location.pathname === "/" || 
-                           window.location.pathname === "/home/";
-
+                             window.location.pathname.endsWith("/home/") ||
+                             window.location.pathname === "/home" ||
+                             /^\/(en|ro|es)\/?$/.test(window.location.pathname) ||
+                             /^\/(en|ro|es)\/home\/?$/.test(window.location.pathname);
+          
           if (isHomePage) {
-            // If on home page, prevent default and scroll
-            e.preventDefault();
             if (this.contactSection) {
               this.contactSection.scrollIntoView({ behavior: "smooth" });
+            } else {
+              // If contact section isn't found on this page, redirect to home page with contact anchor
+              window.location.href = '/#contact-section';
             }
+          } else {
+            // If not on home page, redirect to home page with contact anchor
+            window.location.href = '/#contact-section';
           }
-          // If not on home page, let the default link behavior work
-          // It will redirect to home page with #contact-section hash
         });
       });
     }
 
-    // Check for hash in URL when page loads
+    // Handle direct navigation to #contact-section
     window.addEventListener('load', () => {
       if (window.location.hash === '#contact-section' && this.contactSection) {
-        this.contactSection.scrollIntoView({ behavior: "smooth" });
+        setTimeout(() => {
+          this.contactSection.scrollIntoView({ behavior: "smooth" });
+        }, 100); // Small delay to ensure DOM is fully loaded
       }
     });
   }
 }
+
+
+
 
 
 class CarouselHandler {
