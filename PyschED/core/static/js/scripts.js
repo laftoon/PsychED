@@ -466,3 +466,51 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 });
+document.addEventListener('DOMContentLoaded', function() {
+  const consent = localStorage.getItem('cookieConsent');
+  const consentContainer = document.getElementById('cookieConsentContainer');
+
+  if (consent === null || consent === 'refused') {
+    showConsentPopup();
+    if (consent === 'refused') {
+      blockWebsite();
+    }
+  }
+
+  document.getElementById('acceptCookies').addEventListener('click', function() {
+    localStorage.setItem('cookieConsent', 'accepted');
+    hideConsentPopup();
+    document.body.style.overflow = '';
+  });
+
+  document.getElementById('refuseCookies').addEventListener('click', function() {
+    localStorage.setItem('cookieConsent', 'refused');
+    blockWebsite();
+  });
+
+  function showConsentPopup() {
+    consentContainer.style.visibility = 'visible';
+    consentContainer.style.opacity = '1';
+  }
+
+  function hideConsentPopup() {
+    consentContainer.style.opacity = '0';
+    setTimeout(() => consentContainer.style.visibility = 'hidden', 500);
+  }
+
+  function blockWebsite() {
+    const message = window.translations.get('cookie_refused', 'errors');
+    consentContainer.innerHTML = `
+      <div class="cookie-content">
+        <p>${message}</p>
+      </div>
+    `;
+    consentContainer.style.visibility = 'visible';
+    consentContainer.style.opacity = '1';
+    document.body.style.overflow = 'hidden';
+
+    // Automatically clear refusal after page reload
+    localStorage.removeItem('cookieConsent');
+  }
+});
+

@@ -21,6 +21,8 @@
     <!-- Load CSS files -->
     <link rel="stylesheet" href="{% static 'css/variables.css' %}">
     <link rel="stylesheet" href="{% static 'css/expandable-cards.css' %}">
+    <link rel="stylesheet" href="{% static 'css/cookie-consent.css' %}">
+    <link rel="stylesheet" href="{% static 'css/privacy-policy.css' %}">
     <link rel="stylesheet" href="{% static 'css/navigation.css' %}">
     <link rel="stylesheet" href="{% static 'css/hero.css' %}">
     <link rel="stylesheet" href="{% static 'css/wide-cards.css' %}">
@@ -30,6 +32,8 @@
     <link rel="stylesheet" href="{% static 'css/blog-cards.css' %}">
     <link rel="stylesheet" href="{% static 'css/blog-detail.css' %}">
     <link rel="stylesheet" href="{% static 'css/language-selector.css' %}">
+
+
     <link rel="shortcut icon" type="image/x-icon" href="{% static 'images/favicon.ico' %}">
 
     
@@ -37,6 +41,7 @@
 </head>
 <body>
     {% block content %}{% endblock %}
+    {% include 'components/cookie-consent.html' %}
 <!-- Load JavaScript -->
 <script src="{% static 'js/translations.js' %}"></script>
 <script src="{% static 'js/language-selector.js' %}"></script>

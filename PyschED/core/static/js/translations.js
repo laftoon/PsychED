@@ -26,6 +26,7 @@ const TRANSLATIONS = {
       calendarService: "Nu s-a putut conecta la serviciul de calendar",
       workingHours: "Programările se pot face doar între orele 11:00-19:00 (GMT+1)",
       slotUnavailable: "Acest interval orar nu mai este disponibil",
+      cookie_refused: "Ați refuzat cookie-urile, iar site-ul nu poate fi utilizat fără acestea. Reîmprospătați pagina și acceptați cookie-urile pentru a continua.",
     },
     form: {
       required_field: "Vă rugăm să completați toate câmpurile obligatorii",
@@ -105,6 +106,7 @@ const TRANSLATIONS = {
       calendarService: "Could not connect to calendar service",
       workingHours: "Appointments can only be made between 11:00-19:00 (GMT+1)",
       slotUnavailable: "This time slot is no longer available",
+      cookie_refused: "You refused cookies, and the website cannot function without them. Refresh the page and accept cookies to continue.",
     },
     form: {
       required_field: "Please fill in all required fields",
@@ -185,6 +187,7 @@ touch: {
       calendarService: "No se pudo conectar al servicio de calendario",
       workingHours: "Las citas solo se pueden hacer entre las 11:00-19:00 (GMT+1)",
       slotUnavailable: "Este horario ya no está disponible",
+      cookie_refused: "Ha rechazado las cookies y el sitio web no puede funcionar sin ellas. Actualice la página y acepte las cookies para continuar.",
     },
     form: {
       required_field: "Por favor complete todos los campos requeridos",

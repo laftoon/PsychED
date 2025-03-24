@@ -1,0 +1,13 @@
+<!-- templates/partials/cookie_consent.html -->
+{% load i18n %}
+<div id="cookieConsentContainer" class="cookie-consent-container">
+    <div class="cookie-content">
+        <p>{% trans "Acest site utilizează cookie-uri pentru a îmbunătăți experiența dumneavoastră. Aveți opțiunea de a accepta sau refuza utilizarea cookie-urilor." %}
+            <br><a href="{% url 'privacy-policy' %}">{% trans "Afla mai multe" %}</a>
+        </p>
+        <div class="cookie-buttons">
+            <button id="acceptCookies" class="cookie-btn">{% trans "Acceptă" %}</button>
+            <button id="refuseCookies" class="cookie-btn refuse">{% trans "Refuză" %}</button>
+        </div>
+    </div>
+</div>

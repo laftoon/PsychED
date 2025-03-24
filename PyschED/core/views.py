@@ -19,6 +19,10 @@ from django.urls import reverse
 
 logger = logging.getLogger(__name__)
 
+
+def privacy_policy(request):
+    return render(request, 'core/privacy-policy.html')
+
 def get_language_context(request):
     return {'LANGUAGE_CODE': get_language()}
 

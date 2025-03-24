@@ -1,0 +1,87 @@
+/* Desktop styles */
+.cookie-consent-container {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: 2;
+    width: 300px;  /* Adjust width as needed */
+    height: 300px; /* Square dimension */
+    background-color: var(--background-light);
+    color: var(--paragraph-color);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    visibility: hidden; /* Hidden by default */
+    opacity: 0;
+    transition: opacity 0.5s, visibility 0.5s;
+    padding: var(--space-md);
+}
+
+.cookie-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%; /* Full width */
+}
+
+.cookie-content p {
+    text-align: center;
+    margin: 0;
+    padding-bottom: var(--space-md);
+}
+
+.cookie-buttons {
+    display: flex;
+    justify-content: center;
+    width: 100%; /* Full width to center buttons */
+}
+
+.cookie-btn {
+    padding: var(--space-sm) var(--space-md);
+    margin: 0 var(--space-sm); /* Space between buttons */
+    background-color: var(--primary-color);
+    color: var(--text-light);
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.cookie-btn.refuse {
+    background-color: var(--secondary-color); /* Different background for refuse */
+}
+
+.cookie-content a {
+    color: var(--accent-color);
+    transition: color 0.3s;
+}
+
+.cookie-content a:hover,
+.cookie-btn:hover {
+    color: var(--text-dark);
+    text-decoration: underline;
+}
+
+/* Mobile styles */
+@media (max-width: 768px) {
+    .cookie-consent-container {
+        width: 100%;  /* Full width */
+        height: auto; /* Auto height based on content */
+        flex-direction: column;
+    }
+
+    .cookie-content p {
+        font-size: var(--text-sm);
+    }
+
+    .cookie-buttons {
+        flex-direction: column; /* Stack buttons vertically on smaller screens */
+        align-items: center;
+    }
+
+    .cookie-btn {
+        width: 80%; /* Full width buttons on mobile */
+        margin-bottom: var(--space-sm);
+    }
+}

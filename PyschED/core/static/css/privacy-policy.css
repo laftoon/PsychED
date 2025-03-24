@@ -1,0 +1,65 @@
+/* privacy-policy.css */
+
+.privacy-policy-content {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: var(--space-2xl) var(--space-xl); /* big padding on desktop */
+    background-color: var(--background-light);
+    color: var(--paragraph-color);
+    font-family: var(--font-secondary);
+    line-height: 1.6;
+  }
+  
+  /* Typography */
+  .privacy-policy-content h1,
+  .privacy-policy-content h2 {
+    color: var(--heading-color);
+    font-family: var(--font-primary);
+  }
+  
+  .privacy-policy-content h1 {
+    font-size: var(--text-3xl);
+    margin-bottom: var(--space-lg);
+  }
+  
+  .privacy-policy-content h2 {
+    font-size: var(--text-2xl);
+    margin-top: var(--space-xl);
+    margin-bottom: var(--space-md);
+  }
+  
+  .privacy-policy-content p {
+    font-size: var(--text-base);
+    margin-bottom: var(--space-md);
+  }
+  
+  .privacy-policy-content a {
+    color: var(--accent-color);
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+  
+  .privacy-policy-content a:hover {
+    color: var(--secondary-color);
+    text-decoration: underline;
+  }
+  
+  /* Mobile Responsive Styling */
+  @media (max-width: 768px) {
+    .privacy-policy-content {
+      padding: var(--space-xl) var(--space-md); /* reduce side padding on mobile */
+    }
+  
+    .privacy-policy-content h1 {
+      font-size: var(--text-2xl);
+    }
+  
+    .privacy-policy-content h2 {
+      font-size: var(--text-xl);
+    }
+  
+    .privacy-policy-content p {
+      font-size: var(--text-sm);
+    }
+  }
+  

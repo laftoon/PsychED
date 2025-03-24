@@ -1,10 +1,11 @@
 # PyschED/core/urls.py
 from django.urls import path
 from . import views  
-from .views import HomePageView, AboutPageView, ServicesPageView, BlogPageView, BlogDetailView, get_time_slots, submit_time_slot
+from .views import HomePageView, AboutPageView, ServicesPageView, BlogPageView, BlogDetailView, get_time_slots, submit_time_slot, privacy_policy
 
 urlpatterns = [
     path('', HomePageView.as_view(), name='home'),
+    path('privacy-policy/', privacy_policy, name='privacy-policy'),
     path('despre-mine/', AboutPageView.as_view(), name='about'),
     path('servicii/', ServicesPageView.as_view(), name='services'),
     path('blog/', BlogPageView.as_view(), name='blog'),

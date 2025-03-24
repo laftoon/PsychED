@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% load static %}
+{% load compress %}
+{% load i18n %}
+
+{% block title %}{% trans "PsychED Lab - Politica de Confidențialitate" %}{% endblock %}
+
+{% block content %}
+{% include "components/navigation.html" %}
+{% include "components/hero-simple-blog.html" %}
+<div class = "privacy-policy-content">
+<h1>{% trans "Politica de Confidențialitate" %}</h1>
+
+<p>{% trans "Această politică de confidențialitate descrie modul în care PsychED Lab colectează, utilizează și protejează informațiile personale ale vizitatorilor săi și utilizatorilor săi înregistrati." %}</p>
+
+<h2>{% trans "Informații personale pe care le colectăm" %}</h2>
+<p>{% trans "Când vizitați site-ul nostru, colectăm automat anumite informații despre dispozitivul dumneavoastră, inclusiv informații despre browserul web, adresa IP, fusul orar și unele dintre cookie-urile instalate pe dispozitivul dumneavoastră. De asemenea, pe măsură ce navigați pe site-ul nostru, colectăm informații despre paginile web individuale sau produsele pe care le vizualizați, ce site-uri web sau termeni de căutare vă referă la site-ul nostru și informații despre cum interacționați cu site-ul." %}</p>
+
+<h2>{% trans "Cum utilizăm informațiile dumneavoastră personale" %}</h2>
+<p>{% trans "Utilizăm informațiile pe care le colectăm pentru a ne îmbunătăți website-ul și calitatea serviciilor oferite, inclusiv prin monitorizarea traficului și optimizarea experienței utilizatorilor, precum și pentru a comunica cu dumneavoastră." %}</p>
+
+<h2>{% trans "Partajarea informațiilor personale" %}</h2>
+<p>{% trans "Partajăm informațiile personale cu terți doar în scopurile descrise în această politică de confidențialitate, inclusiv dar nu limitat la furnizorii de servicii care ne ajută să administrăm și să îmbunătățim website-ul." %}</p>
+
+<h2>{% trans "Drepturile dumneavoastră" %}</h2>
+<p>{% trans "Dacă sunteți rezident european, aveți dreptul să accesați informațiile personale pe care le deținem despre dumneavoastră și să cereți ca aceste informații să fie corectate, actualizate sau șterse. Dacă doriți să exercitați acest drept, vă rugăm să ne contactați prin informațiile de contact de mai jos." %}</p>
+</div>
+
+{% endblock %}
