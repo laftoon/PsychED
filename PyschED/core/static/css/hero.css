@@ -28,6 +28,7 @@
   text-align: center;
   overflow: hidden;
   margin-top: calc(-1 * var(--nav-height)); /* Add negative margin to offset navbar height */
+  padding-top: 3.5rem;
 }
 /* Simple Hero Variant
      ========================================================================== */
@@ -140,11 +141,12 @@
   .hero {
     height: var(--hero-height);
     text-align: center;
+    padding-top: 0.3rem;
   }
 
   .hero__content {
     padding: var(--space-xl) var(--space-md);
-    padding-top: calc(var(--nav-height) + var(--space-xl));
+    padding-top: calc(var(--nav-height) + var(--space-lg));
   }
 
   .hero__title {
