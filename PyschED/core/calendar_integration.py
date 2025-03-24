@@ -13,16 +13,24 @@ def get_calendar_service():
     Get a Google Calendar service instance using service account
     """
     try:
+        logger.info(f"Attempting to load service account from: {settings.GOOGLE_CALENDAR_SERVICE_ACCOUNT_FILE}")
+        logger.info(f"Using calendar ID: {settings.GOOGLE_CALENDAR_ID}")
+        logger.info(f"Using user email: {settings.GOOGLE_CALENDAR_USER_EMAIL}")
+        
         credentials = service_account.Credentials.from_service_account_file(
             settings.GOOGLE_CALENDAR_SERVICE_ACCOUNT_FILE,
             scopes=['https://www.googleapis.com/auth/calendar']
         )
         
         service = build('calendar', 'v3', credentials=credentials)
+        logger.info("Successfully created calendar service")
         return service
     except Exception as e:
         logger.error(f"Error creating calendar service: {str(e)}")
-        raise Exception("Could not connect to calendar service")
+        import traceback
+        logger.error(f"Traceback: {traceback.format_exc()}")
+        return None
+
 
 def create_calendar_event(event_details):
     try:

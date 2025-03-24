@@ -28,13 +28,13 @@ def get_language_context(request):
 
 
 
-
-
 def get_time_slots(request):
     if request.method == 'POST':
         try:
+            logger.info(f"Attempting to get calendar service with ID: {settings.GOOGLE_CALENDAR_ID}")
             service = get_calendar_service()
             if not service:
+                logger.error("Failed to get calendar service")
                 return JsonResponse({
                     'success': False,
                     'error': 'Nu s-a putut conecta la serviciul de calendar'
@@ -49,7 +49,7 @@ def get_time_slots(request):
             # Parse the date in UTC
             date = datetime.strptime(date_str, '%Y-%m-%d').date()
             
-            # Create UTC times for work hours (9:00-18:00 Madrid time)
+            # Create UTC times for work hours (11:00-20:00 Madrid time)
             madrid_tz = pytz.timezone('Europe/Madrid')
             utc_tz = pytz.UTC
             
@@ -61,44 +61,62 @@ def get_time_slots(request):
             work_start_utc = work_start.astimezone(utc_tz)
             work_end_utc = work_end.astimezone(utc_tz)
             
-            events_result = service.events().list(
-                calendarId=settings.GOOGLE_CALENDAR_ID,
-                timeMin=work_start_utc.isoformat(),
-                timeMax=work_end_utc.isoformat(),
-                singleEvents=True,
-                orderBy='startTime'
-            ).execute()
+            logger.info(f"Fetching events from {work_start_utc.isoformat()} to {work_end_utc.isoformat()}")
             
-            # Calculate available slots in UTC
-            available_slots = []
-            current_time = work_start_utc
-            
-            while current_time <= work_end_utc - timedelta(minutes=50):
-                is_available = True
-                slot_end = current_time + timedelta(minutes=50)
+            try:
+                events_result = service.events().list(
+                    calendarId=settings.GOOGLE_CALENDAR_ID,
+                    timeMin=work_start_utc.isoformat(),
+                    timeMax=work_end_utc.isoformat(),
+                    singleEvents=True,
+                    orderBy='startTime'
+                ).execute()
                 
-                for event in events_result.get('items', []):
-                    event_start = datetime.fromisoformat(event['start']['dateTime'].replace('Z', '+00:00'))
-                    event_end = datetime.fromisoformat(event['end']['dateTime'].replace('Z', '+00:00'))
+                logger.info(f"Successfully fetched events: {len(events_result.get('items', []))} events found")
+                
+                # Calculate available slots in UTC
+                available_slots = []
+                current_time = work_start_utc
+                
+                while current_time <= work_end_utc - timedelta(minutes=50):
+                    is_available = True
+                    slot_end = current_time + timedelta(minutes=50)
                     
-                    # Compare in UTC
-                    if (event_start < slot_end and event_end > current_time):
-                        is_available = False
-                        break
+                    for event in events_result.get('items', []):
+                        event_start = datetime.fromisoformat(event['start']['dateTime'].replace('Z', '+00:00'))
+                        event_end = datetime.fromisoformat(event['end']['dateTime'].replace('Z', '+00:00'))
+                        
+                        # Compare in UTC
+                        if (event_start < slot_end and event_end > current_time):
+                            is_available = False
+                            break
+                    
+                    if is_available:
+                        available_slots.append(current_time.isoformat())
+                    
+                    current_time += timedelta(hours=1)
                 
-                if is_available:
-                    available_slots.append(current_time.isoformat())
+                logger.info(f"Found {len(available_slots)} available slots")
                 
-                current_time += timedelta(hours=1)
-            
-            return JsonResponse({
-                'success': True,
-                'free_slots': available_slots,
-                'timezone': 'UTC'
-            })
+                return JsonResponse({
+                    'success': True,
+                    'free_slots': available_slots,
+                    'timezone': 'UTC'
+                })
+                
+            except Exception as e:
+                logger.error(f"Error fetching events: {str(e)}")
+                import traceback
+                logger.error(f"Traceback: {traceback.format_exc()}")
+                return JsonResponse({
+                    'success': False,
+                    'error': f'Eroare la obținerea evenimentelor: {str(e)}'
+                })
             
         except Exception as e:
             logger.error(f"Unexpected error: {str(e)}")
+            import traceback
+            logger.error(f"Traceback: {traceback.format_exc()}")
             return JsonResponse({
                 'success': False,
                 'error': 'A apărut o eroare neașteptată. Vă rugăm să încercați din nou.'
@@ -108,6 +126,7 @@ def get_time_slots(request):
         'success': False,
         'error': 'Metodă invalidă de solicitare'
     })
+
 
 
 

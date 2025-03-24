@@ -101,33 +101,38 @@ class CalendarHandler {
     }
   }
 
-  async fetchAndDisplayTimeSlots() {
-    try {
-      const response = await fetch("/get_time_slots/", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "X-CSRFToken": this.getCookie("csrftoken"),
-        },
-        body: JSON.stringify({
-          date: this.selectedDate.toISOString().split("T")[0],
-        }),
-      });
+async fetchAndDisplayTimeSlots() {
+  try {
+    // Use the non-prefixed API URL
+    const url = `/get_time_slots/`;
+    
+    const response = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "X-CSRFToken": this.getCookie("csrftoken"),
+      },
+      body: JSON.stringify({
+        date: this.selectedDate.toISOString().split("T")[0],
+      }),
+    });
 
-      const data = await response.json();
+    const data = await response.json();
 
-      if (data.success) {
-        this.displayTimeSlots(data.free_slots);
-      } else {
-        throw new Error(data.error || window.translations.get('fetch_slots_error', 'calendar'));
-      }
-    } catch (error) {
-      console.error("Error fetching time slots:", error);
-      if (this.timeSlots) {
-        this.timeSlots.innerHTML = `<div class="no-slots-message">${window.translations.get('load_slots_error', 'calendar')}</div>`;
-      }
+    if (data.success) {
+      this.displayTimeSlots(data.free_slots);
+    } else {
+      throw new Error(data.error || window.translations.get('fetch_slots_error', 'calendar'));
+    }
+  } catch (error) {
+    console.error("Error fetching time slots:", error);
+    if (this.timeSlots) {
+      this.timeSlots.innerHTML = `<div class="no-slots-message">${window.translations.get('load_slots_error', 'calendar')}</div>`;
     }
   }
+}
+
+
 
   displayTimeSlots(slots) {
     if (!this.timeSlots) return;

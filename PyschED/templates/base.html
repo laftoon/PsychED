@@ -9,7 +9,7 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
 
 
->
+
     <title>{% block title %}PsychED Lab{% endblock %}</title>
     
     <!-- Fonts -->
@@ -34,7 +34,13 @@
     <link rel="stylesheet" href="{% static 'css/language-selector.css' %}">
 
 
+    <!-- Favicon -->
     <link rel="shortcut icon" type="image/x-icon" href="{% static 'images/favicon.ico' %}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'images/apple-touch-icon.png' %}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'images/favicon-32x32.png' %}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'images/favicon-16x16.png' %}">
+    <link rel="manifest" href="{% static 'images/site.webmanifest' %}">
+
 
     
     {% block extra_css %}{% endblock %}
