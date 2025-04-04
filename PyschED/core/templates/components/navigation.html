@@ -6,13 +6,14 @@
 
   <!-- Mobile Menu Toggle -->
   <button 
-    class="mobile-menu-toggle" 
-    aria-label="{% trans 'Deschide meniul' %}"
-    aria-expanded="false"
-    aria-controls="main-menu"
-  >
-    <span class="hamburger" aria-hidden="true"></span>
-  </button>
+  class="mobile-menu-toggle" 
+  aria-label="{% trans 'Deschide meniul principal' %}"
+  aria-expanded="false"
+  aria-controls="main-menu"
+>
+  <span class="hamburger" aria-hidden="true"></span>
+  <span class="menu-label visually-hidden">{% trans "Meniu" %}</span>
+</button>
 
   <!-- Navigation Menu -->
   <ul id="main-menu" class="nav-menu">

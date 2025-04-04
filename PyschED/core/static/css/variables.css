@@ -136,6 +136,7 @@ body {
     
     /* Adjust container padding */
     --container-padding: 1rem;
+    --nav-height: 56px;
   }
 }
 
